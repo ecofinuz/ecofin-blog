@@ -1,11 +1,41 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const posts = []; // we will wire this up after setting up content collections
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Bosh sahifa">
+  <main class="container">
+
+    <section class="categories-section">
+      <p class="section-label">Mavzular</p>
+      <div class="category-list">
+        <a href="/kredit/" class="category-tag active">Kredit</a>
+        <a href="/birja/" class="category-tag">Birja</a>
+        <a href="/tilla/" class="category-tag">Tilla</a>
+        <a href="/treyding/" class="category-tag">Treyding</a>
+        <a href="/pul-saqlash/" class="category-tag">Pul saqlash</a>
+        <a href="/inqirozlar/" class="category-tag">Inqirozlar</a>
+        <a href="/boshqalar/" class="category-tag">Boshqalar</a>
+      </div>
+    </section>
+
+    <section class="posts-section">
+      <p class="section-label">Maqolalar</p>
+      <div class="post-list">
+        {posts.map((post) => (
+          <a href={post.url} class="post-item">
+            <div class="post-meta-row">
+              <span class="post-category">{post.category}</span>
+              <span class="post-date">{post.date}</span>
+            </div>
+            <h2 class="post-title">{post.title}</h2>
+            <p class="post-excerpt">{post.excerpt}</p>
+            <span class="post-read">O'qish &rarr;</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+  </main>
 </Layout>

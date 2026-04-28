@@ -1,0 +1,242 @@
+/* ── 1. Variables & Base ── */
+:root {
+    --bg: #f9f8f6;
+    --surface: #ffffff;
+    --border: #e2e0db;
+    --text-primary: #1a1a1a;
+    --text-secondary: #555550;
+    --text-muted: #999;
+    --accent: #2a2a2a;
+    --line-simple: #1a1a1a;
+    --line-compound: #888;
+    --max-width: 768px;
+    --transition: 0.15s ease;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: "Source Sans 3", sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.75;
+}
+
+/* ── 2. Typography ── */
+h1,
+h2,
+.nav-brand,
+.post-title,
+.formula,
+.amount,
+.result-R {
+    font-family: "Lora", Georgia, serif;
+}
+
+h1 {
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    padding-top: 8px;
+}
+
+p {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    margin-bottom: 24px;
+}
+
+strong {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.label-small {
+    /* Unified style for bylines, metadata, and labels */
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+/* ── 3. Layout & Navigation ── */
+.container,
+main,
+.nav-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.site-nav {
+    border-bottom: 1px solid var(--border);
+    padding: 20px 0;
+    margin-bottom: 64px;
+}
+
+.nav-brand {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-decoration: none;
+}
+
+/* ── 4. UI Components ── */
+
+/* Content Blocks */
+.card-vessel {
+    /* Unified background for charts, calculators, and loan containers */
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 32px 28px;
+    margin: 28px 0;
+}
+
+/* Table of Contents */
+.toc {
+    margin: 48px 0;
+    padding: 28px 32px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+}
+
+.toc li {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.toc a {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color var(--transition);
+}
+
+/* Data Grids (Comparison & Breakdowns) */
+.data-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin: 28px 0;
+}
+
+.grid-cell {
+    background: var(--surface);
+    padding: 20px 22px;
+    text-align: center;
+}
+
+/* ── 5. Forms & Interactive ── */
+.sliders {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    margin-bottom: 32px;
+}
+
+input[type="range"] {
+    width: 100%;
+    height: 2px;
+    background: var(--border);
+    appearance: none;
+    cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    background: var(--text-primary);
+    border-radius: 50%;
+}
+
+select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    background: var(--bg)
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='%23999' d='M6 8L0 0h12z'/%3E%3C/svg%3E")
+        no-repeat right 12px center;
+    appearance: none;
+    font-size: 0.95rem;
+}
+
+/* ── 6. Tables ── */
+.table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    margin-top: 28px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-variant-numeric: tabular-nums;
+}
+
+th {
+    background: var(--accent);
+    color: white;
+    font-size: 11px;
+    text-transform: uppercase;
+    padding: 12px 14px;
+    position: sticky;
+    top: 0;
+}
+
+td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+}
+
+/* ── 7. Blog Feed ── */
+.post-item {
+    display: block;
+    text-decoration: none;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.post-title {
+    font-size: 1.75rem;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+}
+
+.post-excerpt {
+    font-size: 1.1rem;
+    max-width: 65ch;
+    color: var(--text-secondary);
+}
+
+/* ── 8. Footer ── */
+footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0 48px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}

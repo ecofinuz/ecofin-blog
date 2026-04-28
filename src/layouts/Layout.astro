@@ -1,23 +1,44 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+interface Props {
+  title: string;
+  description?: string;
+  lang?: string;
+}
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+const { title, description = "Moliyaviy savodxonlik", lang = "uz" } = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang}>
+	<head>
+    	<meta charset="UTF-8" />
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    	<title>{title} | Ecofin</title>
+    	<meta name="description" content={description} />
+    	<link rel="canonical" href={Astro.url} />
+    	<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    	<link rel="preconnect" href="https://fonts.googleapis.com" />
+    	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    	<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet" />
+    	<link rel="stylesheet" href="/src/styles/global.css" />
+    	<slot name="head" />
+  	</head>
+  	<body>
+	    <nav class="site-nav">
+    		<div class="nav-inner">
+        		<a href="/" class="nav-brand">Ecofin</a>
+      		</div>
+    	</nav>
+    	<slot />
+    	<footer>
+      		<div class="container">
+	        	<p>
+          			Hojiakbar Barotov &nbsp;·&nbsp;
+          			<a href="https://t.me/hmbarotov" target="_blank">Telegram</a>
+          			&nbsp;·&nbsp;
+          			<a href="https://medium.com/@hmbarotov" target="_blank">Medium</a>
+        		</p>
+    		</div>
+    	</footer>
+  	</body>
+</html>
