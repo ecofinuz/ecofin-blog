@@ -1,0 +1,83 @@
+---
+import { getCollection } from "astro:content";
+import type { CategoryKey } from "../../../data/categories";
+import { categories } from "../../../data/categories";
+import Layout from "../../../layouts/Layout.astro";
+
+const locale = "en";
+
+export async function getStaticPaths() {
+    return (Object.keys(categories) as CategoryKey[]).map((key) => ({
+        params: { category: categories[key].en.slug },
+        props: { categoryKey: key },
+    }));
+}
+
+const { category } = Astro.params;
+const { categoryKey } = Astro.props;
+
+const allPosts = await getCollection("blog", ({ id }) =>
+    id.startsWith(`${locale}/${categoryKey}/`)
+);
+
+const posts = allPosts.sort(
+    (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+
+const catLabel = categories[categoryKey].en.label;
+
+function formatDate(date: Date): string {
+    return date.toLocaleDateString("en-US", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+    });
+}
+
+function getSlug(id: string): string {
+    const parts = id.split("/");
+    return parts[parts.length - 1];
+}
+---
+
+<Layout title={catLabel} lang={locale}>
+    <main>
+        <div class="container">
+
+            <div class="category-header">
+                <a href="/en/" class="label-small back-link">← All articles</a>
+                <h1>{catLabel}</h1>
+                <p class="label-small">{posts.length} posts</p>
+            </div>
+
+            <div class="post-list">
+                {
+                    posts.map((post) => {
+                        const slug = getSlug(post.id);
+                        return (
+                            <a
+                                href={`/en/${category}/${slug}/`}
+                                class="post-item"
+                            >
+                                <div class="post-meta-row">
+                                    <span class="post-date label-small">
+                                        {formatDate(post.data.date)}
+                                    </span>
+                                    {post.data.series && (
+                                        <span class="label-small post-date">
+                                                Post {post.data.series.part}
+                                        </span>
+                                    )}
+                                </div>
+                                <h2 class="post-title">{post.data.title}</h2>
+                                <p class="post-excerpt">{post.data.description}</p>
+                                <span class="post-read">Read &rarr;</span>
+                            </a>
+                        );
+                    })
+                }
+            </div>
+
+        </div>
+    </main>
+</Layout>

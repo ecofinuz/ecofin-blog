@@ -240,3 +240,175 @@ footer {
     font-size: 0.85rem;
     color: var(--text-muted);
 }
+
+/* ── Nav additions ── */
+.nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.nav-link {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+.nav-link:hover {
+    color: var(--text-primary);
+}
+
+.nav-github {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.nav-donate {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--surface);
+    background: var(--text-primary);
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: opacity var(--transition);
+}
+
+.nav-donate:hover {
+    opacity: 0.8;
+}
+
+/* ── Category list ── */
+.categories-section {
+    margin-bottom: 48px;
+}
+
+.category-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.category-tag {
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+    text-decoration: none;
+    transition: all var(--transition);
+}
+
+.category-tag:hover,
+.category-tag.active {
+    color: var(--surface);
+    background: var(--text-primary);
+    border-color: var(--text-primary);
+}
+
+/* ── Post feed additions ── */
+.posts-section {
+    margin-bottom: 80px;
+}
+
+.post-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+
+.post-category {
+    color: var(--text-muted);
+}
+
+.post-date {
+    color: var(--text-muted);
+}
+
+.post-read {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    font-weight: 600;
+    letter-spacing: 0.03em;
+}
+
+/* ── Footer additions ── */
+.footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 32px;
+}
+
+.footer-brand {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.footer-tagline {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 0;
+    max-width: 28ch;
+}
+
+.footer-right {
+    text-align: right;
+}
+
+.footer-links {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-end;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+}
+
+.footer-link {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+.footer-link:hover {
+    color: var(--text-primary);
+}
+
+.footer-copy {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+    .nav-github-label {
+        display: none;
+    }
+
+    .footer-inner {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .footer-right {
+        text-align: left;
+    }
+
+    .footer-links {
+        justify-content: flex-start;
+    }
+}
