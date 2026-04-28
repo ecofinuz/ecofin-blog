@@ -1,0 +1,242 @@
+/* ── interactive.css ──
+   Import this only in pages or components that use
+   tables, charts, calculators, or sliders.
+
+   In Layout.astro:   <link rel="stylesheet" href="/src/styles/interactive.css" />
+   Or per-component:  import '../styles/interactive.css';
+── */
+
+/* ── 1. Card vessel ──
+   Shared wrapper for charts, calculators, and comparison containers.
+── */
+.card-vessel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 32px 28px;
+    margin: 28px 0;
+}
+
+/* ── 2. Tables ── */
+.table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    margin: 28px 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-variant-numeric: tabular-nums;
+}
+
+th {
+    background: var(--accent);
+    color: white;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 12px 14px;
+    text-align: left;
+    position: sticky;
+    top: 0;
+}
+
+td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    font-size: 1rem;
+    color: var(--text-secondary);
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+/* ── 3. Data Grid ──
+   Two-column comparison blocks (e.g. simple vs compound interest).
+── */
+.data-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin: 28px 0;
+}
+
+.grid-cell {
+    background: var(--surface);
+    padding: 20px 22px;
+    text-align: center;
+}
+
+.grid-cell.header {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 12px 22px;
+}
+
+/* ── 4. Formula block ── */
+.formula-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 24px 28px;
+    margin: 28px 0;
+    text-align: center;
+}
+
+.formula-label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+}
+
+.formula {
+    font-family: "Lora", Georgia, serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+}
+
+.formula-note {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 0;
+}
+
+/* ── 5. Sliders & Inputs ── */
+.sliders {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    margin-bottom: 32px;
+}
+
+.slider-group label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+.slider-group label span {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+input[type="range"] {
+    width: 100%;
+    height: 2px;
+    background: var(--border);
+    appearance: none;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    background: var(--text-primary);
+    border-radius: 50%;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    background: var(--text-primary);
+    border-radius: 50%;
+    border: none;
+}
+
+select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    background: var(--bg)
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='%23999' d='M6 8L0 0h12z'/%3E%3C/svg%3E")
+        no-repeat right 12px center;
+    appearance: none;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+}
+
+/* ── 6. Chart container ── */
+.chart-container {
+    margin: 28px 0;
+}
+
+.chart-legend {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 16px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--line-simple);
+    flex-shrink: 0;
+}
+
+.legend-dot.compound {
+    background: var(--line-compound);
+}
+
+canvas {
+    width: 100%;
+    max-width: 100%;
+}
+
+/* ── 7. Result callout ── */
+.result-callout {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 24px;
+}
+
+.result-callout .item {
+    background: var(--surface);
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.result-callout strong {
+    font-family: "Lora", Georgia, serif;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    display: block;
+}
+
+@media (max-width: 600px) {
+    .result-callout {
+        grid-template-columns: 1fr;
+    }
+
+    .sliders {
+        grid-template-columns: 1fr;
+    }
+}

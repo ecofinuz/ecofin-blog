@@ -4,281 +4,114 @@ description: Foiz o'zi nima degani? Sodda va murakkab foizlarning farqi nimada?
 date: 2026-04-11
 category: kredit
 translationKey: sodda-va-murakkab-foizlar
+author: hojiakbar
+series:
+    name: "Moliyaviy savodxonlik"
+    part: 1
 ---
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+import TOC from "@components/TOC.astro";
 
-<script src="/js/sodda-va-murakkab-foizlar.js"></script>
+<TOC
+    items={[
+        { label: "Foiz nima?", href: "#foiz-nima" },
+        { label: "Sodda foiz nima?", href: "#sodda-foiz-nima" },
+        { label: "Murakkab foiz nima?", href: "#murakkab-foiz-nima" },
+        { label: "Interaktiv grafik", href: "#interaktiv-grafik" },
+        { label: "Xulosa", href: "#xulosa" },
+    ]}
+/>
 
-<nav class="toc">
-    <p class="toc-title">Mundarija</p>
-    <ol>
-        <li>
-            <a href="#foiz">Foiz nima?</a>
-        </li>
-        <li>
-            <a href="#sodda">Sodda foiz nima?</a>
-        </li>
-        <li>
-            <a href="#murakkab">Murakkab foiz nima?</a>
-        </li>
-        <li>
-            <a href="#grafik">Interaktiv grafik</a>
-        </li>
-        <li>
-            <a href="#xulosa">Asosiy xulosa</a>
-        </li>
-    </ol>
-</nav>
+---
 
-<article>
-    <section id="foiz">
-        <h2>Foiz nima?</h2>
-        <p>
-            <strong>Foiz (interest)</strong> — bu matematik termin bo'lib, 100
-            dan 1 birni ifodalaydi. 20% - 100 dan 20 degani. Moliyada foiz
-            pulning "narxi". Bank (yoki mikromoliya tashkiloti yoki sudxo'r
-            odam) sizga pul bergani uchun foizda haq oladi. Deylik, men sizga
-            10,000,000 so'm bersam va uning uchun sizdan 1 yildan so'ng,
-            12,000,000 million so'm talab qilsam, qarz stavkasi 20% bo'ladi.
-            Ya'ni, 10,000,000 so'm ustiga 20% (ya'ni 2,000,000) so'm qo'shib
-            bermoqdasiz.
-        </p>
-        <p>
-            Moliya va iqtisodda foizlar shunchaki pulning narxi. Pulni ishlatib,
-            qaytarib berish uchun siz unga haq to'laysiz - foizda. Bir jihatdan,
-            foiz bu xuddi ijara kabi. Bu to'g'ri yoki noto'g'riligi haqida
-            keyingi postlarda. Shunchaki, zamonaviy bank tizimi shu yo'sinda
-            ishlaydi.
-        </p>
+## Foiz nima?
 
-        <p>
-            G'arb moliyasi "pul vaqt qiymatiga ega" tushunchasiga qurilgan.
-            <strong>(Time-value of money)</strong> Shuning uchun ham foiz
-            tushunchasi mavjud.
-        </p>
+**Foiz (interest)** — bu matematik termin bo'lib, 100 dan 1 birni ifodalaydi. 20% — 100 dan 20 degani. Moliyada foiz pulning "narxi". Bank sizga pul bergani uchun foizda haq oladi. Deylik, men sizga 10,000,000 so'm bersam va uning uchun 1 yildan so'ng 12,000,000 so'm talab qilsam, qarz stavkasi 20% bo'ladi.
 
-        <p>
-            Moliyaviy foizlarning 2 xil turi bor: sodda va murakkab. Ular
-            bir-biridan farq qiladi, va ikkalasi ham bank tizimida keng
-            ishlatiladi. Hozirgi post ularning farqi haqida.
-        </p>
-    </section>
-    <section id="sodda">
-        <h2>Sodda foiz nima?</h2>
-        <p>
-            <strong>Sodda foiz (simple interest)</strong> — bu faqat asosiy
-            summaga hisoblanadigan foiz. Har yil bir xil miqdor. Foizlar asosiy
-            summaga qo'shilmaydi, alohida to'lanadi yoki hisoblanadi. Ya'ni,
-            sizning foiz to'lovingiz o'zgarmaydi, chunki u asosiy o'zgarmas
-            summaga (<strong>principal</strong>) bog'langan. Bu ko'pchilik
-            biladigan va tushunadigan foiz turi. Sudxo'rlarning deyarli barchasi
-            shu asosda qarz beradi.
-        </p>
-        <p>
-            O'zbekistonda ko'pchilik bank depozitlari shunday ishlaydi. Masalan,
-            siz 24% da 10,000,000 so'm qo'ysangiz, bank har oy sizning
-            kartangizga bir xil foizni (2,000,000 so'mni) o'tkazib boradi. Siz
-            bankka qo'ygan asosiy summa esa o'zgarishsiz qoladi.
-        </p>
+Moliya va iqtisodda foizlar shunchaki pulning narxi. Pulni ishlatib, qaytarib berish uchun siz unga haq to'laysiz — foizda. Bir jihatdan, foiz bu xuddi ijara kabi. Zamonaviy bank tizimi shu yo'sinda ishlaydi.
 
-        <p>
-            Matematik jihatdan, sodda foizlar to'g'ri chiziq funksiyasi bilan
-            ifodalaniladi (y = ax + b):
-        </p>
+G'arb moliyasi **"pul vaqt qiymatiga ega"** tushunchasiga qurilgan (Time-value of money). Shuning uchun ham foiz tushunchasi mavjud.
 
-        <div class="formula-block">
-            <p class="formula-label">Formula</p>
-            <p class="formula">A = P x (1 + r x t)</p>
-            <p class="formula-note">
-                P — asosiy summa &nbsp;·&nbsp; r — yillik foiz stavkasi
-                &nbsp;·&nbsp; t — yillar soni &nbsp;·&nbsp; A — yakuniy summa
-            </p>
-        </div>
+Moliyaviy foizlarning 2 xil turi bor: sodda va murakkab. Hozirgi post ularning farqi haqida.
 
-        <h3>Misol</h3>
-        <p>10 000 000 so'm, 20% yillik stavka, 5 yil muddatga.</p>
-        <p>
-            Har yil: 10 000 000 × 0.20 =
-            <strong>2 000 000 so'm</strong><br />
-            5 yildan keyin jami foiz:
-            <strong>10 000 000 so'm</strong><br />
-            Yakuniy summa: <strong>20 000 000 so'm</strong>
-        </p>
-    </section>
+---
 
-    <section id="murakkab">
-        <h2>Murakkab foiz nima?</h2>
-        <p>
-            <strong>Murakkab foiz (compound interest)</strong> — bu foizga foiz
-            hisoblanadigan tizim. Ya'ni, pulingiz pul "tug'adi". Har davr
-            oxirida hisoblangan foiz asosiy summaga qo'shiladi va hisoblangan
-            foiz yanada kattaroq bo'lib boradi. Keyingi davr uchun yangi asos
-            esa kattaroq summaga aylanadi.
-        </p>
-        <p>
-            Buni odatlarga o'xshatish mumkin. Bir hafta zalga qatnash ko'p
-            narsani o'zgartirmaydi, ammo har bitta mashg'ulot kuchingizga kuch
-            qo'shib, sizni kuchli qilib boradi. Yomon odatlar ham shunday: oyda
-            bir-ikki marta video o'yinlar yomon emas, ammo har bitta o'yin vaqti
-            sizni ko'proq qaram qilib boradi.
-        </p>
-        <p>
-            O'zbekistonda ba'zi banklar buni
-            <strong>kapitalizatsiya</strong> deb ataydi. Masalan, Asia Alliance
-            Bank depozit shartnomasida shunday yozadi: "Kapitalizatsiya — davr
-            uchun hisoblangan foizni asosiy summaga qo'shib, keyingi
-            hisob-kitobni shu yangi summadan olib borish." Ko'pchilik banklar
-            buni taklif qiladi, lekin bu variant odatda standart emas — alohida
-            so'rash kerak.
-        </p>
+## Sodda foiz nima?
 
-        <p>
-            Albattada, qaysi bank ko'proq pul to'lashni xohlardi?
-            O'zbekistondagi kattaroq foizlarda sodda va murakkab foizlarning
-            farqi juda katta.
-        </p>
+**Sodda foiz (simple interest)** — bu faqat asosiy summaga hisoblanadigan foiz. Har yil bir xil miqdor. Foizlar asosiy summaga qo'shilmaydi, alohida to'lanadi yoki hisoblanadi. Sizning foiz to'lovingiz o'zgarmaydi, chunki u asosiy o'zgarmas summaga (**principal**) bog'langan.
 
-        <p>
-            Matematik jihatdan, murakkab foizlar darajali funksiya asosida
-            yoziladi: (y = a^x)
-        </p>
+O'zbekistonda ko'pchilik bank depozitlari shunday ishlaydi. Masalan, siz 24% da 10,000,000 so'm qo'ysangiz, bank har oy kartangizga bir xil foizni o'tkazib boradi.
 
-        <div class="formula-block">
-            <p class="formula-label">Formula</p>
-            <p class="formula">A = P x (1 + r)<sup>t</sup></p>
-            <p class="formula-note">
-                P — asosiy summa &nbsp;·&nbsp; r — yillik foiz stavkasi
-                &nbsp;·&nbsp; t — yillar soni &nbsp;·&nbsp; A — yakuniy summa
-            </p>
-        </div>
+Matematik jihatdan, sodda foizlar to'g'ri chiziq funksiyasi bilan ifodalaniladi:
 
-        <h3>Xuddi shu misol</h3>
-        <p>10 000 000 so'm, 20% yillik stavka, 5 yil muddatga.</p>
-        <p>
-            A = 10 000 000 x (1.20)<sup>5</sup> =
-            <strong>24 883 200 so'm</strong><br />
-            Jami foiz: <strong>14 883 200 so'm</strong>
-        </p>
+```
+A = P x (1 + r x t)
 
-        <div class="compare-grid">
-            <div class="compare-cell header">Sodda foiz</div>
-            <div class="compare-cell header">Murakkab foiz</div>
-            <div class="compare-cell">
-                <div class="amount muted">20 000 000 so'm</div>
-                <div class="diff">+10 000 000 so'm foiz</div>
-            </div>
-            <div class="compare-cell">
-                <div class="amount">24 883 200 so'm</div>
-                <div class="diff">+14 883 200 so'm foiz</div>
-            </div>
-        </div>
+P — asosiy summa
+r — yillik foiz stavkasi
+t — yillar soni
+A — yakuniy summa
+```
 
-        <p>
-            Bir xil pul, bir xil stavka, bir xil muddat. Farq —
-            <strong>4 883 200 so'm</strong>. Bu farq vaqt o'tgan sari, yoki foiz
-            darajasi oshgan sari kuchayib boradi.
-        </p>
-    </section>
+### Misol
 
-    <section id="grafik">
-        <h2>Interaktiv grafik</h2>
-        <p>
-            Quyidagi grafikda ikkala foiz turi bir xil sharoitda qanday
-            o'sishini ko'rishingiz mumkin. Slayderlarni o'zgartiring va natijani
-            kuzating. Murakkab foizlarning grafigi to'g'ri chiziq bo'lmaydi, va
-            vaqt o'tgani sarin sodda foiz grafigidan yaqqol ajralib turadi.
-        </p>
+10,000,000 so'm, 20% yillik stavka, 5 yil muddatga.
 
-        <p>
-            Masalan, 100 million so'm, 20% va 10yildagi farq 2 baravardan
-            ko'proq.
-        </p>
+|                     |                                        |
+| ------------------- | -------------------------------------- |
+| Har yilgi foiz      | 10,000,000 × 0.20 = **2,000,000 so'm** |
+| 5 yildagi jami foiz | **10,000,000 so'm**                    |
+| Yakuniy summa       | **20,000,000 so'm**                    |
 
-        <div class="chart-container">
-            <div class="sliders">
-                <div class="slider-group">
-                    <label>
-                        Asosiy summa
-                        <span id="val-principal">10 mln</span>
-                    </label>
-                    <input
-                        type="range"
-                        id="principal"
-                        min="1000000"
-                        max="100000000"
-                        step="1000000"
-                        value="10000000"
-                    />
-                </div>
-                <div class="slider-group">
-                    <label>Foiz stavkasi <span id="val-rate">20%</span></label>
-                    <input
-                        type="range"
-                        id="rate"
-                        min="5"
-                        max="40"
-                        step="1"
-                        value="20"
-                    />
-                </div>
-                <div class="slider-group">
-                    <label>Muddat <span id="val-years">5 yil</span></label>
-                    <input
-                        type="range"
-                        id="years"
-                        min="1"
-                        max="30"
-                        step="1"
-                        value="5"
-                    />
-                </div>
-            </div>
+---
 
-            <div class="chart-legend">
-                <div class="legend-item">
-                    <div class="legend-dot"></div>
-                    Sodda foiz
-                </div>
-                <div class="legend-item">
-                    <div class="legend-dot compound"></div>
-                    Murakkab foiz
-                </div>
-            </div>
+## Murakkab foiz nima?
 
-            <canvas id="interestChart" height="300"></canvas>
+**Murakkab foiz (compound interest)** — bu foizga foiz hisoblanadigan tizim. Pulingiz pul "tug'adi". Har davr oxirida hisoblangan foiz asosiy summaga qo'shiladi va keyingi davr uchun yangi asos kattaroq summaga aylanadi.
 
-            <div class="result-callout" id="result-callout">
-                <div class="item">
-                    <strong id="res-simple">—</strong>Sodda foiz (yakuniy)
-                </div>
-                <div class="item">
-                    <strong id="res-compound">—</strong>Murakkab foiz (yakuniy)
-                </div>
-                <div class="item"><strong id="res-diff">—</strong>Farq</div>
-            </div>
-        </div>
-    </section>
+Buni odatlarga o'xshatish mumkin. Bir hafta zalga qatnash ko'p narsani o'zgartirmaydi, ammo har bitta mashg'ulot kuchingizga kuch qo'shib boradi. Yomon odatlar ham shunday: oyda bir-ikki marta video o'yinlar yomon emas, ammo har bitta o'yin vaqti sizni ko'proq qaram qilib boradi.
 
-    <section id="xulosa" class="takeaway">
-        <h2>Xulosa</h2>
-        <p>
-            Foiz bu pulning narxi. Pulni olib turishning narxi. G'arblik
-            mutaxassislarni buni ijara stavkasi deb atashadi. Pulni olganingiz
-            uchun uning ustiga qo'shimcha qaytarib berasiz. Bu lekin anchagina
-            ziddiyatli mavzu - deylik, qo'shningizdan bitta non olib ertasi kuni
-            1.5 ta qaytarib berasizmi?
-        </p>
-        <p>
-            Sodda foiz - bu asosiy summa o'zgarmaydigan foiz. Murakkab foizda
-            asosiy summa o'zgaradi. Foiz orqali pul pul "tug'sa", murakkab
-            foizlar "egizak tug'adi".
-        </p>
+O'zbekistonda ba'zi banklar buni **kapitalizatsiya** deb ataydi. Ko'pchilik banklar buni taklif qiladi, lekin bu variant odatda standart emas — alohida so'rash kerak.
 
-        <p>
-            Keyingi postda, banklar aholiga kredit berayotganda qanday qilib
-            foizni hisoblashini ko'ramiz.
-        </p>
-    </section>
+Matematik jihatdan, murakkab foizlar darajali funksiya asosida yoziladi:
 
-</article>
+```
+A = P × (1 + r)^t
+
+P — asosiy summa
+r — yillik foiz stavkasi
+t — yillar soni
+A — yakuniy summa
+```
+
+### Xuddi shu misol
+
+10,000,000 so'm, 20% yillik stavka, 5 yil muddatga.
+
+A = 10,000,000 × (1.20)^5 = **24,883,200 so'm**
+
+|               | Sodda foiz       | Murakkab foiz    |
+| ------------- | ---------------- | ---------------- |
+| Yakuniy summa | 20,000,000 so'm  | 24,883,200 so'm  |
+| Jami foiz     | +10,000,000 so'm | +14,883,200 so'm |
+
+Bir xil pul, bir xil stavka, bir xil muddat. Farq — **4,883,200 so'm**. Bu farq vaqt o'tgan sari, yoki foiz darajasi oshgan sari kuchayib boradi.
+
+---
+
+## Interaktiv grafik
+
+Quyidagi grafikda ikkala foiz turi bir xil sharoitda qanday o'sishini ko'rishingiz mumkin. Slayderlarni o'zgartiring va natijani kuzating. Murakkab foizlarning grafigi to'g'ri chiziq bo'lmaydi va vaqt o'tgan sari sodda foiz grafigidan yaqqol ajralib turadi.
+
+Masalan, 100 million so'm, 20% va 10 yildagi farq 2 baravardan ko'proq.
+
+---
+
+## Xulosa
+
+Foiz bu pulning narxi — pulni olib turishning narxi. G'arblik mutaxassislar buni ijara stavkasi deb atashadi. Bu lekin anchagina ziddiyatli mavzu: qo'shningizdan bitta non olib, ertasi kuni 1.5 ta qaytarib berasizmi?
+
+- **Sodda foiz** — asosiy summa o'zgarmaydigan foiz
+- **Murakkab foiz** — foiz asosiy summaga qo'shilib, yangi foiz undan hisoblanadi
+
+Keyingi postda banklar aholiga kredit berayotganda foizni qanday hisoblashini ko'ramiz.

@@ -1,0 +1,79 @@
+---
+import type { CategoryKey } from "@data/categories";
+import { categories } from "@data/categories";
+import Layout from "@layouts/Layout.astro";
+import { getCollection, render } from "astro:content";
+
+const locale = "en";
+
+export async function getStaticPaths() {
+    const posts = await getCollection("blog", ({ id }) =>
+        id.startsWith("en/")
+    );
+
+    return posts.map((post) => {
+        const parts = post.id.split("/");
+        const category = parts[1];
+        const slug = parts[2];
+
+        const catKey = category as CategoryKey;
+        const catSlug = categories[catKey]?.en?.slug ?? category;
+
+        return {
+            params: { category: catSlug, slug },
+            props: { post },
+        };
+    });
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const parts = post.id.split("/");
+const catKey = parts[1] as CategoryKey;
+const catLabel = categories[catKey]?.en?.label ?? parts[1];
+const catSlug = categories[catKey]?.en?.slug ?? parts[1];
+
+function formatDate(date: Date): string {
+    return date.toLocaleDateString("en-US", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+    });
+}
+---
+
+<Layout title={post.data.title} description={post.data.description} lang={locale}>
+    <main>
+        <div class="container">
+
+            <div class="post-header">
+                <div class="post-meta-row">
+                    <a href={`/en/${catSlug}/`} class="post-category label-small">
+                        {catLabel}
+                    </a>
+                    {post.data.series && (
+                        <span class="label-small post-date">
+                            {post.data.series.part}-qism
+                        </span>
+                    )}
+                </div>
+                <h1>{post.data.title}</h1>
+                <p class="post-description">{post.data.description}</p>
+                <div class="post-byline">
+                    <a href={`/en/author/${post.data.author}/`} class="label-small byline-author">
+                        {post.data.author}
+                    </a>
+                    <span class="label-small post-date">
+                        {formatDate(post.data.date)}
+                    </span>
+                </div>
+            </div>
+
+            <article class="post-body">
+                <Content />
+            </article>
+
+        </div>
+    </main>
+</Layout>

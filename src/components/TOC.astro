@@ -1,0 +1,15 @@
+---
+interface Props {
+    items: { label: string; href: string }[];
+}
+const { items } = Astro.props;
+---
+
+<nav class="toc">
+    <p class="toc-title">Mundarija</p>
+    <ol>
+        {items.map((item) => (
+            <li><a href={item.href}>{item.label}</a></li>
+        ))}
+    </ol>
+</nav>

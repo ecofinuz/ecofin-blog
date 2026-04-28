@@ -17,6 +17,22 @@ export default defineConfig({
         },
     },
 
+    vite: {
+        resolve: {
+            alias: {
+                "@data": "/src/data",
+                "@components": "/src/components",
+                "@utils": "/src/utils",
+                "@layouts": "/src/layouts",
+            },
+        },
+        server: {
+            watch: {
+                ignored: ["**/.venv/**", "**/node_modules/**", "**/dist/**"],
+            },
+        },
+    },
+
     integrations: [
         sitemap({
             serialize(item) {

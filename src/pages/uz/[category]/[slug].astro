@@ -1,8 +1,8 @@
 ---
+import type { CategoryKey } from "@data/categories";
+import { categories } from "@data/categories";
+import Layout from "@layouts/Layout.astro";
 import { getCollection, render } from "astro:content";
-import type { CategoryKey } from "../../../data/categories";
-import { categories } from "../../../data/categories";
-import Layout from "../../../layouts/Layout.astro";
 
 const locale = "uz";
 
@@ -52,6 +52,7 @@ function formatDate(date: Date): string {
                     <a href={`/uz/${catSlug}/`} class="post-category label-small">
                         {catLabel}
                     </a>
+                    &middot;
                     {post.data.series && (
                         <span class="label-small post-date">
                             {post.data.series.part}-qism
