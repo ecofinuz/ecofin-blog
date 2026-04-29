@@ -6,7 +6,7 @@ import { categories } from "@data/categories";
 import Layout from "@layouts/Layout.astro";
 import { getCollection } from "astro:content";
 
-const locale = "uz";
+const locale = "ru";
 
 export async function getStaticPaths() {
     return (Object.keys(authors) as AuthorKey[]).map((key) => ({
@@ -27,7 +27,7 @@ const posts = allPosts.sort(
 );
 
 function formatDate(date: Date): string {
-    return date.toLocaleDateString("uz-UZ", {
+    return date.toLocaleDateString("ru-RU", {
         day: "numeric",
         month: "numeric",
         year: "numeric",
@@ -40,12 +40,12 @@ function getSlug(id: string): string {
 
 function getCatSlug(id: string): string {
     const catKey = id.split("/")[1] as CategoryKey;
-    return categories[catKey]?.uz?.slug ?? catKey;
+    return categories[catKey]?.ru?.slug ?? catKey;
 }
 
 function getCatLabel(id: string): string {
     const catKey = id.split("/")[1] as CategoryKey;
-    return categories[catKey]?.uz?.label ?? catKey;
+    return categories[catKey]?.ru?.label ?? catKey;
 }
 ---
 
@@ -72,7 +72,7 @@ function getCatLabel(id: string): string {
                                 rel="noopener noreferrer"
                                 class="author-link"
                             >
-                                Telegram
+                                Телеграм
                             </a>
                         )}
                         {author.links.medium && (
@@ -82,7 +82,7 @@ function getCatLabel(id: string): string {
                                 rel="noopener noreferrer"
                                 class="author-link"
                             >
-                                Medium
+                                Медиум
                             </a>
                         )}
                         {author.links.linkedin && (
@@ -92,7 +92,7 @@ function getCatLabel(id: string): string {
                                 rel="noopener noreferrer"
                                 class="author-link"
                             >
-                                LinkedIn
+                                Линкедин
                             </a>
                         )}
                         {author.links.twitter && (
@@ -102,7 +102,7 @@ function getCatLabel(id: string): string {
                                 rel="noopener noreferrer"
                                 class="author-link"
                             >
-                                Twitter
+                                Твиттер
                             </a>
                         )}
                     </div>
@@ -110,11 +110,11 @@ function getCatLabel(id: string): string {
             </div>
 
             <div class="author-posts">
-                <p class="label-small">{posts.length} ta maqola</p>
+                <p class="label-small">{posts.length} публикацци</p>
                 <div class="post-list">
                     {posts.map((post) => (
                         <a
-                            href={`/uz/${getCatSlug(post.id)}/${getSlug(post.id)}/`}
+                            href={`/ru/${getCatSlug(post.id)}/${getSlug(post.id)}/`}
                             class="post-item"
                         >
                             <div class="post-meta-row">
@@ -126,14 +126,14 @@ function getCatLabel(id: string): string {
                                 </span>
                                 {post.data.series && (
                                     <span class="label-small post-date">
-                                        {post.data.series.part}-qism
+                                        {post.data.series.part}-часть
                                     </span>
                                 )}
                             </div>
                             <h2 class="post-title">{post.data.title}</h2>
                             <p class="post-excerpt">{post.data.description}</p>
                             <div class="post-footer">
-                                <span class="post-read">O'qish &rarr;</span>
+                                <span class="post-read">Прочитать &rarr;</span>
                                 
                                 <div class="post-item-byline">
                                     <span class="byline-author">{author.name}</span>

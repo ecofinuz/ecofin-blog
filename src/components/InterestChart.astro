@@ -1,96 +1,118 @@
 ---
-// InterestChart.astro
-// Self-contained: markup, styles, and JS all in one file.
-// Usage in MDX: import InterestChart from '../../../components/InterestChart.astro';
-//               then <InterestChart />
+interface Props {
+    lang?: string;
+}
+
+const { lang = "uz" } = Astro.props;
+
+const t: Record<string, Record<string, string>> = {
+    uz: {
+        principal:      "Asosiy summa",
+        rate:           "Foiz stavkasi",
+        years:          "Muddat",
+        yearsUnit:      "yil",
+        simple:         "Sodda foiz",
+        compound:       "Murakkab foiz",
+        simpleLabel:    "Sodda foiz (yakuniy)",
+        compoundLabel:  "Murakkab foiz (yakuniy)",
+        diff:           "Farq",
+        start:          "Boshida",
+        yearUnit:       "-yil",
+        currency:       "so'm",
+        read:           "mlrd",
+        mln:            "mln",
+    },
+    en: {
+        principal:      "Principal",
+        rate:           "Interest rate",
+        years:          "Duration",
+        yearsUnit:      "years",
+        simple:         "Simple interest",
+        compound:       "Compound interest",
+        simpleLabel:    "Simple interest (final)",
+        compoundLabel:  "Compound interest (final)",
+        diff:           "Difference",
+        start:          "Start",
+        yearUnit:       "yr",
+        currency:       "",
+        read:           "B",
+        mln:            "M",
+    },
+    ru: {
+        principal:      "Основная сумма",
+        rate:           "Процентная ставка",
+        years:          "Срок",
+        yearsUnit:      "лет",
+        simple:         "Простой процент",
+        compound:       "Сложный процент",
+        simpleLabel:    "Простой процент (итог)",
+        compoundLabel:  "Сложный процент (итог)",
+        diff:           "Разница",
+        start:          "Начало",
+        yearUnit:       "-й год",
+        currency:       "сум",
+        read:           "млрд",
+        mln:            "млн",
+    },
+};
+
+const strings = t[lang] ?? t["uz"];
 ---
 
-<div class="chart-container card-vessel">
+<div
+    class="chart-container card-vessel"
+    id="interest-chart-root"
+    data-strings={JSON.stringify(strings)}
+>
     <div class="sliders">
         <div class="slider-group">
-            <label>
-                Asosiy summa
-                <span id="val-principal">10 mln</span>
-            </label>
-            <input
-                type="range"
-                id="principal"
-                min="1000000"
-                max="100000000"
-                step="1000000"
-                value="10000000"
-            />
+            <label>{strings.principal} <span id="val-principal">10 {strings.mln}</span></label>
+            <input type="range" id="principal" min="1000000" max="100000000" step="1000000" value="10000000" />
         </div>
         <div class="slider-group">
-            <label>
-                Foiz stavkasi
-                <span id="val-rate">20%</span>
-            </label>
-            <input
-                type="range"
-                id="rate"
-                min="5"
-                max="40"
-                step="1"
-                value="20"
-            />
+            <label>{strings.rate} <span id="val-rate">20%</span></label>
+            <input type="range" id="rate" min="5" max="40" step="1" value="20" />
         </div>
         <div class="slider-group">
-            <label>
-                Muddat
-                <span id="val-years">5 yil</span>
-            </label>
-            <input
-                type="range"
-                id="years"
-                min="1"
-                max="30"
-                step="1"
-                value="5"
-            />
+            <label>{strings.years} <span id="val-years">5 {strings.yearsUnit}</span></label>
+            <input type="range" id="years" min="1" max="30" step="1" value="5" />
         </div>
     </div>
 
     <div class="chart-legend">
         <div class="legend-item">
             <div class="legend-dot"></div>
-            Sodda foiz
+            {strings.simple}
         </div>
         <div class="legend-item">
             <div class="legend-dot compound"></div>
-            Murakkab foiz
+            {strings.compound}
         </div>
     </div>
 
     <canvas id="interestChart" height="300"></canvas>
 
-    <div class="result-callout" id="result-callout">
-        <div class="item">
-            <strong id="res-simple">—</strong>
-            Sodda foiz (yakuniy)
-        </div>
-        <div class="item">
-            <strong id="res-compound">—</strong>
-            Murakkab foiz (yakuniy)
-        </div>
-        <div class="item">
-            <strong id="res-diff">—</strong>
-            Farq
-        </div>
+    <div class="result-callout">
+        <div class="item"><strong id="res-simple">—</strong>{strings.simpleLabel}</div>
+        <div class="item"><strong id="res-compound">—</strong>{strings.compoundLabel}</div>
+        <div class="item"><strong id="res-diff">—</strong>{strings.diff}</div>
     </div>
 </div>
 
 <script>
     import Chart from "chart.js/auto";
 
+    const root = document.getElementById("interest-chart-root")!;
+    const s = JSON.parse(root.dataset.strings!);
+
     const fmt = (n: number): string => {
-        if (n >= 1e9) return (n / 1e9).toFixed(1).replace(/\.0$/, "") + " mlrd";
-        if (n >= 1e6) return (n / 1e6).toFixed(1).replace(/\.0$/, "") + " mln";
-        return n.toLocaleString("uz-UZ");
+        if (n >= 1e9) return (n / 1e9).toFixed(1).replace(/\.0$/, "") + " " + s.read;
+        if (n >= 1e6) return (n / 1e6).toFixed(1).replace(/\.0$/, "") + " " + s.mln;
+        return n.toLocaleString();
     };
 
     const fmtFull = (n: number): string =>
-        n.toLocaleString("uz-UZ") + " so'm";
+        n.toLocaleString() + (s.currency ? " " + s.currency : "");
 
     const principalEl = document.getElementById("principal") as HTMLInputElement;
     const rateEl = document.getElementById("rate") as HTMLInputElement;

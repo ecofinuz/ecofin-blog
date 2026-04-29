@@ -1,12 +1,18 @@
 ---
 interface Props {
     items: { label: string; href: string }[];
+    lang?: string;
 }
-const { items } = Astro.props;
+const { items, lang = "uz" } = Astro.props;
+const title: Record<string, string> = {
+    uz: "Mundarija",
+    en: "Contents",
+    ru: "Содержание",
+};
 ---
 
 <nav class="toc">
-    <p class="toc-title">Mundarija</p>
+    <p class="toc-title">{title[lang]}</p>
     <ol>
         {items.map((item) => (
             <li><a href={item.href}>{item.label}</a></li>

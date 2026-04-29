@@ -1,4 +1,6 @@
 ---
+import type { AuthorKey } from "@data/authors";
+import { getAuthor } from "@data/authors";
 import type { CategoryKey } from "@data/categories";
 import { categories } from "@data/categories";
 import Layout from "@layouts/Layout.astro";
@@ -29,6 +31,7 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+const author = getAuthor(post.data.author as AuthorKey);
 
 const parts = post.id.split("/");
 const catKey = parts[1] as CategoryKey;
@@ -55,7 +58,7 @@ function formatDate(date: Date): string {
                     </a>
                     {post.data.series && (
                         <span class="label-small post-date">
-                            {post.data.series.part}-qism
+                            {post.data.series.part}-часть
                         </span>
                     )}
                 </div>
@@ -63,7 +66,7 @@ function formatDate(date: Date): string {
                 <p class="post-description">{post.data.description}</p>
                 <div class="post-byline">
                     <a href={`/ru/author/${post.data.author}/`} class="label-small byline-author">
-                        {post.data.author}
+                        {author.name}
                     </a>
                     <span class="label-small post-date">
                         {formatDate(post.data.date)}

@@ -1,4 +1,6 @@
 ---
+import type { AuthorKey } from "@data/authors";
+import { getAuthor } from "@data/authors";
 import type { CategoryKey } from "@data/categories";
 import { categories } from "@data/categories";
 import Layout from "@layouts/Layout.astro";
@@ -66,6 +68,7 @@ function getCategory(id: string): string {
                             const slug = getSlug(post.id);
                             const catSlug = categories[cat]?.[locale]?.slug ?? cat;
                             const catLabel = categories[cat]?.[locale]?.label ?? cat;
+                            const author = getAuthor(post.data.author as AuthorKey);
 
                             return (
                                 <a
@@ -77,15 +80,25 @@ function getCategory(id: string): string {
                                             {catLabel}
                                         </span>
                                         &middot;
-                                        <span class="post-date label-small">
-                                            {formatDate(post.data.date)}
-                                        </span>
+                                        {post.data.series && (
+                                            <span class="label-small post-date">
+                                                {post.data.series.part}-часть
+                                            </span>
+                                        )}
                                     </div>
                                     <h2 class="post-title">{post.data.title}</h2>
                                     <p class="post-excerpt">
                                         {post.data.description}
                                     </p>
-                                    <span class="post-read">O'qish &rarr;</span>
+                                    <div class="post-footer">
+                                        <span class="post-read">Прочитать &rarr;</span>
+                                        
+                                        <div class="post-item-byline">
+                                            <span class="byline-author">{author.name}</span>
+                                            <span class="sep">&middot;</span>
+                                            <span class="post-date">{formatDate(post.data.date)}</span>
+                                        </div>
+                                    </div>
                                 </a>
                             );
                         })

@@ -1,5 +1,5 @@
 // @ts-check
-import sitemap from "@astrojs/sitemap";
+import sitemap, { ChangeFreqEnum } from "@astrojs/sitemap";
 import { defineConfig } from "astro/config";
 
 import mdx from "@astrojs/mdx";
@@ -36,11 +36,27 @@ export default defineConfig({
     integrations: [
         sitemap({
             serialize(item) {
-                if (/posts/.test(item.url)) {
-                    /** @type {any} */ (item).changefreq = "weekly";
+                // Boost individual post pages (3 segments: /uz/kredit/slug/)
+                const url = new URL(item.url);
+                const segments = url.pathname.split("/").filter(Boolean);
+
+                if (segments.length === 3) {
+                    item.changefreq = ChangeFreqEnum.WEEKLY;
                     item.priority = 0.8;
                 }
-                // Ensure lastmod is included if available
+
+                // Category and index pages
+                if (segments.length === 2) {
+                    item.changefreq = ChangeFreqEnum.DAILY;
+                    item.priority = 0.6;
+                }
+
+                // Home pages (/uz/, /en/, /ru/)
+                if (segments.length === 1) {
+                    item.changefreq = ChangeFreqEnum.DAILY;
+                    item.priority = 1.0;
+                }
+
                 item.lastmod = new Date().toISOString();
                 return item;
             },

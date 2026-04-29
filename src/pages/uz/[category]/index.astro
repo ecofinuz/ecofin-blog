@@ -1,4 +1,6 @@
 ---
+import type { AuthorKey } from "@data/authors";
+import { getAuthor } from "@data/authors";
 import type { CategoryKey } from "@data/categories";
 import { categories } from "@data/categories";
 import Layout from "@layouts/Layout.astro";
@@ -54,6 +56,8 @@ function getSlug(id: string): string {
                 {
                     posts.map((post) => {
                         const slug = getSlug(post.id);
+                        const author = getAuthor(post.data.author as AuthorKey);
+                        
                         return (
                             <a
                                 href={`/uz/${category}/${slug}/`}
@@ -74,7 +78,15 @@ function getSlug(id: string): string {
                                 </div>
                                 <h2 class="post-title">{post.data.title}</h2>
                                 <p class="post-excerpt">{post.data.description}</p>
-                                <span class="post-read">O'qish &rarr;</span>
+                                <div class="post-footer">
+                                    <span class="post-read">O'qish &rarr;</span>
+                                    
+                                    <div class="post-item-byline">
+                                        <span class="byline-author">{author.name}</span>
+                                        <span class="sep">&middot;</span>
+                                        <span class="post-date">{formatDate(post.data.date)}</span>
+                                    </div>
+                                </div>
                             </a>
                         );
                     })

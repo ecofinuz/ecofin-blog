@@ -41,6 +41,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
             rel="stylesheet"
         />
 
+        <link rel="alternate" type="application/rss+xml" title="Ecofin Blog (UZ)" href="/uz/rss.xml" />
+        <link rel="alternate" type="application/rss+xml" title="Ecofin Blog (EN)" href="/en/rss.xml" />
+        <link rel="alternate" type="application/rss+xml" title="Ecofin Blog (RU)" href="/ru/rss.xml" />
+
         <link rel="stylesheet" href="/src/styles/global.css" />
         <link rel="stylesheet" href="/src/styles/interactive.css" />
         <slot name="head" />
@@ -102,7 +106,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
                         >Telegram</a>
                     </div>
                     <p class="footer-copy">
-                        © {new Date().getFullYear()} Hojiakbar Barotov
+                        © {new Date().getFullYear()} Ecofin
                     </p>
                 </div>
             </div>
