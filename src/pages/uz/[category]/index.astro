@@ -17,9 +17,10 @@ export async function getStaticPaths() {
 
 const { category } = Astro.params;
 const { categoryKey } = Astro.props;
+const categorySlug = categories[categoryKey].uz.slug;
 
 const allPosts = await getCollection("blog", ({ id }) =>
-    id.startsWith(`${locale}/${categoryKey}/`)
+    id.startsWith(`${locale}/${categorySlug}/`)
 );
 
 const posts = allPosts.sort(

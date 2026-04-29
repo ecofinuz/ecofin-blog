@@ -23,6 +23,7 @@ export async function GET(context: APIContext) {
             const catKey = parts[1] as CategoryKey;
             const slug = parts[2];
             const catSlug = categories[catKey]?.en?.slug ?? catKey;
+            const catLabel = categories[catKey]?.uz?.label ?? catKey;
 
             return {
                 title: post.data.title,
@@ -30,6 +31,7 @@ export async function GET(context: APIContext) {
                 pubDate: post.data.date,
                 link: `/en/${catSlug}/${slug}/`,
                 author: author.name,
+                category: [catLabel],
             };
         }),
         customData: `<language>en</language>`,

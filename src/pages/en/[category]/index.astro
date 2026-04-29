@@ -17,14 +17,17 @@ export async function getStaticPaths() {
 
 const { category } = Astro.params;
 const { categoryKey } = Astro.props;
+const categorySlug = categories[categoryKey].en.slug;
 
 const allPosts = await getCollection("blog", ({ id }) =>
-    id.startsWith(`${locale}/${categoryKey}/`)
+    id.startsWith(`${locale}/${categorySlug}/`)
 );
 
 const posts = allPosts.sort(
     (a, b) => b.data.date.getTime() - a.data.date.getTime()
 );
+
+console.log(posts)
 
 const catLabel = categories[categoryKey].en.label;
 

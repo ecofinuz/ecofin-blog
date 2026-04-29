@@ -1,0 +1,120 @@
+---
+title: What is Interest? Simple and Compound Interest
+description: What is interest anyways? What is the difference?
+date: 2026-04-11
+category: loan
+translationKey: sodda-va-murakkab-foizlar
+author: hojiakbar
+series:
+    part: 1
+---
+
+import InterestChart from "@components/InterestChart.astro";
+import TOC from "@components/TOC.astro";
+
+<TOC
+    lang="en"
+    items={[
+        { label: "What is interest?", href: "#what-is-interest" },
+        { label: "Simple interest", href: "#simple-interest" },
+        { label: "Compound interest", href: "#compound-interest" },
+        { label: "Interest chart", href: "#interest-chart" },
+        { label: "Conclusion", href: "#conclusion" },
+    ]}
+/>
+
+---
+
+## What is interest?
+
+**Interest** is a mathematical term representing 1 in 100. 20% is 20 out of 100. In finance, interest is the "price" of money. The bank (or microfinance organization, or money lender) charges you interest for lending you money. Let's say I give you 10,000,000 soums and demand 12,000,000 million soums from you in 1 year, then the loan rate will be 20%. That is, you are adding 20% (i.e., 2,000,000) to 10,000,000 soums.
+
+In finance and economics, interest is simply the price of money. To use the money and give it back, you pay the lender a fee - in percent. In a way, interest is like rent. Whether this is true or not will be discussed in future posts. It's just how the modern banking system works.
+
+Western finance is built on the idea that **money has a time value**. (Time-value of money) That is why the concept of interest exists.
+
+There are two types of financial interest: simple and complex. They differ from each other, and both are widely used in the banking system. This post is about their difference.
+
+---
+
+## Simple Interest
+
+**Simple interest** is interest accrued only on the principal amount. Same amount every year. Interest is not added to the principal amount; it is paid or accrued separately. In other words, your interest payment won't change because it is tied to a **fixed principal amount**. This is a type of interest that most people know and understand. Almost all moneylenders lend on this basis.
+
+This is how most bank deposits work in Uzbekistan. For example, if you deposit 10,000,000 soums at 24% on a National Bank deposit, the bank will transfer the same interest (200,000 soums) to your card every month. The principal amount you deposit in the bank will remain unchanged.
+
+Mathematically, simple percentages are represented by a linear function (y = ax + b):
+
+```
+A = P x (1 + r x t)
+
+P — principal
+r — annual interest rate
+t — number of years
+A — future value
+```
+
+### Example
+
+10,000,000 soums, 20% annual interest rate, for a term of 5 years.
+
+|                             |                                        |
+| --------------------------- | -------------------------------------- |
+| Annual interest             | 10 000 000 x 0.20 = **2 000 000 so'm** |
+| Total interest over 5 years | **10 000 000 so'm**                    |
+| Final amount                | **20 000 000 so'm**                    |
+
+---
+
+## Compound Interest
+
+**Compound interest** is a system in which interest is charged on a percentage as well as principal. In other words, your money "bears" additional money out of itself. At the end of each period, the accrued interest is added to the principal amount, and the accrued interest becomes larger. For the next period, the new basis becomes a larger amount.
+
+This can be compared to habits. Going to the gym for a week won't change much, but every workout adds strength and makes you stronger. Bad habits are the same: playing video games once or twice a month isn't bad, but each time you play makes you more addicted.
+
+In Uzbekistan, some banks call this **capitalization**. For example, Asia Alliance Bank writes in the deposit agreement: "Capitalization is the addition of interest accrued for a period to the principal amount and the subsequent settlement from this new amount." Most banks offer this, but this option is usually not standard - you need to look for it separately.
+
+Mathematically, compound percentages are written as an exponential function (y = a^x):
+
+```
+A = P x (1 + r/n)^(t*n)
+
+P — pricipal
+r — annual interest rate
+t — number of years
+n — number of compounding periods
+A — final amount
+```
+
+### Same Example
+
+10,000,000 soums, 20% annual interest rate, for a term of 5 years, with an annual compounding (n=1)
+
+A = 10 000 000 x (1.20)^5 = **24 883 200 soums**
+
+|                | Sodda foiz        | Murakkab foiz     |
+| -------------- | ----------------- | ----------------- |
+| Final amount   | 20 000 000 soums  | 24 883 200 soums  |
+| Total interest | +10 000 000 soums | +14 883 200 soums |
+
+Same money, same rate, same time. The difference is 4,883,200 soums. This difference increases over time, or as the interest rate increases, or as the compounding period increases.
+
+---
+
+## Interest Chart
+
+In the graph below, you can see how both types of percentages grow under the same conditions. Change the sliders and track the result. The graph of compound interest is not a straight line, and it is clearly different from the graph of simple interest over time.
+
+For example, the difference between 100 million soums, 20% and the total amount over 10 years is more than 2 times.
+
+<InterestChart lang="en" />
+
+---
+
+## Conclusion
+
+Interest is the price of money - the price of renting money. Western experts call this the rental rate. Since you received and used the money, you will return it to the lender with an additional amount. But this is a rather controversial topic - for example, would you take a loaf of bread from your neighbor and return 1.5 loaves after 1 month?
+
+Simple interest is the interest at which the principal does not change. In compound interest, the principal amount changes. While money "bears" money through interest, compound interest "bears twins."
+
+In the next post, we will see how banks calculate interest when lending to the population.
