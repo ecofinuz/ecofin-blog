@@ -37,7 +37,7 @@ const catSlug = categories[catKey]?.en?.slug ?? parts[1];
 function formatDate(date: Date): string {
     return date.toLocaleDateString("en-US", {
         day: "numeric",
-        month: "long",
+        month: "numeric",
         year: "numeric",
     });
 }

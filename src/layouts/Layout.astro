@@ -42,6 +42,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         />
 
         <link rel="stylesheet" href="/src/styles/global.css" />
+        <link rel="stylesheet" href="/src/styles/interactive.css" />
         <slot name="head" />
     </head>
     <body>
@@ -51,7 +52,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
                 <div class="nav-links">
                     <a href="#" class="nav-link">ecofin.uz</a>
                     <a
-                        href="https://github.com/ecofinuz/ecofin-blog"
+                        href="https://github.com/ecofinuz/"
                         target="_blank"
                         rel="noopener noreferrer"
                         class="nav-link nav-github"
@@ -88,7 +89,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
                     <div class="footer-links">
                         <a href="#" class="footer-link">ecofin.uz</a>
                         <a
-                            href="https://github.com/ecofinuz/ecofin-blog"
+                            href="https://github.com/ecofinuz/"
                             target="_blank"
                             rel="noopener noreferrer"
                             class="footer-link"
@@ -99,12 +100,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
                             rel="noopener noreferrer"
                             class="footer-link"
                         >Telegram</a>
-                        <a
-                            href="https://medium.com/@hmbarotov"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="footer-link"
-                        >Medium</a>
                     </div>
                     <p class="footer-copy">
                         © {new Date().getFullYear()} Hojiakbar Barotov

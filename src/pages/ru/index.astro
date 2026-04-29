@@ -1,8 +1,8 @@
 ---
-import { getCollection } from "astro:content";
 import type { CategoryKey } from "@data/categories";
 import { categories } from "@data/categories";
 import Layout from "@layouts/Layout.astro";
+import { getCollection } from "astro:content";
 
 const locale = "ru";
 
@@ -19,7 +19,7 @@ const posts = allPosts.sort(
 function formatDate(date: Date): string {
     return date.toLocaleDateString("ru-RU", {
         day: "numeric",
-        month: "long",
+        month: "numeric",
         year: "numeric",
     });
 }
@@ -76,6 +76,7 @@ function getCategory(id: string): string {
                                         <span class="post-category label-small">
                                             {catLabel}
                                         </span>
+                                        &middot;
                                         <span class="post-date label-small">
                                             {formatDate(post.data.date)}
                                         </span>

@@ -258,13 +258,42 @@ main,
     color: var(--text-secondary);
 }
 
+.post-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
 .post-read {
-    display: inline-block;
-    margin-top: 12px;
     font-size: 0.9rem;
     color: var(--text-primary);
     font-weight: 600;
     letter-spacing: 0.03em;
+}
+
+.post-item-byline {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.post-item-byline .byline-author {
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.post-item-byline .sep {
+    color: var(--border);
+}
+
+/* Hover effect for the whole card */
+.post-item:hover .post-title {
+    text-decoration: underline;
+    text-decoration-color: var(--border);
+    text-underline-offset: 4px;
 }
 
 /* ── 7. Post page ── */
@@ -282,6 +311,8 @@ main,
     display: flex;
     align-items: center;
     gap: 16px;
+    margin-top: 16px;
+    margin-bottom: 4px;
 }
 
 .byline-author {
@@ -447,4 +478,76 @@ footer {
 
 .toc a:hover {
     color: var(--text-muted);
+}
+
+/* ── Author page ── */
+.author-profile {
+    display: flex;
+    align-items: flex-start;
+    gap: 28px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+}
+
+.author-avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid var(--border);
+}
+
+.author-info {
+    flex: 1;
+}
+
+.author-name {
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+}
+
+.author-bio {
+    margin-bottom: 16px;
+}
+
+.author-links {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.author-link {
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+.author-link:hover {
+    color: var(--text-primary);
+}
+
+.author-posts {
+    margin-bottom: 80px;
+}
+
+.author-posts .label-small {
+    margin-bottom: 8px;
+    display: block;
+}
+
+@media (max-width: 600px) {
+    .author-profile {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .author-links {
+        justify-content: center;
+    }
 }

@@ -38,7 +38,7 @@ const catSlug = categories[catKey]?.ru?.slug ?? parts[1];
 function formatDate(date: Date): string {
     return date.toLocaleDateString("ru-RU", {
         day: "numeric",
-        month: "long",
+        month: "numeric",
         year: "numeric",
     });
 }

@@ -19,15 +19,15 @@ export const authors: Record<
     hojiakbar: {
         name: "Hojiakbar Barotov",
         bio: {
-            uz: "Moliyaviy savodxonlik haqida yozaman.",
-            en: "I write about financial literacy.",
-            ru: "Пишу о финансовой грамотности.",
+            uz: "Ekofin asoschisi. Westminster Universiteti Moliya bakalavriati. Moliya, iqtisod, va texnologiyalar haqida interaktiv tarzda yozaman. ",
+            en: "Founder of Ecofin. Bachelor of Finance at Westminster University. I write interactively on finance, economics, and technology.",
+            ru: "Основатель Ecofin. Имею степень бакалавра в области финансов Вестминстерского университета. Я веду интерактивные публикации на темы финансов, экономики и технологий.",
         },
-        avatar: "/authors/hojiakbar.jpg",
+        avatar: "/authors/hojiakbar.webp",
         links: {
             telegram: "https://t.me/hmbarotov",
             medium: "https://medium.com/@hmbarotov",
-            linkedin: "https://linkedin.com/hojiakbar-barotov",
+            linkedin: "https://linkedin.com/in/hojiakbar-barotov",
         },
     },
 };

@@ -1,8 +1,8 @@
 ---
-import { getCollection } from "astro:content";
 import type { CategoryKey } from "@data/categories";
 import { categories } from "@data/categories";
 import Layout from "@layouts/Layout.astro";
+import { getCollection } from "astro:content";
 
 const locale = "ru";
 
@@ -29,7 +29,7 @@ const catLabel = categories[categoryKey].ru.label;
 function formatDate(date: Date): string {
     return date.toLocaleDateString("ru-RU", {
         day: "numeric",
-        month: "long",
+        month: "numeric",
         year: "numeric",
     });
 }
@@ -63,6 +63,7 @@ function getSlug(id: string): string {
                                     <span class="post-date label-small">
                                         {formatDate(post.data.date)}
                                     </span>
+                                    &middot;
                                     {post.data.series && (
                                         <span class="label-small post-date">
                                                 Публикация {post.data.series.part}

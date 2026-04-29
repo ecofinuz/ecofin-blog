@@ -1,0 +1,200 @@
+---
+// InterestChart.astro
+// Self-contained: markup, styles, and JS all in one file.
+// Usage in MDX: import InterestChart from '../../../components/InterestChart.astro';
+//               then <InterestChart />
+---
+
+<div class="chart-container card-vessel">
+    <div class="sliders">
+        <div class="slider-group">
+            <label>
+                Asosiy summa
+                <span id="val-principal">10 mln</span>
+            </label>
+            <input
+                type="range"
+                id="principal"
+                min="1000000"
+                max="100000000"
+                step="1000000"
+                value="10000000"
+            />
+        </div>
+        <div class="slider-group">
+            <label>
+                Foiz stavkasi
+                <span id="val-rate">20%</span>
+            </label>
+            <input
+                type="range"
+                id="rate"
+                min="5"
+                max="40"
+                step="1"
+                value="20"
+            />
+        </div>
+        <div class="slider-group">
+            <label>
+                Muddat
+                <span id="val-years">5 yil</span>
+            </label>
+            <input
+                type="range"
+                id="years"
+                min="1"
+                max="30"
+                step="1"
+                value="5"
+            />
+        </div>
+    </div>
+
+    <div class="chart-legend">
+        <div class="legend-item">
+            <div class="legend-dot"></div>
+            Sodda foiz
+        </div>
+        <div class="legend-item">
+            <div class="legend-dot compound"></div>
+            Murakkab foiz
+        </div>
+    </div>
+
+    <canvas id="interestChart" height="300"></canvas>
+
+    <div class="result-callout" id="result-callout">
+        <div class="item">
+            <strong id="res-simple">—</strong>
+            Sodda foiz (yakuniy)
+        </div>
+        <div class="item">
+            <strong id="res-compound">—</strong>
+            Murakkab foiz (yakuniy)
+        </div>
+        <div class="item">
+            <strong id="res-diff">—</strong>
+            Farq
+        </div>
+    </div>
+</div>
+
+<script>
+    import Chart from "chart.js/auto";
+
+    const fmt = (n: number): string => {
+        if (n >= 1e9) return (n / 1e9).toFixed(1).replace(/\.0$/, "") + " mlrd";
+        if (n >= 1e6) return (n / 1e6).toFixed(1).replace(/\.0$/, "") + " mln";
+        return n.toLocaleString("uz-UZ");
+    };
+
+    const fmtFull = (n: number): string =>
+        n.toLocaleString("uz-UZ") + " so'm";
+
+    const principalEl = document.getElementById("principal") as HTMLInputElement;
+    const rateEl = document.getElementById("rate") as HTMLInputElement;
+    const yearsEl = document.getElementById("years") as HTMLInputElement;
+    const canvas = document.getElementById("interestChart") as HTMLCanvasElement;
+
+    const chart = new Chart(canvas, {
+        type: "line",
+        data: {
+            labels: [],
+            datasets: [
+                {
+                    label: "Sodda foiz",
+                    data: [],
+                    borderColor: "#1a1a1a",
+                    borderWidth: 2,
+                    pointRadius: 0,
+                    tension: 0,
+                    fill: false,
+                },
+                {
+                    label: "Murakkab foiz",
+                    data: [],
+                    borderColor: "#888",
+                    borderWidth: 2,
+                    borderDash: [6, 4],
+                    pointRadius: 0,
+                    tension: 0,
+                    fill: false,
+                },
+            ],
+        },
+        options: {
+            responsive: true,
+            animation: { duration: 300 },
+            interaction: { mode: "index", intersect: false },
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: "#1a1a1a",
+                    titleColor: "#999",
+                    bodyColor: "#fff",
+                    padding: 12,
+                    callbacks: {
+                        label: (ctx) =>
+                            ctx.dataset.label +
+                            ": " +
+                            fmtFull(Math.round(ctx.parsed.y)),
+                    },
+                },
+            },
+            scales: {
+                x: {
+                    grid: { color: "#e2e0db" },
+                    ticks: { color: "#999", font: { size: 12 } },
+                },
+                y: {
+                    grid: { color: "#e2e0db" },
+                    ticks: {
+                        color: "#999",
+                        font: { size: 12 },
+                        callback: (v) => fmt(Number(v)),
+                    },
+                },
+            },
+        },
+    });
+
+    function update(): void {
+        const P = +principalEl.value;
+        const r = +rateEl.value / 100;
+        const T = +yearsEl.value;
+
+        document.getElementById("val-principal")!.textContent = fmt(P);
+        document.getElementById("val-rate")!.textContent = rateEl.value + "%";
+        document.getElementById("val-years")!.textContent = yearsEl.value + " yil";
+
+        const labels: string[] = [];
+        const simple: number[] = [];
+        const compound: number[] = [];
+
+        for (let t = 0; t <= T; t++) {
+            labels.push(t === 0 ? "Boshida" : t + "-yil");
+            simple.push(P * (1 + r * t));
+            compound.push(P * Math.pow(1 + r, t));
+        }
+
+        chart.data.labels = labels;
+        chart.data.datasets[0].data = simple;
+        chart.data.datasets[1].data = compound;
+        chart.update();
+
+        const finalSimple = P * (1 + r * T);
+        const finalCompound = P * Math.pow(1 + r, T);
+        const diff = finalCompound - finalSimple;
+
+        document.getElementById("res-simple")!.textContent = fmtFull(Math.round(finalSimple));
+        document.getElementById("res-compound")!.textContent = fmtFull(Math.round(finalCompound));
+        document.getElementById("res-diff")!.textContent = "+" + fmtFull(Math.round(diff));
+    }
+
+    [principalEl, rateEl, yearsEl].forEach((el) =>
+        el.addEventListener("input", update)
+    );
+
+    update();
+</script>

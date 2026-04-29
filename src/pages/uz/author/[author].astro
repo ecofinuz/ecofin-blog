@@ -1,0 +1,141 @@
+---
+import type { AuthorKey } from "@data/authors";
+import { authors, getAuthor } from "@data/authors";
+import type { CategoryKey } from "@data/categories";
+import { categories } from "@data/categories";
+import Layout from "@layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const locale = "uz";
+
+export async function getStaticPaths() {
+    return (Object.keys(authors) as AuthorKey[]).map((key) => ({
+        params: { author: key },
+        props: { authorKey: key },
+    }));
+}
+
+const { authorKey } = Astro.props;
+const author = getAuthor(authorKey);
+
+const allPosts = await getCollection("blog", ({ id, data }) =>
+    id.startsWith(`${locale}/`) && data.author === authorKey
+);
+
+const posts = allPosts.sort(
+    (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+
+function formatDate(date: Date): string {
+    return date.toLocaleDateString("uz-UZ", {
+        day: "numeric",
+        month: "numeric",
+        year: "numeric",
+    });
+}
+
+function getSlug(id: string): string {
+    return id.split("/").pop()!;
+}
+
+function getCatSlug(id: string): string {
+    const catKey = id.split("/")[1] as CategoryKey;
+    return categories[catKey]?.uz?.slug ?? catKey;
+}
+
+function getCatLabel(id: string): string {
+    const catKey = id.split("/")[1] as CategoryKey;
+    return categories[catKey]?.uz?.label ?? catKey;
+}
+---
+
+<Layout title={author.name} description={author.bio[locale]} lang={locale}>
+    <main>
+        <div class="container">
+
+            <div class="author-profile">
+                <img
+                    src={author.avatar}
+                    alt={author.name}
+                    class="author-avatar"
+                    width="96"
+                    height="96"
+                />
+                <div class="author-info">
+                    <h1 class="author-name">{author.name}</h1>
+                    <p class="author-bio">{author.bio[locale]}</p>
+                    <div class="author-links">
+                        {author.links.telegram && (
+                            <a
+                                href={author.links.telegram}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="author-link"
+                            >
+                                Telegram
+                            </a>
+                        )}
+                        {author.links.medium && (
+                            <a
+                                href={author.links.medium}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="author-link"
+                            >
+                                Medium
+                            </a>
+                        )}
+                        {author.links.linkedin && (
+                            <a
+                                href={author.links.linkedin}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="author-link"
+                            >
+                                LinkedIn
+                            </a>
+                        )}
+                        {author.links.twitter && (
+                            <a
+                                href={author.links.twitter}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="author-link"
+                            >
+                                Twitter
+                            </a>
+                        )}
+                    </div>
+                </div>
+            </div>
+
+            <div class="author-posts">
+                <p class="label-small">{posts.length} ta maqola</p>
+                <div class="post-list">
+                    {posts.map((post) => (
+                        <a
+                            href={`/uz/${getCatSlug(post.id)}/${getSlug(post.id)}/`}
+                            class="post-item"
+                        >
+                            <div class="post-meta-row">
+                                <span class="post-category label-small">
+                                    {getCatLabel(post.id)}
+                                </span>
+                                <span class="label-small">
+                                    &middot;
+                                </span>
+                                <span class="post-date label-small">
+                                    {formatDate(post.data.date)}
+                                </span>
+                            </div>
+                            <h2 class="post-title">{post.data.title}</h2>
+                            <p class="post-excerpt">{post.data.description}</p>
+                            <span class="post-read">O'qish &rarr;</span>
+                        </a>
+                    ))}
+                </div>
+            </div>
+
+        </div>
+    </main>
+</Layout>
