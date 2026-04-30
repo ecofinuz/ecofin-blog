@@ -51,7 +51,7 @@ function formatDate(date: Date): string {
 
             <div class="post-header">
                 <div class="post-meta-row">
-                    <a href={`/uz/${catSlug}/`} class="post-category label-small">
+                    <a href={`/${catSlug}/`} class="post-category label-small">
                         {catLabel}
                     </a>
                     <span class="label-small">
@@ -66,7 +66,7 @@ function formatDate(date: Date): string {
                 <h1>{post.data.title}</h1>
                 <p class="post-description">{post.data.description}</p>
                 <div class="post-byline">
-                    <a href={`/uz/author/${post.data.author}/`} class="label-small byline-author">
+                    <a href={`/author/${post.data.author}/`} class="label-small byline-author">
                         {author.name}
                     </a>
                     <span class="label-small">

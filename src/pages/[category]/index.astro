@@ -48,7 +48,7 @@ function getSlug(id: string): string {
         <div class="container">
 
             <div class="category-header">
-                <a href="/uz/" class="label-small back-link">← Barcha maqolalar</a>
+                <a href="/" class="label-small back-link">← Barcha maqolalar</a>
                 <h1>{catLabel}</h1>
                 <p class="label-small">{posts.length} ta maqola</p>
             </div>
@@ -61,7 +61,7 @@ function getSlug(id: string): string {
                         
                         return (
                             <a
-                                href={`/uz/${category}/${slug}/`}
+                                href={`/${category}/${slug}/`}
                                 class="post-item"
                             >
                                 <div class="post-meta-row">

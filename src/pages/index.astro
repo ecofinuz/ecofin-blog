@@ -1,7 +1,113 @@
 ---
-// Redirect root to default locale
-// Astro's i18n middleware handles this, but this file
-// acts as a fallback for static hosting environments.
-return Astro.redirect("/uz/", 301);
+import type { AuthorKey } from "@data/authors";
+import { getAuthor } from "@data/authors";
+import type { CategoryKey } from "@data/categories";
+import { categories } from "@data/categories";
+import Layout from "@layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const locale = "uz";
+
+// Get all uz posts, sorted by date descending
+const allPosts = await getCollection("blog", ({ id }) =>
+    id.startsWith(`${locale}/`)
+);
+
+const posts = allPosts.sort(
+    (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+
+// Format date for Uzbek: "11-Aprel, 2026"
+function formatDate(date: Date): string {
+    return date.toLocaleDateString("uz-UZ", {
+        day: "numeric",
+        month: "numeric",
+        year: "numeric",
+    });
+}
+
+// Derive slug from entry id: "uz/kredit/sodda-va-murakkab-foizlar" → "sodda-va-murakkab-foizlar"
+function getSlug(id: string): string {
+    const parts = id.split("/");
+    return parts[parts.length - 1];
+}
+
+// Derive category from entry id: "uz/kredit/sodda-va-murakkab-foizlar" → "kredit"
+function getCategory(id: string): string {
+    const parts = id.split("/");
+    return parts[1];
+}
 ---
- 
+
+<Layout title="Bosh sahifa" lang={locale}>
+    <main>
+        <div class="container">
+
+            <section class="categories-section">
+                <p class="label-small">Mavzular</p>
+                <div class="category-list">
+                    {
+                        (Object.keys(categories) as CategoryKey[]).map((key) => (
+                            <a
+                                href={`/${categories[key][locale].slug}/`}
+                                class="category-tag"
+                            >
+                                {categories[key][locale].label}
+                            </a>
+                        ))
+                    }
+                </div>
+            </section>
+
+            <section class="posts-section">
+                <p class="label-small">Maqolalar</p>
+                <div class="post-list">
+                    {
+                        posts.map((post) => {
+                            const cat = getCategory(post.id) as CategoryKey;
+                            const slug = getSlug(post.id);
+                            const catSlug = categories[cat]?.[locale]?.slug ?? cat;
+                            const catLabel = categories[cat]?.[locale]?.label ?? cat;
+                            const author = getAuthor(post.data.author as AuthorKey);
+
+                            return (
+                                <a
+                                    href={`/${catSlug}/${slug}/`}
+                                    class="post-item"
+                                >
+                                    <div class="post-meta-row">
+                                        <span class="post-category label-small">
+                                            {catLabel}
+                                        </span>
+                                        <span class="label-small">
+                                            &middot;
+                                        </span>
+                                        {post.data.series && (
+                                            <span class="label-small post-date">
+                                                {post.data.series.part}-qism
+                                            </span>
+                                        )}
+                                    </div>
+                                    <h2 class="post-title">{post.data.title}</h2>
+                                    <p class="post-excerpt">
+                                        {post.data.description}
+                                    </p>
+                                    <div class="post-footer">
+                                        <span class="post-read">O'qish &rarr;</span>
+                                        
+                                        <div class="post-item-byline">
+                                            <span class="byline-author">{author.name}</span>
+                                            <span class="sep">&middot;</span>
+                                            <span class="post-date">{formatDate(post.data.date)}</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            );
+                        })
+                    }
+                </div>
+            </section>
+
+        </div>
+    </main>
+</Layout>
