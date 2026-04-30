@@ -6,6 +6,9 @@ interface Props {
     ogImage?: string;
 }
 
+import "@styles/global.css";
+import "@styles/interactive.css";
+
 const {
     title,
     description = "Moliyaviy savodxonlik",
@@ -64,9 +67,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         <link rel="alternate" type="application/rss+xml" title="Ecofin Blog (UZ)" href="/uz/rss.xml" />
         <link rel="alternate" type="application/rss+xml" title="Ecofin Blog (EN)" href="/en/rss.xml" />
         <link rel="alternate" type="application/rss+xml" title="Ecofin Blog (RU)" href="/ru/rss.xml" />
-
-        <link rel="stylesheet" href="/src/styles/global.css" />
-        <link rel="stylesheet" href="/src/styles/interactive.css" />
         <slot name="head" />
     </head>
     <body>

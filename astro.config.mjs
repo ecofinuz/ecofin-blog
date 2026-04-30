@@ -8,7 +8,6 @@ import mdx from "@astrojs/mdx";
 export default defineConfig({
     trailingSlash: "always",
     site: "https://blog.ecofin.uz",
-    outDir: "./public_build",
     i18n: {
         defaultLocale: "uz",
         locales: ["uz", "en", "ru"],
@@ -24,6 +23,7 @@ export default defineConfig({
                 "@components": "/src/components",
                 "@utils": "/src/utils",
                 "@layouts": "/src/layouts",
+                "@styles": "/src/styles",
             },
         },
         server: {
