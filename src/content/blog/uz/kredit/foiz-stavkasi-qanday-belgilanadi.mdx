@@ -1,0 +1,100 @@
+---
+title: Foiz Stavkasi Qanday Belgilanadi?
+description: Bank sizga 49% stavka taklif qiladi. Bu raqam qayerdan keladi? Tasodifmi yoki hisob-kitobmi?
+date: 2026-05-02
+category: kredit
+translationKey: foiz-stavkasi-qanday-belgilanadi
+author: hojiakbar
+series:
+    part: 4
+---
+
+import TOC from "@components/TOC.astro";
+
+<TOC
+    lang="uz"
+    items={[
+        { label: "49% - bu qayerdan?", href: "#49---bu-qayerdan" },
+        { label: "Fisher Formulasi", href: "#fisher-formulasi" },
+        { label: "Uchta komponent", href: "#uchta-komponent" },
+        { label: "Interaktiv kalkulyator", href: "#interaktiv-kalkulyator" },
+        { label: "Xulosa", href: "#xulosa" },
+    ]}
+/>
+
+---
+
+## 49% - bu qayerdan?
+
+O'zbekistonda iste'mol kreditlarining nominal yillik foiz stavkasi ko'pincha 30-50% oralig'ida bo'ladi. Nominal - bu sizga ko'rsatiladigan foiz stavkasi. Avvalgi postda kreditning qanday hisoblanishini ko'rgan edik. Kredit muddati va foiz stavkasi siz olgan pulingizni qancha qilib qaytarib berishingizni belgilab beradi.
+
+Ko'pchilik buni shunchaki qabul qiladi - banklar shunday belgilagan, demak shunday. Bo'lishi kerak ekan, bo'lyapti. Lekin bu raqam havodan olinmagan. Uning o'z mantig'i mavjud.
+
+Banklar odatda kredit berayotganda uchta narsani hisobga oladi: **qarz qaytmasligi xavfi**, **o'z foyda marjasi**, va iqtisodiyotdagi **inflyatsiya**. Garchi har bir bank o'zining holatidan kelib chiqib foiz stavkasini belgilasida, umuman olganda, ushbu uchta omil birlashib, siz ko'rayotgan nominal foiz stavkasini hosil qiladi.
+
+Buni tushunish sizga kredit takliflarini solishtirishda, muzokaralar olib borishda, va bank nima uchun aynan shu raqamni taklif qilayotganini baholashda yordam beradi.
+
+---
+
+## Fisher Formulasi
+
+Matematik jihatdan nominal foiz stavkasini quyidagi formula orqali tushuntirish mumkin:
+
+```
+(1 + R) = (1 + r) x (1 + m) x (1 + π)
+
+R — nominal foiz stavkasi (siz to'laydigan)
+r — risk mukofoti
+m — bank foyda marjasi
+π — inflyatsiya
+```
+
+Bu formula ko'paytirish asosida qurilgan, chunki har bir omil oldingi summaga emas, balki _kumulyativ_ ta'sir ko'rsatadi. Masalan, inflyatsiya yuqori bo'lsa bu bankning riski va foydasiga ham ta'sir ko'rsatadi. Sodda qo'shish (R = r + m + π) taxminiy natija beradi, lekin aniq hisob-kitob uchun ko'paytirish kerak.
+
+Masalan: risk mukofoti 25%, foyda marjasi 13%, inflyatsiya 7% bo'lsa - oddiy qo'shish 45% beradi, lekin to'g'ri formula bo'yicha **51% **beradi. Bu farq kichik ko'rinsa ham, katta summalarda sezilarli.
+
+---
+
+## Uchta Komponent
+
+### Risk Mukofoti (r)
+
+**Risk mukofoti** - bank qarz qaytmasligi ehtimoli uchun oladigan qo'shimcha haq. Bank beradigan hamma kreditni ham qaytarib ola olmaydi: olgan odam vafot etishi, bankrot bo'lishi, yoki vaqtida to'lamay qochib yurishi mumkin. Undan tashqari, bankning o'z xavf-xatarlari ham mavjud: siyosiy, iqtisodiy, moliyaviy xatarlari. Bankning bosh ofisida ishlaydigan kuchli iqtisodchilar barcha faktorlarni hisoblab, bu premiumni hisoblashadi.
+
+Nega banklar iloji boricha ko'proq odamlarga kredit berishga harakat qiladi? Nega banklar reklamalarga milliardlab sarflaydi? Sababi **diversifikatsiya (taqsimlash). **Bank minglab mijozlarga kredit beradi. Ularning katta qismi o'z vaqtida to'laydi, lekin qoraqosh qorako'z Toshmat ishi tayin bo'lmagani uchun Iphone 16 Pro Max'ga olgan kreditini to'lay olmaydi.
+
+Buni bankdagi iqtisodchilar ham bilishadi, shuning uchun ham ular to'lay olmaydigan odamlarni ham hisobga olishadi. Siz barcha qarzlarini o'z vaqtida to'lovchi, muqim daromad manbaiga ega bo'lsangiz ham, sizga qo'yiladigan risk premiumi siz loyiq bo'lganidan ko'ra balandroq. Bankning strategiyasi bo'yicha sizga o'xshagan kredit oluvchilar kredit to'la olmaydiganlar uchun ham to'lashadi.
+
+Umuman olganda, risk qanchalik yuqori bo'lsa - garovsiz kredit, qisqa tarix, past daromad - mukofot shunchalik katta bo'ladi. Yuridik shaxslarga beriladigan kreditlarning foizlari jismoniy shaxslarga beriladigan foizlardan deyarli har doim past bo'lishining sababi ham shu. Firmalarda odatda firma nomiga olingan ko'chmas mulk, avtomobil, yoki yer bo'ladi. Ular kreditni to'lay olmasa, bank ushbu mulklarni tortib olib, zararlarini qoplashi mumkin.
+
+### Foyda Marjasi (m)
+
+Bank moliyaviy tijorat tashkiloti. Istalgan biznes tashkiloti kabi, u ham depozit jalb qilishga, xodimlarga pul to'lashga, texnologiya sotib olishga, soliq to'lashga, va aksiyadorlarga daromad berishga majbur. Bularning barchasi foiz stavkasiga kiritiladi. Ya'ni, aholiga beriladigan kredit ortidan bank biznes faoliyatini olib boradi.
+
+O'zbekistonda tarixan foyda marjasi (m) juda yuqori bo'lgan. Nega mustaqillikdan keyingi avlod intiladigan eng mashhur kasblar bankda? Nega talabalar bankka ishga kirishi uchun oylab tekinga amaliyot o'tashadi? Albatta, bankdagi oyliklar tufayli. Bankdagi juda yuqori oyliklar va "13-oylik" qayerdan? Albatta bankning foydasidan. Foydasi katta bo'lmagan tashkilot mantiqan katta oylik bera olmaydi.
+
+Iqtisodda raqobat qanchalik kuchli bo'lsa, marjani ushlab turish shunchalik qiyin - bu O'zbekiston banking sektori uchun hali to'liq ishlamayotgan mexanizm. Moliyaviy infrastruktura rivojlanib, O'zbekiston jahonga ochilaversa, raqobat kuchayib kredit foizlari ham tushib boradi.
+
+### Inflyatsiya (π)
+
+Bank bugun bergan pulni oyma-oy oz-ozdan oladi. Lekin bu muddat davomida inflyatsiya tufayli pulning xarid qobiliyati kamayadi. Bank bu yo'qotishni ham stavkaga qo'shadi. Bank va davlatning bir so'm puli ko'chada qolmaydi.
+
+Oldingi qismda ko'rganimizdek, O'zbekistonda yillik inflyatsiya hozir ~7%. 2018 yilda bu ko'rsatkich 20% dan oshgan edi - o'sha yillarda kredit stavkalari ham mos ravishda baland bo'lgan. Markaziy Bank inflyatsiyaning keyingi 2-3 yil ichida 5% ga tushirishni maqsad qilgan: keyingi 2-3 yil ichida kredit foiz stavklari ham tushishi kerak.
+
+Ammo shunday ehtimol ham bor: banklar pastlagan inflyatsiyadan shunchaki o'z foydasini oshirish uchun foydalanadi. Deylik, 7% pul qadrsizlanishida 49% ga iste'mol krediti bergan onlayn bank inflyatsiya 5% ga tushgach ham 49% stavkada berishda va yanada ko'proq foyda olishda davom etadi.
+
+---
+
+## Interaktiv Kalkulyator
+
+Uchta komponentni o'zgartiring va nominal foiz stavkasi qanday shakllanishini kuzating. Standart qiymatlar O'zbekiston bozorining hozirgi holatini aks ettiradi.
+
+---
+
+## Xulosa
+
+TBC Bankda 49% stavka ko'rganingizda endi uni uchta savolga ajratib ko'ring: bank qancha risk olmoqda, qancha foyda kutmoqda, va inflyatsiya qancha? Inflyatsiya barcha uchun bir xil. Demak, bank qancha risk olmoqda, va buning ortidan qancha daromad ko'rmoqda?
+
+Bu savollarning javobini bilmasangiz ham, hisob-kitobni tushungan odam muzokaralarga boshqacha kirishadi. "Bu 49% ichiga insofini ham tiqqanmi?" deb emas; "Olayotgan riskiga yarasha stavka qo'yyaptimi?" deb so'raydi. "Bank ko'zlagan foyda asoslimi?" deb so'raydi.
+
+Keyingi qismda kredit reyting nima ekanligini bilib olamiz.

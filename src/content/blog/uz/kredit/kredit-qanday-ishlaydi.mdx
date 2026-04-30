@@ -1,0 +1,113 @@
+---
+title: Kredit Qanday Ishlaydi?
+description: Har oylik to'lovning ichida nima bor? Qanchasi asosiy qarz, qanchasi bank daromadi?
+date: 2026-04-18
+category: kredit
+translationKey: kredit-qanday-ishlaydi
+author: hojiakbar
+series:
+    part: 2
+---
+
+import TOC from "@components/TOC.astro";
+
+<TOC
+    lang="uz"
+    items={[
+        { label: "Iste'mol krediti nima?", href: "#istemol-krediti-nima" },
+        { label: "Annuitet", href: "#annuitet" },
+        { label: "Differensiya", href: "#differensiya" },
+        { label: "Qaysi biri foydali?", href: "#qaysi-biri-foydali" },
+    ]}
+/>
+
+---
+
+## Iste'mol Krediti Nima?
+
+**Iste'mol krediti (consumer loan)** - bank yoki mikro-moliya muassasasi tomonidan jismoniy shaxsga ma'lum muddat va foiz stavkasida beriladigan qarz. Siz bu kreditni biznes boshlash yoki uni kengaytirish uchun emas, shunchaki sarflash uchun olasiz. Avtomobil, maishiy texnika, ta'lim, yoki shunchaki naqd pul - maqsad har xil bo'lishi mumkin, lekin mexanizm bir xil. Afsuski, banklar hozir mobil telefon, sayohat, va to'y uchun ham kredit berishadi.
+
+Iste'mol kreditlari kredit oluvchiga katta foyda olib kelmaydi. Biznesdan farqli o'laroq, kredit olayotganlarning juda katta foizi faqatgina uni sarflash uchun olishadi. 12 oylik kreditga yangi gaz plita olganingiz bilan daromadingiz oshib qolmaydi. To'y uchun kredit olish moliyaviy eng katta xatoliklardan biri: nafaqat bir kunda ortiqcha kamida 100 mln so'mni behuda sovurasiz, balki bu pulni foizi bilan qaytarib ham berasiz.
+
+Albatta, iste'mol kreditlari yomon demoqchi emasman. Shu postni yozayotgan noutbukimni ham akam 5 yil oldin $700 kreditga olgan. Boshqa iloji bo'lmagan u paytlar. U orqali biz yangi bulimlar orttirdik, kasb o'rgandik, va ishga kirdik. Akam bir yil Germaniyada ham ishlab keldi. Hozir esa, bunday noutbuklarni olish muammo emas.
+
+Iste'mol krediti to'g'ri maqsadda ishlatilsa yaxshi. Ta'lim uchun, yangi malakalar uchun, yangi ish uchun. Ammo faqatgina iste'mol uchun katta foizda qarz olish - bu moliyaviy jihatdan noto'g'ri. Kreditlar doimo eng so'nggi variant bo'lishi kerak.
+
+Xo'p, iste'mol krediti olar ekansiz, u nima ekanligini bilib oldingiz. Endi uning qanday hisoblanishi va turlarini ham o'rganamiz.
+
+---
+
+Kredit uchta asosiy parametrdan iborat: **asosiy qarz** (siz olgan summa), **foiz stavkasi** (bank olayotgan haq), va **muddat** (to'lash davri). Shu uchta raqam sizning oylik to'lovingizni va jami qancha to'lashingizni belgilaydi.
+
+O'zbekistonda iste'mol kreditlari asosan ikki sxema bo'yicha to'lanadi: **annuitet** va **kamayuvchi qoldiq (differensiyalashgan). **Annuitet bu oylik teng to'lov, differensiya esa boshida ko'p to'lab, so'ngida ozroq to'lash.
+
+---
+
+## Annuitet
+
+**Annuitet (annuity)** - har oy bir xil miqdorda to'lanadigan sxema. Birinchi oydan oxirgi oygacha to'lov o'zgarmaydi. Bu O'zbekistondagi eng keng tarqalgan kredit turi. Siz har oy nechanchi sanada qancha to'lashingizni aniq bilasiz.
+
+Moliyaviy savodxonlikni o'qiyotgan ekansiz, bilingki, banklar ochko'z; butun moliya sohasi ochko'z **(greedy).** G'arb moliya sistemasini shunday qurgan, biz esa undan andaza olganmiz.
+
+Lekin "bir xil to'lov" degani ichki tarkib ham bir xil degani emas. Dastlabki oylarida to'lovning katta qismi foiz, kichik qismi asosiy qarz. Ya'ni, boshida asosan foiz to'laysiz, qarzingizni emas. Katta qismi asosiy qarz, kichik qismi foiz bo'lishi mumkin edi. Bu bilan siz to'laydigan summa ham kamaygan bo'lardi. Vaqt o'tgan sari nisbat o'zgaradi - oxirgi oyga kelib deyarli hammasi asosiy qarz bo'ladi*. Ничего личного, просто бизнес.*
+
+Excelda `=PPMT()` va `=IPMT()` bilan annuitet oylik qarz va foiz to'lovlarini hisoblasa bo'ladi. Matematik jihatdan, annuitet formulasi shunday hisoblanadi:
+
+```
+M = P x r(1 + r)^n / ((1 + r)^n - 1)
+
+P — asosiy qarz
+r — oylik foiz stavkasi (yillik/12)
+n — oylar soni
+M — oylik to'lov
+```
+
+Quyidagi jadvalda slayderlarni o'zgartirib, har oylik to'lovning qanday taqsimlanishini ko'ring. Bank servis xizmatlari, garov, yoki penya hisobga kiritilmagan.
+
+Tasavvur qiling, o'zimizning qorako'z qoraqosh Toshmat jonajon TBC Bankdan iPhone 16 Pro Max olish uchun 2 yilga 15 000 000 so'm kredit olmoqchi. Yillik 49% ga. Axir, iPhone muhim! Bu matoh unga hurmat va ehtirom olib keladi. 5 daqiqada onlayn kredit oladi Toshmat. Va oyiga 990 000 so'm to'laydi.
+
+Oylik to'lov uncha ko'p emas, to'g'ri. Lekin 24 oyda u olgan 15 000 000 so'mni sal kam 24 000 **000** qilib qaytarib beradi. Naq 60% oshig'i bilan! Bir kun kechikilsa ham yoziladigan penyalarni hisoblamasa, albatta.
+
+---
+
+## Differensiya
+
+**Kamayuvchi qoldiq yoki differensiya (declining balance)** sxemasida asosiy qarz har oy teng bo'laklarga bo'linib to'lanadi. Foiz esa har oy qolgan qarzga hisoblanadi - demak qoldiq kamaygan sari foiz ham kamayadi. Bu keng tarqalgan ikkinchi kredit hisoblash usuli.
+
+Natijada oylik to'lov har oy kamroq bo'ladi. Annuitetdan farqli o'laroq, siz qarzingizni to'layapsiz, foizni emas. Shuning uchun ham, boshida to'lov annuitetga qaraganda yuqoriroq, lekin jami to'lanadigan foiz kamroq.
+
+Matematik jihatdan differensiya mantig'i anchagina sodda:
+
+```
+Asosiy qarz qismi = P / n
+Foiz qismi = Qoldiq x r
+Oylik to'lov = Asosiy qarz qismi + Foiz qismi
+
+P — asosiy qarz
+r — oylik foiz stavkasi
+n — oylar soni
+A — yakuniy summa
+Qoldiq — o'sha oyga qolgan qarz
+```
+
+Yuqoridagi misol qaytsak. Differensiya usuli bilan hisoblaganda Toshmat umumiy 22 500 000 so'm atrofida to'lov qiladi. Lekin birinchi 10 oy u oyiga 1 000 000 so'mdan oshiq pul to'laydi. Asosiy qarzi oyiga o'zgarmas 625 000 so'm. Foiz esa kamayib boradi.
+
+---
+
+## Qaysi Biri Foydali?
+
+Bank uchun ikkalasi ham. Siz uchun katta ahamiyat kasb etmaydi, ochig'i.
+
+Ikkala sxema ham bir xil asosiy qarz, foiz stavkasi, va muddatda turli natija beradi. Asosiy farq - jami to'lanadigan foiz miqdori va oylik to'lovning o'zgarish tarzida.
+
+| Annuitet                                                 | Differensiya                                                |
+| -------------------------------------------------------- | ----------------------------------------------------------- |
+| Oylik to'lov **bir xil**. Byudjetni rejalashtirish oson. | Oylik to'lov kamayib boradi. Boshida og'irroq.              |
+| Jami foiz **ko'proq**. Bank uchun qulay.                 | Jami foiz **kamroq**. Qarz oluvchi uchun qulay.             |
+| O'zbekistonda **keng tarqalgan**.                        | Ko'proq **ipoteka** va **korporativ** kreditlarda uchraydi. |
+
+Agar oylik to'lov barqarorligi muhim bo'lsa - annuitet. Agar jami xarajatni kamaytirmoqchi bo'lsangiz va boshida ko'proq to'lashga imkoningiz bo'lsa - differensiya. Sizga qaysi biri to'g'riroq ekanligi sizning holatingizga bog'liq.
+
+Lekin amalda ko'pchilik bank annuitetni taklif qiladi, chunki u bankka ko'proq foiz keltiradi. Siz so'ramasangiz, kamayuvchi qoldiqni taklif qilishmaydi.
+
+Kreditlarni hisoblash va ularni to'lash haqida gap ketganda, inflyatsiyani unutmaslik kerak. Keyingi post inflyatsiya haqida.

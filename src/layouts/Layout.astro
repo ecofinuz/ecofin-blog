@@ -13,6 +13,26 @@ const {
     ogImage,
 } = Astro.props;
 
+const t: Record<string, Record<string, string>> = {
+    uz: {
+        platform:  "ecofin.uz",
+        sponsor:   "Qo'llab-quvvatlash",
+        tagline:   "Moliyaviy savodxonlik va iqtisodiy bilimlar ekotizimi.",
+    },
+    en: {
+        platform:  "ecofin.uz",
+        sponsor:   "Sponsor",
+        tagline:   "An ecosystem of financial literacy and economic knowledge.",
+    },
+    ru: {
+        platform:  "ecofin.uz",
+        sponsor:   "Поддержать",
+        tagline:   "Экосистема финансовой грамотности и экономических знаний.",
+    },
+};
+
+const ui = t[lang] ?? t["uz"];
+
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
@@ -52,7 +72,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <body>
         <nav class="site-nav">
             <div class="nav-inner">
-                <a href="/" class="nav-brand">Ecofin</a>
+                <a href="/" class="nav-brand">{ui.platform}</a>
                 <div class="nav-links">
                     <a href="#" class="nav-link">ecofin.uz</a>
                     <a
@@ -73,7 +93,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
                         rel="noopener noreferrer"
                         class="nav-donate"
                     >
-                        Qo'llab-quvvatlash
+                        {ui.sponsor}
                     </a>
                 </div>
             </div>
@@ -86,7 +106,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
                 <div class="footer-left">
                     <span class="nav-brand footer-brand">Ecofin</span>
                     <p class="footer-tagline">
-                        Moliyaviy savodxonlik va iqtisodiy bilimlar ekotizimi.
+                        {ui.tagline}
                     </p>
                 </div>
                 <div class="footer-right">

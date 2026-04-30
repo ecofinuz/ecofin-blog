@@ -56,6 +56,9 @@ function formatDate(date: Date): string {
                     <a href={`/ru/${catSlug}/`} class="post-category label-small">
                         {catLabel}
                     </a>
+                    <span class="label-small">
+                        &middot;
+                    </span>
                     {post.data.series && (
                         <span class="label-small post-date">
                             {post.data.series.part}-часть
@@ -68,6 +71,9 @@ function formatDate(date: Date): string {
                     <a href={`/ru/author/${post.data.author}/`} class="label-small byline-author">
                         {author.name}
                     </a>
+                    <span class="label-small">
+                        &middot;
+                    </span>
                     <span class="label-small post-date">
                         {formatDate(post.data.date)}
                     </span>
