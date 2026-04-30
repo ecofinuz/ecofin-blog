@@ -230,12 +230,82 @@ canvas {
     display: block;
 }
 
+.result-display {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.result-label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+.result-R {
+    font-family: "Lora", Georgia, serif;
+    font-size: clamp(2.4rem, 8vw, 4rem);
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--text-primary);
+}
+
+.result-sub {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-top: 8px;
+    margin-bottom: 0;
+}
+
+.breakdown {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 28px;
+}
+
+.breakdown-item {
+    background: var(--surface);
+    padding: 18px 16px;
+    text-align: center;
+}
+
+.b-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+}
+
+.b-value {
+    font-family: "Lora", Georgia, serif;
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.b-name {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+.nominal-rate-calculator .sliders {
+    margin-bottom: 0;
+}
+
 @media (max-width: 600px) {
     .result-callout {
         grid-template-columns: 1fr;
     }
 
     .sliders {
+        grid-template-columns: 1fr;
+    }
+
+    .breakdown {
         grid-template-columns: 1fr;
     }
 }
