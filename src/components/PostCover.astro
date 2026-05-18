@@ -1,0 +1,35 @@
+---
+interface Props {
+    cover?: string;
+    title: string;
+    className?: string;
+    loading?: "eager" | "lazy";
+    decorative?: boolean;
+}
+
+const {
+    cover,
+    title,
+    className = "",
+    loading = "lazy",
+    decorative = false,
+} = Astro.props;
+
+const coverSrc = cover ? `/images/covers/${cover}` : undefined;
+const classes = ["post-cover", className].filter(Boolean).join(" ");
+---
+
+<div class={classes}>
+    {
+        coverSrc ? (
+            <img
+                src={coverSrc}
+                alt={decorative ? "" : title}
+                loading={loading}
+                decoding="async"
+            />
+        ) : (
+            <div class="post-cover-placeholder" aria-hidden="true"></div>
+        )
+    }
+</div>

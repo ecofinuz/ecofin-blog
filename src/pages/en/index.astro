@@ -5,6 +5,7 @@ import type { CategoryKey } from "@data/categories";
 import { categories, getCategoryDetailsFromSlug } from "@data/categories";
 import HomeHero from "@components/HomeHero.astro";
 import Layout from "@layouts/Layout.astro";
+import PostCover from "@components/PostCover.astro";
 import { getCollection } from "astro:content";
 
 const locale = "en";
@@ -102,6 +103,12 @@ const postCountLabel = `${posts.length} ${posts.length === 1 ? "article" : "arti
                                     href={`/en/${cat.slug}/${slug}/`}
                                     class="post-item"
                                 >
+                                    <PostCover
+                                        cover={post.data.cover}
+                                        title={post.data.title}
+                                        className="post-item-cover"
+                                        decorative
+                                    />
                                     <div class="post-meta-row">
                                         <span class="post-category label-small">
                                             {cat.label}

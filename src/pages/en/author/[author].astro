@@ -3,6 +3,7 @@ import type { AuthorKey } from "@data/authors";
 import { authors, getAuthor } from "@data/authors";
 import { getCategoryDetailsFromSlug } from "@data/categories";
 import Layout from "@layouts/Layout.astro";
+import PostCover from "@components/PostCover.astro";
 import { getCollection } from "astro:content";
 
 const locale = "en";
@@ -114,6 +115,12 @@ function getCatLabel(id: string): string {
                             href={`/en/${getCatSlug(post.id)}/${getSlug(post.id)}/`}
                             class="post-item"
                         >
+                            <PostCover
+                                cover={post.data.cover}
+                                title={post.data.title}
+                                className="post-item-cover"
+                                decorative
+                            />
                             <div class="post-meta-row">
                                 <span class="post-category label-small">
                                     {getCatLabel(post.id)}

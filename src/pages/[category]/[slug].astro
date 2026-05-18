@@ -3,6 +3,7 @@ import type { AuthorKey } from "@data/authors";
 import { getAuthor } from "@data/authors";
 import { getCategoryDetailsFromSlug } from "@data/categories";
 import Layout from "@layouts/Layout.astro";
+import PostCover from "@components/PostCover.astro";
 import { getCollection, render } from "astro:content";
 const locale = "uz";
 
@@ -33,6 +34,9 @@ const parts = post.id.split("/");
 const cat = getCategoryDetailsFromSlug(parts[1], locale);
 const catLabel = cat.label;
 const catSlug = cat.slug;
+const ogImage = post.data.cover
+    ? new URL(`/images/covers/${post.data.cover}`, Astro.site).href
+    : undefined;
 
 function formatDate(date: Date): string {
     return date.toLocaleDateString("uz-UZ", {
@@ -43,7 +47,7 @@ function formatDate(date: Date): string {
 }
 ---
 
-<Layout title={post.data.title} description={post.data.description} lang={locale}>
+<Layout title={post.data.title} description={post.data.description} lang={locale} ogImage={ogImage}>
     <main>
         <div class="container">
 
@@ -74,6 +78,12 @@ function formatDate(date: Date): string {
                         {formatDate(post.data.date)}
                     </span>
                 </div>
+                <PostCover
+                    cover={post.data.cover}
+                    title={post.data.title}
+                    className="post-hero-cover"
+                    loading="eager"
+                />
             </div>
 
             <article class="post-body">

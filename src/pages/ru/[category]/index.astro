@@ -4,6 +4,7 @@ import { getAuthor } from "@data/authors";
 import type { CategoryKey } from "@data/categories";
 import { categories } from "@data/categories";
 import Layout from "@layouts/Layout.astro";
+import PostCover from "@components/PostCover.astro";
 import { getCollection } from "astro:content";
 
 const locale = "ru";
@@ -64,6 +65,12 @@ function getSlug(id: string): string {
                                 href={`/ru/${category}/${slug}/`}
                                 class="post-item"
                             >
+                                <PostCover
+                                    cover={post.data.cover}
+                                    title={post.data.title}
+                                    className="post-item-cover"
+                                    decorative
+                                />
                                 <div class="post-meta-row">
                                     <span class="post-date label-small">
                                         {formatDate(post.data.date)}
