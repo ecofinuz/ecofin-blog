@@ -75,6 +75,20 @@ const languages = [
         <link rel="alternate" type="application/rss+xml" title="Ecofin Blog (EN)" href="/en/rss.xml" />
         <link rel="alternate" type="application/rss+xml" title="Ecofin Blog (RU)" href="/ru/rss.xml" />
         <slot name="head" />
+        <!-- Google tag (gtag.js) -->
+        <script type="application/javascript"
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-R73J85XQ5N"
+        ></script>
+        <script type="application/javascript">
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+
+            gtag("config", "G-R73J85XQ5N");
+        </script>
     </head>
     <body>
         <nav class="site-nav">
