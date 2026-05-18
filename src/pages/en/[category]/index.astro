@@ -75,10 +75,15 @@ function getSlug(id: string): string {
                                     <span class="post-date label-small">
                                         {formatDate(post.data.date)}
                                     </span>
-                                    {post.data.series && (
-                                        <span class="label-small post-date">
-                                                Post {post.data.series.part}
-                                        </span>
+                                    {post.data.part && (
+                                        <>
+                                            <span class="label-small">
+                                                &middot;
+                                            </span>
+                                            <span class="label-small post-date">
+                                                Post {post.data.part}
+                                            </span>
+                                        </>
                                     )}
                                 </div>
                                 <h2 class="post-title">{post.data.title}</h2>

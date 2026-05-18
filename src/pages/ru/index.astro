@@ -119,11 +119,15 @@ const postCountLabel = `${posts.length} ${postCountWord}`;
                                         <span class="post-category label-small">
                                             {cat.label}
                                         </span>
-                                        &middot;
-                                        {post.data.series && (
-                                            <span class="label-small post-date">
-                                                {post.data.series.part}-часть
-                                            </span>
+                                        {post.data.part && (
+                                            <>
+                                                <span class="label-small">
+                                                    &middot;
+                                                </span>
+                                                <span class="label-small post-date">
+                                                    {post.data.part}-часть
+                                                </span>
+                                            </>
                                         )}
                                     </div>
                                     <h2 class="post-title">{post.data.title}</h2>

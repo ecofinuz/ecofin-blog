@@ -1,0 +1,90 @@
+---
+import type { Locale } from "@data/categories";
+import type { BlogPost } from "@utils/seriesNavigation";
+import { getPostHref } from "@utils/seriesNavigation";
+
+interface Props {
+    locale: Locale;
+    previousPost?: BlogPost;
+    nextPost?: BlogPost;
+}
+
+const { locale, previousPost, nextPost } = Astro.props;
+const hasNavigation = Boolean(previousPost || nextPost);
+const isSingle = Boolean(previousPost) !== Boolean(nextPost);
+
+const labels = {
+    uz: {
+        aria: "Seriyadagi maqolalar",
+        previous: "Oldingi maqola",
+        next: "Keyingi maqola",
+    },
+    en: {
+        aria: "Posts in this series",
+        previous: "Previous post",
+        next: "Next post",
+    },
+    ru: {
+        aria: "Публикации в этой серии",
+        previous: "Предыдущая публикация",
+        next: "Следующая публикация",
+    },
+}[locale];
+
+function getPartLabel(post: BlogPost): string {
+    const part = post.data.part;
+
+    if (!part) {
+        return "";
+    }
+
+    if (locale === "uz") {
+        return `${part}-qism`;
+    }
+
+    if (locale === "ru") {
+        return `${part}-часть`;
+    }
+
+    return `Part ${part}`;
+}
+---
+
+{
+    hasNavigation && (
+        <nav
+            aria-label={labels.aria}
+            class:list={["series-nav", { "series-nav--single": isSingle }]}
+        >
+            {previousPost && (
+                <a
+                    class="series-nav-card series-nav-card--previous"
+                    href={getPostHref(previousPost)}
+                >
+                    <span class="series-nav-direction">
+                        &larr; {labels.previous}
+                    </span>
+                    <span class="series-nav-title">{previousPost.data.title}</span>
+                    <span class="series-nav-part label-small">
+                        {getPartLabel(previousPost)}
+                    </span>
+                </a>
+            )}
+
+            {nextPost && (
+                <a
+                    class="series-nav-card series-nav-card--next"
+                    href={getPostHref(nextPost)}
+                >
+                    <span class="series-nav-direction">
+                        {labels.next} &rarr;
+                    </span>
+                    <span class="series-nav-title">{nextPost.data.title}</span>
+                    <span class="series-nav-part label-small">
+                        {getPartLabel(nextPost)}
+                    </span>
+                </a>
+            )}
+        </nav>
+    )
+}

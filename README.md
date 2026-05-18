@@ -41,24 +41,28 @@ date: 2026-04-11
 category: kredit
 translationKey: shared-translation-key
 author: hojiakbar
-series:
-    part: 1
+part: 1
+# translated_by: translator-key-or-name
 ---
 ```
 
 Use the locale-specific category slug in `category`. For example, English loan posts use `category: loan`, while Uzbek and Russian loan posts currently use `category: kredit`.
 
+Posts with `part` in the same locale and category are linked automatically as a series. Bottom navigation is omitted only when the post is the only current post in that series.
+
+Use optional `translated_by` when a translated post should credit a translator on the post page. If it matches a key in `src/data/authors.ts`, the translator credit links to that author page.
+
 ## Commands
 
 All commands run from the project root:
 
-| Command | Action |
-| --- | --- |
-| `npm install` | Install dependencies |
-| `npm run dev` | Start the local dev server |
-| `npm run build` | Build the static site into `dist/` |
-| `npm run preview` | Preview the production build locally |
-| `npm run astro -- --help` | Show Astro CLI help |
+| Command                   | Action                               |
+| ------------------------- | ------------------------------------ |
+| `npm install`             | Install dependencies                 |
+| `npm run dev`             | Start the local dev server           |
+| `npm run build`           | Build the static site into `dist/`   |
+| `npm run preview`         | Preview the production build locally |
+| `npm run astro -- --help` | Show Astro CLI help                  |
 
 Node.js `>=22.12.0` is required.
 

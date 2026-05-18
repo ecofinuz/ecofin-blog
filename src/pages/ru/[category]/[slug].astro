@@ -4,6 +4,8 @@ import { getAuthor } from "@data/authors";
 import { getCategoryDetailsFromSlug } from "@data/categories";
 import Layout from "@layouts/Layout.astro";
 import PostCover from "@components/PostCover.astro";
+import SeriesNavigation from "@components/SeriesNavigation.astro";
+import { getSeriesNavigation } from "@utils/seriesNavigation";
 import { getCollection, render } from "astro:content";
 
 
@@ -23,14 +25,20 @@ export async function getStaticPaths() {
 
         return {
             params: { category: cat.slug, slug },
-            props: { post },
+            props: { post, seriesNavigation: getSeriesNavigation(post, posts) },
         };
     });
 }
 
-const { post } = Astro.props;
+const { post, seriesNavigation } = Astro.props;
 const { Content } = await render(post);
 const author = getAuthor(post.data.author as AuthorKey);
+const translatorKey = post.data.translated_by as AuthorKey | undefined;
+const translator = translatorKey ? getAuthor(translatorKey) : undefined;
+const translatorName = post.data.translated_by
+    ? (translator?.name ?? post.data.translated_by)
+    : undefined;
+const translatorHref = translator ? `/ru/author/${translatorKey}/` : undefined;
 
 const parts = post.id.split("/");
 const cat = getCategoryDetailsFromSlug(parts[1], locale);
@@ -58,13 +66,15 @@ function formatDate(date: Date): string {
                     <a href={`/ru/${catSlug}/`} class="post-category label-small">
                         {catLabel}
                     </a>
-                    <span class="label-small">
-                        &middot;
-                    </span>
-                    {post.data.series && (
-                        <span class="label-small post-date">
-                            {post.data.series.part}-часть
-                        </span>
+                    {post.data.part && (
+                        <>
+                            <span class="label-small">
+                                &middot;
+                            </span>
+                            <span class="label-small post-date">
+                                {post.data.part}-часть
+                            </span>
+                        </>
                     )}
                 </div>
                 <h1>{post.data.title}</h1>
@@ -79,6 +89,22 @@ function formatDate(date: Date): string {
                     <span class="label-small post-date">
                         {formatDate(post.data.date)}
                     </span>
+                    {translatorName && (
+                        <>
+                            <span class="label-small">
+                                &middot;
+                            </span>
+                            {translatorHref ? (
+                                <a href={translatorHref} class="label-small byline-author">
+                                    Перевод: {translatorName}
+                                </a>
+                            ) : (
+                                <span class="label-small post-date">
+                                    Перевод: {translatorName}
+                                </span>
+                            )}
+                        </>
+                    )}
                 </div>
                 <PostCover
                     cover={post.data.cover}
@@ -90,6 +116,11 @@ function formatDate(date: Date): string {
 
             <article class="post-body">
                 <Content />
+                <SeriesNavigation
+                    locale={locale}
+                    previousPost={seriesNavigation.previousPost}
+                    nextPost={seriesNavigation.nextPost}
+                />
             </article>
 
         </div>

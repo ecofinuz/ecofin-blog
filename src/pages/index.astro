@@ -112,13 +112,15 @@ const latestHref = latestPost && latestCategory
                                         <span class="post-category label-small">
                                             {cat.label}
                                         </span>
-                                        <span class="label-small">
-                                            &middot;
-                                        </span>
-                                        {post.data.series && (
-                                            <span class="label-small post-date">
-                                                {post.data.series.part}-qism
-                                            </span>
+                                        {post.data.part && (
+                                            <>
+                                                <span class="label-small">
+                                                    &middot;
+                                                </span>
+                                                <span class="label-small post-date">
+                                                    {post.data.part}-qism
+                                                </span>
+                                            </>
                                         )}
                                     </div>
                                     <h2 class="post-title">{post.data.title}</h2>

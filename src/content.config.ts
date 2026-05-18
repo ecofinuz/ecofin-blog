@@ -16,14 +16,11 @@ const blog = defineCollection({
         description: z.string(),
         cover: z.string().optional(),
         author: z.string(),
+        translated_by: z.string().optional(),
         date: z.coerce.date(),
         category: z.enum(allCategorySlugs),
         translationKey: z.string(),
-        series: z
-            .object({
-                part: z.number(),
-            })
-            .optional(),
+        part: z.number().int().positive().optional(),
     }),
 });
 
