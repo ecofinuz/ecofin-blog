@@ -1,46 +1,73 @@
-# Astro Starter Kit: Basics
+# Ecofin Blog
 
-```sh
-npm create astro@latest -- --template basics
-```
+Ecofin is a multilingual economics and finance blog focused on financial literacy. The site is built around article series, starting with the Uzbek `kredit` series about loans, interest, inflation, rates, and credit scoring.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+The production site is configured for `https://blog.ecofin.uz`.
 
-## 🚀 Project Structure
+## Stack
 
-Inside of your Astro project, you'll see the following folders and files:
+- Astro 6
+- MDX content collections
+- Static routes
+- `@astrojs/rss` for language-specific RSS feeds
+- `@astrojs/sitemap` for sitemap generation
+- Chart.js for interactive financial explainers
+
+## Locales
+
+The default locale is Uzbek and is not URL-prefixed:
+
+- Uzbek: `/`, `/kredit/`, `/kredit/sodda-va-murakkab-foizlar/`
+- English: `/en/`, `/en/loan/`, `/en/loan/simple-and-compound-interest/`
+- Russian: `/ru/`, `/ru/kredit/`, `/ru/kredit/prostie-i-slojnie-protsenti/`
+
+Locale and category labels are defined in `src/data/categories.ts`.
+
+## Content
+
+Posts live under:
 
 ```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+src/content/blog/{locale}/{category-slug}/{post-slug}.mdx
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+Each post must include frontmatter matching the content schema in `src/content.config.ts`:
 
-## 🧞 Commands
+```yaml
+---
+title: Post title
+description: Short summary
+date: 2026-04-11
+category: kredit
+translationKey: shared-translation-key
+author: hojiakbar
+series:
+    part: 1
+---
+```
 
-All commands are run from the root of the project, from a terminal:
+Use the locale-specific category slug in `category`. For example, English loan posts use `category: loan`, while Uzbek and Russian loan posts currently use `category: kredit`.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## Commands
 
-## 👀 Want to learn more?
+All commands run from the project root:
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+| Command | Action |
+| --- | --- |
+| `npm install` | Install dependencies |
+| `npm run dev` | Start the local dev server |
+| `npm run build` | Build the static site into `dist/` |
+| `npm run preview` | Preview the production build locally |
+| `npm run astro -- --help` | Show Astro CLI help |
+
+Node.js `>=22.12.0` is required.
+
+## Key Files
+
+- `astro.config.mjs` - site config, i18n, sitemap, MDX integration
+- `src/content.config.ts` - MDX collection schema
+- `src/data/categories.ts` - canonical category keys, localized slugs, labels
+- `src/data/authors.ts` - author metadata
+- `src/layouts/Layout.astro` - shared page shell, SEO metadata, navigation, footer
+- `src/components/InterestChart.astro` - simple vs compound interest chart
+- `src/components/NominalRateCalculator.astro` - nominal rate calculator

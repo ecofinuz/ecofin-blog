@@ -11,7 +11,7 @@ import "@styles/interactive.css";
 
 const {
     title,
-    description = "Moliyaviy savodxonlik",
+    description,
     lang = "uz",
     ogImage,
 } = Astro.props;
@@ -19,7 +19,7 @@ const {
 const t: Record<string, Record<string, string>> = {
     uz: {
         platform:  "ecofin.uz",
-        sponsor:   "Qo'llab-quvvatlash",
+        sponsor:   "Qo'llash",
         tagline:   "Moliyaviy savodxonlik va iqtisodiy bilimlar ekotizimi.",
     },
     en: {
@@ -35,8 +35,15 @@ const t: Record<string, Record<string, string>> = {
 };
 
 const ui = t[lang] ?? t["uz"];
+const pageDescription = description ?? ui.tagline;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const homeHref = lang === "uz" ? "/" : `/${lang}/`;
+const languages = [
+    { code: "uz", label: "UZ", href: "/" },
+    { code: "en", label: "EN", href: "/en/" },
+    { code: "ru", label: "RU", href: "/ru/" },
+];
 ---
 
 <!doctype html>
@@ -45,13 +52,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{title} | Ecofin</title>
-        <meta name="description" content={description} />
+        <meta name="description" content={pageDescription} />
         <link rel="canonical" href={canonicalURL} />
         <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 
         <!-- Open Graph -->
         <meta property="og:title" content={`${title} | Ecofin`} />
-        <meta property="og:description" content={description} />
+        <meta property="og:description" content={pageDescription} />
         <meta property="og:url" content={canonicalURL} />
         <meta property="og:site_name" content="Ecofin" />
         {ogImage && <meta property="og:image" content={ogImage} />}
@@ -72,11 +79,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <body>
         <nav class="site-nav">
             <div class="nav-inner">
-                <a href="/" class="nav-brand">{ui.platform}</a>
+                <a href={homeHref} class="nav-brand">{ui.platform}</a>
                 <div class="nav-links">
-                    <a href="#" class="nav-link">ecofin.uz</a>
+                    <a href="https://ecofin.uz/" class="nav-link nav-link-site">ecofin.uz</a>
                     <a
-                        href="https://github.com/ecofinuz/"
+                        href="https://github.com/ecofinuz"
                         target="_blank"
                         rel="noopener noreferrer"
                         class="nav-link nav-github"
@@ -87,6 +94,19 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
                         </svg>
                         <span class="nav-github-label">GitHub</span>
                     </a>
+                    <div class="language-switch" aria-label="Language selector">
+                        {
+                            languages.map((language) => (
+                                <a
+                                    href={language.href}
+                                    class={`language-option${lang === language.code ? " active" : ""}`}
+                                    aria-current={lang === language.code ? "page" : undefined}
+                                >
+                                    {language.label}
+                                </a>
+                            ))
+                        }
+                    </div>
                     <a
                         href="https://patreon.com/ecofin"
                         target="_blank"
@@ -111,7 +131,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
                 </div>
                 <div class="footer-right">
                     <div class="footer-links">
-                        <a href="#" class="footer-link">ecofin.uz</a>
+                        <a href="https://ecofin.uz/" class="footer-link">ecofin.uz</a>
                         <a
                             href="https://github.com/ecofinuz/"
                             target="_blank"

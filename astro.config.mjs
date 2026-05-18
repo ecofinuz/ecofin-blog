@@ -36,25 +36,32 @@ export default defineConfig({
     integrations: [
         sitemap({
             serialize(item) {
-                // Boost individual post pages (3 segments: /uz/kredit/slug/)
                 const url = new URL(item.url);
                 const segments = url.pathname.split("/").filter(Boolean);
+                const isPrefixedLocale = ["en", "ru"].includes(segments[0]);
+                const contentSegments = isPrefixedLocale
+                    ? segments.slice(1)
+                    : segments;
+                const contentDepth = isPrefixedLocale
+                    ? segments.length - 1
+                    : segments.length;
+                const isHomePage =
+                    segments.length === 0 ||
+                    (isPrefixedLocale && contentDepth === 0);
+                const isAuthorPage = contentSegments[0] === "author";
 
-                if (segments.length === 3) {
-                    item.changefreq = ChangeFreqEnum.WEEKLY;
-                    item.priority = 0.8;
-                }
-
-                // Category and index pages
-                if (segments.length === 2) {
-                    item.changefreq = ChangeFreqEnum.DAILY;
-                    item.priority = 0.6;
-                }
-
-                // Home pages (/uz/, /en/, /ru/)
-                if (segments.length === 1) {
+                if (isHomePage) {
                     item.changefreq = ChangeFreqEnum.DAILY;
                     item.priority = 1.0;
+                } else if (isAuthorPage) {
+                    item.changefreq = ChangeFreqEnum.WEEKLY;
+                    item.priority = 0.4;
+                } else if (contentDepth === 2) {
+                    item.changefreq = ChangeFreqEnum.WEEKLY;
+                    item.priority = 0.8;
+                } else if (contentDepth === 1) {
+                    item.changefreq = ChangeFreqEnum.DAILY;
+                    item.priority = 0.6;
                 }
 
                 item.lastmod = new Date().toISOString();

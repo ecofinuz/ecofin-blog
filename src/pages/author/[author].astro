@@ -1,8 +1,7 @@
 ---
 import type { AuthorKey } from "@data/authors";
 import { authors, getAuthor } from "@data/authors";
-import type { CategoryKey } from "@data/categories";
-import { categories } from "@data/categories";
+import { getCategoryDetailsFromSlug } from "@data/categories";
 import Layout from "@layouts/Layout.astro";
 import { getCollection } from "astro:content";
 
@@ -39,13 +38,11 @@ function getSlug(id: string): string {
 }
 
 function getCatSlug(id: string): string {
-    const catKey = id.split("/")[1] as CategoryKey;
-    return categories[catKey]?.uz?.slug ?? catKey;
+    return getCategoryDetailsFromSlug(id.split("/")[1], locale).slug;
 }
 
 function getCatLabel(id: string): string {
-    const catKey = id.split("/")[1] as CategoryKey;
-    return categories[catKey]?.uz?.label ?? catKey;
+    return getCategoryDetailsFromSlug(id.split("/")[1], locale).label;
 }
 ---
 

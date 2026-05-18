@@ -2,13 +2,14 @@
 import type { AuthorKey } from "@data/authors";
 import { getAuthor } from "@data/authors";
 import type { CategoryKey } from "@data/categories";
-import { categories } from "@data/categories";
+import { categories, getCategoryDetailsFromSlug } from "@data/categories";
+import HomeHero from "@components/HomeHero.astro";
 import Layout from "@layouts/Layout.astro";
 import { getCollection } from "astro:content";
 
 const locale = "uz";
 
-// Get all uz posts, sorted by date descending
+// Get all Uzbek posts, sorted by date descending
 const allPosts = await getCollection("blog", ({ id }) =>
     id.startsWith(`${locale}/`)
 );
@@ -17,7 +18,6 @@ const posts = allPosts.sort(
     (a, b) => b.data.date.getTime() - a.data.date.getTime()
 );
 
-// Format date for Uzbek: "11-Aprel, 2026"
 function formatDate(date: Date): string {
     return date.toLocaleDateString("uz-UZ", {
         day: "numeric",
@@ -26,25 +26,47 @@ function formatDate(date: Date): string {
     });
 }
 
-// Derive slug from entry id: "uz/kredit/sodda-va-murakkab-foizlar" → "sodda-va-murakkab-foizlar"
+// Derive slug from entry id: "uz/kredit/sodda-va-murakkab-foizlar" -> "sodda-va-murakkab-foizlar"
 function getSlug(id: string): string {
     const parts = id.split("/");
     return parts[parts.length - 1];
 }
 
-// Derive category from entry id: "uz/kredit/sodda-va-murakkab-foizlar" → "kredit"
+// Derive category slug from entry id: "uz/kredit/sodda-va-murakkab-foizlar" -> "kredit"
 function getCategory(id: string): string {
     const parts = id.split("/");
     return parts[1];
 }
+
+const latestPost = posts[0];
+const latestCategory = latestPost
+    ? getCategoryDetailsFromSlug(getCategory(latestPost.id), locale)
+    : undefined;
+const latestHref = latestPost && latestCategory
+    ? `/${latestCategory.slug}/${getSlug(latestPost.id)}/`
+    : "#articles";
 ---
 
 <Layout title="Bosh sahifa" lang={locale}>
-    <main>
+    <main class="home-main">
+        <HomeHero
+            lang={locale}
+            postCount={posts.length}
+            categoryCount={Object.keys(categories).length}
+            latestHref={latestHref}
+            latestTitle={latestPost?.data.title}
+            latestCategory={latestCategory?.label}
+        />
+
         <div class="container">
 
-            <section class="categories-section">
-                <p class="label-small">Mavzular</p>
+            <section class="categories-section home-section">
+                <div class="section-heading">
+                    <div>
+                        <p class="label-small">Mavzular</p>
+                        <h2 class="section-title">Yo'nalishni tanlang</h2>
+                    </div>
+                </div>
                 <div class="category-list">
                     {
                         (Object.keys(categories) as CategoryKey[]).map((key) => (
@@ -59,25 +81,29 @@ function getCategory(id: string): string {
                 </div>
             </section>
 
-            <section class="posts-section">
-                <p class="label-small">Maqolalar</p>
+            <section class="posts-section home-section" id="articles">
+                <div class="section-heading">
+                    <div>
+                        <p class="label-small">Maqolalar</p>
+                        <h2 class="section-title">Yangi maqolalar</h2>
+                    </div>
+                    <p class="section-note">{posts.length} ta maqola</p>
+                </div>
                 <div class="post-list">
                     {
                         posts.map((post) => {
-                            const cat = getCategory(post.id) as CategoryKey;
+                            const cat = getCategoryDetailsFromSlug(getCategory(post.id), locale);
                             const slug = getSlug(post.id);
-                            const catSlug = categories[cat]?.[locale]?.slug ?? cat;
-                            const catLabel = categories[cat]?.[locale]?.label ?? cat;
                             const author = getAuthor(post.data.author as AuthorKey);
 
                             return (
                                 <a
-                                    href={`/${catSlug}/${slug}/`}
+                                    href={`/${cat.slug}/${slug}/`}
                                     class="post-item"
                                 >
                                     <div class="post-meta-row">
                                         <span class="post-category label-small">
-                                            {catLabel}
+                                            {cat.label}
                                         </span>
                                         <span class="label-small">
                                             &middot;

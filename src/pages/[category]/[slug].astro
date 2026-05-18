@@ -1,8 +1,7 @@
 ---
 import type { AuthorKey } from "@data/authors";
 import { getAuthor } from "@data/authors";
-import type { CategoryKey } from "@data/categories";
-import { categories } from "@data/categories";
+import { getCategoryDetailsFromSlug } from "@data/categories";
 import Layout from "@layouts/Layout.astro";
 import { getCollection, render } from "astro:content";
 const locale = "uz";
@@ -17,11 +16,10 @@ export async function getStaticPaths() {
         const category = parts[1];
         const slug = parts[2];
 
-        const catKey = category as CategoryKey;
-        const catSlug = categories[catKey]?.uz?.slug ?? category;
+        const cat = getCategoryDetailsFromSlug(category, "uz");
 
         return {
-            params: { category: catSlug, slug },
+            params: { category: cat.slug, slug },
             props: { post },
         };
     });
@@ -32,9 +30,9 @@ const { Content } = await render(post);
 const author = getAuthor(post.data.author as AuthorKey);
 
 const parts = post.id.split("/");
-const catKey = parts[1] as CategoryKey;
-const catLabel = categories[catKey]?.uz?.label ?? parts[1];
-const catSlug = categories[catKey]?.uz?.slug ?? parts[1];
+const cat = getCategoryDetailsFromSlug(parts[1], locale);
+const catLabel = cat.label;
+const catSlug = cat.slug;
 
 function formatDate(date: Date): string {
     return date.toLocaleDateString("uz-UZ", {

@@ -27,8 +27,6 @@ const posts = allPosts.sort(
     (a, b) => b.data.date.getTime() - a.data.date.getTime()
 );
 
-console.log(posts)
-
 const catLabel = categories[categoryKey].en.label;
 
 function formatDate(date: Date): string {

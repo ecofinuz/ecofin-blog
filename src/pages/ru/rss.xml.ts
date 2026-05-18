@@ -1,8 +1,7 @@
 import rss from "@astrojs/rss";
 import type { AuthorKey } from "@data/authors";
 import { getAuthor } from "@data/authors";
-import type { CategoryKey } from "@data/categories";
-import { categories } from "@data/categories";
+import { getCategoryDetailsFromSlug } from "@data/categories";
 import type { APIContext } from "astro";
 import { getCollection } from "astro:content";
 
@@ -20,18 +19,16 @@ export async function GET(context: APIContext) {
         items: sorted.map((post) => {
             const parts = post.id.split("/");
             const author = getAuthor(post.data.author as AuthorKey);
-            const catKey = parts[1] as CategoryKey;
+            const cat = getCategoryDetailsFromSlug(parts[1], "ru");
             const slug = parts[2];
-            const catSlug = categories[catKey]?.ru?.slug ?? catKey;
-            const catLabel = categories[catKey]?.uz?.label ?? catKey;
 
             return {
                 title: post.data.title,
                 description: post.data.description,
                 pubDate: post.data.date,
-                link: `/ru/${catSlug}/${slug}/`,
+                link: `/ru/${cat.slug}/${slug}/`,
                 author: author.name,
-                categories: [catLabel],
+                categories: [cat.label],
             };
         }),
         customData: `<language>ru</language>`,

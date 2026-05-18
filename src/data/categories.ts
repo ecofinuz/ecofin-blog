@@ -59,3 +59,20 @@ export function getCategoryKeyFromSlug(
         (key) => categories[key][locale].slug === slug,
     );
 }
+
+export function getCategoryDetailsFromSlug(slug: string, locale: Locale) {
+    const key = getCategoryKeyFromSlug(slug, locale);
+
+    if (!key) {
+        return {
+            key: undefined,
+            slug,
+            label: slug,
+        };
+    }
+
+    return {
+        key,
+        ...categories[key][locale],
+    };
+}

@@ -1,0 +1,141 @@
+---
+import type { Locale } from "@data/categories";
+
+interface Props {
+    lang: Locale;
+    postCount: number;
+    categoryCount: number;
+    latestHref?: string;
+    latestTitle?: string;
+    latestCategory?: string;
+}
+
+const {
+    lang,
+    postCount,
+    categoryCount,
+    latestHref = "#articles",
+    latestTitle,
+    latestCategory,
+} = Astro.props;
+
+const copy = {
+    uz: {
+        eyebrow: "Moliyaviy savodxonlik",
+        title: "Ecofin",
+        lead: "Pul, kredit, inflyatsiya va bozorlarni sodda tilda tushuntiradigan iqtisodiy maqolalar to'plami.",
+        primaryCta: "Maqolalarni o'qish",
+        latestLabel: "So'nggi maqola",
+        posts: "Maqola",
+        topics: "Mavzu",
+        insight: "Tahlil",
+        visualTitle: "Bozor signallari",
+        visualMain: "Foiz",
+        visualSecondary: "Inflyatsiya",
+        visualThird: "Jamg'arma",
+    },
+    en: {
+        eyebrow: "Financial literacy",
+        title: "Ecofin",
+        lead: "Plain-language writing on money, credit, inflation, markets, and everyday economic decisions.",
+        primaryCta: "Read articles",
+        latestLabel: "Latest article",
+        posts: "Articles",
+        topics: "Topics",
+        insight: "Analysis",
+        visualTitle: "Market signals",
+        visualMain: "Interest",
+        visualSecondary: "Inflation",
+        visualThird: "Savings",
+    },
+    ru: {
+        eyebrow: "Финансовая грамотность",
+        title: "Ecofin",
+        lead: "Статьи простым языком о деньгах, кредитах, инфляции, рынках и повседневных экономических решениях.",
+        primaryCta: "Читать публикации",
+        latestLabel: "Свежая публикация",
+        posts: "Публикации",
+        topics: "Темы",
+        insight: "Аналитика",
+        visualTitle: "Сигналы рынка",
+        visualMain: "Процент",
+        visualSecondary: "Инфляция",
+        visualThird: "Сбережения",
+    },
+}[lang];
+---
+
+<section class="home-hero">
+    <div class="container home-hero-grid">
+        <div class="hero-copy">
+            <p class="label-small hero-eyebrow">{copy.eyebrow}</p>
+            <h1 class="hero-title">{copy.title}</h1>
+            <p class="hero-lede">{copy.lead}</p>
+
+            <div class="hero-actions">
+                <a class="button button-primary" href="#articles">
+                    {copy.primaryCta}
+                </a>
+                {
+                    latestTitle && (
+                        <a class="button button-secondary" href={latestHref}>
+                            <span>{copy.latestLabel}</span>
+                            <strong>{latestTitle}</strong>
+                        </a>
+                    )
+                }
+            </div>
+
+            <dl class="hero-stats" aria-label="Ecofin content overview">
+                <div class="hero-stat">
+                    <dt>{copy.posts}</dt>
+                    <dd>{postCount}</dd>
+                </div>
+                <div class="hero-stat">
+                    <dt>{copy.topics}</dt>
+                    <dd>{categoryCount}</dd>
+                </div>
+                <div class="hero-stat">
+                    <dt>{copy.insight}</dt>
+                    <dd>{latestCategory ?? "Ecofin"}</dd>
+                </div>
+            </dl>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+            <div class="finance-visual">
+                <div class="visual-header">
+                    <span>{copy.visualTitle}</span>
+                    <strong>14.0%</strong>
+                </div>
+
+                <div class="visual-chart">
+                    <span class="visual-bar" style="--bar-height: 38%; --bar-color: var(--accent);"></span>
+                    <span class="visual-bar" style="--bar-height: 56%; --bar-color: var(--blue);"></span>
+                    <span class="visual-bar" style="--bar-height: 48%; --bar-color: var(--gold);"></span>
+                    <span class="visual-bar" style="--bar-height: 72%; --bar-color: var(--accent);"></span>
+                    <span class="visual-bar" style="--bar-height: 64%; --bar-color: var(--red);"></span>
+                    <span class="visual-bar" style="--bar-height: 82%; --bar-color: var(--blue);"></span>
+                    <div class="trend-segment trend-one"></div>
+                    <div class="trend-segment trend-two"></div>
+                    <div class="trend-segment trend-three"></div>
+                </div>
+
+                <div class="visual-metrics">
+                    <div>
+                        <span>{copy.visualMain}</span>
+                        <strong>+2.4</strong>
+                    </div>
+                    <div>
+                        <span>{copy.visualSecondary}</span>
+                        <strong>8.1</strong>
+                    </div>
+                    <div>
+                        <span>{copy.visualThird}</span>
+                        <strong>31%</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
