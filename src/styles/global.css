@@ -144,7 +144,7 @@ h3 {
 p {
     margin-bottom: var(--space-6);
     color: var(--text-secondary);
-    font-size: 1.12rem;
+    font-size: 1.15rem;
 }
 
 strong {
@@ -171,7 +171,7 @@ ol {
     margin-bottom: var(--space-6);
     padding-left: 1.5rem;
     color: var(--text-secondary);
-    font-size: 1.04rem;
+    font-size: 1.1rem;
 }
 
 code {
@@ -1090,6 +1090,7 @@ main {
     gap: var(--space-2);
     list-style: none;
     padding-left: 0;
+    font-size: 1.04rem;
 }
 
 .breadcrumbs li {
