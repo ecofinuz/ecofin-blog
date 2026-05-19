@@ -2,6 +2,7 @@
 import type { AuthorKey } from "@data/authors";
 import { getAuthor } from "@data/authors";
 import { getCategoryDetailsFromSlug } from "@data/categories";
+import Breadcrumbs from "@components/Breadcrumbs.astro";
 import Layout from "@layouts/Layout.astro";
 import PostCover from "@components/PostCover.astro";
 import SeriesNavigation from "@components/SeriesNavigation.astro";
@@ -61,6 +62,12 @@ function formatDate(date: Date): string {
         <div class="container">
 
             <div class="post-header">
+                <Breadcrumbs
+                    lang={locale}
+                    categoryLabel={catLabel}
+                    categoryHref={`/en/${catSlug}/`}
+                    postTitle={post.data.title}
+                />
                 <div class="post-meta-row">
                     <a href={`/en/${catSlug}/`} class="post-category label-small">
                         {catLabel}

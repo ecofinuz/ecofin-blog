@@ -1,11 +1,11 @@
 ---
+import HomeHero from "@components/HomeHero.astro";
+import PostCover from "@components/PostCover.astro";
 import type { AuthorKey } from "@data/authors";
 import { getAuthor } from "@data/authors";
 import type { CategoryKey } from "@data/categories";
 import { categories, getCategoryDetailsFromSlug } from "@data/categories";
-import HomeHero from "@components/HomeHero.astro";
 import Layout from "@layouts/Layout.astro";
-import PostCover from "@components/PostCover.astro";
 import { getCollection } from "astro:content";
 
 const locale = "uz";
@@ -86,7 +86,7 @@ const latestHref = latestPost && latestCategory
                 <div class="section-heading">
                     <div>
                         <p class="label-small">Maqolalar</p>
-                        <h2 class="section-title">Yangi maqolalar</h2>
+                        <h2 class="section-title">So'nggi Maqolalar</h2>
                     </div>
                     <p class="section-note">{posts.length} ta maqola</p>
                 </div>

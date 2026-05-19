@@ -1,0 +1,66 @@
+---
+import type { Locale } from "@data/categories";
+
+interface Props {
+    lang: Locale;
+    categoryLabel: string;
+    categoryHref: string;
+    postTitle: string;
+}
+
+const { lang, categoryLabel, categoryHref, postTitle } = Astro.props;
+
+const copy: Record<Locale, { ariaLabel: string; home: string; homeHref: string }> = {
+    uz: {
+        ariaLabel: "Sahifa yo'li",
+        home: "Bosh sahifa",
+        homeHref: "/",
+    },
+    en: {
+        ariaLabel: "Breadcrumb",
+        home: "Home",
+        homeHref: "/en/",
+    },
+    ru: {
+        ariaLabel: "Навигационная цепочка",
+        home: "Главная",
+        homeHref: "/ru/",
+    },
+};
+
+const ui = copy[lang];
+const currentHref = Astro.url.pathname;
+const siteUrl = Astro.site ?? Astro.url;
+const items = [
+    { label: ui.home, href: ui.homeHref },
+    { label: categoryLabel, href: categoryHref },
+    { label: postTitle, href: currentHref },
+];
+
+const jsonLd = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: item.label,
+        item: new URL(item.href, siteUrl).href,
+    })),
+}).replace(/</g, "\\u003c");
+---
+
+<nav class="breadcrumbs" aria-label={ui.ariaLabel}>
+    <ol>
+        <li>
+            <a href={ui.homeHref}>{ui.home}</a>
+        </li>
+        <li>
+            <a href={categoryHref}>{categoryLabel}</a>
+        </li>
+        <li aria-current="page">
+            <span>{postTitle}</span>
+        </li>
+    </ol>
+</nav>
+
+<script type="application/ld+json" set:html={jsonLd} />
