@@ -1,0 +1,348 @@
+---
+import type { Locale } from "@data/categories";
+
+interface Props {
+    lang?: Locale;
+}
+
+const { lang = "uz" } = Astro.props;
+
+const translations: Record<
+    Locale,
+    {
+        title: string;
+        startYear: string;
+        endYear: string;
+        datasetLabel: string;
+        tooltipLabel: string;
+    }
+> = {
+    uz: {
+        title: "O'zbekiston yillik inflyatsiyasi, 2016-2026",
+        startYear: "Boshlanish yili",
+        endYear: "Tugash yili",
+        datasetLabel: "Yillik inflyatsiya",
+        tooltipLabel: "Yillik inflyatsiya",
+    },
+    en: {
+        title: "Uzbekistan annual inflation, 2016-2026",
+        startYear: "Start year",
+        endYear: "End year",
+        datasetLabel: "Annual inflation",
+        tooltipLabel: "Annual inflation",
+    },
+    ru: {
+        title: "Годовая инфляция в Узбекистане, 2016-2026",
+        startYear: "Начальный год",
+        endYear: "Конечный год",
+        datasetLabel: "Годовая инфляция",
+        tooltipLabel: "Годовая инфляция",
+    },
+};
+
+const strings = translations[lang];
+---
+
+<div
+    class="inflation-chart chart-container card-vessel"
+    data-inflation-chart
+    data-strings={JSON.stringify(strings)}
+>
+    <p class="chart-eyebrow">{strings.title}</p>
+
+    <div class="sliders inflation-chart-sliders">
+        <div class="slider-group">
+            <label>
+                {strings.startYear}
+                <span data-inflation-chart-from-value>2016</span>
+            </label>
+            <input
+                type="range"
+                data-inflation-chart-from
+                min="2016"
+                max="2025"
+                step="1"
+                value="2016"
+            />
+        </div>
+        <div class="slider-group">
+            <label>
+                {strings.endYear}
+                <span data-inflation-chart-to-value>2026</span>
+            </label>
+            <input
+                type="range"
+                data-inflation-chart-to
+                min="2017"
+                max="2026"
+                step="1"
+                value="2026"
+            />
+        </div>
+    </div>
+
+    <canvas data-inflation-chart-canvas height="260"></canvas>
+</div>
+
+<script>
+    import Chart, { type ChartData, type TooltipItem } from "chart.js/auto";
+
+    type InflationStrings = {
+        datasetLabel: string;
+        tooltipLabel: string;
+    };
+
+    type InflationRecord = readonly [
+        label: string,
+        monthlyChange: number,
+        annualChange: number,
+    ];
+
+    const inflationData: InflationRecord[] = [
+        ["Yanvar 2016", 1.6, 8.9],
+        ["Fevral 2016", 0.8, 8.7],
+        ["Mart 2016", 0.5, 8.3],
+        ["Aprel 2016", 0.6, 8],
+        ["May 2016", 0.2, 7.7],
+        ["Iyun 2016", -0.2, 8.1],
+        ["Iyul 2016", -0.6, 8.4],
+        ["Avgust 2016", 0.2, 8.6],
+        ["Sentabr 2016", 1.4, 9.1],
+        ["Oktabr 2016", 1.4, 9.6],
+        ["Noyabr 2016", 1.6, 9.7],
+        ["Dekabr 2016", 1.8, 9.7],
+        ["Yanvar 2017", 1.5, 9.6],
+        ["Fevral 2017", 1.4, 10.3],
+        ["Mart 2017", 1, 10.8],
+        ["Aprel 2017", 1, 11.3],
+        ["May 2017", 1.3, 12.5],
+        ["Iyun 2017", 0.7, 13.5],
+        ["Iyul 2017", 0.9, 15.2],
+        ["Avgust 2017", 0.8, 15.9],
+        ["Sentabr 2017", 1.3, 15.8],
+        ["Oktabr 2017", 1.2, 15.6],
+        ["Noyabr 2017", 2.1, 16.2],
+        ["Dekabr 2017", 4.1, 18.8],
+        ["Yanvar 2018", 2.7, 20.1],
+        ["Fevral 2018", 1.1, 19.8],
+        ["Mart 2018", 1.1, 19.8],
+        ["Aprel 2018", 0.9, 19.6],
+        ["May 2018", 0.8, 19],
+        ["Iyun 2018", -0.4, 17.7],
+        ["Iyul 2018", -0.3, 16.3],
+        ["Avgust 2018", 0.3, 15.7],
+        ["Sentabr 2018", 1.8, 16.2],
+        ["Oktabr 2018", 1.3, 16.3],
+        ["Noyabr 2018", 2.3, 16.5],
+        ["Dekabr 2018", 2.1, 14.3],
+        ["Yanvar 2019", 1.5, 13],
+        ["Fevral 2019", 1.6, 13.5],
+        ["Mart 2019", 1.2, 13.6],
+        ["Aprel 2019", 0.9, 13.7],
+        ["May 2019", 0.7, 13.7],
+        ["Iyun 2019", -0.5, 13.6],
+        ["Iyul 2019", -0.4, 13.5],
+        ["Avgust 2019", 2.9, 16.5],
+        ["Sentabr 2019", 1.3, 16],
+        ["Oktabr 2019", 1.5, 16.3],
+        ["Noyabr 2019", 1.7, 15.6],
+        ["Dekabr 2019", 1.7, 15.2],
+        ["Yanvar 2020", 0.6, 14.3],
+        ["Fevral 2020", 0.8, 13.5],
+        ["Mart 2020", 1.3, 13.6],
+        ["Aprel 2020", 1.7, 14.5],
+        ["May 2020", 0.3, 14],
+        ["Iyun 2020", -0.2, 14.2],
+        ["Iyul 2020", -0.3, 14.4],
+        ["Avgust 2020", 0.5, 11.7],
+        ["Sentabr 2020", 1.4, 11.7],
+        ["Oktabr 2020", 1.4, 11.5],
+        ["Noyabr 2020", 1.5, 11.3],
+        ["Dekabr 2020", 1.6, 11.1],
+        ["Yanvar 2021", 1, 11.6],
+        ["Fevral 2021", 0.6, 11.4],
+        ["Mart 2021", 0.8, 10.9],
+        ["Aprel 2021", 1.5, 10.7],
+        ["May 2021", 0.5, 10.9],
+        ["Iyun 2021", -0.2, 10.9],
+        ["Iyul 2021", -0.2, 11.1],
+        ["Avgust 2021", 0.5, 11.1],
+        ["Sentabr 2021", 1.1, 10.8],
+        ["Oktabr 2021", 1.3, 10.6],
+        ["Noyabr 2021", 1.2, 10.3],
+        ["Dekabr 2021", 1.3, 10],
+        ["Yanvar 2022", 0.9, 9.8],
+        ["Fevral 2022", 0.5, 9.7],
+        ["Mart 2022", 1.5, 10.5],
+        ["Aprel 2022", 1.5, 10.4],
+        ["May 2022", 1, 11],
+        ["Iyun 2022", 0.9, 12.2],
+        ["Iyul 2022", -0.1, 12.3],
+        ["Avgust 2022", 0.5, 12.3],
+        ["Sentabr 2022", 1, 12.2],
+        ["Oktabr 2022", 1.2, 12.2],
+        ["Noyabr 2022", 1.3, 12.3],
+        ["Dekabr 2022", 1.2, 12.3],
+        ["Yanvar 2023", 0.8, 12.2],
+        ["Fevral 2023", 0.5, 12.2],
+        ["Mart 2023", 1, 11.7],
+        ["Aprel 2023", 0.8, 11],
+        ["May 2023", 0.5, 10.4],
+        ["Iyun 2023", -0.3, 9],
+        ["Iyul 2023", -0.2, 8.9],
+        ["Avgust 2023", 0.5, 9],
+        ["Sentabr 2023", 1.2, 9.2],
+        ["Oktabr 2023", 1, 9],
+        ["Noyabr 2023", 1.1, 8.8],
+        ["Dekabr 2023", 1.2, 8.8],
+        ["Yanvar 2024", 0.6, 8.6],
+        ["Fevral 2024", 0.3, 8.3],
+        ["Mart 2024", 0.7, 8],
+        ["Aprel 2024", 0.9, 8.1],
+        ["May 2024", 2.8, 10.6],
+        ["Iyun 2024", -0.2, 10.6],
+        ["Iyul 2024", -0.3, 10.5],
+        ["Avgust 2024", 0.5, 10.5],
+        ["Sentabr 2024", 1.2, 10.5],
+        ["Oktabr 2024", 0.8, 10.2],
+        ["Noyabr 2024", 0.9, 10],
+        ["Dekabr 2024", 1, 9.8],
+        ["Yanvar 2025", 0.7, 9.9],
+        ["Fevral 2025", 0.5, 10.1],
+        ["Mart 2025", 0.9, 10.3],
+        ["Aprel 2025", 0.7, 10.1],
+        ["May 2025", 1.5, 8.7],
+        ["Iyun 2025", -0.2, 8.7],
+        ["Iyul 2025", -0.2, 8.9],
+        ["Avgust 2025", 0.4, 8.8],
+        ["Sentabr 2025", 0.6, 8],
+        ["Oktabr 2025", 0.6, 7.8],
+        ["Noyabr 2025", 0.7, 7.5],
+        ["Dekabr 2025", 0.9, 7.3],
+        ["Yanvar 2026", 0.7, 7.2],
+        ["Fevral 2026", 0.6, 7.3],
+        ["Mart 2026", 0.6, 7.1],
+    ];
+
+    const getYear = (label: string): number => Number(label.split(" ")[1]);
+
+    const charts = document.querySelectorAll<HTMLElement>(
+        "[data-inflation-chart]",
+    );
+
+    charts.forEach((root) => {
+        const strings = JSON.parse(root.dataset.strings!) as InflationStrings;
+        const fromEl = root.querySelector<HTMLInputElement>(
+            "[data-inflation-chart-from]",
+        )!;
+        const toEl = root.querySelector<HTMLInputElement>(
+            "[data-inflation-chart-to]",
+        )!;
+        const fromValue = root.querySelector<HTMLElement>(
+            "[data-inflation-chart-from-value]",
+        )!;
+        const toValue = root.querySelector<HTMLElement>(
+            "[data-inflation-chart-to-value]",
+        )!;
+        const canvas = root.querySelector<HTMLCanvasElement>(
+            "[data-inflation-chart-canvas]",
+        )!;
+
+        const chartData: ChartData<"line", number[], string> = {
+            labels: [],
+            datasets: [
+                {
+                    label: strings.datasetLabel,
+                    data: [],
+                    borderColor: "#1a1a1a",
+                    borderWidth: 1.5,
+                    pointRadius: 1.5,
+                    pointBackgroundColor: "#1a1a1a",
+                    tension: 0.3,
+                    fill: false,
+                },
+            ],
+        };
+
+        const chart: Chart<"line", number[], string> = new Chart(canvas, {
+            type: "line",
+            data: chartData,
+            options: {
+                responsive: true,
+                animation: { duration: 250 },
+                interaction: { mode: "index", intersect: false },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: "#1a1a1a",
+                        titleColor: "#aaa",
+                        bodyColor: "#fff",
+                        padding: 12,
+                        callbacks: {
+                            title: (ctx) => ctx[0]?.label ?? "",
+                            label: (ctx: TooltipItem<"line">) =>
+                                `${strings.tooltipLabel}: ${ctx.parsed.y}%`,
+                        },
+                    },
+                },
+                scales: {
+                    x: {
+                        grid: { color: "#e2e0db" },
+                        ticks: {
+                            color: "#999",
+                            font: { size: 11 },
+                            maxRotation: 45,
+                            autoSkip: true,
+                            maxTicksLimit: 14,
+                        },
+                    },
+                    y: {
+                        grid: { color: "#e2e0db" },
+                        ticks: {
+                            color: "#999",
+                            font: { size: 11 },
+                            callback: (value) => `${value}%`,
+                        },
+                    },
+                },
+            },
+        });
+
+        function update(): void {
+            let fromYear = Number(fromEl.value);
+            let toYear = Number(toEl.value);
+
+            if (fromYear >= toYear) {
+                if (document.activeElement === fromEl) {
+                    toYear = fromYear + 1;
+                    toEl.value = String(toYear);
+                } else {
+                    fromYear = toYear - 1;
+                    fromEl.value = String(fromYear);
+                }
+            }
+
+            fromValue.textContent = String(fromYear);
+            toValue.textContent = String(toYear);
+
+            const filtered = inflationData.filter((record) => {
+                const year = getYear(record[0]);
+                return year >= fromYear && year <= toYear;
+            });
+
+            chart.data.labels = filtered.map((record) => record[0]);
+            const dataset = chart.data.datasets[0];
+
+            if (!dataset) return;
+
+            dataset.data = filtered.map((record) => record[2]);
+            chart.update();
+        }
+
+        [fromEl, toEl].forEach((el) =>
+            el.addEventListener("input", update),
+        );
+
+        update();
+    });
+</script>

@@ -100,7 +100,7 @@ const strings = t[lang] ?? t["uz"];
 </div>
 
 <script>
-    import Chart from "chart.js/auto";
+    import Chart, { type ChartData, type TooltipItem } from "chart.js/auto";
 
     const root = document.getElementById("interest-chart-root")!;
     const s = JSON.parse(root.dataset.strings!);
@@ -119,32 +119,34 @@ const strings = t[lang] ?? t["uz"];
     const yearsEl = document.getElementById("years") as HTMLInputElement;
     const canvas = document.getElementById("interestChart") as HTMLCanvasElement;
 
-    const chart = new Chart(canvas, {
+    const chartData: ChartData<"line", number[], string> = {
+        labels: [],
+        datasets: [
+            {
+                label: s.simple,
+                data: [],
+                borderColor: "#1a1a1a",
+                borderWidth: 2,
+                pointRadius: 0,
+                tension: 0,
+                fill: false,
+            },
+            {
+                label: s.compound,
+                data: [],
+                borderColor: "#888",
+                borderWidth: 2,
+                borderDash: [6, 4],
+                pointRadius: 0,
+                tension: 0,
+                fill: false,
+            },
+        ],
+    };
+
+    const chart: Chart<"line", number[], string> = new Chart(canvas, {
         type: "line",
-        data: {
-            labels: [],
-            datasets: [
-                {
-                    label: s.simple,
-                    data: [],
-                    borderColor: "#1a1a1a",
-                    borderWidth: 2,
-                    pointRadius: 0,
-                    tension: 0,
-                    fill: false,
-                },
-                {
-                    label: s.compound,
-                    data: [],
-                    borderColor: "#888",
-                    borderWidth: 2,
-                    borderDash: [6, 4],
-                    pointRadius: 0,
-                    tension: 0,
-                    fill: false,
-                },
-            ],
-        },
+        data: chartData,
         options: {
             responsive: true,
             animation: { duration: 300 },
@@ -157,10 +159,10 @@ const strings = t[lang] ?? t["uz"];
                     bodyColor: "#fff",
                     padding: 12,
                     callbacks: {
-                        label: (ctx) =>
-                            ctx.dataset.label +
-                            ": " +
-                            fmtFull(Math.round(ctx.parsed.y)),
+                        label: (ctx: TooltipItem<"line">) =>
+                            `${ctx.dataset.label ?? ""}: ${fmtFull(
+                                Math.round(ctx.parsed.y),
+                            )}`,
                     },
                 },
             },
@@ -201,8 +203,13 @@ const strings = t[lang] ?? t["uz"];
         }
 
         chart.data.labels = labels;
-        chart.data.datasets[0].data = simple;
-        chart.data.datasets[1].data = compound;
+        const simpleDataset = chart.data.datasets[0];
+        const compoundDataset = chart.data.datasets[1];
+
+        if (!simpleDataset || !compoundDataset) return;
+
+        simpleDataset.data = simple;
+        compoundDataset.data = compound;
         chart.update();
 
         const finalSimple = P * (1 + r * T);

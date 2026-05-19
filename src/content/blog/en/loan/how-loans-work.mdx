@@ -1,0 +1,110 @@
+---
+title: How Do Loans Work?
+description: What is inside a monthly payment? How much is principal, and how much is bank income?
+cover: kredit-qanday-ishlaydi.webp
+date: 2026-04-18
+category: loan
+translationKey: kredit-qanday-ishlaydi
+author: hojiakbar
+part: 2
+---
+
+import LoanCalculator from "@components/LoanCalculator.astro";
+import TOC from "@components/TOC.astro";
+
+<TOC
+    lang="en"
+    items={[
+        { label: "What is a consumer loan?", href: "#what-is-a-consumer-loan" },
+        { label: "Annuity", href: "#annuity" },
+        { label: "Declining balance", href: "#declining-balance" },
+        { label: "Which one is better?", href: "#which-one-is-better" },
+    ]}
+/>
+
+## What Is a Consumer Loan?
+
+**A consumer loan** is debt given by a bank or microfinance institution to an individual for a fixed period and at a fixed interest rate. You do not take this loan to start or expand a business. You take it to spend. A car, home appliances, education, or just cash - the purpose can differ, but the mechanism is the same. Unfortunately, banks now also issue loans for phones, travel, and weddings.
+
+Consumer loans usually do not bring serious financial benefit to the borrower. Unlike business loans, a very large share of people take them only to spend. If you buy a new gas stove on a 12-month loan, your income does not increase. Taking a loan for a wedding is one of the biggest financial mistakes: you waste at least 100 million soums in one day and then repay that money with interest.
+
+Of course, I am not saying every consumer loan is bad. The laptop I am writing this post on was bought by my brother on a $700 loan five years ago. There was no other option at the time. Through that laptop, we gained new knowledge, learned skills, and found work. My brother even worked in Germany for a year. Today, buying a laptop like that is no longer a problem.
+
+A consumer loan can be useful if it is used for the right purpose: education, new skills, or a new job. But borrowing at high interest only for consumption is financially wrong. Loans should always be the last option.
+
+So, if you are going to take a consumer loan, you now know what it is. Next, we will look at how it is calculated and what types of repayment schedules banks use.
+
+---
+
+A loan has three main parameters: **principal** (the amount you borrow), **interest rate** (the bank's fee), and **term** (the repayment period). These three numbers determine your monthly payment and the total amount you will repay.
+
+In Uzbekistan, consumer loans are mostly repaid using two schedules: **annuity** and **declining balance**. Annuity means equal monthly payments. Declining balance means you pay more at the beginning and less toward the end.
+
+## Annuity
+
+**Annuity** is a repayment schedule where you pay the same amount every month. The payment does not change from the first month to the last. This is the most common loan type in Uzbekistan. You know exactly how much you will pay every month and on which date.
+
+Since you are studying financial literacy, remember this: banks are greedy; the whole financial sector is greedy. The Western financial system was built this way, and we copied much of it.
+
+But "same payment" does not mean the internal structure is the same. In the first months, most of the payment is interest and only a small part is principal. In other words, at the beginning you mostly pay interest, not the debt itself. It could have been the opposite - a larger principal part and a smaller interest part - and then the total amount you pay would be lower. Over time, the ratio changes, and by the last month almost the whole payment is principal. Nothing personal, just business.
+
+In Excel, annuity principal and interest parts can be calculated with `=PPMT()` and `=IPMT()`. Mathematically, the annuity formula looks like this:
+
+```text
+M = P x r(1 + r)^n / ((1 + r)^n - 1)
+
+P - principal
+r - monthly interest rate (annual / 12)
+n - number of months
+M - monthly payment
+```
+
+Use the sliders in the table below to see how each monthly payment is split. Bank service fees, collateral costs, and penalties are not included.
+
+<LoanCalculator lang="en" variant="annuity" />
+
+Imagine our familiar Toshmat wants to take a 15,000,000 soum loan from TBC Bank for two years to buy an iPhone 16 Pro Max. The annual rate is 49%. After all, the iPhone is important. It will bring him respect and status. Toshmat gets the loan online in five minutes and pays about 990,000 soums per month.
+
+The monthly payment does not look too large. But over 24 months, he returns almost **24,000,000 soums** for the 15,000,000 soums he borrowed. More than 60% extra - and that is before counting penalties for even one late day.
+
+## Declining Balance
+
+In the **declining balance** schedule, the principal is divided into equal parts and paid every month. Interest is calculated on the remaining balance each month, so as the balance falls, the interest amount also falls. This is the second common loan calculation method.
+
+As a result, the monthly payment gets smaller every month. Unlike annuity, you are paying down the debt itself faster, not mainly paying interest. That is why the early payments are higher than annuity payments, but the total interest paid is lower.
+
+Mathematically, the logic is much simpler:
+
+```text
+Principal part = P / n
+Interest part = Balance x r
+Monthly payment = Principal part + Interest part
+
+P - principal
+r - monthly interest rate
+n - number of months
+A - final amount
+Balance - remaining debt for that month
+```
+
+<LoanCalculator lang="en" variant="declining" />
+
+Back to the example above. Under the declining balance method, Toshmat pays around 22,500,000 soums in total. But for the first 10 months, he pays more than 1,000,000 soums per month. His principal part stays fixed at 625,000 soums per month, while the interest part keeps falling.
+
+## Which One Is Better?
+
+For the bank, both are good. For you, honestly, the difference is not always decisive.
+
+The same principal, interest rate, and term can produce different results under the two schedules. The main difference is the total interest paid and the way the monthly payment changes.
+
+| Annuity                                                   | Declining balance                                          |
+| --------------------------------------------------------- | ---------------------------------------------------------- |
+| Monthly payment is **the same**. Budgeting is easier.     | Monthly payment **falls over time**. Harder at first.      |
+| Total interest is **higher**. Better for the bank.        | Total interest is **lower**. Better for the borrower.      |
+| **Very common** in Uzbekistan.                            | More common in **mortgage** and **corporate** loans.       |
+
+If stable monthly payments matter to you, annuity is easier. If you want to reduce the total cost and can afford higher early payments, declining balance is better. The right choice depends on your situation.
+
+In practice, most banks offer annuity because it brings them more interest. If you do not ask, they usually will not offer declining balance.
+
+When talking about loan calculations and repayment, you should not forget inflation. The next post is about inflation.

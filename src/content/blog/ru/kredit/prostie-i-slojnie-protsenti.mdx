@@ -1,6 +1,6 @@
 ---
 title: Что Такое Проценты? Простые и Сложные Проценты
-description: А что такое проценты вообще? В чём разница?
+description: Что вообще означает процент? В чем разница между простыми и сложными процентами?
 cover: prostie-i-slojnie-protsenti.webp
 date: 2026-04-11
 category: kredit
@@ -16,105 +16,94 @@ import TOC from "@components/TOC.astro";
     lang="ru"
     items={[
         { label: "Что такое проценты?", href: "#что-такое-проценты" },
-        { label: "Простые проценты", href: "#простые-проценты" },
-        { label: "Сложные проценты", href: "#сложные-проценты" },
-        { label: "График процентов", href: "#график-процентов" },
+        { label: "Что такое простые проценты?", href: "#что-такое-простые-проценты" },
+        { label: "Что такое сложные проценты?", href: "#что-такое-сложные-проценты" },
+        { label: "Интерактивный график", href: "#интерактивный-график" },
         { label: "Заключение", href: "#заключение" },
     ]}
 />
 
----
-
 ## Что Такое Проценты?
 
-**Interest** is a mathematical term representing 1 in 100. 20% is 20 out of 100. In finance, interest is the "price" of money. The bank (or microfinance organization, or money lender) charges you interest for lending you money. Let's say I give you 10,000,000 soums and demand 12,000,000 million soums from you in 1 year, then the loan rate will be 20%. That is, you are adding 20% (i.e., 2,000,000) to 10,000,000 soums.
+**Процент** - это математический термин, который означает часть из 100. 20% означает 20 из 100. В финансах процент - это "цена" денег. Банк, микрофинансовая организация или частный кредитор берет процент за то, что дает вам деньги в пользование. Если я дам вам 10 000 000 сумов и через год потребую вернуть 12 000 000 сумов, ставка займа будет 20%. То есть к 10 000 000 сумов вы добавляете 20%, или 2 000 000 сумов.
 
-In finance and economics, interest is simply the price of money. To use the money and give it back, you pay the lender a fee - in percent. In a way, interest is like rent. Whether this is true or not will be discussed in future posts. It's just how the modern banking system works.
+В финансах и экономике проценты - это просто цена денег. Вы пользуетесь деньгами и платите за это комиссию в процентах. В каком-то смысле процент похож на аренду. Правильно это или нет - тема для следующих постов. Пока важно понять, что современная банковская система работает именно так.
 
-Western finance is built on the idea that **money has a time value**. (Time-value of money) That is why the concept of interest exists.
+Западные финансы построены на идее, что **деньги имеют временную стоимость**. Поэтому и существует понятие процента.
 
-There are two types of financial interest: simple and complex. They differ from each other, and both are widely used in the banking system. This post is about their difference.
+Есть два основных вида финансовых процентов: простые и сложные. Они отличаются друг от друга, и оба широко используются в банковской системе. Этот пост о разнице между ними.
 
----
+## Что Такое Простые Проценты?
 
-## Простые Проценты
+**Простые проценты** - это проценты, которые начисляются только на основную сумму. Каждый год сумма процента одинаковая. Проценты не добавляются к основной сумме, а выплачиваются или считаются отдельно. Иначе говоря, ваш процентный платеж не меняется, потому что он привязан к **фиксированной основной сумме**. Это самый понятный для большинства людей вид процентов. Почти все частные ростовщики дают деньги именно так.
 
-**Simple interest** is interest accrued only on the principal amount. Same amount every year. Interest is not added to the principal amount; it is paid or accrued separately. In other words, your interest payment won't change because it is tied to a **fixed principal amount**. This is a type of interest that most people know and understand. Almost all moneylenders lend on this basis.
+Многие банковские вклады в Узбекистане работают по такому принципу. Например, если вы положите 10 000 000 сумов на вклад в Национальном банке под 24%, банк каждый месяц будет переводить вам на карту одинаковый процент - 200 000 сумов. Основная сумма вклада останется без изменений.
 
-This is how most bank deposits work in Uzbekistan. For example, if you deposit 10,000,000 soums at 24% on a National Bank deposit, the bank will transfer the same interest (200,000 soums) to your card every month. The principal amount you deposit in the bank will remain unchanged.
+Математически простые проценты выражаются линейной функцией (y = ax + b):
 
-Mathematically, simple percentages are represented by a linear function (y = ax + b):
-
-```
+```text
 A = P x (1 + r x t)
 
-P — principal
-r — annual interest rate
-t — number of years
-A — future value
+P - основная сумма
+r - годовая процентная ставка
+t - количество лет
+A - итоговая сумма
 ```
 
-### Example
+### Пример
 
-10,000,000 soums, 20% annual interest rate, for a term of 5 years.
+10 000 000 сумов, годовая ставка 20%, срок 5 лет.
 
-|                             |                                        |
-| --------------------------- | -------------------------------------- |
-| Annual interest             | 10 000 000 x 0.20 = **2 000 000 so'm** |
-| Total interest over 5 years | **10 000 000 so'm**                    |
-| Final amount                | **20 000 000 so'm**                    |
+|                         |                                           |
+| ----------------------- | ----------------------------------------- |
+| Процент за год          | 10 000 000 x 0.20 = **2 000 000 сумов**   |
+| Общий процент за 5 лет  | **10 000 000 сумов**                      |
+| Итоговая сумма          | **20 000 000 сумов**                      |
 
----
+## Что Такое Сложные Проценты?
 
-## Сложные Проценты
+**Сложные проценты** - это система, где проценты начисляются на проценты. Иначе говоря, ваши деньги "рождают" новые деньги. В конце каждого периода начисленный процент добавляется к основной сумме, и следующий процент считается уже от большей суммы.
 
-**Compound interest** is a system in which interest is charged on a percentage as well as principal. In other words, your money "bears" additional money out of itself. At the end of each period, the accrued interest is added to the principal amount, and the accrued interest becomes larger. For the next period, the new basis becomes a larger amount.
+Это можно сравнить с привычками. Одна неделя в спортзале мало что изменит, но каждая тренировка добавляет силу и постепенно делает вас сильнее. Плохие привычки работают так же: играть в видеоигры один-два раза в месяц не страшно, но каждая игра может усиливать зависимость.
 
-This can be compared to habits. Going to the gym for a week won't change much, but every workout adds strength and makes you stronger. Bad habits are the same: playing video games once or twice a month isn't bad, but each time you play makes you more addicted.
+В Узбекистане некоторые банки называют это капитализацией. Например, в договоре вклада Asia Alliance Bank капитализация описывается как добавление начисленного за период процента к основной сумме и дальнейший расчет уже от новой суммы. Многие банки предлагают такую опцию, но обычно она не стоит по умолчанию. Ее нужно искать отдельно.
 
-In Uzbekistan, some banks call this **capitalization**. For example, Asia Alliance Bank writes in the deposit agreement: "Capitalization is the addition of interest accrued for a period to the principal amount and the subsequent settlement from this new amount." Most banks offer this, but this option is usually not standard - you need to look for it separately.
+Математически сложные проценты записываются как показательная функция (y = a^x):
 
-Mathematically, compound percentages are written as an exponential function (y = a^x):
+```text
+A = P x (1 + r)^t
 
-```
-A = P x (1 + r/n)^(t*n)
-
-P — pricipal
-r — annual interest rate
-t — number of years
-n — number of compounding periods
-A — final amount
+P - основная сумма
+r - годовая процентная ставка
+t - количество лет
+A - итоговая сумма
 ```
 
-### Same Example
+### Тот Же Пример
 
-10,000,000 soums, 20% annual interest rate, for a term of 5 years, with an annual compounding (n=1)
+10 000 000 сумов, годовая ставка 20%, срок 5 лет.
 
-A = 10 000 000 x (1.20)^5 = **24 883 200 soums**
+A = 10 000 000 x (1.20)^5 = **24 883 200 сумов**
 
-|                | Sodda foiz        | Murakkab foiz     |
-| -------------- | ----------------- | ----------------- |
-| Final amount   | 20 000 000 soums  | 24 883 200 soums  |
-| Total interest | +10 000 000 soums | +14 883 200 soums |
+|                 | Простые проценты     | Сложные проценты     |
+| --------------- | -------------------- | -------------------- |
+| Итоговая сумма  | 20 000 000 сумов     | 24 883 200 сумов     |
+| Общий процент   | +10 000 000 сумов    | +14 883 200 сумов    |
 
-Same money, same rate, same time. The difference is 4,883,200 soums. This difference increases over time, or as the interest rate increases, or as the compounding period increases.
+Одна и та же сумма, та же ставка и тот же срок. Разница - 4 883 200 сумов. Чем больше срок или выше ставка, тем сильнее растет эта разница.
 
----
+## Интерактивный График
 
-## График Процентов
+На графике ниже видно, как растут оба вида процентов при одинаковых условиях. Двигайте слайдеры и смотрите на результат. Линия сложных процентов не является прямой, и со временем она все сильнее отрывается от линии простых процентов.
 
-In the graph below, you can see how both types of percentages grow under the same conditions. Change the sliders and track the result. The graph of compound interest is not a straight line, and it is clearly different from the graph of simple interest over time.
-
-For example, the difference between 100 million soums, 20% and the total amount over 10 years is more than 2 times.
+Например, при 100 млн сумов, ставке 20% и сроке 10 лет разница в итоговой сумме становится больше чем в два раза.
 
 <InterestChart lang="ru" />
 
----
-
 ## Заключение
 
-Interest is the price of money - the price of renting money. Western experts call this the rental rate. Since you received and used the money, you will return it to the lender with an additional amount. But this is a rather controversial topic - for example, would you take a loaf of bread from your neighbor and return 1.5 loaves after 1 month?
+Процент - это цена денег, то есть цена пользования деньгами. Западные специалисты часто называют это арендной ставкой. Вы берете деньги, пользуетесь ими и возвращаете больше, чем получили. Но это довольно спорная тема. Например, взяли бы вы у соседа один хлеб и вернули бы через месяц полтора хлеба?
 
-Simple interest is the interest at which the principal does not change. In compound interest, the principal amount changes. While money "bears" money through interest, compound interest "bears twins."
+Простые проценты - это проценты, при которых основная сумма не меняется. При сложных процентах основная сумма меняется. Если проценты позволяют деньгам "рожать" деньги, то сложные проценты "рожают двойню".
 
-In the next post, we will see how banks calculate interest when lending to the population.
+В следующем посте посмотрим, как банки считают потребительские кредиты.

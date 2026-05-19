@@ -1,0 +1,93 @@
+---
+title: How Are Interest Rates Set?
+description: A bank offers you a 49% rate. Where does that number come from? Is it random or calculated?
+cover: foiz-stavkasi-qanday-belgilanadi.webp
+date: 2026-05-02
+category: loan
+translationKey: foiz-stavkasi-qanday-belgilanadi
+author: hojiakbar
+part: 4
+---
+
+import NominalRateCalculator from "@components/NominalRateCalculator.astro";
+import TOC from "@components/TOC.astro";
+
+<TOC
+    lang="en"
+    items={[
+        { label: "Where does 49% come from?", href: "#where-does-49-come-from" },
+        { label: "Fisher formula", href: "#fisher-formula" },
+        { label: "Three components", href: "#three-components" },
+        { label: "Interactive calculator", href: "#interactive-calculator" },
+        { label: "Conclusion", href: "#conclusion" },
+    ]}
+/>
+
+## Where Does 49% Come From?
+
+In Uzbekistan, the nominal annual interest rate on consumer loans is often in the 30-50% range. Nominal means the rate shown to you. In the previous post, we looked at how a loan is calculated. The loan term and interest rate determine how much you return for the money you borrowed.
+
+Most people simply accept this. The bank set the rate, so that must be the rate. But this number is not taken out of thin air. It has its own logic.
+
+When issuing a loan, banks usually consider three things: **default risk**, **their profit margin**, and **inflation** in the economy. Each bank sets rates according to its own situation, but in general these three factors combine to produce the nominal interest rate you see.
+
+Understanding this helps you compare loan offers, negotiate, and evaluate why a bank is offering exactly that number.
+
+## Fisher Formula
+
+Mathematically, a nominal interest rate can be explained with this formula:
+
+```text
+(1 + R) = (1 + r) x (1 + m) x (1 + pi)
+
+R - nominal interest rate (what you pay)
+r - risk premium
+m - bank profit margin
+pi - inflation
+```
+
+This formula is multiplicative because each factor has a cumulative effect. For example, when inflation is high, it also affects the bank's risk and profit. Simple addition, R = r + m + pi, gives an approximation, but multiplication is needed for a more accurate calculation.
+
+For example, if the risk premium is 25%, the profit margin is 13%, and inflation is 7%, simple addition gives 45%, but the proper formula gives **51%**. The difference may look small, but it matters for large amounts.
+
+## Three Components
+
+### Risk Premium (r)
+
+**The risk premium** is the extra amount the bank charges for the possibility that the loan will not be repaid. A bank cannot recover every loan it issues. A borrower may die, go bankrupt, or avoid paying on time. The bank also faces its own risks: political, economic, and financial. Strong economists at the bank's head office calculate these factors and price the premium.
+
+Why do banks try to lend to as many people as possible? Why do they spend billions on advertising? The reason is **diversification**. A bank lends to thousands of clients. Most pay on time, but our familiar Toshmat may fail to repay the loan he took for an iPhone 16 Pro Max because his income is unstable.
+
+Bank economists know this, so they include non-paying borrowers in their calculations. Even if you pay all debts on time and have a stable income source, your risk premium may be higher than you personally deserve. Under the bank's strategy, borrowers like you also pay for borrowers who fail to repay.
+
+In general, the higher the risk - unsecured loan, short credit history, low income - the higher the premium. This is also why loans to legal entities almost always have lower rates than loans to individuals. Companies often own real estate, vehicles, or land under the company name. If they cannot repay, the bank can seize those assets and cover losses.
+
+### Profit Margin (m)
+
+A bank is a commercial financial institution. Like any business, it must attract deposits, pay employees, buy technology, pay taxes, and provide returns to shareholders. All of this is included in the interest rate. In other words, the bank runs its business through the loans it gives to the public.
+
+Historically, profit margins in Uzbekistan have been very high. Why was banking one of the most desired careers for the generation after independence? Why do students intern for free for months just to get a bank job? Because bank salaries are high. Where do high salaries and "13th-month salary" bonuses come from? From bank profit, of course. A business without large profit cannot logically pay large salaries.
+
+In economics, the stronger competition is, the harder it becomes to maintain a high margin. This mechanism still does not fully work in Uzbekistan's banking sector. As financial infrastructure develops and Uzbekistan opens more to the world, competition should increase and loan rates should fall.
+
+### Inflation (pi)
+
+The bank gives money today and receives it back little by little every month. During that period, inflation reduces the purchasing power of money. The bank adds this loss to the rate. Neither banks nor the state leave a single soum on the street.
+
+As we saw in the previous post, annual inflation in Uzbekistan is now around 7%. In 2018, it was above 20%, and loan rates were correspondingly high. The Central Bank aims to bring inflation down to 5% within the next two or three years. Loan rates should also fall over that period.
+
+But there is another possibility: banks may use lower inflation simply to increase profit. Suppose an online bank issued consumer loans at 49% when inflation was 7%. If inflation falls to 5%, it may continue lending at 49% and earn even more.
+
+## Interactive Calculator
+
+Change the three components and watch how the nominal interest rate is formed. The default values reflect the current state of the Uzbek market.
+
+<NominalRateCalculator lang="en" />
+
+## Conclusion
+
+When you see a 49% rate at TBC Bank, break it into three questions: how much risk is the bank taking, how much profit does it expect, and how much is inflation? Inflation is the same for everyone. So how much risk is the bank really taking, and how much is it earning from that risk?
+
+Even if you do not know the exact answers, understanding the calculation changes the way you enter negotiations. Instead of asking, "Did they also include their conscience in this 49%?", you ask, "Is this rate fair for the risk they are taking?" You ask, "Is the bank's expected profit reasonable?"
+
+In the next part, we will look at what a credit score is.

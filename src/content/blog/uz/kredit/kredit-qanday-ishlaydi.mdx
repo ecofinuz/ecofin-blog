@@ -9,6 +9,7 @@ author: hojiakbar
 part: 2
 ---
 
+import LoanCalculator from "@components/LoanCalculator.astro";
 import TOC from "@components/TOC.astro";
 
 <TOC
@@ -20,8 +21,6 @@ import TOC from "@components/TOC.astro";
         { label: "Qaysi biri foydali?", href: "#qaysi-biri-foydali" },
     ]}
 />
-
----
 
 ## Iste'mol Krediti Nima?
 
@@ -40,8 +39,6 @@ Xo'p, iste'mol krediti olar ekansiz, u nima ekanligini bilib oldingiz. Endi unin
 Kredit uchta asosiy parametrdan iborat: **asosiy qarz** (siz olgan summa), **foiz stavkasi** (bank olayotgan haq), va **muddat** (to'lash davri). Shu uchta raqam sizning oylik to'lovingizni va jami qancha to'lashingizni belgilaydi.
 
 O'zbekistonda iste'mol kreditlari asosan ikki sxema bo'yicha to'lanadi: **annuitet** va **kamayuvchi qoldiq (differensiyalashgan). **Annuitet bu oylik teng to'lov, differensiya esa boshida ko'p to'lab, so'ngida ozroq to'lash.
-
----
 
 ## Annuitet
 
@@ -64,11 +61,11 @@ M — oylik to'lov
 
 Quyidagi jadvalda slayderlarni o'zgartirib, har oylik to'lovning qanday taqsimlanishini ko'ring. Bank servis xizmatlari, garov, yoki penya hisobga kiritilmagan.
 
+<LoanCalculator lang="uz" variant="annuity" />
+
 Tasavvur qiling, o'zimizning qorako'z qoraqosh Toshmat jonajon TBC Bankdan iPhone 16 Pro Max olish uchun 2 yilga 15 000 000 so'm kredit olmoqchi. Yillik 49% ga. Axir, iPhone muhim! Bu matoh unga hurmat va ehtirom olib keladi. 5 daqiqada onlayn kredit oladi Toshmat. Va oyiga 990 000 so'm to'laydi.
 
-Oylik to'lov uncha ko'p emas, to'g'ri. Lekin 24 oyda u olgan 15 000 000 so'mni sal kam 24 000 **000** qilib qaytarib beradi. Naq 60% oshig'i bilan! Bir kun kechikilsa ham yoziladigan penyalarni hisoblamasa, albatta.
-
----
+Oylik to'lov uncha ko'p emas, to'g'ri. Lekin 24 oyda u olgan 15 000 000 so'mni sal kam **24 000 000** qilib qaytarib beradi. Naq 60% oshig'i bilan! Bir kun kechikilsa ham yoziladigan penyalarni hisoblamasa, albatta.
 
 ## Differensiya
 
@@ -90,9 +87,9 @@ A — yakuniy summa
 Qoldiq — o'sha oyga qolgan qarz
 ```
 
-Yuqoridagi misol qaytsak. Differensiya usuli bilan hisoblaganda Toshmat umumiy 22 500 000 so'm atrofida to'lov qiladi. Lekin birinchi 10 oy u oyiga 1 000 000 so'mdan oshiq pul to'laydi. Asosiy qarzi oyiga o'zgarmas 625 000 so'm. Foiz esa kamayib boradi.
+<LoanCalculator lang="uz" variant="declining" />
 
----
+Yuqoridagi misol qaytsak. Differensiya usuli bilan hisoblaganda Toshmat umumiy 22 500 000 so'm atrofida to'lov qiladi. Lekin birinchi 10 oy u oyiga 1 000 000 so'mdan oshiq pul to'laydi. Asosiy qarzi oyiga o'zgarmas 625 000 so'm. Foiz esa kamayib boradi.
 
 ## Qaysi Biri Foydali?
 

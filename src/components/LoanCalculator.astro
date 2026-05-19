@@ -1,0 +1,376 @@
+---
+import type { Locale } from "@data/categories";
+
+type LoanVariant = "annuity" | "declining";
+
+interface Props {
+    lang?: Locale;
+    variant?: LoanVariant;
+}
+
+const { lang = "uz", variant = "annuity" } = Astro.props;
+
+const translations: Record<
+    Locale,
+    {
+        principal: string;
+        annualRate: string;
+        term: string;
+        monthlyPayment: string;
+        firstPayment: string;
+        totalPayment: string;
+        totalInterest: string;
+        month: string;
+        tableMonth: string;
+        tablePayment: string;
+        tablePrincipal: string;
+        tableInterest: string;
+        tableBalance: string;
+        total: string;
+        million: string;
+        billion: string;
+        currency: string;
+        localeCode: string;
+    }
+> = {
+    uz: {
+        principal: "Asosiy qarz",
+        annualRate: "Yillik foiz",
+        term: "Muddat",
+        monthlyPayment: "Oylik to'lov",
+        firstPayment: "1-oy to'lovi",
+        totalPayment: "Jami to'lov",
+        totalInterest: "Jami foiz",
+        month: "oy",
+        tableMonth: "Oy",
+        tablePayment: "Oylik to'lov",
+        tablePrincipal: "Asosiy qarz",
+        tableInterest: "Foiz",
+        tableBalance: "Qoldiq",
+        total: "Jami",
+        million: "mln",
+        billion: "mlrd",
+        currency: "so'm",
+        localeCode: "uz-UZ",
+    },
+    en: {
+        principal: "Principal",
+        annualRate: "Annual interest",
+        term: "Term",
+        monthlyPayment: "Monthly payment",
+        firstPayment: "First payment",
+        totalPayment: "Total payment",
+        totalInterest: "Total interest",
+        month: "months",
+        tableMonth: "Month",
+        tablePayment: "Monthly payment",
+        tablePrincipal: "Principal",
+        tableInterest: "Interest",
+        tableBalance: "Balance",
+        total: "Total",
+        million: "M",
+        billion: "B",
+        currency: "UZS",
+        localeCode: "en-US",
+    },
+    ru: {
+        principal: "Основной долг",
+        annualRate: "Годовой процент",
+        term: "Срок",
+        monthlyPayment: "Ежемесячный платеж",
+        firstPayment: "Платеж за 1-й месяц",
+        totalPayment: "Общий платеж",
+        totalInterest: "Всего процентов",
+        month: "мес.",
+        tableMonth: "Месяц",
+        tablePayment: "Ежемесячный платеж",
+        tablePrincipal: "Основной долг",
+        tableInterest: "Проценты",
+        tableBalance: "Остаток",
+        total: "Итого",
+        million: "млн",
+        billion: "млрд",
+        currency: "сум",
+        localeCode: "ru-RU",
+    },
+};
+
+const strings = translations[lang];
+const monthlyLabel =
+    variant === "declining" ? strings.firstPayment : strings.monthlyPayment;
+---
+
+<div
+    class="loan-calculator card-vessel"
+    data-loan-calculator
+    data-variant={variant}
+    data-strings={JSON.stringify(strings)}
+>
+    <div class="sliders">
+        <div class="slider-group">
+            <label>
+                {strings.principal}
+                <span data-loan-principal-value>10 {strings.million}</span>
+            </label>
+            <input
+                type="range"
+                data-loan-principal
+                min="1000000"
+                max="50000000"
+                step="500000"
+                value="10000000"
+            />
+        </div>
+
+        <div class="slider-group">
+            <label>
+                {strings.annualRate} <span data-loan-rate-value>24%</span>
+            </label>
+            <input
+                type="range"
+                data-loan-rate
+                min="10"
+                max="50"
+                step="1"
+                value="24"
+            />
+        </div>
+
+        <div class="slider-group">
+            <label>
+                {strings.term}
+                <span data-loan-months-value>12 {strings.month}</span>
+            </label>
+            <input
+                type="range"
+                data-loan-months
+                min="3"
+                max="36"
+                step="1"
+                value="12"
+            />
+        </div>
+    </div>
+
+    <div class="loan-summary result-callout">
+        <div class="item">
+            <span>{monthlyLabel}</span>
+            <strong data-loan-monthly>—</strong>
+        </div>
+        <div class="item">
+            <span>{strings.totalPayment}</span>
+            <strong data-loan-total>—</strong>
+        </div>
+        <div class="item">
+            <span>{strings.totalInterest}</span>
+            <strong data-loan-interest>—</strong>
+        </div>
+    </div>
+
+    <div class="table-wrap loan-table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>{strings.tableMonth}</th>
+                    <th>{strings.tablePayment}</th>
+                    <th>{strings.tablePrincipal}</th>
+                    <th>{strings.tableInterest}</th>
+                    <th>{strings.tableBalance}</th>
+                </tr>
+            </thead>
+            <tbody data-loan-table-body></tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    type LoanVariant = "annuity" | "declining";
+    type LoanStrings = {
+        month: string;
+        total: string;
+        million: string;
+        billion: string;
+        currency: string;
+        localeCode: string;
+    };
+
+    const calculators = document.querySelectorAll<HTMLElement>(
+        "[data-loan-calculator]",
+    );
+
+    const fmtM = (n: number, strings: LoanStrings): string => {
+        if (n >= 1e9) {
+            return `${(n / 1e9).toFixed(1).replace(/\.0$/, "")} ${strings.billion}`;
+        }
+
+        if (n >= 1e6) {
+            return `${(n / 1e6).toFixed(1).replace(/\.0$/, "")} ${strings.million}`;
+        }
+
+        return Math.round(n).toLocaleString(strings.localeCode);
+    };
+
+    const fmtF = (n: number, strings: LoanStrings): string =>
+        `${Math.round(n).toLocaleString(strings.localeCode)} ${strings.currency}`;
+
+    function appendPaymentRow(
+        tbody: HTMLTableSectionElement,
+        cells: Array<string | number>,
+        isTotal = false,
+    ): void {
+        const row = document.createElement("tr");
+
+        if (isTotal) {
+            row.classList.add("loan-total-row");
+        }
+
+        cells.forEach((cell) => {
+            const td = document.createElement("td");
+            td.textContent = String(cell);
+            row.appendChild(td);
+        });
+
+        tbody.appendChild(row);
+    }
+
+    calculators.forEach((root) => {
+        const variant = root.dataset.variant as LoanVariant;
+        const strings = JSON.parse(root.dataset.strings!) as LoanStrings;
+        const principalEl =
+            root.querySelector<HTMLInputElement>("[data-loan-principal]")!;
+        const rateEl =
+            root.querySelector<HTMLInputElement>("[data-loan-rate]")!;
+        const monthsEl =
+            root.querySelector<HTMLInputElement>("[data-loan-months]")!;
+
+        const principalValue = root.querySelector<HTMLElement>(
+            "[data-loan-principal-value]",
+        )!;
+        const rateValue = root.querySelector<HTMLElement>(
+            "[data-loan-rate-value]",
+        )!;
+        const monthsValue = root.querySelector<HTMLElement>(
+            "[data-loan-months-value]",
+        )!;
+
+        const monthlyResult =
+            root.querySelector<HTMLElement>("[data-loan-monthly]")!;
+        const totalResult =
+            root.querySelector<HTMLElement>("[data-loan-total]")!;
+        const interestResult =
+            root.querySelector<HTMLElement>("[data-loan-interest]")!;
+        const tbody = root.querySelector<HTMLTableSectionElement>(
+            "[data-loan-table-body]",
+        )!;
+
+        function updateAnnuity(P: number, r: number, n: number): void {
+            const monthlyPayment =
+                (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+            const totalPaid = monthlyPayment * n;
+            const totalInterest = totalPaid - P;
+            let balance = P;
+
+            monthlyResult.textContent = fmtF(monthlyPayment, strings);
+            totalResult.textContent = fmtF(totalPaid, strings);
+            interestResult.textContent = fmtF(totalInterest, strings);
+
+            tbody.replaceChildren();
+
+            for (let i = 1; i <= n; i++) {
+                const interest = balance * r;
+                const principal = monthlyPayment - interest;
+                balance -= principal;
+
+                appendPaymentRow(tbody, [
+                    i,
+                    fmtF(monthlyPayment, strings),
+                    fmtF(principal, strings),
+                    fmtF(interest, strings),
+                    fmtF(Math.max(0, balance), strings),
+                ]);
+            }
+
+            appendPaymentRow(
+                tbody,
+                [
+                    strings.total,
+                    fmtF(totalPaid, strings),
+                    fmtF(P, strings),
+                    fmtF(totalInterest, strings),
+                    "—",
+                ],
+                true,
+            );
+        }
+
+        function updateDeclining(P: number, r: number, n: number): void {
+            const principalPerMonth = P / n;
+            let balance = P;
+            let totalPaid = 0;
+            let totalInterest = 0;
+            let firstPayment = 0;
+
+            tbody.replaceChildren();
+
+            for (let i = 1; i <= n; i++) {
+                const interest = balance * r;
+                const payment = principalPerMonth + interest;
+
+                balance -= principalPerMonth;
+                totalPaid += payment;
+                totalInterest += interest;
+
+                if (i === 1) {
+                    firstPayment = payment;
+                }
+
+                appendPaymentRow(tbody, [
+                    i,
+                    fmtF(payment, strings),
+                    fmtF(principalPerMonth, strings),
+                    fmtF(interest, strings),
+                    fmtF(Math.max(0, balance), strings),
+                ]);
+            }
+
+            appendPaymentRow(
+                tbody,
+                [
+                    strings.total,
+                    fmtF(totalPaid, strings),
+                    fmtF(P, strings),
+                    fmtF(totalInterest, strings),
+                    "—",
+                ],
+                true,
+            );
+
+            monthlyResult.textContent = fmtF(firstPayment, strings);
+            totalResult.textContent = fmtF(totalPaid, strings);
+            interestResult.textContent = fmtF(totalInterest, strings);
+        }
+
+        function update(): void {
+            const P = Number(principalEl.value);
+            const r = Number(rateEl.value) / 100 / 12;
+            const n = Number(monthsEl.value);
+
+            principalValue.textContent = fmtM(P, strings);
+            rateValue.textContent = `${rateEl.value}%`;
+            monthsValue.textContent = `${n} ${strings.month}`;
+
+            if (variant === "declining") {
+                updateDeclining(P, r, n);
+                return;
+            }
+
+            updateAnnuity(P, r, n);
+        }
+
+        [principalEl, rateEl, monthsEl].forEach((el) =>
+            el.addEventListener("input", update),
+        );
+
+        update();
+    });
+</script>

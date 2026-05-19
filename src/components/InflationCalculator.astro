@@ -1,0 +1,407 @@
+---
+import type { Locale } from "@data/categories";
+
+interface Props {
+    lang?: Locale;
+}
+
+const { lang = "uz" } = Astro.props;
+
+const translations: Record<
+    Locale,
+    {
+        amount: string;
+        startPeriod: string;
+        endPeriod: string;
+        result: string;
+        samePeriod: string;
+        sentence: string;
+        change: string;
+        million: string;
+        billion: string;
+        currency: string;
+        localeCode: string;
+        months: string[];
+    }
+> = {
+    uz: {
+        amount: "Summa",
+        startPeriod: "Boshlang'ich davr",
+        endPeriod: "Yakuniy davr",
+        result: "Natija",
+        samePeriod: "Ikki davr bir xil.",
+        sentence: "{amount} ({from}) ning {to} davridagi qiymati - {adjusted}",
+        change: "Umumiy o'zgarish",
+        million: "mln",
+        billion: "mlrd",
+        currency: "so'm",
+        localeCode: "uz-UZ",
+        months: [
+            "Yanvar",
+            "Fevral",
+            "Mart",
+            "Aprel",
+            "May",
+            "Iyun",
+            "Iyul",
+            "Avgust",
+            "Sentabr",
+            "Oktabr",
+            "Noyabr",
+            "Dekabr",
+        ],
+    },
+    en: {
+        amount: "Amount",
+        startPeriod: "Start period",
+        endPeriod: "End period",
+        result: "Result",
+        samePeriod: "Both periods are the same.",
+        sentence: "{amount} in {from} equals {adjusted} in {to}",
+        change: "Total change",
+        million: "M",
+        billion: "B",
+        currency: "UZS",
+        localeCode: "en-US",
+        months: [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+        ],
+    },
+    ru: {
+        amount: "Сумма",
+        startPeriod: "Начальный период",
+        endPeriod: "Конечный период",
+        result: "Результат",
+        samePeriod: "Периоды одинаковые.",
+        sentence: "{amount} в {from} соответствует {adjusted} в {to}",
+        change: "Общее изменение",
+        million: "млн",
+        billion: "млрд",
+        currency: "сум",
+        localeCode: "ru-RU",
+        months: [
+            "Январь",
+            "Февраль",
+            "Март",
+            "Апрель",
+            "Май",
+            "Июнь",
+            "Июль",
+            "Август",
+            "Сентябрь",
+            "Октябрь",
+            "Ноябрь",
+            "Декабрь",
+        ],
+    },
+};
+
+const strings = translations[lang];
+---
+
+<div
+    class="inflation-calculator calc-container card-vessel"
+    data-inflation-calculator
+    data-strings={JSON.stringify(strings)}
+>
+    <div class="sliders inflation-amount-slider">
+        <div class="slider-group">
+            <label>
+                {strings.amount}
+                <span data-inflation-amount-value>1 {strings.million}</span>
+            </label>
+            <input
+                type="range"
+                data-inflation-amount
+                min="100000"
+                max="100000000"
+                step="100000"
+                value="1000000"
+            />
+        </div>
+    </div>
+
+    <div class="period-selects">
+        <div class="select-group">
+            <label>{strings.startPeriod}</label>
+            <select data-inflation-from></select>
+        </div>
+        <div class="select-group">
+            <label>{strings.endPeriod}</label>
+            <select data-inflation-to></select>
+        </div>
+    </div>
+
+    <div class="result-display inflation-result">
+        <p class="result-label">{strings.result}</p>
+        <p class="result-sentence" data-inflation-result>—</p>
+        <p class="result-sub result-change" data-inflation-change></p>
+    </div>
+</div>
+
+<script>
+    type InflationStrings = {
+        samePeriod: string;
+        sentence: string;
+        change: string;
+        million: string;
+        billion: string;
+        currency: string;
+        localeCode: string;
+        months: string[];
+    };
+
+    type InflationRecord = readonly [
+        year: number,
+        month: number,
+        monthlyChange: number,
+        annualChange: number,
+    ];
+
+    const inflationData: InflationRecord[] = [
+        [2016, 0, 1.6, 8.9],
+        [2016, 1, 0.8, 8.7],
+        [2016, 2, 0.5, 8.3],
+        [2016, 3, 0.6, 8],
+        [2016, 4, 0.2, 7.7],
+        [2016, 5, -0.2, 8.1],
+        [2016, 6, -0.6, 8.4],
+        [2016, 7, 0.2, 8.6],
+        [2016, 8, 1.4, 9.1],
+        [2016, 9, 1.4, 9.6],
+        [2016, 10, 1.6, 9.7],
+        [2016, 11, 1.8, 9.7],
+        [2017, 0, 1.5, 9.6],
+        [2017, 1, 1.4, 10.3],
+        [2017, 2, 1, 10.8],
+        [2017, 3, 1, 11.3],
+        [2017, 4, 1.3, 12.5],
+        [2017, 5, 0.7, 13.5],
+        [2017, 6, 0.9, 15.2],
+        [2017, 7, 0.8, 15.9],
+        [2017, 8, 1.3, 15.8],
+        [2017, 9, 1.2, 15.6],
+        [2017, 10, 2.1, 16.2],
+        [2017, 11, 4.1, 18.8],
+        [2018, 0, 2.7, 20.1],
+        [2018, 1, 1.1, 19.8],
+        [2018, 2, 1.1, 19.8],
+        [2018, 3, 0.9, 19.6],
+        [2018, 4, 0.8, 19],
+        [2018, 5, -0.4, 17.7],
+        [2018, 6, -0.3, 16.3],
+        [2018, 7, 0.3, 15.7],
+        [2018, 8, 1.8, 16.2],
+        [2018, 9, 1.3, 16.3],
+        [2018, 10, 2.3, 16.5],
+        [2018, 11, 2.1, 14.3],
+        [2019, 0, 1.5, 13],
+        [2019, 1, 1.6, 13.5],
+        [2019, 2, 1.2, 13.6],
+        [2019, 3, 0.9, 13.7],
+        [2019, 4, 0.7, 13.7],
+        [2019, 5, -0.5, 13.6],
+        [2019, 6, -0.4, 13.5],
+        [2019, 7, 2.9, 16.5],
+        [2019, 8, 1.3, 16],
+        [2019, 9, 1.5, 16.3],
+        [2019, 10, 1.7, 15.6],
+        [2019, 11, 1.7, 15.2],
+        [2020, 0, 0.6, 14.3],
+        [2020, 1, 0.8, 13.5],
+        [2020, 2, 1.3, 13.6],
+        [2020, 3, 1.7, 14.5],
+        [2020, 4, 0.3, 14],
+        [2020, 5, -0.2, 14.2],
+        [2020, 6, -0.3, 14.4],
+        [2020, 7, 0.5, 11.7],
+        [2020, 8, 1.4, 11.7],
+        [2020, 9, 1.4, 11.5],
+        [2020, 10, 1.5, 11.3],
+        [2020, 11, 1.6, 11.1],
+        [2021, 0, 1, 11.6],
+        [2021, 1, 0.6, 11.4],
+        [2021, 2, 0.8, 10.9],
+        [2021, 3, 1.5, 10.7],
+        [2021, 4, 0.5, 10.9],
+        [2021, 5, -0.2, 10.9],
+        [2021, 6, -0.2, 11.1],
+        [2021, 7, 0.5, 11.1],
+        [2021, 8, 1.1, 10.8],
+        [2021, 9, 1.3, 10.6],
+        [2021, 10, 1.2, 10.3],
+        [2021, 11, 1.3, 10],
+        [2022, 0, 0.9, 9.8],
+        [2022, 1, 0.5, 9.7],
+        [2022, 2, 1.5, 10.5],
+        [2022, 3, 1.5, 10.4],
+        [2022, 4, 1, 11],
+        [2022, 5, 0.9, 12.2],
+        [2022, 6, -0.1, 12.3],
+        [2022, 7, 0.5, 12.3],
+        [2022, 8, 1, 12.2],
+        [2022, 9, 1.2, 12.2],
+        [2022, 10, 1.3, 12.3],
+        [2022, 11, 1.2, 12.3],
+        [2023, 0, 0.8, 12.2],
+        [2023, 1, 0.5, 12.2],
+        [2023, 2, 1, 11.7],
+        [2023, 3, 0.8, 11],
+        [2023, 4, 0.5, 10.4],
+        [2023, 5, -0.3, 9],
+        [2023, 6, -0.2, 8.9],
+        [2023, 7, 0.5, 9],
+        [2023, 8, 1.2, 9.2],
+        [2023, 9, 1, 9],
+        [2023, 10, 1.1, 8.8],
+        [2023, 11, 1.2, 8.8],
+        [2024, 0, 0.6, 8.6],
+        [2024, 1, 0.3, 8.3],
+        [2024, 2, 0.7, 8],
+        [2024, 3, 0.9, 8.1],
+        [2024, 4, 2.8, 10.6],
+        [2024, 5, -0.2, 10.6],
+        [2024, 6, -0.3, 10.5],
+        [2024, 7, 0.5, 10.5],
+        [2024, 8, 1.2, 10.5],
+        [2024, 9, 0.8, 10.2],
+        [2024, 10, 0.9, 10],
+        [2024, 11, 1, 9.8],
+        [2025, 0, 0.7, 9.9],
+        [2025, 1, 0.5, 10.1],
+        [2025, 2, 0.9, 10.3],
+        [2025, 3, 0.7, 10.1],
+        [2025, 4, 1.5, 8.7],
+        [2025, 5, -0.2, 8.7],
+        [2025, 6, -0.2, 8.9],
+        [2025, 7, 0.4, 8.8],
+        [2025, 8, 0.6, 8],
+        [2025, 9, 0.6, 7.8],
+        [2025, 10, 0.7, 7.5],
+        [2025, 11, 0.9, 7.3],
+        [2026, 0, 0.7, 7.2],
+        [2026, 1, 0.6, 7.3],
+        [2026, 2, 0.6, 7.1],
+    ];
+
+    const calculators = document.querySelectorAll<HTMLElement>(
+        "[data-inflation-calculator]",
+    );
+
+    const cumulativeIndex = [1];
+
+    for (let i = 1; i < inflationData.length; i++) {
+        cumulativeIndex.push(
+            cumulativeIndex[i - 1] * (1 + inflationData[i][2] / 100),
+        );
+    }
+
+    const fmtM = (n: number, strings: InflationStrings): string => {
+        if (n >= 1e9) {
+            return `${(n / 1e9).toFixed(2)} ${strings.billion}`;
+        }
+
+        if (n >= 1e6) {
+            return `${(n / 1e6).toFixed(2)} ${strings.million}`;
+        }
+
+        return Math.round(n).toLocaleString(strings.localeCode);
+    };
+
+    const fmtF = (n: number, strings: InflationStrings): string =>
+        `${Math.round(n).toLocaleString(strings.localeCode)} ${strings.currency}`;
+
+    const getPeriodLabel = (
+        record: InflationRecord,
+        strings: InflationStrings,
+    ): string => `${strings.months[record[1]]} ${record[0]}`;
+
+    const renderSentence = (
+        template: string,
+        values: Record<string, string>,
+    ): string =>
+        Object.entries(values).reduce(
+            (text, [key, value]) => text.replace(`{${key}}`, value),
+            template,
+        );
+
+    calculators.forEach((root) => {
+        const strings = JSON.parse(root.dataset.strings!) as InflationStrings;
+        const amountEl = root.querySelector<HTMLInputElement>(
+            "[data-inflation-amount]",
+        )!;
+        const amountValue = root.querySelector<HTMLElement>(
+            "[data-inflation-amount-value]",
+        )!;
+        const fromSelect = root.querySelector<HTMLSelectElement>(
+            "[data-inflation-from]",
+        )!;
+        const toSelect = root.querySelector<HTMLSelectElement>(
+            "[data-inflation-to]",
+        )!;
+        const result = root.querySelector<HTMLElement>(
+            "[data-inflation-result]",
+        )!;
+        const change = root.querySelector<HTMLElement>(
+            "[data-inflation-change]",
+        )!;
+
+        inflationData.forEach((record, index) => {
+            const label = getPeriodLabel(record, strings);
+            fromSelect.appendChild(new Option(label, String(index)));
+            toSelect.appendChild(new Option(label, String(index)));
+        });
+
+        fromSelect.value = "0";
+        toSelect.value = String(inflationData.length - 1);
+
+        function update(): void {
+            const amount = Number(amountEl.value);
+            const from = Number(fromSelect.value);
+            const to = Number(toSelect.value);
+
+            amountValue.textContent = fmtM(amount, strings);
+
+            if (from === to) {
+                result.textContent = strings.samePeriod;
+                change.textContent = "";
+                return;
+            }
+
+            const ratio = cumulativeIndex[to] / cumulativeIndex[from];
+            const adjusted = amount * ratio;
+            const diff = adjusted - amount;
+            const pct = ((ratio - 1) * 100).toFixed(1);
+            const sign = diff > 0 ? "+" : "";
+
+            result.innerHTML = renderSentence(strings.sentence, {
+                amount: `<strong>${fmtF(amount, strings)}</strong>`,
+                adjusted: `<strong>${fmtF(adjusted, strings)}</strong>`,
+                from: getPeriodLabel(inflationData[from], strings),
+                to: getPeriodLabel(inflationData[to], strings),
+            });
+
+            change.textContent = `${strings.change}: ${sign}${pct}% (${sign}${fmtF(
+                diff,
+                strings,
+            )})`;
+        }
+
+        [amountEl, fromSelect, toSelect].forEach((el) =>
+            el.addEventListener("input", update),
+        );
+
+        update();
+    });
+</script>
