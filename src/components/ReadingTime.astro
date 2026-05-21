@@ -1,0 +1,19 @@
+---
+import Icon from "@components/Icon.astro";
+import type { BlogLocale } from "@utils/readingTime";
+import { formatReadingTime } from "@utils/readingTime";
+
+interface Props {
+    minutesRead: number;
+    locale: BlogLocale;
+    class?: string;
+}
+
+const { minutesRead, locale, class: className } = Astro.props;
+const label = formatReadingTime(minutesRead, locale);
+---
+
+<span class:list={["post-reading-time", className]}>
+    <Icon name="book" class="post-reading-time-icon" />
+    <span>{label}</span>
+</span>

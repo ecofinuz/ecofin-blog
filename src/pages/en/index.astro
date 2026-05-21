@@ -5,7 +5,10 @@ import type { CategoryKey } from "@data/categories";
 import { categories, getCategoryDetailsFromSlug } from "@data/categories";
 import HomeHero from "@components/HomeHero.astro";
 import Layout from "@layouts/Layout.astro";
+import PostDate from "@components/PostDate.astro";
 import PostCover from "@components/PostCover.astro";
+import ReadingTime from "@components/ReadingTime.astro";
+import { getPostsWithReadingTime } from "@utils/readingTime";
 import { getCollection } from "astro:content";
 
 const locale = "en";
@@ -18,6 +21,7 @@ const allPosts = await getCollection("blog", ({ id }) =>
 const posts = allPosts.sort(
     (a, b) => b.data.date.getTime() - a.data.date.getTime()
 );
+const postsWithReadingTime = await getPostsWithReadingTime(posts);
 
 function formatDate(date: Date): string {
     return date.toLocaleDateString("en-US", {
@@ -93,7 +97,7 @@ const postCountLabel = `${posts.length} ${posts.length === 1 ? "article" : "arti
                 </div>
                 <div class="post-list">
                     {
-                        posts.map((post) => {
+                        postsWithReadingTime.map(({ post, minutesRead }) => {
                             const cat = getCategoryDetailsFromSlug(getCategory(post.id), locale);
                             const slug = getSlug(post.id);
                             const author = getAuthor(post.data.author as AuthorKey);
@@ -134,7 +138,9 @@ const postCountLabel = `${posts.length} ${posts.length === 1 ? "article" : "arti
                                         <div class="post-item-byline">
                                             <span class="byline-author">{author.name}</span>
                                             <span class="sep">&middot;</span>
-                                            <span class="post-date">{formatDate(post.data.date)}</span>
+                                            <PostDate date={formatDate(post.data.date)} />
+                                            <span class="sep">&middot;</span>
+                                            <ReadingTime locale={locale} minutesRead={minutesRead} />
                                         </div>
                                     </div>
                                 </a>

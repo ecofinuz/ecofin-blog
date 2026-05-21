@@ -1,5 +1,6 @@
 ---
 import HomeHero from "@components/HomeHero.astro";
+import PostDate from "@components/PostDate.astro";
 import PostCover from "@components/PostCover.astro";
 import type { AuthorKey } from "@data/authors";
 import { getAuthor } from "@data/authors";
@@ -7,6 +8,8 @@ import type { CategoryKey } from "@data/categories";
 import { categories, getCategoryDetailsFromSlug } from "@data/categories";
 import Layout from "@layouts/Layout.astro";
 import { getCollection } from "astro:content";
+import ReadingTime from "@components/ReadingTime.astro";
+import { getPostsWithReadingTime } from "@utils/readingTime";
 
 const locale = "uz";
 
@@ -18,6 +21,7 @@ const allPosts = await getCollection("blog", ({ id }) =>
 const posts = allPosts.sort(
     (a, b) => b.data.date.getTime() - a.data.date.getTime()
 );
+const postsWithReadingTime = await getPostsWithReadingTime(posts);
 
 function formatDate(date: Date): string {
     return date.toLocaleDateString("uz-UZ", {
@@ -92,7 +96,7 @@ const latestHref = latestPost && latestCategory
                 </div>
                 <div class="post-list">
                     {
-                        posts.map((post) => {
+                        postsWithReadingTime.map(({ post, minutesRead }) => {
                             const cat = getCategoryDetailsFromSlug(getCategory(post.id), locale);
                             const slug = getSlug(post.id);
                             const author = getAuthor(post.data.author as AuthorKey);
@@ -133,7 +137,9 @@ const latestHref = latestPost && latestCategory
                                         <div class="post-item-byline">
                                             <span class="byline-author">{author.name}</span>
                                             <span class="sep">&middot;</span>
-                                            <span class="post-date">{formatDate(post.data.date)}</span>
+                                            <PostDate date={formatDate(post.data.date)} />
+                                            <span class="sep">&middot;</span>
+                                            <ReadingTime locale={locale} minutesRead={minutesRead} />
                                         </div>
                                     </div>
                                 </a>

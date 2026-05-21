@@ -4,9 +4,14 @@ import { getAuthor } from "@data/authors";
 import { getCategoryDetailsFromSlug } from "@data/categories";
 import Breadcrumbs from "@components/Breadcrumbs.astro";
 import Layout from "@layouts/Layout.astro";
+import PostDate from "@components/PostDate.astro";
 import PostCover from "@components/PostCover.astro";
+import ReadingTime from "@components/ReadingTime.astro";
+import ReadingProgress from "@components/ReadingProgress.astro";
 import SeriesNavigation from "@components/SeriesNavigation.astro";
+import ShareActions from "@components/ShareActions.astro";
 import { getSeriesNavigation } from "@utils/seriesNavigation";
+import { getMinutesRead } from "@utils/readingTime";
 import { getCollection, render } from "astro:content";
 
 const locale = "en";
@@ -31,7 +36,8 @@ export async function getStaticPaths() {
 }
 
 const { post, seriesNavigation } = Astro.props;
-const { Content } = await render(post);
+const { Content, remarkPluginFrontmatter } = await render(post);
+const minutesRead = getMinutesRead(remarkPluginFrontmatter);
 const author = getAuthor(post.data.author as AuthorKey);
 const translatorKey = post.data.translated_by as AuthorKey | undefined;
 const translator = translatorKey ? getAuthor(translatorKey) : undefined;
@@ -58,6 +64,7 @@ function formatDate(date: Date): string {
 ---
 
 <Layout title={post.data.title} description={post.data.description} lang={locale} ogImage={ogImage}>
+    <ReadingProgress />
     <main>
         <div class="container">
 
@@ -92,9 +99,11 @@ function formatDate(date: Date): string {
                     <span class="label-small">
                         &middot;
                     </span>
-                    <span class="label-small post-date">
-                        {formatDate(post.data.date)}
+                    <PostDate date={formatDate(post.data.date)} class="label-small" />
+                    <span class="label-small">
+                        &middot;
                     </span>
+                    <ReadingTime locale={locale} minutesRead={minutesRead} class="label-small" />
                     {translatorName && (
                         <>
                             <span class="label-small">
@@ -122,6 +131,7 @@ function formatDate(date: Date): string {
 
             <article class="post-body">
                 <Content />
+                <ShareActions lang={locale} title={post.data.title} />
                 <SeriesNavigation
                     locale={locale}
                     previousPost={seriesNavigation.previousPost}

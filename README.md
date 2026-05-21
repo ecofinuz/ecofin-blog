@@ -38,6 +38,7 @@ Each post must include frontmatter matching the content schema in `src/content.c
 title: Post title
 description: Short summary
 date: 2026-04-11
+# updated: 2026-04-18
 category: kredit
 translationKey: shared-translation-key
 author: hojiakbar
@@ -51,6 +52,8 @@ Use the locale-specific category slug in `category`. For example, English loan p
 Posts with `part` in the same locale and category are linked automatically as a series. Bottom navigation is omitted only when the post is the only current post in that series.
 
 Use optional `translated_by` when a translated post should credit a translator on the post page. If it matches a key in `src/data/authors.ts`, the translator credit links to that author page.
+
+Use optional `updated` when a post has a meaningful revision date after publication.
 
 ## Commands
 

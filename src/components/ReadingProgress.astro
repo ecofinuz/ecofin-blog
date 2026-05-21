@@ -1,0 +1,40 @@
+<div class="reading-progress" aria-hidden="true">
+    <div class="reading-progress-bar" data-reading-progress-bar></div>
+</div>
+
+<script>
+    const progressBar = document.querySelector<HTMLElement>(
+        "[data-reading-progress-bar]",
+    );
+
+    if (progressBar) {
+        let ticking = false;
+
+        const updateProgress = () => {
+            const documentElement = document.documentElement;
+            const scrollableHeight =
+                documentElement.scrollHeight - window.innerHeight;
+            const progress =
+                scrollableHeight > 0
+                    ? window.scrollY / scrollableHeight
+                    : 1;
+
+            progressBar.style.transform = `scaleX(${Math.min(
+                Math.max(progress, 0),
+                1,
+            )})`;
+            ticking = false;
+        };
+
+        const requestUpdate = () => {
+            if (!ticking) {
+                window.requestAnimationFrame(updateProgress);
+                ticking = true;
+            }
+        };
+
+        updateProgress();
+        window.addEventListener("scroll", requestUpdate, { passive: true });
+        window.addEventListener("resize", requestUpdate);
+    }
+</script>

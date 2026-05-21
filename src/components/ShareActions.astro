@@ -1,0 +1,140 @@
+---
+import type { Locale } from "@data/categories";
+
+interface Props {
+    lang?: Locale;
+    title: string;
+}
+
+const { lang = "uz", title } = Astro.props;
+
+const translations: Record<
+    Locale,
+    {
+        share: string;
+        telegram: string;
+        copied: string;
+        failed: string;
+        telegramLabel: string;
+    }
+> = {
+    uz: {
+        share: "Ulashish",
+        telegram: "Telegram",
+        copied: "Nusxalandi",
+        failed: "Nusxalab bo'lmadi",
+        telegramLabel: "Telegram orqali ulashish",
+    },
+    en: {
+        share: "Share",
+        telegram: "Telegram",
+        copied: "Copied",
+        failed: "Copy failed",
+        telegramLabel: "Share on Telegram",
+    },
+    ru: {
+        share: "Поделиться",
+        telegram: "Telegram",
+        copied: "Скопировано",
+        failed: "Не удалось скопировать",
+        telegramLabel: "Поделиться в Telegram",
+    },
+};
+
+const strings = translations[lang];
+const site = Astro.site ?? new URL(Astro.url.origin);
+const shareUrl = new URL(Astro.url.pathname, site).href;
+const telegramHref = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(title)}`;
+---
+
+<div class="post-share-actions">
+    <button
+        type="button"
+        class="post-share-button"
+        data-share-button
+        data-share-title={title}
+        data-share-url={shareUrl}
+        data-share-copied={strings.copied}
+        data-share-failed={strings.failed}
+    >
+        {strings.share}
+    </button>
+    <a
+        href={telegramHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="post-share-telegram"
+        aria-label={strings.telegramLabel}
+    >
+        {strings.telegram}
+    </a>
+    <span class="post-share-status" data-share-status aria-live="polite"></span>
+</div>
+
+<script>
+    const shareButtons = document.querySelectorAll<HTMLButtonElement>(
+        "[data-share-button]",
+    );
+    const mobileQuery = window.matchMedia("(hover: none), (pointer: coarse)");
+
+    async function copyText(text: string): Promise<void> {
+        if (navigator.clipboard?.writeText && window.isSecureContext) {
+            await navigator.clipboard.writeText(text);
+            return;
+        }
+
+        const textarea = document.createElement("textarea");
+        textarea.value = text;
+        textarea.setAttribute("readonly", "");
+        textarea.style.position = "fixed";
+        textarea.style.top = "-999px";
+        textarea.style.left = "-999px";
+        document.body.append(textarea);
+        textarea.select();
+
+        try {
+            document.execCommand("copy");
+        } finally {
+            textarea.remove();
+        }
+    }
+
+    shareButtons.forEach((button) => {
+        const status = button
+            .closest(".post-share-actions")
+            ?.querySelector<HTMLElement>("[data-share-status]");
+
+        button.addEventListener("click", async () => {
+            const title = button.dataset.shareTitle ?? document.title;
+            const url = button.dataset.shareUrl ?? window.location.href;
+            const copied = button.dataset.shareCopied ?? "";
+            const failed = button.dataset.shareFailed ?? "";
+            const shareText = `${title}\n${url}`;
+
+            if (mobileQuery.matches && typeof navigator.share === "function") {
+                try {
+                    await navigator.share({ title, text: title, url });
+                    return;
+                } catch (error) {
+                    if (error instanceof DOMException && error.name === "AbortError") {
+                        return;
+                    }
+                }
+            }
+
+            try {
+                await copyText(shareText);
+                if (status) {
+                    status.textContent = copied;
+                    window.setTimeout(() => {
+                        status.textContent = "";
+                    }, 2200);
+                }
+            } catch {
+                if (status) {
+                    status.textContent = failed;
+                }
+            }
+        });
+    });
+</script>

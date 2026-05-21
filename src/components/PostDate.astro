@@ -1,0 +1,15 @@
+---
+import Icon from "@components/Icon.astro";
+
+interface Props {
+    date: string;
+    class?: string;
+}
+
+const { date, class: className } = Astro.props;
+---
+
+<span class:list={["post-date", "post-date-with-icon", className]}>
+    <Icon name="clock" class="post-meta-icon" />
+    <span>{date}</span>
+</span>

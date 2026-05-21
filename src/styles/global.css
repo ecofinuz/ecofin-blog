@@ -1003,6 +1003,26 @@ main {
     color: var(--text-muted);
 }
 
+.post-date-with-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+}
+
+.post-reading-time {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    color: var(--text-muted);
+}
+
+.post-meta-icon,
+.post-reading-time-icon {
+    width: 1em;
+    height: 1em;
+    flex: 0 0 auto;
+}
+
 .post-title {
     margin: 0 0 var(--space-3);
     color: var(--text-primary);
@@ -1165,6 +1185,72 @@ main {
     text-underline-offset: 3px;
 }
 
+.post-share-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-12);
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--border);
+}
+
+.post-share-button,
+.post-share-telegram {
+    min-height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    line-height: 1;
+    text-decoration: none;
+    transition:
+        background var(--transition),
+        border-color var(--transition),
+        color var(--transition),
+        transform var(--transition);
+}
+
+.post-share-button {
+    border: 1px solid var(--accent-strong);
+    background: var(--accent-strong);
+    color: var(--text-inverted);
+    cursor: pointer;
+    font-weight: 700;
+    padding: 0 var(--space-4);
+}
+
+.post-share-button:hover,
+.post-share-telegram:hover {
+    border-color: var(--text-primary);
+    background: var(--text-primary);
+    color: var(--text-inverted);
+    transform: translateY(-1px);
+}
+
+.post-body .post-share-telegram {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--accent-strong);
+    font-weight: 700;
+    padding: 0 var(--space-4);
+    text-decoration: none;
+}
+
+.post-body .post-share-telegram:hover {
+    border-color: var(--text-primary);
+    background: var(--text-primary);
+    color: var(--text-inverted);
+}
+
+.post-share-status {
+    min-height: 1.35em;
+    color: var(--text-muted);
+    font-size: 0.86rem;
+    font-weight: 700;
+}
+
 .post-body table {
     font-size: 0.95rem;
 }
@@ -1173,7 +1259,7 @@ main {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-4);
-    margin-top: var(--space-16);
+    margin-top: var(--space-8);
     padding-top: var(--space-8);
     border-top: 1px solid var(--border);
 }
@@ -1428,6 +1514,25 @@ footer {
 .author-posts .label-small {
     display: block;
     margin-bottom: var(--space-4);
+}
+
+.reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 40;
+    width: 100%;
+    height: 3px;
+    pointer-events: none;
+}
+
+.reading-progress-bar {
+    width: 100%;
+    height: 100%;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left center;
+    will-change: transform;
 }
 
 /* 13. Responsive */
