@@ -4,6 +4,7 @@ import { getAuthor } from "@data/authors";
 import type { CategoryKey } from "@data/categories";
 import { categories } from "@data/categories";
 import Layout from "@layouts/Layout.astro";
+import BylineAuthor from "@components/BylineAuthor.astro";
 import PostDate from "@components/PostDate.astro";
 import PostCover from "@components/PostCover.astro";
 import ReadingTime from "@components/ReadingTime.astro";
@@ -94,7 +95,7 @@ function getSlug(id: string): string {
                                     <span class="post-read">Read &rarr;</span>
                                     
                                     <div class="post-item-byline">
-                                        <span class="byline-author">{author.name}</span>
+                                        <BylineAuthor name={author.name} />
                                         <span class="sep">&middot;</span>
                                         <PostDate date={formatDate(post.data.date)} />
                                         <span class="sep">&middot;</span>

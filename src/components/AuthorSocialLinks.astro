@@ -1,0 +1,50 @@
+---
+import Icon from "@components/Icon.astro";
+
+interface Props {
+    authorName: string;
+    links: {
+        telegram?: string;
+        medium?: string;
+        linkedin?: string;
+        twitter?: string;
+    };
+}
+
+const { authorName, links } = Astro.props;
+const iconLinks = [
+    { name: "telegram", href: links.telegram, label: "Telegram" },
+    { name: "medium", href: links.medium, label: "Medium" },
+    { name: "twitter", href: links.twitter, label: "Twitter" },
+] as const;
+---
+
+<div class="author-links">
+    {
+        iconLinks.map(({ name, href, label }) => (
+            href && (
+                <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="author-link author-link-icon"
+                    aria-label={`${label}: ${authorName}`}
+                >
+                    <Icon name={name} class="author-link-icon-svg" />
+                </a>
+            )
+        ))
+    }
+    {
+        links.linkedin && (
+            <a
+                href={links.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="author-link author-link-text"
+            >
+                LinkedIn
+            </a>
+        )
+    }
+</div>

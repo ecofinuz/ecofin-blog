@@ -1,0 +1,28 @@
+---
+import Icon from "@components/Icon.astro";
+
+interface Props {
+    name: string;
+    href?: string;
+    class?: string;
+}
+
+const { name, href, class: className } = Astro.props;
+const classes = ["byline-author", "byline-author-with-icon", className]
+    .filter(Boolean)
+    .join(" ");
+---
+
+{
+    href ? (
+        <a href={href} class={classes}>
+            <Icon name="user" class="byline-author-icon" />
+            <span>{name}</span>
+        </a>
+    ) : (
+        <span class={classes}>
+            <Icon name="user" class="byline-author-icon" />
+            <span>{name}</span>
+        </span>
+    )
+}

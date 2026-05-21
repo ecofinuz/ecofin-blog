@@ -3,6 +3,8 @@ import type { AuthorKey } from "@data/authors";
 import { authors, getAuthor } from "@data/authors";
 import { getCategoryDetailsFromSlug } from "@data/categories";
 import Layout from "@layouts/Layout.astro";
+import AuthorSocialLinks from "@components/AuthorSocialLinks.astro";
+import BylineAuthor from "@components/BylineAuthor.astro";
 import PostDate from "@components/PostDate.astro";
 import PostCover from "@components/PostCover.astro";
 import ReadingTime from "@components/ReadingTime.astro";
@@ -66,48 +68,10 @@ function getCatLabel(id: string): string {
                 <div class="author-info">
                     <h1 class="author-name">{author.name}</h1>
                     <p class="author-bio">{author.bio[locale]}</p>
-                    <div class="author-links">
-                        {author.links.telegram && (
-                            <a
-                                href={author.links.telegram}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="author-link"
-                            >
-                                Telegram
-                            </a>
-                        )}
-                        {author.links.medium && (
-                            <a
-                                href={author.links.medium}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="author-link"
-                            >
-                                Medium
-                            </a>
-                        )}
-                        {author.links.linkedin && (
-                            <a
-                                href={author.links.linkedin}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="author-link"
-                            >
-                                LinkedIn
-                            </a>
-                        )}
-                        {author.links.twitter && (
-                            <a
-                                href={author.links.twitter}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="author-link"
-                            >
-                                Twitter
-                            </a>
-                        )}
-                    </div>
+                    <AuthorSocialLinks
+                        authorName={author.name}
+                        links={author.links}
+                    />
                 </div>
             </div>
 
@@ -146,7 +110,7 @@ function getCatLabel(id: string): string {
                                 <span class="post-read">Read &rarr;</span>
                                 
                                 <div class="post-item-byline">
-                                    <span class="byline-author">{author.name}</span>
+                                    <BylineAuthor name={author.name} />
                                     <span class="sep">&middot;</span>
                                     <PostDate date={formatDate(post.data.date)} />
                                     <span class="sep">&middot;</span>

@@ -4,6 +4,7 @@ import { getAuthor } from "@data/authors";
 import type { CategoryKey } from "@data/categories";
 import { categories, getCategoryDetailsFromSlug } from "@data/categories";
 import HomeHero from "@components/HomeHero.astro";
+import BylineAuthor from "@components/BylineAuthor.astro";
 import Layout from "@layouts/Layout.astro";
 import PostDate from "@components/PostDate.astro";
 import PostCover from "@components/PostCover.astro";
@@ -142,7 +143,7 @@ const postCountLabel = `${posts.length} ${postCountWord}`;
                                         <span class="post-read">Прочитать &rarr;</span>
                                         
                                         <div class="post-item-byline">
-                                            <span class="byline-author">{author.name}</span>
+                                            <BylineAuthor name={author.name} />
                                             <span class="sep">&middot;</span>
                                             <PostDate date={formatDate(post.data.date)} />
                                             <span class="sep">&middot;</span>

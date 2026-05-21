@@ -1,5 +1,6 @@
 ---
 import HomeHero from "@components/HomeHero.astro";
+import BylineAuthor from "@components/BylineAuthor.astro";
 import PostDate from "@components/PostDate.astro";
 import PostCover from "@components/PostCover.astro";
 import type { AuthorKey } from "@data/authors";
@@ -135,7 +136,7 @@ const latestHref = latestPost && latestCategory
                                         <span class="post-read">O'qish &rarr;</span>
                                         
                                         <div class="post-item-byline">
-                                            <span class="byline-author">{author.name}</span>
+                                            <BylineAuthor name={author.name} />
                                             <span class="sep">&middot;</span>
                                             <PostDate date={formatDate(post.data.date)} />
                                             <span class="sep">&middot;</span>

@@ -313,6 +313,14 @@ main {
     white-space: nowrap;
 }
 
+.nav-brand-logo {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    object-fit: contain;
+}
+
 .nav-links {
     display: flex;
     align-items: center;
@@ -1069,6 +1077,18 @@ main {
     font-weight: 700;
 }
 
+.byline-author-with-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+}
+
+.byline-author-icon {
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+}
+
 .post-item-byline .sep {
     color: var(--border-strong);
 }
@@ -1505,6 +1525,34 @@ footer {
 
 .author-link:hover {
     color: var(--text-primary);
+}
+
+.author-link-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background: var(--surface);
+    letter-spacing: 0;
+    line-height: 1;
+}
+
+.author-link-icon:hover {
+    border-color: var(--accent);
+}
+
+.author-link-icon-svg {
+    width: 18px;
+    height: 18px;
+}
+
+.author-link-text {
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
 }
 
 .author-posts {

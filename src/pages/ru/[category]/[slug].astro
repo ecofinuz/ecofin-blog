@@ -3,6 +3,7 @@ import type { AuthorKey } from "@data/authors";
 import { getAuthor } from "@data/authors";
 import { getCategoryDetailsFromSlug } from "@data/categories";
 import Breadcrumbs from "@components/Breadcrumbs.astro";
+import BylineAuthor from "@components/BylineAuthor.astro";
 import Layout from "@layouts/Layout.astro";
 import PostDate from "@components/PostDate.astro";
 import PostCover from "@components/PostCover.astro";
@@ -94,9 +95,11 @@ function formatDate(date: Date): string {
                 <h1>{post.data.title}</h1>
                 <p class="post-description">{post.data.description}</p>
                 <div class="post-byline">
-                    <a href={`/ru/author/${post.data.author}/`} class="label-small byline-author">
-                        {author.name}
-                    </a>
+                    <BylineAuthor
+                        name={author.name}
+                        href={`/ru/author/${post.data.author}/`}
+                        class="label-small"
+                    />
                     <span class="label-small">
                         &middot;
                     </span>
