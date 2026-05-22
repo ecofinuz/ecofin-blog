@@ -1,14 +1,14 @@
 ---
+import BylineAuthor from "@components/BylineAuthor.astro";
+import HomeHero from "@components/HomeHero.astro";
+import PostCover from "@components/PostCover.astro";
+import PostDate from "@components/PostDate.astro";
+import ReadingTime from "@components/ReadingTime.astro";
 import type { AuthorKey } from "@data/authors";
 import { getAuthor } from "@data/authors";
 import type { CategoryKey } from "@data/categories";
 import { categories, getCategoryDetailsFromSlug } from "@data/categories";
-import HomeHero from "@components/HomeHero.astro";
-import BylineAuthor from "@components/BylineAuthor.astro";
 import Layout from "@layouts/Layout.astro";
-import PostDate from "@components/PostDate.astro";
-import PostCover from "@components/PostCover.astro";
-import ReadingTime from "@components/ReadingTime.astro";
 import { getPostsWithReadingTime } from "@utils/readingTime";
 import { getCollection } from "astro:content";
 
@@ -77,7 +77,6 @@ const postCountLabel = `${posts.length} ${postCountWord}`;
                 <div class="section-heading">
                     <div>
                         <p class="label-small">Темы</p>
-                        <h2 class="section-title">Выберите направление</h2>
                     </div>
                 </div>
                 <div class="category-list">
@@ -98,9 +97,8 @@ const postCountLabel = `${posts.length} ${postCountWord}`;
                 <div class="section-heading">
                     <div>
                         <p class="label-small">Публикации</p>
-                        <h2 class="section-title">Свежие публикации</h2>
+                        <h2 class="section-title">Последние публикации</h2>
                     </div>
-                    <p class="section-note">{postCountLabel}</p>
                 </div>
                 <div class="post-list">
                     {

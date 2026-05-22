@@ -909,6 +909,7 @@ main {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-5);
+    margin-bottom: 2rem;
 }
 
 .post-item {
@@ -1100,10 +1101,7 @@ main {
 /* 8. Post page */
 .post-header,
 .post-body,
-.category-header,
-.toc,
-.author-profile,
-.author-posts {
+.toc {
     max-width: var(--content-width);
     margin-right: auto;
     margin-left: auto;

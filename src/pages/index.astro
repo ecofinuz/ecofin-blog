@@ -1,16 +1,16 @@
 ---
-import HomeHero from "@components/HomeHero.astro";
 import BylineAuthor from "@components/BylineAuthor.astro";
-import PostDate from "@components/PostDate.astro";
+import HomeHero from "@components/HomeHero.astro";
 import PostCover from "@components/PostCover.astro";
+import PostDate from "@components/PostDate.astro";
+import ReadingTime from "@components/ReadingTime.astro";
 import type { AuthorKey } from "@data/authors";
 import { getAuthor } from "@data/authors";
 import type { CategoryKey } from "@data/categories";
 import { categories, getCategoryDetailsFromSlug } from "@data/categories";
 import Layout from "@layouts/Layout.astro";
-import { getCollection } from "astro:content";
-import ReadingTime from "@components/ReadingTime.astro";
 import { getPostsWithReadingTime } from "@utils/readingTime";
+import { getCollection } from "astro:content";
 
 const locale = "uz";
 
@@ -70,7 +70,6 @@ const latestHref = latestPost && latestCategory
                 <div class="section-heading">
                     <div>
                         <p class="label-small">Mavzular</p>
-                        <h2 class="section-title">Yo'nalishni tanlang</h2>
                     </div>
                 </div>
                 <div class="category-list">
@@ -93,7 +92,6 @@ const latestHref = latestPost && latestCategory
                         <p class="label-small">Maqolalar</p>
                         <h2 class="section-title">So'nggi Maqolalar</h2>
                     </div>
-                    <p class="section-note">{posts.length} ta maqola</p>
                 </div>
                 <div class="post-list">
                     {

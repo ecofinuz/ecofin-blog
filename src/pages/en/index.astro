@@ -1,14 +1,14 @@
 ---
+import BylineAuthor from "@components/BylineAuthor.astro";
+import HomeHero from "@components/HomeHero.astro";
+import PostCover from "@components/PostCover.astro";
+import PostDate from "@components/PostDate.astro";
+import ReadingTime from "@components/ReadingTime.astro";
 import type { AuthorKey } from "@data/authors";
 import { getAuthor } from "@data/authors";
 import type { CategoryKey } from "@data/categories";
 import { categories, getCategoryDetailsFromSlug } from "@data/categories";
-import HomeHero from "@components/HomeHero.astro";
-import BylineAuthor from "@components/BylineAuthor.astro";
 import Layout from "@layouts/Layout.astro";
-import PostDate from "@components/PostDate.astro";
-import PostCover from "@components/PostCover.astro";
-import ReadingTime from "@components/ReadingTime.astro";
 import { getPostsWithReadingTime } from "@utils/readingTime";
 import { getCollection } from "astro:content";
 
@@ -71,7 +71,6 @@ const postCountLabel = `${posts.length} ${posts.length === 1 ? "article" : "arti
                 <div class="section-heading">
                     <div>
                         <p class="label-small">Topics</p>
-                        <h2 class="section-title">Choose a track</h2>
                     </div>
                 </div>
                 <div class="category-list">
@@ -94,7 +93,6 @@ const postCountLabel = `${posts.length} ${posts.length === 1 ? "article" : "arti
                         <p class="label-small">Articles</p>
                         <h2 class="section-title">Latest articles</h2>
                     </div>
-                    <p class="section-note">{postCountLabel}</p>
                 </div>
                 <div class="post-list">
                     {
