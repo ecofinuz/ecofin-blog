@@ -20,16 +20,19 @@ const t: Record<string, Record<string, string>> = {
     uz: {
         platform:  "ecofin.uz",
         sponsor:   "Qo'llash",
+        navTagline: "Ochiq moliyaviy bilim, hamma uchun",
         tagline:   "Moliyaviy savodxonlik va iqtisodiy bilimlar ekotizimi.",
     },
     en: {
         platform:  "ecofin.uz",
         sponsor:   "Sponsor",
+        navTagline: "Open finance knowledge, for everyone",
         tagline:   "An ecosystem of financial literacy and economic knowledge.",
     },
     ru: {
         platform:  "ecofin.uz",
         sponsor:   "Поддержать",
+        navTagline: "Открытые финансовые знания, для всех",
         tagline:   "Экосистема финансовой грамотности и экономических знаний.",
     },
 };
@@ -101,7 +104,10 @@ const languages = [
                         width="28"
                         height="28"
                     />
-                    <span>Ecofin</span>
+                    <span class="nav-brand-copy">
+                        <span class="nav-brand-name">Ecofin</span>
+                        <span class="nav-brand-tagline">{ui.navTagline}</span>
+                    </span>
                 </a>
                 <div class="nav-links">
                     <a href="https://ecofin.uz/" class="nav-link nav-link-site">ecofin.uz</a>

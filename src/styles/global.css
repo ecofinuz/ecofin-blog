@@ -313,6 +313,26 @@ main {
     white-space: nowrap;
 }
 
+.nav-brand-copy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.nav-brand-name {
+    line-height: 1;
+}
+
+.nav-brand-tagline {
+    color: var(--text-secondary);
+    font-family: var(--font-sans);
+    font-size: 0.74rem;
+    font-weight: 600;
+    line-height: 1.12;
+    white-space: normal;
+}
+
 .nav-brand-logo {
     width: 28px;
     height: 28px;
@@ -416,10 +436,6 @@ main {
 
 .hero-copy {
     max-width: 640px;
-}
-
-.hero-eyebrow {
-    margin-bottom: var(--space-4);
 }
 
 .hero-title {
