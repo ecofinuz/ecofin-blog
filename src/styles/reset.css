@@ -1,0 +1,50 @@
+/* 2. Reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    background: var(--color-bg);
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    background:
+        linear-gradient(
+            180deg,
+            var(--color-bg-soft) 0,
+            var(--color-bg) 430px,
+            #f7f4ee 100%
+        ),
+        var(--color-bg);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.72;
+    text-rendering: optimizeLegibility;
+}
+
+img,
+svg,
+canvas {
+    display: block;
+    max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+::selection {
+    background: var(--accent-soft);
+    color: var(--accent-strong);
+}
