@@ -40,12 +40,6 @@ const { post, seriesNavigation } = Astro.props;
 const { Content, remarkPluginFrontmatter } = await render(post);
 const minutesRead = getMinutesRead(remarkPluginFrontmatter);
 const author = getAuthor(post.data.author as AuthorKey);
-const translatorKey = post.data.translated_by as AuthorKey | undefined;
-const translator = translatorKey ? getAuthor(translatorKey) : undefined;
-const translatorName = post.data.translated_by
-    ? (translator?.name ?? post.data.translated_by)
-    : undefined;
-const translatorHref = translator ? `/en/author/${translatorKey}/` : undefined;
 
 const parts = post.id.split("/");
 const cat = getCategoryDetailsFromSlug(parts[1], locale);
@@ -107,22 +101,6 @@ function formatDate(date: Date): string {
                         &middot;
                     </span>
                     <ReadingTime locale={locale} minutesRead={minutesRead} class="label-small" />
-                    {translatorName && (
-                        <>
-                            <span class="label-small">
-                                &middot;
-                            </span>
-                            {translatorHref ? (
-                                <a href={translatorHref} class="label-small byline-author">
-                                    Translated by {translatorName}
-                                </a>
-                            ) : (
-                                <span class="label-small post-date">
-                                    Translated by {translatorName}
-                                </span>
-                            )}
-                        </>
-                    )}
                 </div>
                 <PostCover
                     cover={post.data.cover}

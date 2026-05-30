@@ -1,7 +1,7 @@
 /* 10. Footer */
 footer {
     border-top: 1px solid var(--border);
-    background: rgb(255 253 248 / 0.58);
+    background: var(--color-bg);
     color: var(--text-muted);
     font-size: 0.9rem;
     padding: var(--space-10) 0 var(--space-12);
@@ -47,7 +47,7 @@ footer {
 }
 
 .footer-link:hover {
-    color: var(--accent-strong);
+    color: var(--gold);
 }
 
 .footer-copy {

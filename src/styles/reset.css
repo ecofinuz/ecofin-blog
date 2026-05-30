@@ -17,9 +17,8 @@ body {
     background:
         linear-gradient(
             180deg,
-            var(--color-bg-soft) 0,
-            var(--color-bg) 430px,
-            #f7f4ee 100%
+            var(--page-gradient-start) 0,
+            var(--page-gradient-end) 360px
         ),
         var(--color-bg);
     color: var(--text-primary);
@@ -45,6 +44,6 @@ textarea {
 }
 
 ::selection {
-    background: var(--accent-soft);
-    color: var(--accent-strong);
+    background: var(--selection-bg);
+    color: var(--selection-text);
 }

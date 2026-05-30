@@ -118,6 +118,20 @@ const strings = t[lang] ?? t["uz"];
     const rateEl = document.getElementById("rate") as HTMLInputElement;
     const yearsEl = document.getElementById("years") as HTMLInputElement;
     const canvas = document.getElementById("interestChart") as HTMLCanvasElement;
+    const getThemeColor = (name: string, fallback: string): string =>
+        getComputedStyle(document.documentElement).getPropertyValue(name).trim() || fallback;
+
+    const getChartColors = () => ({
+        simple: getThemeColor("--line-simple", "#050505"),
+        compound: getThemeColor("--line-compound", "#d6a23a"),
+        grid: getThemeColor("--chart-grid", "rgb(0 0 0 / 0.14)"),
+        tick: getThemeColor("--chart-tick", "rgb(5 5 5 / 0.58)"),
+        tooltipBg: getThemeColor("--chart-tooltip-bg", "#050505"),
+        tooltipTitle: getThemeColor("--chart-tooltip-title", "#d6a23a"),
+        tooltipBody: getThemeColor("--chart-tooltip-body", "#ffffff"),
+    });
+
+    const initialColors = getChartColors();
 
     const chartData: ChartData<"line", number[], string> = {
         labels: [],
@@ -125,7 +139,7 @@ const strings = t[lang] ?? t["uz"];
             {
                 label: s.simple,
                 data: [],
-                borderColor: "#1a1a1a",
+                borderColor: initialColors.simple,
                 borderWidth: 2,
                 pointRadius: 0,
                 tension: 0,
@@ -134,7 +148,7 @@ const strings = t[lang] ?? t["uz"];
             {
                 label: s.compound,
                 data: [],
-                borderColor: "#888",
+                borderColor: initialColors.compound,
                 borderWidth: 2,
                 borderDash: [6, 4],
                 pointRadius: 0,
@@ -154,9 +168,9 @@ const strings = t[lang] ?? t["uz"];
             plugins: {
                 legend: { display: false },
                 tooltip: {
-                    backgroundColor: "#1a1a1a",
-                    titleColor: "#999",
-                    bodyColor: "#fff",
+                    backgroundColor: initialColors.tooltipBg,
+                    titleColor: initialColors.tooltipTitle,
+                    bodyColor: initialColors.tooltipBody,
                     padding: 12,
                     callbacks: {
                         label: (ctx: TooltipItem<"line">) =>
@@ -168,13 +182,13 @@ const strings = t[lang] ?? t["uz"];
             },
             scales: {
                 x: {
-                    grid: { color: "#e2e0db" },
-                    ticks: { color: "#999", font: { size: 12 } },
+                    grid: { color: initialColors.grid },
+                    ticks: { color: initialColors.tick, font: { size: 12 } },
                 },
                 y: {
-                    grid: { color: "#e2e0db" },
+                    grid: { color: initialColors.grid },
                     ticks: {
-                        color: "#999",
+                        color: initialColors.tick,
                         font: { size: 12 },
                         callback: (v) => fmt(Number(v)),
                     },
@@ -182,6 +196,23 @@ const strings = t[lang] ?? t["uz"];
             },
         },
     });
+
+    function applyTheme(): void {
+        const colors = getChartColors();
+        const [simpleDataset, compoundDataset] = chart.data.datasets;
+        if (simpleDataset) simpleDataset.borderColor = colors.simple;
+        if (compoundDataset) compoundDataset.borderColor = colors.compound;
+
+        const options = chart.options as any;
+        options.plugins.tooltip.backgroundColor = colors.tooltipBg;
+        options.plugins.tooltip.titleColor = colors.tooltipTitle;
+        options.plugins.tooltip.bodyColor = colors.tooltipBody;
+        options.scales.x.grid.color = colors.grid;
+        options.scales.x.ticks.color = colors.tick;
+        options.scales.y.grid.color = colors.grid;
+        options.scales.y.ticks.color = colors.tick;
+        chart.update("none");
+    }
 
     function update(): void {
         const P = +principalEl.value;
@@ -224,6 +255,7 @@ const strings = t[lang] ?? t["uz"];
     [principalEl, rateEl, yearsEl].forEach((el) =>
         el.addEventListener("input", update)
     );
+    window.addEventListener("ecofin-theme-change", applyTheme);
 
     update();
 </script>

@@ -1,4 +1,5 @@
 // @ts-check
+import { unified } from "@astrojs/markdown-remark";
 import sitemap, { ChangeFreqEnum } from "@astrojs/sitemap";
 import { defineConfig } from "astro/config";
 import { remarkReadingTime } from "./remark-reading-time.mjs";
@@ -17,7 +18,9 @@ export default defineConfig({
         },
     },
     markdown: {
-        remarkPlugins: [remarkReadingTime],
+        processor: unified({
+            remarkPlugins: [remarkReadingTime],
+        }),
     },
 
     vite: {

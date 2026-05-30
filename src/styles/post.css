@@ -50,7 +50,7 @@
 }
 
 .breadcrumbs a:hover {
-    color: var(--accent-strong);
+    color: var(--gold);
 }
 
 .breadcrumbs [aria-current="page"] {
@@ -85,7 +85,7 @@
 }
 
 .byline-author:hover {
-    color: var(--accent-strong);
+    color: var(--gold);
 }
 
 .post-body {
@@ -97,7 +97,7 @@
 }
 
 .post-body a {
-    color: var(--accent-strong);
+    color: var(--gold);
     font-weight: 700;
     text-decoration-thickness: 1px;
     text-underline-offset: 3px;
@@ -131,9 +131,9 @@
 }
 
 .post-share-button {
-    border: 1px solid var(--accent-strong);
-    background: var(--accent-strong);
-    color: var(--text-inverted);
+    border: 1px solid var(--button-primary-border);
+    background: var(--button-primary-bg);
+    color: var(--button-primary-color);
     cursor: pointer;
     font-weight: 700;
     padding: 0 var(--space-4);
@@ -141,25 +141,25 @@
 
 .post-share-button:hover,
 .post-share-telegram:hover {
-    border-color: var(--text-primary);
-    background: var(--text-primary);
-    color: var(--text-inverted);
+    border-color: var(--button-primary-hover-border);
+    background: var(--button-primary-hover-bg);
+    color: var(--button-primary-hover-color);
     transform: translateY(-1px);
 }
 
 .post-body .post-share-telegram {
     border: 1px solid var(--border);
     background: var(--surface);
-    color: var(--accent-strong);
+    color: var(--gold);
     font-weight: 700;
     padding: 0 var(--space-4);
     text-decoration: none;
 }
 
 .post-body .post-share-telegram:hover {
-    border-color: var(--text-primary);
-    background: var(--text-primary);
-    color: var(--text-inverted);
+    border-color: var(--button-primary-hover-border);
+    background: var(--button-primary-hover-bg);
+    color: var(--button-primary-hover-color);
 }
 
 .post-share-status {
@@ -250,7 +250,7 @@
 }
 
 .back-link:hover {
-    color: var(--accent-strong);
+    color: var(--gold);
 }
 /* 11. Table of contents */
 .toc {
@@ -309,7 +309,7 @@
 }
 
 .toc a:hover {
-    color: var(--accent-strong);
+    color: var(--gold);
 }
 .reading-progress {
     position: fixed;

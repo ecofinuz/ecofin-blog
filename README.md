@@ -43,15 +43,12 @@ category: kredit
 translationKey: shared-translation-key
 author: hojiakbar
 part: 1
-# translated_by: translator-key-or-name
 ---
 ```
 
 Use the locale-specific category slug in `category`. For example, English loan posts use `category: loan`, while Uzbek and Russian loan posts currently use `category: kredit`.
 
 Posts with `part` in the same locale and category are linked automatically as a series. Bottom navigation is omitted only when the post is the only current post in that series.
-
-Use optional `translated_by` when a translated post should credit a translator on the post page. If it matches a key in `src/data/authors.ts`, the translator credit links to that author page.
 
 Use optional `updated` when a post has a meaningful revision date after publication.
 

@@ -247,6 +247,19 @@ const strings = translations[lang];
         const canvas = root.querySelector<HTMLCanvasElement>(
             "[data-inflation-chart-canvas]",
         )!;
+        const getThemeColor = (name: string, fallback: string): string =>
+            getComputedStyle(document.documentElement).getPropertyValue(name).trim() || fallback;
+
+        const getChartColors = () => ({
+            line: getThemeColor("--line-compound", "#d6a23a"),
+            grid: getThemeColor("--chart-grid", "rgb(0 0 0 / 0.14)"),
+            tick: getThemeColor("--chart-tick", "rgb(5 5 5 / 0.58)"),
+            tooltipBg: getThemeColor("--chart-tooltip-bg", "#050505"),
+            tooltipTitle: getThemeColor("--chart-tooltip-title", "#d6a23a"),
+            tooltipBody: getThemeColor("--chart-tooltip-body", "#ffffff"),
+        });
+
+        const initialColors = getChartColors();
 
         const chartData: ChartData<"line", number[], string> = {
             labels: [],
@@ -254,10 +267,10 @@ const strings = translations[lang];
                 {
                     label: strings.datasetLabel,
                     data: [],
-                    borderColor: "#1a1a1a",
+                    borderColor: initialColors.line,
                     borderWidth: 1.5,
                     pointRadius: 1.5,
-                    pointBackgroundColor: "#1a1a1a",
+                    pointBackgroundColor: initialColors.line,
                     tension: 0.3,
                     fill: false,
                 },
@@ -274,9 +287,9 @@ const strings = translations[lang];
                 plugins: {
                     legend: { display: false },
                     tooltip: {
-                        backgroundColor: "#1a1a1a",
-                        titleColor: "#aaa",
-                        bodyColor: "#fff",
+                        backgroundColor: initialColors.tooltipBg,
+                        titleColor: initialColors.tooltipTitle,
+                        bodyColor: initialColors.tooltipBody,
                         padding: 12,
                         callbacks: {
                             title: (ctx) => ctx[0]?.label ?? "",
@@ -287,9 +300,9 @@ const strings = translations[lang];
                 },
                 scales: {
                     x: {
-                        grid: { color: "#e2e0db" },
+                        grid: { color: initialColors.grid },
                         ticks: {
-                            color: "#999",
+                            color: initialColors.tick,
                             font: { size: 11 },
                             maxRotation: 45,
                             autoSkip: true,
@@ -297,9 +310,9 @@ const strings = translations[lang];
                         },
                     },
                     y: {
-                        grid: { color: "#e2e0db" },
+                        grid: { color: initialColors.grid },
                         ticks: {
-                            color: "#999",
+                            color: initialColors.tick,
                             font: { size: 11 },
                             callback: (value) => `${value}%`,
                         },
@@ -307,6 +320,25 @@ const strings = translations[lang];
                 },
             },
         });
+
+        function applyTheme(): void {
+            const colors = getChartColors();
+            const dataset = chart.data.datasets[0];
+            if (dataset) {
+                dataset.borderColor = colors.line;
+                dataset.pointBackgroundColor = colors.line;
+            }
+
+            const options = chart.options as any;
+            options.plugins.tooltip.backgroundColor = colors.tooltipBg;
+            options.plugins.tooltip.titleColor = colors.tooltipTitle;
+            options.plugins.tooltip.bodyColor = colors.tooltipBody;
+            options.scales.x.grid.color = colors.grid;
+            options.scales.x.ticks.color = colors.tick;
+            options.scales.y.grid.color = colors.grid;
+            options.scales.y.ticks.color = colors.tick;
+            chart.update("none");
+        }
 
         function update(): void {
             let fromYear = Number(fromEl.value);
@@ -342,6 +374,7 @@ const strings = translations[lang];
         [fromEl, toEl].forEach((el) =>
             el.addEventListener("input", update),
         );
+        window.addEventListener("ecofin-theme-change", applyTheme);
 
         update();
     });

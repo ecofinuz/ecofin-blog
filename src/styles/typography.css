@@ -67,7 +67,7 @@ code {
     border: 1px solid var(--border);
     border-radius: var(--radius-xs);
     background: var(--surface);
-    color: var(--accent-strong);
+    color: var(--gold);
     font-family: var(--font-mono);
     font-size: 0.86em;
     padding: 2px 6px;
@@ -78,8 +78,8 @@ pre {
     overflow-x: auto;
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    background: #10251d;
-    color: var(--text-inverted);
+    background: var(--surface-muted);
+    color: var(--text-primary);
     font-size: 0.92rem;
     line-height: 1.65;
     padding: var(--space-6);
@@ -100,8 +100,8 @@ hr {
 
 blockquote {
     margin: var(--space-8) 0;
-    border-left: 4px solid var(--accent);
-    background: var(--accent-soft);
+    border-left: 4px solid var(--gold);
+    background: var(--gold-soft);
     border-radius: 0 var(--radius) var(--radius) 0;
     padding: var(--space-5) var(--space-6);
 }

@@ -33,9 +33,9 @@
 
 .category-tag:hover,
 .category-tag.active {
-    border-color: var(--accent-strong);
-    background: var(--accent-strong);
-    color: var(--text-inverted);
+    border-color: var(--gold-action);
+    background: var(--gold-action);
+    color: var(--text-on-gold);
     transform: translateY(-1px);
 }
 
@@ -97,8 +97,8 @@
     background:
         linear-gradient(
             135deg,
-            rgb(222 239 231 / 0.9),
-            rgb(250 237 215 / 0.82)
+            rgb(214 162 58 / 0.18),
+            var(--subtle-bg)
         ),
         var(--surface-muted);
 }
@@ -106,7 +106,7 @@
 .post-cover-placeholder::before {
     position: absolute;
     inset: 18%;
-    border: 1px solid rgb(15 107 79 / 0.18);
+    border: 1px solid rgb(214 162 58 / 0.18);
     border-radius: var(--radius-sm);
     content: "";
 }
@@ -118,10 +118,10 @@
     width: 48%;
     height: 8px;
     border-radius: 999px;
-    background: rgb(15 107 79 / 0.34);
+    background: rgb(214 162 58 / 0.34);
     box-shadow:
-        0 -18px 0 rgb(189 122 34 / 0.24),
-        0 -36px 0 rgb(49 95 134 / 0.2);
+        0 -18px 0 rgb(214 162 58 / 0.24),
+        0 -36px 0 var(--subtle-bg);
     content: "";
 }
 
@@ -142,7 +142,7 @@
 }
 
 .post-category {
-    color: var(--accent);
+    color: var(--gold);
     text-decoration: none;
 }
 
@@ -194,7 +194,7 @@
 }
 
 .post-read {
-    color: var(--accent-strong);
+    color: var(--gold);
     font-size: 0.9rem;
     font-weight: 800;
 }
@@ -233,5 +233,5 @@
 }
 
 .post-item:hover .post-title {
-    color: var(--accent-strong);
+    color: var(--gold);
 }

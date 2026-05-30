@@ -16,7 +16,6 @@ const blog = defineCollection({
         description: z.string(),
         cover: z.string().optional(),
         author: z.string(),
-        translated_by: z.string().optional(),
         date: z.coerce.date(),
         updated: z.coerce.date().optional(),
         category: z.enum(allCategorySlugs),
