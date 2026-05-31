@@ -21,22 +21,22 @@ const labels: Record<
     }
 > = {
     uz: {
-        heading: "Maqoladan iqtibos keltirish",
-        style: "APA uslubi",
+        heading: "Maqolani keltirish",
+        style: "APA",
         copy: "Iqtibosni nusxalash",
         copied: "Iqtibos nusxalandi",
-        failed: "Iqtibosni nusxalab bo'lmadi",
+        failed: "Iqtibosni nusxalab bo‘lmadi",
     },
     en: {
-        heading: "To cite this article",
-        style: "APA style",
+        heading: "Cite this article",
+        style: "APA",
         copy: "Copy citation",
         copied: "Citation copied",
         failed: "Could not copy citation",
     },
     ru: {
-        heading: "Как цитировать статью",
-        style: "Стиль APA",
+        heading: "Цитировать статью",
+        style: "APA",
         copy: "Скопировать цитату",
         copied: "Цитата скопирована",
         failed: "Не удалось скопировать цитату",
@@ -76,13 +76,21 @@ const citation = `${formatAuthorForApa(authorName)} (${formatDateForApa(date)}).
 ---
 
 <section class="post-citation" aria-labelledby="post-citation-title">
-    <div class="post-citation-header">
-        <div>
-            <h2 id="post-citation-title" class="post-citation-title">
-                {strings.heading}
-            </h2>
-            <p class="post-citation-style label-small">{strings.style}</p>
-        </div>
+    <div class="post-citation-row">
+        <details class="post-citation-details">
+            <summary class="post-citation-summary">
+                <span class="post-citation-summary-copy">
+                    <span id="post-citation-title" class="post-citation-title">
+                        {strings.heading}
+                    </span>
+                    <span class="post-citation-style label-small">
+                        {strings.style}
+                    </span>
+                </span>
+                <span class="post-citation-toggle" aria-hidden="true"></span>
+            </summary>
+            <p class="post-citation-text">{citation}</p>
+        </details>
         <button
             type="button"
             class="post-citation-copy"
@@ -94,7 +102,6 @@ const citation = `${formatAuthorForApa(authorName)} (${formatDateForApa(date)}).
             {strings.copy}
         </button>
     </div>
-    <p class="post-citation-text">{citation}</p>
     <p
         class="post-citation-status"
         data-citation-status

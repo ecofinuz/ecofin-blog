@@ -25,22 +25,22 @@ const labels: Record<
 > = {
     uz: {
         writtenBy: "Muallif",
-        profile: "Muallif sahifasi",
-        shareArticle: "Maqolani ulashish",
-        support: "Ecofinni qo'llash",
+        profile: "Muallif profili",
+        shareArticle: "Ulashish",
+        support: "Ecofin’ni qo‘llab-quvvatlash",
         actions: "Maqola yakunidagi harakatlar",
     },
     en: {
         writtenBy: "Written by",
-        profile: "View author profile",
-        shareArticle: "Share article",
+        profile: "Author profile",
+        shareArticle: "Share",
         support: "Support Ecofin",
         actions: "Article next actions",
     },
     ru: {
         writtenBy: "Автор",
         profile: "Профиль автора",
-        shareArticle: "Поделиться статьёй",
+        shareArticle: "Поделиться",
         support: "Поддержать Ecofin",
         actions: "Действия после статьи",
     },
@@ -51,45 +51,44 @@ const hasAuthorLinks = Boolean(
     author.links.telegram ||
         author.links.medium ||
         author.links.linkedin ||
-        author.links.twitter,
+        author.links.instagram ||
+        author.links.x ||
+        author.links.twitter ||
+        author.links.bluesky ||
+        author.links.mastodon,
 );
 ---
 
 <section class="article-footer" aria-labelledby="article-footer-title">
-    <div class="article-footer-author">
-        <p class="article-footer-label label-small">{strings.writtenBy}</p>
-        <div class="article-author-card">
-            <img
-                src={author.avatar}
-                alt={author.name}
-                class="article-author-avatar"
-                width="72"
-                height="72"
-                loading="lazy"
-            />
-            <div class="article-author-copy">
-                <h2 id="article-footer-title" class="article-author-name">
-                    {author.name}
-                </h2>
-                <p class="article-author-bio">
-                    {author.articleBio[locale] ?? author.bio[locale]}
-                </p>
-                {
-                    hasAuthorLinks && (
-                        <AuthorSocialLinks
-                            authorName={author.name}
-                            links={author.links}
-                        />
-                    )
-                }
-            </div>
+    <div class="article-author-card">
+        <img
+            src={author.avatar}
+            alt={author.name}
+            class="article-author-avatar"
+            width="64"
+            height="64"
+            loading="lazy"
+        />
+        <div class="article-author-copy">
+            <p class="article-footer-label label-small">{strings.writtenBy}</p>
+            <h2 id="article-footer-title" class="article-author-name">
+                {author.name}
+            </h2>
+            <p class="article-author-bio">
+                {author.articleBio[locale] ?? author.bio[locale]}
+            </p>
+            {
+                hasAuthorLinks && (
+                    <AuthorSocialLinks
+                        authorName={author.name}
+                        links={author.links}
+                    />
+                )
+            }
         </div>
     </div>
 
     <div class="article-footer-actions" role="group" aria-label={strings.actions}>
-        <a href={authorHref} class="article-footer-action">
-            {strings.profile}
-        </a>
         <ShareActions
             lang={locale}
             title={title}
@@ -104,6 +103,9 @@ const hasAuthorLinks = Boolean(
             class="article-footer-action article-footer-action--support"
         >
             {strings.support}
+        </a>
+        <a href={authorHref} class="article-footer-action article-footer-action--profile">
+            {strings.profile}
         </a>
     </div>
 </section>

@@ -11,7 +11,11 @@ export interface Author {
         telegram?: string;
         medium?: string;
         linkedin?: string;
+        instagram?: string;
+        x?: string;
         twitter?: string;
+        bluesky?: string;
+        mastodon?: string;
     };
 }
 

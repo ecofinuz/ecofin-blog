@@ -7,7 +7,11 @@ interface Props {
         telegram?: string;
         medium?: string;
         linkedin?: string;
+        instagram?: string;
+        x?: string;
         twitter?: string;
+        bluesky?: string;
+        mastodon?: string;
     };
 }
 
@@ -15,7 +19,11 @@ const { authorName, links } = Astro.props;
 const iconLinks = [
     { name: "telegram", href: links.telegram, label: "Telegram" },
     { name: "medium", href: links.medium, label: "Medium" },
-    { name: "twitter", href: links.twitter, label: "Twitter" },
+    { name: "linkedin", href: links.linkedin, label: "LinkedIn" },
+    { name: "instagram", href: links.instagram, label: "Instagram" },
+    { name: "x", href: links.x ?? links.twitter, label: "X" },
+    { name: "bluesky", href: links.bluesky, label: "Bluesky" },
+    { name: "mastodon", href: links.mastodon, label: "Mastodon" },
 ] as const;
 ---
 
@@ -34,17 +42,5 @@ const iconLinks = [
                 </a>
             )
         ))
-    }
-    {
-        links.linkedin && (
-            <a
-                href={links.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="author-link author-link-text"
-            >
-                LinkedIn
-            </a>
-        )
     }
 </div>
