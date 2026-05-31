@@ -50,7 +50,7 @@
 }
 
 .breadcrumbs a:hover {
-    color: var(--gold);
+    color: var(--gold-text);
 }
 
 .breadcrumbs [aria-current="page"] {
@@ -85,7 +85,7 @@
 }
 
 .byline-author:hover {
-    color: var(--gold);
+    color: var(--gold-text);
 }
 
 .post-body {
@@ -97,7 +97,7 @@
 }
 
 .post-body a {
-    color: var(--gold);
+    color: var(--gold-text);
     font-weight: 700;
     text-decoration-thickness: 1px;
     text-underline-offset: 3px;
@@ -107,21 +107,40 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    gap: var(--space-2);
+}
+
+.post-share-actions--block {
     gap: var(--space-3);
     margin-top: var(--space-12);
     padding-top: var(--space-8);
     border-top: 1px solid var(--border);
 }
 
+.post-share-actions--inline {
+    margin-left: calc(var(--space-1) * -1);
+}
+
+.post-share-actions--footer {
+    gap: var(--space-3);
+}
+
 .post-share-button,
-.post-share-telegram {
+.post-share-telegram,
+.article-footer-action {
     min-height: 34px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: var(--space-2);
+    border: 1px solid var(--border);
     border-radius: var(--radius-sm);
+    background: var(--surface);
+    color: var(--gold-text);
     font-size: 0.9rem;
+    font-weight: 800;
     line-height: 1;
+    padding: 0 var(--space-4);
     text-decoration: none;
     transition:
         background var(--transition),
@@ -131,35 +150,53 @@
 }
 
 .post-share-button {
-    border: 1px solid var(--button-primary-border);
-    background: var(--button-primary-bg);
-    color: var(--button-primary-color);
     cursor: pointer;
-    font-weight: 700;
-    padding: 0 var(--space-4);
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 800;
 }
 
 .post-share-button:hover,
-.post-share-telegram:hover {
-    border-color: var(--button-primary-hover-border);
-    background: var(--button-primary-hover-bg);
-    color: var(--button-primary-hover-color);
+.post-share-telegram:hover,
+.article-footer-action:hover {
+    border-color: var(--accent-border);
+    background: var(--gold-soft);
+    color: var(--gold-text);
     transform: translateY(-1px);
 }
 
-.post-body .post-share-telegram {
-    border: 1px solid var(--border);
-    background: var(--surface);
-    color: var(--gold);
-    font-weight: 700;
-    padding: 0 var(--space-4);
-    text-decoration: none;
+.post-share-button:active,
+.post-share-telegram:active,
+.article-footer-action:active {
+    transform: translateY(0);
 }
 
-.post-body .post-share-telegram:hover {
+.post-share-actions--block .post-share-button,
+.post-share-actions--footer .post-share-button {
+    border-color: var(--button-primary-border);
+    background: var(--button-primary-bg);
+    color: var(--button-primary-color);
+}
+
+.post-share-actions--block .post-share-button:hover,
+.post-share-actions--footer .post-share-button:hover {
     border-color: var(--button-primary-hover-border);
     background: var(--button-primary-hover-bg);
     color: var(--button-primary-hover-color);
+}
+
+.post-share-actions--inline .post-share-button {
+    min-height: 30px;
+    border-color: transparent;
+    background: var(--control-bg);
+    font-size: 0.82rem;
+    padding: 0 var(--space-3);
+}
+
+.post-share-icon {
+    width: 1em;
+    height: 1em;
+    flex: 0 0 auto;
 }
 
 .post-share-status {
@@ -167,6 +204,94 @@
     color: var(--text-muted);
     font-size: 0.86rem;
     font-weight: 700;
+}
+
+.post-share-actions--inline .post-share-status {
+    font-size: 0.78rem;
+}
+
+.article-footer {
+    display: grid;
+    gap: var(--space-5);
+    margin-top: var(--space-16);
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--border);
+}
+
+.article-footer-label {
+    margin-bottom: var(--space-4);
+}
+
+.article-author-card {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: flex-start;
+    gap: var(--space-5);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background:
+        linear-gradient(
+            135deg,
+            var(--gold-soft),
+            rgb(var(--gold-brand-rgb) / 0) 48%
+        ),
+        var(--surface);
+    padding: var(--space-5);
+}
+
+.article-author-avatar {
+    width: 72px;
+    height: 72px;
+    flex-shrink: 0;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background: var(--surface-muted);
+    object-fit: cover;
+}
+
+.article-author-copy {
+    min-width: 0;
+}
+
+.article-author-name {
+    margin: 0 0 var(--space-2);
+    font-size: 1.36rem;
+    line-height: 1.2;
+}
+
+.article-author-bio {
+    margin-bottom: var(--space-4);
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.62;
+}
+
+.article-author-card .author-links {
+    gap: var(--space-2);
+}
+
+.article-author-card .author-link-icon {
+    background: var(--control-bg);
+}
+
+.article-footer-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+}
+
+.article-footer-action {
+    min-height: 40px;
+}
+
+.post-share-actions--footer .post-share-button {
+    min-height: 40px;
+}
+
+.article-footer-action--support {
+    border-color: var(--accent-border);
+    background: var(--gold-soft);
 }
 
 .post-body table {
@@ -250,7 +375,7 @@
 }
 
 .back-link:hover {
-    color: var(--gold);
+    color: var(--gold-text);
 }
 /* 11. Table of contents */
 .toc {
@@ -309,7 +434,7 @@
 }
 
 .toc a:hover {
-    color: var(--gold);
+    color: var(--gold-text);
 }
 .reading-progress {
     position: fixed;
@@ -324,7 +449,7 @@
 .reading-progress-bar {
     width: 100%;
     height: 100%;
-    background: var(--gold);
+    background: var(--gold-chart);
     transform: scaleX(0);
     transform-origin: left center;
     will-change: transform;

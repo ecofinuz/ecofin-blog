@@ -38,7 +38,7 @@
 }
 
 .author-link {
-    color: var(--gold);
+    color: var(--gold-text);
     font-size: 0.82rem;
     font-weight: 800;
     letter-spacing: 0.06em;
@@ -65,7 +65,7 @@
 }
 
 .author-link-icon:hover {
-    border-color: var(--gold);
+    border-color: var(--accent-border);
 }
 
 .author-link-icon-svg {

@@ -47,7 +47,7 @@ footer {
 }
 
 .footer-link:hover {
-    color: var(--gold);
+    color: var(--gold-text);
 }
 
 .footer-copy {

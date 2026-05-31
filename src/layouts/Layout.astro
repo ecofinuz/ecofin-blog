@@ -4,16 +4,20 @@ interface Props {
     description?: string;
     lang?: string;
     ogImage?: string;
+    languageLinks?: Partial<LanguageLinks>;
 }
 
 import "@styles/global.css";
 import "@styles/interactive.css";
+import type { LanguageLinks } from "@utils/languageLinks";
+import { getLocalizedHomeLinks } from "@utils/languageLinks";
 
 const {
     title,
     description,
     lang = "uz",
     ogImage,
+    languageLinks,
 } = Astro.props;
 
 const t: Record<string, Record<string, string>> = {
@@ -47,10 +51,14 @@ const themeLabel = {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const homeHref = lang === "uz" ? "/" : `/${lang}/`;
+const resolvedLanguageLinks = {
+    ...getLocalizedHomeLinks(),
+    ...languageLinks,
+};
 const languages = [
-    { code: "uz", label: "UZ", href: "/" },
-    { code: "en", label: "EN", href: "/en/" },
-    { code: "ru", label: "RU", href: "/ru/" },
+    { code: "uz", label: "UZ", href: resolvedLanguageLinks.uz },
+    { code: "en", label: "EN", href: resolvedLanguageLinks.en },
+    { code: "ru", label: "RU", href: resolvedLanguageLinks.ru },
 ];
 ---
 

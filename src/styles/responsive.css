@@ -156,6 +156,43 @@
         text-align: left;
     }
 
+    .post-byline .post-share-actions--inline {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .post-share-separator {
+        display: none;
+    }
+
+    .post-share-actions--inline .post-share-status {
+        flex-basis: 100%;
+    }
+
+    .article-author-card {
+        grid-template-columns: 1fr;
+    }
+
+    .article-author-avatar {
+        width: 64px;
+        height: 64px;
+    }
+
+    .article-footer-actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .article-footer-action,
+    .article-footer-actions .post-share-actions--footer,
+    .post-share-actions--footer .post-share-button {
+        width: 100%;
+    }
+
+    .post-share-actions--footer .post-share-status {
+        min-height: 1.35em;
+    }
+
     .series-nav {
         grid-template-columns: 1fr;
     }

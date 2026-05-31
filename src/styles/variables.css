@@ -12,23 +12,33 @@
     --surface: #ffffff;
     --surface-muted: #f5f5f5;
     --border: rgb(0 0 0 / 0.16);
-    --border-strong: rgb(214 162 58 / 0.7);
     --text-primary: #050505;
     --text-secondary: rgb(5 5 5 / 0.78);
     --text-muted: rgb(5 5 5 / 0.58);
     --text-inverted: #050505;
-    --gold: #d6a23a;
-    --gold-action: #9b6112;
-    --gold-soft: rgb(214 162 58 / 0.16);
+
+    --gold-brand: #d6a23a;
+    --gold-brand-rgb: 214 162 58;
+    --gold-text: #7c4a03;
+    --gold-text-rgb: 124 74 3;
+    --gold-action: #8a550b;
+    --gold-action-hover: #6f4206;
+    --gold-action-rgb: 138 85 11;
+    --gold-chart: #a66a14;
+    --gold-chart-rgb: 166 106 20;
+    --gold-soft: rgb(var(--gold-brand-rgb) / 0.12);
+    --accent-border: rgb(var(--gold-action-rgb) / 0.55);
+    --accent-ring: rgb(var(--gold-text-rgb) / 0.28);
     --text-on-gold: #ffffff;
+    --gold: var(--gold-brand);
 
     --bg: var(--color-bg);
     --line-simple: var(--text-primary);
-    --line-compound: var(--gold);
+    --line-compound: var(--gold-chart);
     --theme-color: #ffffff;
-    --selection-bg: var(--gold);
+    --selection-bg: var(--gold-brand);
     --selection-text: #050505;
-    --page-gradient-start: rgb(214 162 58 / 0.1);
+    --page-gradient-start: rgb(var(--gold-brand-rgb) / 0.1);
     --page-gradient-end: rgb(255 255 255 / 0);
     --nav-bg: rgb(255 255 255 / 0.9);
     --control-bg: rgb(0 0 0 / 0.04);
@@ -36,19 +46,19 @@
     --visual-bg-a: rgb(255 255 255 / 0.96);
     --visual-bg-b: rgb(245 245 245 / 0.94);
     --node-bg: rgb(255 255 255 / 0.9);
-    --node-highlight-bg-a: rgb(214 162 58 / 0.18);
+    --node-highlight-bg-a: rgb(var(--gold-brand-rgb) / 0.14);
     --node-highlight-bg-b: rgb(255 255 255 / 0.94);
     --chart-grid: rgb(0 0 0 / 0.14);
     --chart-tick: rgb(5 5 5 / 0.58);
     --chart-tooltip-bg: #050505;
-    --chart-tooltip-title: var(--gold);
+    --chart-tooltip-title: var(--gold-chart);
     --chart-tooltip-body: #ffffff;
     --button-primary-bg: var(--gold-action);
     --button-primary-color: var(--text-on-gold);
     --button-primary-border: var(--gold-action);
-    --button-primary-hover-bg: #050505;
+    --button-primary-hover-bg: var(--gold-action-hover);
     --button-primary-hover-color: #ffffff;
-    --button-primary-hover-border: #050505;
+    --button-primary-hover-border: var(--gold-action-hover);
 
     --page-width: 1120px;
     --content-width: 760px;
@@ -61,7 +71,8 @@
     --shadow-sm:
         0 1px 2px rgb(0 0 0 / 0.06), 0 14px 36px rgb(0 0 0 / 0.08);
     --shadow: 0 24px 64px rgb(0 0 0 / 0.12);
-    --ring: 0 0 0 3px rgb(214 162 58 / 0.34);
+    --border-strong: var(--accent-border);
+    --ring: 0 0 0 3px var(--accent-ring);
     --transition: 160ms ease;
 
     --space-1: 4px;
@@ -87,9 +98,20 @@
     --text-primary: #ffffff;
     --text-secondary: rgb(255 255 255 / 0.78);
     --text-muted: rgb(255 255 255 / 0.58);
+    --gold-text: #e8bd61;
+    --gold-text-rgb: 232 189 97;
+    --gold-action: #e8bd61;
+    --gold-action-hover: #f0c978;
+    --gold-action-rgb: 232 189 97;
+    --gold-chart: #e8bd61;
+    --gold-chart-rgb: 232 189 97;
+    --gold-soft: rgb(var(--gold-action-rgb) / 0.13);
+    --accent-border: rgb(var(--gold-action-rgb) / 0.48);
+    --accent-ring: rgb(var(--gold-action-rgb) / 0.34);
+    --text-on-gold: #050505;
     --theme-color: #050505;
     --selection-text: #050505;
-    --page-gradient-start: rgb(214 162 58 / 0.12);
+    --page-gradient-start: rgb(var(--gold-brand-rgb) / 0.12);
     --page-gradient-end: rgb(5 5 5 / 0);
     --nav-bg: rgb(5 5 5 / 0.9);
     --control-bg: rgb(255 255 255 / 0.04);
@@ -100,12 +122,12 @@
     --node-highlight-bg-b: rgb(11 11 11 / 0.94);
     --chart-grid: rgb(255 255 255 / 0.16);
     --chart-tick: rgb(255 255 255 / 0.58);
-    --button-primary-bg: #ffffff;
-    --button-primary-color: #050505;
-    --button-primary-border: #ffffff;
-    --button-primary-hover-bg: var(--gold-action);
+    --button-primary-bg: var(--gold-action);
+    --button-primary-color: var(--text-on-gold);
+    --button-primary-border: var(--gold-action);
+    --button-primary-hover-bg: var(--gold-action-hover);
     --button-primary-hover-color: var(--text-on-gold);
-    --button-primary-hover-border: var(--gold-action);
+    --button-primary-hover-border: var(--gold-action-hover);
     --shadow-sm:
         0 1px 2px rgb(0 0 0 / 0.42), 0 14px 36px rgb(0 0 0 / 0.34);
     --shadow: 0 24px 64px rgb(0 0 0 / 0.48);

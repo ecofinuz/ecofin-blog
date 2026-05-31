@@ -2,6 +2,7 @@
 import type { AuthorKey } from "@data/authors";
 import { getAuthor } from "@data/authors";
 import { getCategoryDetailsFromSlug } from "@data/categories";
+import ArticleFooter from "@components/ArticleFooter.astro";
 import Breadcrumbs from "@components/Breadcrumbs.astro";
 import BylineAuthor from "@components/BylineAuthor.astro";
 import Layout from "@layouts/Layout.astro";
@@ -11,6 +12,7 @@ import ReadingTime from "@components/ReadingTime.astro";
 import ReadingProgress from "@components/ReadingProgress.astro";
 import SeriesNavigation from "@components/SeriesNavigation.astro";
 import ShareActions from "@components/ShareActions.astro";
+import { getLocalizedPostLinks } from "@utils/languageLinks";
 import { getSeriesNavigation } from "@utils/seriesNavigation";
 import { getMinutesRead } from "@utils/readingTime";
 import { getCollection, render } from "astro:content";
@@ -18,7 +20,8 @@ import { getCollection, render } from "astro:content";
 const locale = "en";
 
 export async function getStaticPaths() {
-    const posts = await getCollection("blog", ({ id }) =>
+    const allPosts = await getCollection("blog");
+    const posts = allPosts.filter(({ id }) =>
         id.startsWith("en/")
     );
 
@@ -31,12 +34,16 @@ export async function getStaticPaths() {
 
         return {
             params: { category: cat.slug, slug },
-            props: { post, seriesNavigation: getSeriesNavigation(post, posts) },
+            props: {
+                post,
+                languageLinks: getLocalizedPostLinks(post, allPosts),
+                seriesNavigation: getSeriesNavigation(post, posts),
+            },
         };
     });
 }
 
-const { post, seriesNavigation } = Astro.props;
+const { post, languageLinks, seriesNavigation } = Astro.props;
 const { Content, remarkPluginFrontmatter } = await render(post);
 const minutesRead = getMinutesRead(remarkPluginFrontmatter);
 const author = getAuthor(post.data.author as AuthorKey);
@@ -58,7 +65,7 @@ function formatDate(date: Date): string {
 }
 ---
 
-<Layout title={post.data.title} description={post.data.description} lang={locale} ogImage={ogImage}>
+<Layout title={post.data.title} description={post.data.description} lang={locale} ogImage={ogImage} languageLinks={languageLinks}>
     <ReadingProgress />
     <main>
         <div class="container">
@@ -101,6 +108,15 @@ function formatDate(date: Date): string {
                         &middot;
                     </span>
                     <ReadingTime locale={locale} minutesRead={minutesRead} class="label-small" />
+                    <span class="label-small post-share-separator">
+                        &middot;
+                    </span>
+                    <ShareActions
+                        lang={locale}
+                        title={post.data.title}
+                        text={post.data.description}
+                        variant="inline"
+                    />
                 </div>
                 <PostCover
                     cover={post.data.cover}
@@ -112,7 +128,13 @@ function formatDate(date: Date): string {
 
             <article class="post-body">
                 <Content />
-                <ShareActions lang={locale} title={post.data.title} />
+                <ArticleFooter
+                    locale={locale}
+                    author={author}
+                    authorHref={`/en/author/${post.data.author}/`}
+                    title={post.data.title}
+                    description={post.data.description}
+                />
                 <SeriesNavigation
                     locale={locale}
                     previousPost={seriesNavigation.previousPost}

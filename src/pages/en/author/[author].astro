@@ -8,6 +8,7 @@ import BylineAuthor from "@components/BylineAuthor.astro";
 import PostDate from "@components/PostDate.astro";
 import PostCover from "@components/PostCover.astro";
 import ReadingTime from "@components/ReadingTime.astro";
+import { getLocalizedAuthorLinks } from "@utils/languageLinks";
 import { getPostsWithReadingTime } from "@utils/readingTime";
 import { getCollection } from "astro:content";
 
@@ -22,6 +23,7 @@ export async function getStaticPaths() {
 
 const { authorKey } = Astro.props;
 const author = getAuthor(authorKey);
+const languageLinks = getLocalizedAuthorLinks(authorKey);
 
 const allPosts = await getCollection("blog", ({ id, data }) =>
     id.startsWith(`${locale}/`) && data.author === authorKey
@@ -53,7 +55,7 @@ function getCatLabel(id: string): string {
 }
 ---
 
-<Layout title={author.name} description={author.bio[locale]} lang={locale}>
+<Layout title={author.name} description={author.bio[locale]} lang={locale} languageLinks={languageLinks}>
     <main>
         <div class="container">
 

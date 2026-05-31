@@ -1,81 +1,114 @@
 ---
 import type { Locale } from "@data/categories";
+import Icon from "@components/Icon.astro";
 
 interface Props {
     lang?: Locale;
     title: string;
+    text?: string;
+    variant?: "block" | "inline" | "footer";
+    showTelegram?: boolean;
+    label?: string;
 }
 
-const { lang = "uz", title } = Astro.props;
+const {
+    lang = "uz",
+    title,
+    text,
+    variant = "block",
+    showTelegram = variant === "block",
+    label,
+} = Astro.props;
 
 const translations: Record<
     Locale,
     {
         share: string;
-        telegram: string;
+        shareArticle: string;
         copied: string;
         failed: string;
+        shareLabel: string;
+        telegram: string;
         telegramLabel: string;
     }
 > = {
     uz: {
         share: "Ulashish",
+        shareArticle: "Maqolani ulashish",
+        copied: "Havola nusxalandi",
+        failed: "Havolani nusxalab bo'lmadi",
+        shareLabel: "Maqolani ulashish",
         telegram: "Telegram",
-        copied: "Nusxalandi",
-        failed: "Nusxalab bo'lmadi",
         telegramLabel: "Telegram orqali ulashish",
     },
     en: {
         share: "Share",
+        shareArticle: "Share article",
+        copied: "Link copied",
+        failed: "Could not copy link",
+        shareLabel: "Share this article",
         telegram: "Telegram",
-        copied: "Copied",
-        failed: "Copy failed",
         telegramLabel: "Share on Telegram",
     },
     ru: {
         share: "Поделиться",
+        shareArticle: "Поделиться статьёй",
+        copied: "Ссылка скопирована",
+        failed: "Не удалось скопировать ссылку",
+        shareLabel: "Поделиться статьёй",
         telegram: "Telegram",
-        copied: "Скопировано",
-        failed: "Не удалось скопировать",
         telegramLabel: "Поделиться в Telegram",
     },
 };
 
 const strings = translations[lang];
+const buttonLabel = label ?? (variant === "inline" ? strings.share : strings.shareArticle);
 const site = Astro.site ?? new URL(Astro.url.origin);
 const shareUrl = new URL(Astro.url.pathname, site).href;
+const shareText = text ?? title;
 const telegramHref = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(title)}`;
 ---
 
-<div class="post-share-actions">
+<div class:list={["post-share-actions", `post-share-actions--${variant}`]}>
     <button
         type="button"
         class="post-share-button"
         data-share-button
         data-share-title={title}
+        data-share-text={shareText}
         data-share-url={shareUrl}
         data-share-copied={strings.copied}
         data-share-failed={strings.failed}
+        aria-label={strings.shareLabel}
     >
-        {strings.share}
+        <Icon name="share" class="post-share-icon" />
+        <span class="post-share-label">{buttonLabel}</span>
     </button>
-    <a
-        href={telegramHref}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="post-share-telegram"
-        aria-label={strings.telegramLabel}
-    >
-        {strings.telegram}
-    </a>
-    <span class="post-share-status" data-share-status aria-live="polite"></span>
+    {
+        showTelegram && (
+            <a
+                href={telegramHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="post-share-telegram"
+                aria-label={strings.telegramLabel}
+            >
+                {strings.telegram}
+            </a>
+        )
+    }
+    <span
+        class="post-share-status"
+        data-share-status
+        aria-live="polite"
+        aria-atomic="true"
+    ></span>
 </div>
 
 <script>
     const shareButtons = document.querySelectorAll<HTMLButtonElement>(
-        "[data-share-button]",
+        "[data-share-button]:not([data-share-ready])",
     );
-    const mobileQuery = window.matchMedia("(hover: none), (pointer: coarse)");
 
     async function copyText(text: string): Promise<void> {
         if (navigator.clipboard?.writeText && window.isSecureContext) {
@@ -93,27 +126,49 @@ const telegramHref = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}
         textarea.select();
 
         try {
-            document.execCommand("copy");
+            const copied = document.execCommand("copy");
+            if (!copied) {
+                throw new Error("Copy command failed");
+            }
         } finally {
             textarea.remove();
         }
     }
 
     shareButtons.forEach((button) => {
+        button.dataset.shareReady = "true";
+
         const status = button
             .closest(".post-share-actions")
             ?.querySelector<HTMLElement>("[data-share-status]");
+        let clearStatus: number | undefined;
+
+        const setStatus = (message: string) => {
+            if (!status) {
+                return;
+            }
+
+            window.clearTimeout(clearStatus);
+            status.textContent = message;
+            clearStatus = window.setTimeout(() => {
+                status.textContent = "";
+            }, 2400);
+        };
 
         button.addEventListener("click", async () => {
             const title = button.dataset.shareTitle ?? document.title;
+            const text = button.dataset.shareText || title;
             const url = button.dataset.shareUrl ?? window.location.href;
             const copied = button.dataset.shareCopied ?? "";
             const failed = button.dataset.shareFailed ?? "";
-            const shareText = `${title}\n${url}`;
 
-            if (mobileQuery.matches && typeof navigator.share === "function") {
+            if (status) {
+                status.textContent = "";
+            }
+
+            if (typeof navigator.share === "function") {
                 try {
-                    await navigator.share({ title, text: title, url });
+                    await navigator.share({ title, text, url });
                     return;
                 } catch (error) {
                     if (error instanceof DOMException && error.name === "AbortError") {
@@ -123,17 +178,10 @@ const telegramHref = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}
             }
 
             try {
-                await copyText(shareText);
-                if (status) {
-                    status.textContent = copied;
-                    window.setTimeout(() => {
-                        status.textContent = "";
-                    }, 2200);
-                }
+                await copyText(url);
+                setStatus(copied);
             } catch {
-                if (status) {
-                    status.textContent = failed;
-                }
+                setStatus(failed);
             }
         });
     });

@@ -1,0 +1,109 @@
+---
+import type { Author, Locale } from "@data/authors";
+import AuthorSocialLinks from "@components/AuthorSocialLinks.astro";
+import ShareActions from "@components/ShareActions.astro";
+
+interface Props {
+    locale: Locale;
+    author: Author;
+    authorHref: string;
+    title: string;
+    description?: string;
+}
+
+const { locale, author, authorHref, title, description } = Astro.props;
+
+const labels: Record<
+    Locale,
+    {
+        writtenBy: string;
+        profile: string;
+        shareArticle: string;
+        support: string;
+        actions: string;
+    }
+> = {
+    uz: {
+        writtenBy: "Muallif",
+        profile: "Muallif sahifasi",
+        shareArticle: "Maqolani ulashish",
+        support: "Ecofinni qo'llash",
+        actions: "Maqola yakunidagi harakatlar",
+    },
+    en: {
+        writtenBy: "Written by",
+        profile: "View author profile",
+        shareArticle: "Share article",
+        support: "Support Ecofin",
+        actions: "Article next actions",
+    },
+    ru: {
+        writtenBy: "Автор",
+        profile: "Профиль автора",
+        shareArticle: "Поделиться статьёй",
+        support: "Поддержать Ecofin",
+        actions: "Действия после статьи",
+    },
+};
+
+const strings = labels[locale];
+const hasAuthorLinks = Boolean(
+    author.links.telegram ||
+        author.links.medium ||
+        author.links.linkedin ||
+        author.links.twitter,
+);
+---
+
+<section class="article-footer" aria-labelledby="article-footer-title">
+    <div class="article-footer-author">
+        <p class="article-footer-label label-small">{strings.writtenBy}</p>
+        <div class="article-author-card">
+            <img
+                src={author.avatar}
+                alt={author.name}
+                class="article-author-avatar"
+                width="72"
+                height="72"
+                loading="lazy"
+            />
+            <div class="article-author-copy">
+                <h2 id="article-footer-title" class="article-author-name">
+                    {author.name}
+                </h2>
+                <p class="article-author-bio">
+                    {author.articleBio[locale] ?? author.bio[locale]}
+                </p>
+                {
+                    hasAuthorLinks && (
+                        <AuthorSocialLinks
+                            authorName={author.name}
+                            links={author.links}
+                        />
+                    )
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="article-footer-actions" role="group" aria-label={strings.actions}>
+        <a href={authorHref} class="article-footer-action">
+            {strings.profile}
+        </a>
+        <ShareActions
+            lang={locale}
+            title={title}
+            text={description}
+            variant="footer"
+            label={strings.shareArticle}
+        />
+        <a
+            href="https://ecofin.uz/#sponsors"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="article-footer-action article-footer-action--support"
+        >
+            {strings.support}
+        </a>
+    </div>
+</section>

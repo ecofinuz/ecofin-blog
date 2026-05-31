@@ -8,6 +8,7 @@ import BylineAuthor from "@components/BylineAuthor.astro";
 import PostDate from "@components/PostDate.astro";
 import PostCover from "@components/PostCover.astro";
 import ReadingTime from "@components/ReadingTime.astro";
+import { getLocalizedCategoryLinks } from "@utils/languageLinks";
 import { getPostsWithReadingTime } from "@utils/readingTime";
 import { getCollection } from "astro:content";
 
@@ -23,6 +24,7 @@ export async function getStaticPaths() {
 const { category } = Astro.params;
 const { categoryKey } = Astro.props;
 const categorySlug = categories[categoryKey].ru.slug;
+const languageLinks = getLocalizedCategoryLinks(categoryKey);
 
 const allPosts = await getCollection("blog", ({ id }) =>
     id.startsWith(`${locale}/${categorySlug}/`)
@@ -49,7 +51,7 @@ function getSlug(id: string): string {
 }
 ---
 
-<Layout title={catLabel} lang={locale}>
+<Layout title={catLabel} lang={locale} languageLinks={languageLinks}>
     <main>
         <div class="container">
 
