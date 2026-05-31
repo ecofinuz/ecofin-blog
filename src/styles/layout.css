@@ -105,7 +105,7 @@ main {
     height: 28px;
     flex-shrink: 0;
     border-radius: 6px;
-    box-shadow: 0 0 0 1px var(--accent-border);
+    box-shadow: 0 0 0 1px rgb(var(--gold-brand-rgb) / 0.34);
     object-fit: contain;
 }
 
@@ -142,8 +142,8 @@ main {
 }
 
 .nav-link:hover {
-    color: var(--gold-text);
-    background: var(--gold-soft);
+    color: var(--accent-text);
+    background: var(--green-soft);
 }
 
 .nav-github {
@@ -173,8 +173,8 @@ main {
 }
 
 .language-option.active {
-    color: var(--text-on-gold);
-    background: var(--gold-action);
+    color: var(--text-on-accent);
+    background: var(--accent-action);
 }
 
 .theme-toggle {
@@ -188,7 +188,8 @@ main {
 
 .theme-toggle:hover {
     border-color: var(--accent-border);
-    color: var(--gold-text);
+    background: var(--green-soft);
+    color: var(--accent-text);
     transform: translateY(-1px);
 }
 
@@ -399,8 +400,8 @@ main {
     border-radius: 50%;
     background: radial-gradient(
         circle,
-        rgb(var(--gold-brand-rgb) / 0.13),
-        rgb(var(--gold-brand-rgb) / 0.07) 42%,
+        rgb(var(--green-brand-rgb) / 0.12),
+        rgb(var(--green-brand-rgb) / 0.06) 42%,
         transparent 72%
     );
     content: "";
@@ -429,7 +430,7 @@ main {
 }
 
 .ecosystem-header strong {
-    color: var(--gold-text);
+    color: var(--accent-text);
     font-family: var(--font-serif);
     font-size: 1.72rem;
     line-height: 1;
@@ -444,7 +445,7 @@ main {
     inset: 0;
     width: 100%;
     height: 100%;
-    color: var(--gold-chart);
+    color: var(--chart-accent);
     overflow: visible;
 }
 
@@ -456,11 +457,11 @@ main {
 }
 
 .ecosystem-path--blog {
-    color: var(--gold-chart);
+    color: var(--chart-accent);
 }
 
 .ecosystem-path--platform {
-    color: var(--gold-chart);
+    color: var(--chart-accent);
 }
 
 .ecosystem-path--repo {
@@ -532,18 +533,18 @@ main {
         var(--node-highlight-bg-b)
     );
     box-shadow:
-        0 0 0 5px rgb(var(--gold-brand-rgb) / 0.1),
+        0 0 0 5px rgb(var(--green-brand-rgb) / 0.1),
         var(--shadow);
 }
 
 .ecosystem-node--highlight .ecosystem-node-icon {
-    border-color: var(--gold-action);
-    background: var(--gold-action);
-    color: var(--text-on-gold);
+    border-color: var(--accent-action);
+    background: var(--accent-action);
+    color: var(--text-on-accent);
 }
 
 .ecosystem-node--highlight strong {
-    color: var(--gold-text);
+    color: var(--accent-text);
 }
 
 .ecosystem-node--platform {
@@ -566,7 +567,7 @@ main {
     border: 1px solid currentColor;
     border-radius: var(--radius-sm);
     background: var(--control-bg);
-    color: var(--gold-chart);
+    color: var(--chart-accent);
 }
 
 .ecosystem-node-icon--blog span {
@@ -592,7 +593,7 @@ main {
 }
 
 .ecosystem-node-icon--platform {
-    color: var(--gold-chart);
+    color: var(--chart-accent);
 }
 
 .ecosystem-node-icon--platform span {

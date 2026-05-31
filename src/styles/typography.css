@@ -67,7 +67,7 @@ code {
     border: 1px solid var(--border);
     border-radius: var(--radius-xs);
     background: var(--surface);
-    color: var(--gold-text);
+    color: var(--accent-text);
     font-family: var(--font-mono);
     font-size: 0.86em;
     padding: 2px 6px;
@@ -101,7 +101,7 @@ hr {
 blockquote {
     margin: var(--space-8) 0;
     border-left: 4px solid var(--accent-border);
-    background: var(--gold-soft);
+    background: var(--green-soft);
     border-radius: 0 var(--radius) var(--radius) 0;
     padding: var(--space-5) var(--space-6);
 }
@@ -111,7 +111,7 @@ blockquote p:last-child {
 }
 
 .label-small {
-    color: var(--gold-text);
+    color: var(--accent-text);
     font-size: 0.74rem;
     font-weight: 700;
     letter-spacing: 0.09em;

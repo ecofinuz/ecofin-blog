@@ -50,7 +50,7 @@
 }
 
 .breadcrumbs a:hover {
-    color: var(--gold-text);
+    color: var(--accent-text);
 }
 
 .breadcrumbs [aria-current="page"] {
@@ -85,7 +85,7 @@
 }
 
 .byline-author:hover {
-    color: var(--gold-text);
+    color: var(--accent-text);
 }
 
 .post-body {
@@ -97,7 +97,7 @@
 }
 
 .post-body a {
-    color: var(--gold-text);
+    color: var(--accent-text);
     font-weight: 700;
     text-decoration-thickness: 1px;
     text-underline-offset: 3px;
@@ -136,7 +136,7 @@
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
     background: var(--surface);
-    color: var(--gold-text);
+    color: var(--accent-text);
     font-size: 0.9rem;
     font-weight: 800;
     line-height: 1;
@@ -160,8 +160,8 @@
 .post-share-telegram:hover,
 .article-footer-action:hover {
     border-color: var(--accent-border);
-    background: var(--gold-soft);
-    color: var(--gold-text);
+    background: var(--green-soft);
+    color: var(--accent-text);
     transform: translateY(-1px);
 }
 
@@ -232,8 +232,8 @@
     background:
         linear-gradient(
             135deg,
-            var(--gold-soft),
-            rgb(var(--gold-brand-rgb) / 0) 48%
+            var(--green-soft),
+            rgb(var(--green-brand-rgb) / 0) 48%
         ),
         var(--surface);
     padding: var(--space-5);
@@ -291,7 +291,7 @@
 
 .article-footer-action--support {
     border-color: var(--accent-border);
-    background: var(--gold-soft);
+    background: var(--green-soft);
 }
 
 .post-citation {
@@ -329,8 +329,8 @@
     justify-content: center;
     border: 1px solid var(--accent-border);
     border-radius: var(--radius-sm);
-    background: var(--gold-soft);
-    color: var(--gold-text);
+    background: var(--green-soft);
+    color: var(--accent-text);
     cursor: pointer;
     font: inherit;
     font-size: 0.88rem;
@@ -452,7 +452,7 @@
 }
 
 .back-link:hover {
-    color: var(--gold-text);
+    color: var(--accent-text);
 }
 /* 11. Table of contents */
 .toc {
@@ -511,7 +511,7 @@
 }
 
 .toc a:hover {
-    color: var(--gold-text);
+    color: var(--accent-text);
 }
 .reading-progress {
     position: fixed;
@@ -526,7 +526,7 @@
 .reading-progress-bar {
     width: 100%;
     height: 100%;
-    background: var(--gold-chart);
+    background: var(--chart-accent);
     transform: scaleX(0);
     transform-origin: left center;
     will-change: transform;
