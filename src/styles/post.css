@@ -294,6 +294,83 @@
     background: var(--gold-soft);
 }
 
+.post-citation {
+    margin-top: var(--space-8);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    padding: var(--space-5);
+}
+
+.post-citation-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-bottom: var(--space-4);
+}
+
+.post-citation-title {
+    margin: 0 0 var(--space-1);
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    line-height: 1.28;
+}
+
+.post-citation-style {
+    margin-bottom: 0;
+}
+
+.post-citation-copy {
+    min-height: 38px;
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--accent-border);
+    border-radius: var(--radius-sm);
+    background: var(--gold-soft);
+    color: var(--gold-text);
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.88rem;
+    font-weight: 800;
+    line-height: 1;
+    padding: 0 var(--space-4);
+    transition:
+        background var(--transition),
+        border-color var(--transition),
+        color var(--transition),
+        transform var(--transition);
+}
+
+.post-citation-copy:hover {
+    border-color: var(--button-primary-border);
+    background: var(--button-primary-bg);
+    color: var(--button-primary-color);
+    transform: translateY(-1px);
+}
+
+.post-citation-copy:active {
+    transform: translateY(0);
+}
+
+.post-citation-text {
+    margin-bottom: 0;
+    color: var(--text-secondary);
+    font-size: 0.98rem;
+    line-height: 1.62;
+    overflow-wrap: anywhere;
+}
+
+.post-citation-status {
+    min-height: 1.35em;
+    margin: var(--space-3) 0 0;
+    color: var(--text-muted);
+    font-size: 0.86rem;
+    font-weight: 700;
+}
+
 .post-body table {
     font-size: 0.95rem;
 }

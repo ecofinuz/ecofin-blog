@@ -5,6 +5,7 @@ import { getCategoryDetailsFromSlug } from "@data/categories";
 import ArticleFooter from "@components/ArticleFooter.astro";
 import Breadcrumbs from "@components/Breadcrumbs.astro";
 import BylineAuthor from "@components/BylineAuthor.astro";
+import CitationBox from "@components/CitationBox.astro";
 import Layout from "@layouts/Layout.astro";
 import PostDate from "@components/PostDate.astro";
 import PostCover from "@components/PostCover.astro";
@@ -127,6 +128,12 @@ function formatDate(date: Date): string {
 
             <article class="post-body">
                 <Content />
+                <CitationBox
+                    locale={locale}
+                    authorName={author.name}
+                    title={post.data.title}
+                    date={post.data.date}
+                />
                 <ArticleFooter
                     locale={locale}
                     author={author}

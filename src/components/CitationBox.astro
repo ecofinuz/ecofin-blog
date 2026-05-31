@@ -1,0 +1,173 @@
+---
+import type { Locale } from "@data/authors";
+
+interface Props {
+    locale: Locale;
+    authorName: string;
+    title: string;
+    date: Date;
+}
+
+const { locale, authorName, title, date } = Astro.props;
+
+const labels: Record<
+    Locale,
+    {
+        heading: string;
+        style: string;
+        copy: string;
+        copied: string;
+        failed: string;
+    }
+> = {
+    uz: {
+        heading: "Maqoladan iqtibos keltirish",
+        style: "APA uslubi",
+        copy: "Iqtibosni nusxalash",
+        copied: "Iqtibos nusxalandi",
+        failed: "Iqtibosni nusxalab bo'lmadi",
+    },
+    en: {
+        heading: "To cite this article",
+        style: "APA style",
+        copy: "Copy citation",
+        copied: "Citation copied",
+        failed: "Could not copy citation",
+    },
+    ru: {
+        heading: "Как цитировать статью",
+        style: "Стиль APA",
+        copy: "Скопировать цитату",
+        copied: "Цитата скопирована",
+        failed: "Не удалось скопировать цитату",
+    },
+};
+
+function formatAuthorForApa(name: string): string {
+    const parts = name.trim().split(/\s+/);
+
+    if (parts.length < 2) {
+        return name;
+    }
+
+    const familyName = parts.at(-1);
+    const initials = parts
+        .slice(0, -1)
+        .map((part) => `${part.charAt(0).toUpperCase()}.`)
+        .join(" ");
+
+    return `${familyName}, ${initials}`;
+}
+
+function formatDateForApa(value: Date): string {
+    const year = value.getFullYear();
+    const month = new Intl.DateTimeFormat("en-US", { month: "long" }).format(
+        value,
+    );
+    const day = value.getDate();
+
+    return `${year}, ${month} ${day}`;
+}
+
+const strings = labels[locale];
+const site = Astro.site ?? new URL(Astro.url.origin);
+const citationUrl = new URL(Astro.url.pathname, site).href;
+const citation = `${formatAuthorForApa(authorName)} (${formatDateForApa(date)}). ${title}. Ecofin. ${citationUrl}`;
+---
+
+<section class="post-citation" aria-labelledby="post-citation-title">
+    <div class="post-citation-header">
+        <div>
+            <h2 id="post-citation-title" class="post-citation-title">
+                {strings.heading}
+            </h2>
+            <p class="post-citation-style label-small">{strings.style}</p>
+        </div>
+        <button
+            type="button"
+            class="post-citation-copy"
+            data-citation-copy
+            data-citation={citation}
+            data-citation-copied={strings.copied}
+            data-citation-failed={strings.failed}
+        >
+            {strings.copy}
+        </button>
+    </div>
+    <p class="post-citation-text">{citation}</p>
+    <p
+        class="post-citation-status"
+        data-citation-status
+        aria-live="polite"
+        aria-atomic="true"
+    ></p>
+</section>
+
+<script>
+    const citationButtons = document.querySelectorAll<HTMLButtonElement>(
+        "[data-citation-copy]:not([data-citation-ready])",
+    );
+
+    async function copyCitation(text: string): Promise<void> {
+        if (navigator.clipboard?.writeText && window.isSecureContext) {
+            await navigator.clipboard.writeText(text);
+            return;
+        }
+
+        const textarea = document.createElement("textarea");
+        textarea.value = text;
+        textarea.setAttribute("readonly", "");
+        textarea.style.position = "fixed";
+        textarea.style.top = "-999px";
+        textarea.style.left = "-999px";
+        document.body.append(textarea);
+        textarea.select();
+
+        try {
+            const copied = document.execCommand("copy");
+            if (!copied) {
+                throw new Error("Copy command failed");
+            }
+        } finally {
+            textarea.remove();
+        }
+    }
+
+    citationButtons.forEach((button) => {
+        button.dataset.citationReady = "true";
+
+        const status = button
+            .closest(".post-citation")
+            ?.querySelector<HTMLElement>("[data-citation-status]");
+        let clearStatus: number | undefined;
+
+        const setStatus = (message: string) => {
+            if (!status) {
+                return;
+            }
+
+            window.clearTimeout(clearStatus);
+            status.textContent = message;
+            clearStatus = window.setTimeout(() => {
+                status.textContent = "";
+            }, 2400);
+        };
+
+        button.addEventListener("click", async () => {
+            const citation = button.dataset.citation ?? "";
+            const copied = button.dataset.citationCopied ?? "";
+            const failed = button.dataset.citationFailed ?? "";
+
+            if (status) {
+                status.textContent = "";
+            }
+
+            try {
+                await copyCitation(citation);
+                setStatus(copied);
+            } catch {
+                setStatus(failed);
+            }
+        });
+    });
+</script>

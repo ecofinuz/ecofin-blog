@@ -193,6 +193,15 @@
         min-height: 1.35em;
     }
 
+    .post-citation-header {
+        flex-direction: column;
+        gap: var(--space-3);
+    }
+
+    .post-citation-copy {
+        width: 100%;
+    }
+
     .series-nav {
         grid-template-columns: 1fr;
     }
