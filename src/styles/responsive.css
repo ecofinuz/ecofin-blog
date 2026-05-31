@@ -13,8 +13,7 @@
     }
 
     .home-hero-grid {
-        grid-template-columns: 1fr;
-        gap: var(--space-8);
+        display: block;
     }
 
     .hero-copy {
@@ -23,10 +22,6 @@
 
     .hero-title {
         font-size: 3.55rem;
-    }
-
-    .ecosystem-visual {
-        min-height: 390px;
     }
 
     .post-list {
@@ -99,38 +94,8 @@
         white-space: normal;
     }
 
-    .hero-stats {
-        grid-template-columns: 1fr;
-    }
-
-    .ecosystem-visual {
-        min-height: auto;
-        padding: var(--space-5);
-    }
-
-    .ecosystem-map {
-        min-height: 340px;
-    }
-
-    .ecosystem-node {
-        width: 138px;
-        min-height: 118px;
-        padding: var(--space-3);
-    }
-
-    .ecosystem-core {
-        top: 128px;
-        width: min(58%, 220px);
-        padding: var(--space-4);
-    }
-
-    .ecosystem-core strong {
-        font-size: 1.06rem;
-    }
-
     .section-heading,
-    .post-footer,
-    .footer-inner {
+    .post-footer {
         align-items: flex-start;
         flex-direction: column;
     }
@@ -150,8 +115,21 @@
             var(--space-5);
     }
 
-    .post-item-byline,
-    .footer-right {
+    .home-post-cover {
+        height: auto;
+        aspect-ratio: 2 / 1;
+    }
+
+    .home-post-footer {
+        gap: var(--space-3);
+    }
+
+    .post-card-details {
+        justify-content: flex-start;
+        text-align: left;
+    }
+
+    .post-item-byline {
         justify-content: flex-start;
         text-align: left;
     }
@@ -211,8 +189,9 @@
         text-align: left;
     }
 
-    .footer-links {
-        justify-content: flex-start;
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-6);
     }
 
     .toc {
@@ -250,35 +229,5 @@
     .category-tag {
         width: 100%;
         justify-content: center;
-    }
-
-    .ecosystem-map {
-        min-height: 324px;
-    }
-
-    .ecosystem-node {
-        width: 124px;
-    }
-
-    .ecosystem-node-label {
-        font-size: 0.98rem;
-    }
-
-    .ecosystem-node strong {
-        font-size: 0.68rem;
-    }
-
-    .ecosystem-core {
-        top: 126px;
-        width: 54%;
-        padding: var(--space-3);
-    }
-
-    .ecosystem-core span {
-        font-size: 0.64rem;
-    }
-
-    .ecosystem-core strong {
-        font-size: 0.94rem;
     }
 }

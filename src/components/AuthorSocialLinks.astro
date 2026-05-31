@@ -1,5 +1,5 @@
 ---
-import Icon from "@components/Icon.astro";
+import { Icon } from "astro-icon/components";
 
 interface Props {
     authorName: string;
@@ -30,7 +30,7 @@ const iconLinks = [
                     class="author-link author-link-icon"
                     aria-label={`${label}: ${authorName}`}
                 >
-                    <Icon name={name} class="author-link-icon-svg" />
+                    <Icon name={name} class="author-link-icon-svg" aria-hidden="true" />
                 </a>
             )
         ))

@@ -5,6 +5,8 @@ interface Props {
     className?: string;
     loading?: "eager" | "lazy";
     decorative?: boolean;
+    placeholderLabel?: string;
+    placeholderTitle?: string;
 }
 
 const {
@@ -13,23 +15,35 @@ const {
     className = "",
     loading = "lazy",
     decorative = false,
+    placeholderLabel = "Ecofin",
+    placeholderTitle,
 } = Astro.props;
 
 const coverSrc = cover ? `/images/covers/${cover}` : undefined;
-const classes = ["post-cover", className].filter(Boolean).join(" ");
+const classes = [
+    "post-cover",
+    !coverSrc && "post-cover--placeholder-only",
+    className,
+]
+    .filter(Boolean)
+    .join(" ");
+const placeholderTitleText = placeholderTitle ?? title;
 ---
 
 <div class={classes}>
+    <div class="post-cover-placeholder" aria-hidden="true">
+        <span class="post-cover-placeholder-kicker">{placeholderLabel}</span>
+        <span class="post-cover-placeholder-title">{placeholderTitleText}</span>
+    </div>
     {
-        coverSrc ? (
+        coverSrc && (
             <img
                 src={coverSrc}
                 alt={decorative ? "" : title}
                 loading={loading}
                 decoding="async"
+                onerror="this.hidden=true"
             />
-        ) : (
-            <div class="post-cover-placeholder" aria-hidden="true"></div>
         )
     }
 </div>

@@ -1,11 +1,8 @@
 ---
-import BylineAuthor from "@components/BylineAuthor.astro";
 import HomeHero from "@components/HomeHero.astro";
 import PostCover from "@components/PostCover.astro";
 import PostDate from "@components/PostDate.astro";
 import ReadingTime from "@components/ReadingTime.astro";
-import type { AuthorKey } from "@data/authors";
-import { getAuthor } from "@data/authors";
 import type { CategoryKey } from "@data/categories";
 import { categories, getCategoryDetailsFromSlug } from "@data/categories";
 import Layout from "@layouts/Layout.astro";
@@ -51,29 +48,19 @@ const latestCategory = latestPost
 const latestHref = latestPost && latestCategory
     ? `/ru/${latestCategory.slug}/${getSlug(latestPost.id)}/`
     : "#articles";
-const postCountWord =
-    posts.length % 10 === 1 && posts.length % 100 !== 11
-        ? "публикация"
-        : posts.length % 10 >= 2 && posts.length % 10 <= 4 && (posts.length % 100 < 10 || posts.length % 100 >= 20)
-          ? "публикации"
-          : "публикаций";
-const postCountLabel = `${posts.length} ${postCountWord}`;
 ---
 
 <Layout title="Главная страница" lang={locale}>
     <main class="home-main">
         <HomeHero
             lang={locale}
-            postCount={posts.length}
-            categoryCount={Object.keys(categories).length}
             latestHref={latestHref}
             latestTitle={latestPost?.data.title}
-            latestCategory={latestCategory?.label}
         />
 
         <div class="container">
 
-            <section class="categories-section home-section">
+            <section class="categories-section home-section" id="topics">
                 <div class="section-heading">
                     <div>
                         <p class="label-small">Темы</p>
@@ -100,34 +87,35 @@ const postCountLabel = `${posts.length} ${postCountWord}`;
                         <h2 class="section-title">Последние публикации</h2>
                     </div>
                 </div>
-                <div class="post-list">
+                <div class="post-list home-post-list">
                     {
                         postsWithReadingTime.map(({ post, minutesRead }) => {
                             const cat = getCategoryDetailsFromSlug(getCategory(post.id), locale);
                             const slug = getSlug(post.id);
-                            const author = getAuthor(post.data.author as AuthorKey);
 
                             return (
                                 <a
                                     href={`/ru/${cat.slug}/${slug}/`}
-                                    class="post-item"
+                                    class="post-item home-post-item"
                                 >
                                     <PostCover
                                         cover={post.data.cover}
                                         title={post.data.title}
-                                        className="post-item-cover"
+                                        className="post-item-cover home-post-cover"
+                                        placeholderLabel={cat.label}
+                                        placeholderTitle={post.data.title}
                                         decorative
                                     />
-                                    <div class="post-meta-row">
+                                    <div class="post-meta-row home-post-meta">
                                         <span class="post-category label-small">
                                             {cat.label}
                                         </span>
                                         {post.data.part && (
                                             <>
-                                                <span class="label-small">
+                                                <span class="post-meta-separator" aria-hidden="true">
                                                     &middot;
                                                 </span>
-                                                <span class="label-small post-date">
+                                                <span class="label-small post-date home-post-part">
                                                     {post.data.part}-часть
                                                 </span>
                                             </>
@@ -137,15 +125,17 @@ const postCountLabel = `${posts.length} ${postCountWord}`;
                                     <p class="post-excerpt">
                                         {post.data.description}
                                     </p>
-                                    <div class="post-footer">
-                                        <span class="post-read">Прочитать &rarr;</span>
-                                        
-                                        <div class="post-item-byline">
-                                            <BylineAuthor name={author.name} />
-                                            <span class="sep">&middot;</span>
-                                            <PostDate date={formatDate(post.data.date)} />
-                                            <span class="sep">&middot;</span>
-                                            <ReadingTime locale={locale} minutesRead={minutesRead} />
+                                    <div class="post-footer home-post-footer">
+                                        <span class="post-read">Читать &rarr;</span>
+
+                                        <div class="post-card-details">
+                                            <PostDate date={formatDate(post.data.date)} class="label-small" />
+                                            <span class="post-meta-separator" aria-hidden="true">&middot;</span>
+                                            <ReadingTime
+                                                locale={locale}
+                                                minutesRead={minutesRead}
+                                                class="label-small"
+                                            />
                                         </div>
                                     </div>
                                 </a>

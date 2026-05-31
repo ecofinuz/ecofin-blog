@@ -1,6 +1,6 @@
 ---
 import type { Locale } from "@data/categories";
-import Icon from "@components/Icon.astro";
+import { Icon } from "astro-icon/components";
 
 interface Props {
     lang?: Locale;
@@ -81,7 +81,7 @@ const telegramHref = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}
         data-share-failed={strings.failed}
         aria-label={strings.shareLabel}
     >
-        <Icon name="share" class="post-share-icon" />
+        <Icon name="share" class="post-share-icon" aria-hidden="true" />
         <span class="post-share-label">{buttonLabel}</span>
     </button>
     {

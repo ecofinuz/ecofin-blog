@@ -37,7 +37,7 @@ export function formatReadingTime(
 
     switch (locale) {
         case "uz":
-            return `${formattedMinutes} daqiqalik o'qish`;
+            return `${formattedMinutes} daqiqalik o‘qish`;
         case "ru":
             return `${formattedMinutes} мин чтения`;
         case "en":

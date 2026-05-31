@@ -5,6 +5,7 @@ import { defineConfig } from "astro/config";
 import { remarkReadingTime } from "./remark-reading-time.mjs";
 
 import mdx from "@astrojs/mdx";
+import icon from "astro-icon";
 
 // https://astro.build/config
 export default defineConfig({
@@ -41,6 +42,7 @@ export default defineConfig({
     },
 
     integrations: [
+        icon(),
         sitemap({
             serialize(item) {
                 const url = new URL(item.url);

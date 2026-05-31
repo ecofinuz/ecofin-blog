@@ -1,5 +1,5 @@
 ---
-import Icon from "@components/Icon.astro";
+import { Icon } from "astro-icon/components";
 
 interface Props {
     name: string;
@@ -16,12 +16,12 @@ const classes = ["byline-author", "byline-author-with-icon", className]
 {
     href ? (
         <a href={href} class={classes}>
-            <Icon name="user" class="byline-author-icon" />
+            <Icon name="user" class="byline-author-icon" aria-hidden="true" />
             <span>{name}</span>
         </a>
     ) : (
         <span class={classes}>
-            <Icon name="user" class="byline-author-icon" />
+            <Icon name="user" class="byline-author-icon" aria-hidden="true" />
             <span>{name}</span>
         </span>
     )

@@ -26,18 +26,30 @@ const t: Record<string, Record<string, string>> = {
         sponsor:   "Qo'llash",
         navTagline: "Ochiq moliyaviy bilim, hamma uchun",
         tagline:   "Moliyaviy savodxonlik va iqtisodiy bilimlar ekotizimi.",
+        footerExplore: "Ko‘rish",
+        footerBlog: "Blog",
+        footerTopics: "Mavzular",
+        footerCommunity: "Hamjamiyat",
     },
     en: {
         platform:  "ecofin.uz",
         sponsor:   "Sponsor",
         navTagline: "Open finance knowledge, for everyone",
         tagline:   "An ecosystem of financial literacy and economic knowledge.",
+        footerExplore: "Explore",
+        footerBlog: "Blog",
+        footerTopics: "Topics",
+        footerCommunity: "Community",
     },
     ru: {
         platform:  "ecofin.uz",
         sponsor:   "Поддержать",
         navTagline: "Открытые финансовые знания, для всех",
         tagline:   "Экосистема финансовой грамотности и экономических знаний.",
+        footerExplore: "Разделы",
+        footerBlog: "Блог",
+        footerTopics: "Темы",
+        footerCommunity: "Сообщество",
     },
 };
 
@@ -51,6 +63,8 @@ const themeLabel = {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const homeHref = lang === "uz" ? "/" : `/${lang}/`;
+const topicsHref = `${homeHref}#topics`;
+const footerCopy = `© 2026 Ecofin. ${ui.navTagline}.`;
 const resolvedLanguageLinks = {
     ...getLocalizedHomeLinks(),
     ...languageLinks,
@@ -217,33 +231,54 @@ const languages = [
 
         <slot />
 
-        <footer>
+        <footer class="site-footer">
             <div class="container footer-inner">
-                <div class="footer-left">
-                    <span class="nav-brand footer-brand">Ecofin</span>
-                    <p class="footer-tagline">
-                        {ui.tagline}
-                    </p>
-                </div>
-                <div class="footer-right">
-                    <div class="footer-links">
-                        <a href="https://ecofin.uz/" class="footer-link">ecofin.uz</a>
-                        <a
-                            href="https://github.com/ecofinuz/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="footer-link"
-                        >GitHub</a>
-                        <a
-                            href="https://t.me/ecofin_uz"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="footer-link"
-                        >Telegram</a>
+                <div class="footer-grid">
+                    <div class="footer-brand-block">
+                        <span class="footer-brand">Ecofin</span>
+                        <p class="footer-tagline">{ui.navTagline}</p>
                     </div>
-                    <p class="footer-copy">
-                        © {new Date().getFullYear()} Ecofin
-                    </p>
+
+                    <div class="footer-column">
+                        <p class="footer-heading">{ui.footerExplore}</p>
+                        <nav class="footer-links" aria-label={ui.footerExplore}>
+                            <a href={homeHref} class="footer-link">
+                                {ui.footerBlog}
+                            </a>
+                            <a href={topicsHref} class="footer-link">
+                                {ui.footerTopics}
+                            </a>
+                            <a href="https://ecofin.uz/" class="footer-link">
+                                {ui.platform}
+                            </a>
+                        </nav>
+                    </div>
+
+                    <div class="footer-column">
+                        <p class="footer-heading">{ui.footerCommunity}</p>
+                        <nav class="footer-links" aria-label={ui.footerCommunity}>
+                            <a
+                                href="https://github.com/ecofinuz"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="footer-link"
+                            >
+                                GitHub
+                            </a>
+                            <a
+                                href="https://t.me/ecofin_uz"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="footer-link"
+                            >
+                                Telegram
+                            </a>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <p class="footer-copy">{footerCopy}</p>
                 </div>
             </div>
         </footer>

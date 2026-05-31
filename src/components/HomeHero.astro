@@ -3,76 +3,34 @@ import type { Locale } from "@data/categories";
 
 interface Props {
     lang: Locale;
-    postCount: number;
-    categoryCount: number;
     latestHref?: string;
     latestTitle?: string;
-    latestCategory?: string;
 }
 
 const {
     lang,
-    postCount,
-    categoryCount,
     latestHref = "#articles",
     latestTitle,
-    latestCategory,
 } = Astro.props;
 
 const copy = {
     uz: {
-        title: "Ecofin",
-        lead: "Pul, kredit, inflyatsiya va bozorlarni sodda tilda tushuntiradigan iqtisodiy maqolalar to'plami.",
-        primaryCta: "Maqolalarni o'qish",
-        latestLabel: "So'nggi maqola",
-        posts: "Maqola",
-        topics: "Mavzu",
-        insight: "Seriya",
-        ecosystemLabel: "Ecofin ekotizimi",
-        coreKicker: "Ochiq sikl",
-        coreLabel: "O'rganish, qurish, ulashish",
-        blogNode: "Blog",
-        blogMeta: "Bilim",
-        platformNode: "Platforma",
-        platformMeta: "Vositalar",
-        repoNode: "Open-source repo",
-        repoMeta: "Kod",
+        title: "Moliyaviy bilim, sodda tilda",
+        lead: "Pul, kredit, inflyatsiya, bozorlar va kundalik iqtisodiy qarorlar haqida sodda tildagi maqolalar.",
+        primaryCta: "Maqolalarni o‘qish",
+        latestLabel: "So‘nggi maqola",
     },
     en: {
-        title: "Ecofin",
+        title: "Finance, Explained Simply",
         lead: "Plain-language writing on money, credit, inflation, markets, and everyday economic decisions.",
         primaryCta: "Read articles",
         latestLabel: "Latest article",
-        posts: "Articles",
-        topics: "Topics",
-        insight: "Series",
-        ecosystemLabel: "Ecofin ecosystem",
-        coreKicker: "Open loop",
-        coreLabel: "Learn, build, share",
-        blogNode: "Blog",
-        blogMeta: "Knowledge",
-        platformNode: "Platform",
-        platformMeta: "Tools",
-        repoNode: "Open-source repo",
-        repoMeta: "Code",
     },
     ru: {
-        title: "Ecofin",
-        lead: "Статьи простым языком о деньгах, кредитах, инфляции, рынках и повседневных экономических решениях.",
-        primaryCta: "Читать публикации",
-        latestLabel: "Свежая публикация",
-        posts: "Публикации",
-        topics: "Темы",
-        insight: "Серия",
-        ecosystemLabel: "Экосистема Ecofin",
-        coreKicker: "Открытый цикл",
-        coreLabel: "Учиться, строить, делиться",
-        blogNode: "Блог",
-        blogMeta: "Знания",
-        platformNode: "Платформа",
-        platformMeta: "Инструменты",
-        repoNode: "Open-source repo",
-        repoMeta: "Код",
+        title: "Финансы простым языком",
+        lead: "Простые материалы о деньгах, кредитах, инфляции, рынках и повседневных экономических решениях.",
+        primaryCta: "Читать статьи",
+        latestLabel: "Новая статья",
     },
 }[lang];
 ---
@@ -95,97 +53,6 @@ const copy = {
                         </a>
                     )
                 }
-            </div>
-
-            <dl class="hero-stats" aria-label="Ecofin content overview">
-                <div class="hero-stat">
-                    <dt>{copy.posts}</dt>
-                    <dd>{postCount}</dd>
-                </div>
-                <div class="hero-stat">
-                    <dt>{copy.topics}</dt>
-                    <dd>{categoryCount}</dd>
-                </div>
-                <div class="hero-stat">
-                    <dt>{copy.insight}</dt>
-                    <dd>{latestCategory ?? "Ecofin"}</dd>
-                </div>
-            </dl>
-        </div>
-
-        <div class="hero-visual" aria-hidden="true">
-            <div class="ecosystem-visual">
-                <div class="ecosystem-header">
-                    <span>{copy.ecosystemLabel}</span>
-                    <strong>Ecofin</strong>
-                </div>
-
-                <div class="ecosystem-map">
-                    <svg
-                        class="ecosystem-flow"
-                        viewBox="0 0 520 320"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <defs>
-                            <marker
-                                id={`ecosystem-arrow-${lang}`}
-                                markerWidth="10"
-                                markerHeight="10"
-                                refX="8"
-                                refY="5"
-                                orient="auto"
-                            >
-                                <path d="M1 1L9 5L1 9Z" fill="currentColor" />
-                            </marker>
-                        </defs>
-                        <path
-                            class="ecosystem-path ecosystem-path--blog"
-                            d="M288 74C371 82 430 132 411 206"
-                            marker-end={`url(#ecosystem-arrow-${lang})`}
-                        />
-                        <path
-                            class="ecosystem-path ecosystem-path--platform"
-                            d="M368 246C304 292 213 292 151 246"
-                            marker-end={`url(#ecosystem-arrow-${lang})`}
-                        />
-                        <path
-                            class="ecosystem-path ecosystem-path--repo"
-                            d="M108 205C91 132 150 83 232 74"
-                            marker-end={`url(#ecosystem-arrow-${lang})`}
-                        />
-                    </svg>
-
-                    <div class="ecosystem-node ecosystem-node--blog ecosystem-node--highlight">
-                        <span class="ecosystem-node-icon ecosystem-node-icon--blog">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </span>
-                        <span class="ecosystem-node-label">{copy.blogNode}</span>
-                        <strong>{copy.blogMeta}</strong>
-                    </div>
-
-                    <div class="ecosystem-node ecosystem-node--platform">
-                        <span class="ecosystem-node-icon ecosystem-node-icon--platform">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </span>
-                        <span class="ecosystem-node-label">{copy.platformNode}</span>
-                        <strong>{copy.platformMeta}</strong>
-                    </div>
-
-                    <div class="ecosystem-node ecosystem-node--repo">
-                        <span class="ecosystem-node-icon ecosystem-node-icon--repo">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </span>
-                        <span class="ecosystem-node-label">{copy.repoNode}</span>
-                        <strong>{copy.repoMeta}</strong>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
