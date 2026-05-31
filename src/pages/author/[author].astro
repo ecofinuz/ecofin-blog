@@ -4,7 +4,6 @@ import { authors, getAuthor } from "@data/authors";
 import { getCategoryDetailsFromSlug } from "@data/categories";
 import Layout from "@layouts/Layout.astro";
 import AuthorSocialLinks from "@components/AuthorSocialLinks.astro";
-import BylineAuthor from "@components/BylineAuthor.astro";
 import PostDate from "@components/PostDate.astro";
 import PostCover from "@components/PostCover.astro";
 import ReadingTime from "@components/ReadingTime.astro";
@@ -79,28 +78,30 @@ function getCatLabel(id: string): string {
 
             <div class="author-posts">
                 <p class="label-small">{posts.length} ta maqola</p>
-                <div class="post-list">
+                <div class="post-list home-post-list">
                     {postsWithReadingTime.map(({ post, minutesRead }) => (
                         <a
                             href={`/${getCatSlug(post.id)}/${getSlug(post.id)}/`}
-                            class="post-item"
+                            class="post-item home-post-item"
                         >
                             <PostCover
                                 cover={post.data.cover}
                                 title={post.data.title}
-                                className="post-item-cover"
+                                className="post-item-cover home-post-cover"
+                                placeholderLabel={getCatLabel(post.id)}
+                                placeholderTitle={post.data.title}
                                 decorative
                             />
-                            <div class="post-meta-row">
+                            <div class="post-meta-row home-post-meta">
                                 <span class="post-category label-small">
                                     {getCatLabel(post.id)}
                                 </span>
                                 {post.data.part && (
                                     <>
-                                        <span class="label-small">
+                                        <span class="post-meta-separator" aria-hidden="true">
                                             &middot;
                                         </span>
-                                        <span class="label-small post-date">
+                                        <span class="label-small post-date home-post-part">
                                             {post.data.part}-qism
                                         </span>
                                     </>
@@ -108,15 +109,17 @@ function getCatLabel(id: string): string {
                             </div>
                             <h2 class="post-title">{post.data.title}</h2>
                             <p class="post-excerpt">{post.data.description}</p>
-                            <div class="post-footer">
-                                <span class="post-read">O'qish &rarr;</span>
-                                
-                                <div class="post-item-byline">
-                                    <BylineAuthor name={author.name} />
-                                    <span class="sep">&middot;</span>
-                                    <PostDate date={formatDate(post.data.date)} />
-                                    <span class="sep">&middot;</span>
-                                    <ReadingTime locale={locale} minutesRead={minutesRead} />
+                            <div class="post-footer home-post-footer">
+                                <span class="post-read">O‘qish &rarr;</span>
+
+                                <div class="post-card-details">
+                                    <PostDate date={formatDate(post.data.date)} class="label-small" />
+                                    <span class="post-meta-separator" aria-hidden="true">&middot;</span>
+                                    <ReadingTime
+                                        locale={locale}
+                                        minutesRead={minutesRead}
+                                        class="label-small"
+                                    />
                                 </div>
                             </div>
                         </a>

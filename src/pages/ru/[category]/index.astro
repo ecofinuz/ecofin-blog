@@ -1,10 +1,7 @@
 ---
-import type { AuthorKey } from "@data/authors";
-import { getAuthor } from "@data/authors";
 import type { CategoryKey } from "@data/categories";
 import { categories } from "@data/categories";
 import Layout from "@layouts/Layout.astro";
-import BylineAuthor from "@components/BylineAuthor.astro";
 import PostDate from "@components/PostDate.astro";
 import PostCover from "@components/PostCover.astro";
 import ReadingTime from "@components/ReadingTime.astro";
@@ -36,6 +33,27 @@ const posts = allPosts.sort(
 const postsWithReadingTime = await getPostsWithReadingTime(posts);
 
 const catLabel = categories[categoryKey].ru.label;
+const catDescription = categories[categoryKey].ru.description;
+const postCountLabel = formatPostCount(posts.length);
+
+function formatPostCount(count: number): string {
+    const lastTwo = count % 100;
+    const last = count % 10;
+
+    if (lastTwo >= 11 && lastTwo <= 14) {
+        return `${count} публикаций`;
+    }
+
+    if (last === 1) {
+        return `${count} публикация`;
+    }
+
+    if (last >= 2 && last <= 4) {
+        return `${count} публикации`;
+    }
+
+    return `${count} публикаций`;
+}
 
 function formatDate(date: Date): string {
     return date.toLocaleDateString("ru-RU", {
@@ -51,57 +69,68 @@ function getSlug(id: string): string {
 }
 ---
 
-<Layout title={catLabel} lang={locale} languageLinks={languageLinks}>
+<Layout
+    title={catLabel}
+    description={catDescription}
+    lang={locale}
+    languageLinks={languageLinks}
+>
     <main>
         <div class="container">
 
             <div class="category-header">
                 <a href="/ru/" class="label-small back-link">← Все публикации</a>
                 <h1>{catLabel}</h1>
-                <p class="label-small">{posts.length} публикации</p>
+                <p class="category-description">{catDescription}</p>
+                <p class="category-meta label-small">{postCountLabel}</p>
             </div>
 
-            <div class="post-list">
+            <div class="post-list home-post-list">
                 {
                     postsWithReadingTime.map(({ post, minutesRead }) => {
                         const slug = getSlug(post.id);
-                        const author = getAuthor(post.data.author as AuthorKey);
 
                         return (
                             <a
                                 href={`/ru/${category}/${slug}/`}
-                                class="post-item"
+                                class="post-item home-post-item"
                             >
                                 <PostCover
                                     cover={post.data.cover}
                                     title={post.data.title}
-                                    className="post-item-cover"
+                                    className="post-item-cover home-post-cover"
+                                    placeholderLabel={catLabel}
+                                    placeholderTitle={post.data.title}
                                     decorative
                                 />
-                                <div class="post-meta-row">
-                                    <PostDate date={formatDate(post.data.date)} class="label-small" />
+                                <div class="post-meta-row home-post-meta">
+                                    <span class="post-category label-small">
+                                        {catLabel}
+                                    </span>
                                     {post.data.part && (
                                         <>
-                                            <span class="label-small">
+                                            <span class="post-meta-separator" aria-hidden="true">
                                                 &middot;
                                             </span>
-                                            <span class="label-small post-date">
-                                                Часть {post.data.part}
+                                            <span class="label-small post-date home-post-part">
+                                                {post.data.part}-часть
                                             </span>
                                         </>
                                     )}
                                 </div>
                                 <h2 class="post-title">{post.data.title}</h2>
                                 <p class="post-excerpt">{post.data.description}</p>
-                                <div class="post-footer">
-                                    <span class="post-read">Прочитать &rarr;</span>
-                                    
-                                    <div class="post-item-byline">
-                                        <BylineAuthor name={author.name} />
-                                        <span class="sep">&middot;</span>
-                                        <PostDate date={formatDate(post.data.date)} />
-                                        <span class="sep">&middot;</span>
-                                        <ReadingTime locale={locale} minutesRead={minutesRead} />
+                                <div class="post-footer home-post-footer">
+                                    <span class="post-read">Читать &rarr;</span>
+
+                                    <div class="post-card-details">
+                                        <PostDate date={formatDate(post.data.date)} class="label-small" />
+                                        <span class="post-meta-separator" aria-hidden="true">&middot;</span>
+                                        <ReadingTime
+                                            locale={locale}
+                                            minutesRead={minutesRead}
+                                            class="label-small"
+                                        />
                                     </div>
                                 </div>
                             </a>
