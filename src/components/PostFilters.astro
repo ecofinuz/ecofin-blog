@@ -1,0 +1,286 @@
+---
+import { authors } from "@data/authors";
+
+type Locale = "uz" | "en" | "ru";
+
+interface Props {
+    lang: Locale;
+    listId: string;
+    authorKeys?: string[];
+    total: number;
+    showAuthorFilter?: boolean;
+}
+
+const {
+    lang,
+    listId,
+    authorKeys = [],
+    total,
+    showAuthorFilter = true,
+} = Astro.props;
+
+const copy = {
+    uz: {
+        controlsLabel: "Maqolalarni qidirish va saralash",
+        search: "Qidirish",
+        searchPlaceholder: "Sarlavha yoki tavsif",
+        author: "Muallif",
+        allAuthors: "Barcha mualliflar",
+        sort: "Saralash",
+        dateDesc: "Sana: yangidan eskiga",
+        dateAsc: "Sana: eskidan yangiga",
+        titleAsc: "Sarlavha: A-Z",
+        titleDesc: "Sarlavha: Z-A",
+        clear: "Tozalash",
+        empty: "Mos maqola topilmadi.",
+    },
+    en: {
+        controlsLabel: "Search and sort articles",
+        search: "Search",
+        searchPlaceholder: "Title or description",
+        author: "Author",
+        allAuthors: "All authors",
+        sort: "Sort",
+        dateDesc: "Date: newest first",
+        dateAsc: "Date: oldest first",
+        titleAsc: "Title: A-Z",
+        titleDesc: "Title: Z-A",
+        clear: "Clear",
+        empty: "No matching articles found.",
+    },
+    ru: {
+        controlsLabel: "Поиск и сортировка публикаций",
+        search: "Поиск",
+        searchPlaceholder: "Заголовок или описание",
+        author: "Автор",
+        allAuthors: "Все авторы",
+        sort: "Сортировка",
+        dateDesc: "Дата: сначала новые",
+        dateAsc: "Дата: сначала старые",
+        titleAsc: "Заголовок: A-Z",
+        titleDesc: "Заголовок: Z-A",
+        clear: "Очистить",
+        empty: "Подходящие публикации не найдены.",
+    },
+}[lang];
+
+const authorOptions = Array.from(new Set(authorKeys))
+    .map((key) => ({
+        key,
+        name: authors[key as keyof typeof authors]?.name ?? key,
+    }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+---
+
+<div
+    class="post-filter-bar"
+    data-post-filters
+    data-target-list={listId}
+    data-filter-lang={lang}
+>
+    <form
+        class:list={[
+            "post-filter-form",
+            !showAuthorFilter && "post-filter-form--compact",
+        ]}
+        role="search"
+        aria-label={copy.controlsLabel}
+    >
+        <label class="post-filter-field post-filter-field--search">
+            <span class="post-filter-label">{copy.search}</span>
+            <input
+                class="post-filter-input"
+                type="search"
+                autocomplete="off"
+                placeholder={copy.searchPlaceholder}
+                data-post-search
+            />
+        </label>
+
+        {
+            showAuthorFilter && (
+                <label class="post-filter-field">
+                    <span class="post-filter-label">{copy.author}</span>
+                    <select class="post-filter-select" data-post-author>
+                        <option value="">{copy.allAuthors}</option>
+                        {authorOptions.map((author) => (
+                            <option value={author.key}>{author.name}</option>
+                        ))}
+                    </select>
+                </label>
+            )
+        }
+
+        <label class="post-filter-field">
+            <span class="post-filter-label">{copy.sort}</span>
+            <select class="post-filter-select" data-post-sort>
+                <option value="date-desc">{copy.dateDesc}</option>
+                <option value="date-asc">{copy.dateAsc}</option>
+                <option value="title-asc">{copy.titleAsc}</option>
+                <option value="title-desc">{copy.titleDesc}</option>
+            </select>
+        </label>
+    </form>
+
+    <div class="post-filter-feedback">
+        <p class="post-filter-status label-small" aria-live="polite" data-post-filter-status>
+            {lang === "uz" && `${total}/${total} maqola`}
+            {lang === "en" && `${total} of ${total} posts`}
+            {lang === "ru" && `${total} из ${total} публикаций`}
+        </p>
+        <button class="post-filter-clear" type="button" hidden data-post-clear>
+            {copy.clear}
+        </button>
+    </div>
+
+    <p class="post-filter-empty" hidden data-post-filter-empty>{copy.empty}</p>
+</div>
+
+<script is:inline>
+    (() => {
+        if (window.ecofinPostFiltersReady) {
+            window.ecofinPostFiltersInit?.();
+            return;
+        }
+
+        window.ecofinPostFiltersReady = true;
+
+        const normalize = (value) => (value || "").toLocaleLowerCase().trim();
+
+        const formatStatus = (count, total, lang) => {
+            if (lang === "uz") {
+                return `${count}/${total} maqola`;
+            }
+
+            if (lang === "ru") {
+                return `${count} из ${total} публикаций`;
+            }
+
+            return `${count} of ${total} posts`;
+        };
+
+        const initializeFilters = () => {
+            const controls = document.querySelectorAll(
+                "[data-post-filters]:not([data-post-filters-ready])",
+            );
+
+            controls.forEach((root) => {
+                const list = document.getElementById(root.dataset.targetList || "");
+
+                if (!list) {
+                    return;
+                }
+
+                root.dataset.postFiltersReady = "true";
+
+                const search = root.querySelector("[data-post-search]");
+                const author = root.querySelector("[data-post-author]");
+                const sort = root.querySelector("[data-post-sort]");
+                const status = root.querySelector("[data-post-filter-status]");
+                const empty = root.querySelector("[data-post-filter-empty]");
+                const clear = root.querySelector("[data-post-clear]");
+                const items = Array.from(list.querySelectorAll("[data-post-item]"));
+                const initialIndex = new Map(items.map((item, index) => [item, index]));
+                const lang = root.dataset.filterLang || document.documentElement.lang || "en";
+                const collator = new Intl.Collator(lang, {
+                    numeric: true,
+                    sensitivity: "base",
+                });
+
+                const compareInitial = (a, b) =>
+                    (initialIndex.get(a) || 0) - (initialIndex.get(b) || 0);
+
+                const sortItems = () => {
+                    const sortValue = sort?.value || "date-desc";
+
+                    return [...items].sort((a, b) => {
+                        if (sortValue === "title-asc" || sortValue === "title-desc") {
+                            const compared = collator.compare(
+                                a.dataset.postTitle || "",
+                                b.dataset.postTitle || "",
+                            );
+                            const direction = sortValue === "title-desc" ? -1 : 1;
+
+                            return compared * direction || compareInitial(a, b);
+                        }
+
+                        const dateA = Number(a.dataset.postDate || 0);
+                        const dateB = Number(b.dataset.postDate || 0);
+                        const compared = dateA - dateB;
+                        const direction = sortValue === "date-desc" ? -1 : 1;
+
+                        return compared * direction || compareInitial(a, b);
+                    });
+                };
+
+                const applyFilters = () => {
+                    const query = normalize(search?.value);
+                    const selectedAuthor = author?.value || "";
+                    let visibleCount = 0;
+
+                    sortItems().forEach((item) => {
+                        list.append(item);
+
+                        const haystack = normalize(item.dataset.postSearch);
+                        const matchesQuery = !query || haystack.includes(query);
+                        const matchesAuthor =
+                            !selectedAuthor || item.dataset.postAuthor === selectedAuthor;
+                        const isVisible = matchesQuery && matchesAuthor;
+
+                        item.hidden = !isVisible;
+
+                        if (isVisible) {
+                            visibleCount += 1;
+                        }
+                    });
+
+                    if (status) {
+                        status.textContent = formatStatus(visibleCount, items.length, lang);
+                    }
+
+                    if (empty) {
+                        empty.hidden = visibleCount !== 0;
+                    }
+
+                    if (clear) {
+                        clear.hidden =
+                            !query && !selectedAuthor && (sort?.value || "date-desc") === "date-desc";
+                    }
+                };
+
+                search?.addEventListener("input", applyFilters);
+                author?.addEventListener("change", applyFilters);
+                sort?.addEventListener("change", applyFilters);
+                clear?.addEventListener("click", () => {
+                    if (search) {
+                        search.value = "";
+                    }
+                    if (author) {
+                        author.value = "";
+                    }
+                    if (sort) {
+                        sort.value = "date-desc";
+                    }
+                    applyFilters();
+                    search?.focus();
+                });
+
+                root.querySelector("form")?.addEventListener("submit", (event) => {
+                    event.preventDefault();
+                });
+
+                applyFilters();
+            });
+        };
+
+        window.ecofinPostFiltersInit = initializeFilters;
+
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", initializeFilters, {
+                once: true,
+            });
+        } else {
+            initializeFilters();
+        }
+    })();
+</script>

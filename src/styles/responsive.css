@@ -27,6 +27,22 @@
     .post-list {
         grid-template-columns: 1fr;
     }
+
+    .post-filter-form {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .post-filter-field--search {
+        grid-column: 1 / -1;
+    }
+
+    .post-filter-form--compact {
+        grid-template-columns: 1fr;
+    }
+
+    .post-filter-form--compact .post-filter-field--search {
+        grid-column: auto;
+    }
 }
 
 @media (max-width: 700px) {
@@ -127,6 +143,19 @@
     .post-card-details {
         justify-content: flex-start;
         text-align: left;
+    }
+
+    .post-filter-form {
+        grid-template-columns: 1fr;
+    }
+
+    .post-filter-field--search {
+        grid-column: auto;
+    }
+
+    .post-filter-feedback {
+        align-items: flex-start;
+        flex-direction: column;
     }
 
     .post-item-byline {

@@ -6,6 +6,7 @@ import Layout from "@layouts/Layout.astro";
 import AuthorSocialLinks from "@components/AuthorSocialLinks.astro";
 import PostDate from "@components/PostDate.astro";
 import PostCover from "@components/PostCover.astro";
+import PostFilters from "@components/PostFilters.astro";
 import ReadingTime from "@components/ReadingTime.astro";
 import { getLocalizedAuthorLinks } from "@utils/languageLinks";
 import { getPostsWithReadingTime } from "@utils/readingTime";
@@ -20,18 +21,22 @@ export async function getStaticPaths() {
     }));
 }
 
+const { author: authorParam } = Astro.params;
 const { authorKey } = Astro.props;
 const author = getAuthor(authorKey);
 const languageLinks = getLocalizedAuthorLinks(authorKey);
 
 const allPosts = await getCollection("blog", ({ id, data }) =>
-    id.startsWith(`${locale}/`) && data.author === authorKey
+    id.startsWith(`${locale}/`) &&
+    data.author === authorKey &&
+    data.author === authorParam
 );
 
 const posts = allPosts.sort(
     (a, b) => b.data.date.getTime() - a.data.date.getTime()
 );
 const postsWithReadingTime = await getPostsWithReadingTime(posts);
+const postListId = `${locale}-${authorKey}-author-post-list`;
 
 function formatDate(date: Date): string {
     return date.toLocaleDateString("uz-UZ", {
@@ -78,11 +83,22 @@ function getCatLabel(id: string): string {
 
             <div class="author-posts">
                 <p class="label-small">{posts.length} ta maqola</p>
-                <div class="post-list home-post-list">
+                <PostFilters
+                    lang={locale}
+                    listId={postListId}
+                    total={posts.length}
+                    showAuthorFilter={false}
+                />
+                <div class="post-list home-post-list" id={postListId}>
                     {postsWithReadingTime.map(({ post, minutesRead }) => (
                         <a
                             href={`/${getCatSlug(post.id)}/${getSlug(post.id)}/`}
                             class="post-item home-post-item"
+                            data-post-item="true"
+                            data-post-title={post.data.title}
+                            data-post-date={post.data.date.getTime()}
+                            data-post-author={post.data.author}
+                            data-post-search={`${post.data.title} ${post.data.description}`}
                         >
                             <PostCover
                                 cover={post.data.cover}

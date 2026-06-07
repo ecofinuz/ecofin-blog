@@ -2,6 +2,7 @@
 import HomeHero from "@components/HomeHero.astro";
 import PostCover from "@components/PostCover.astro";
 import PostDate from "@components/PostDate.astro";
+import PostFilters from "@components/PostFilters.astro";
 import ReadingTime from "@components/ReadingTime.astro";
 import type { CategoryKey } from "@data/categories";
 import { categories, getCategoryDetailsFromSlug } from "@data/categories";
@@ -20,6 +21,8 @@ const posts = allPosts.sort(
     (a, b) => b.data.date.getTime() - a.data.date.getTime()
 );
 const postsWithReadingTime = await getPostsWithReadingTime(posts);
+const postListId = "home-post-list-uz";
+const authorKeys = posts.map((post) => post.data.author);
 
 function formatDate(date: Date): string {
     return date.toLocaleDateString("uz-UZ", {
@@ -87,7 +90,13 @@ const latestHref = latestPost && latestCategory
                         <h2 class="section-title">So‘nggi maqolalar</h2>
                     </div>
                 </div>
-                <div class="post-list home-post-list">
+                <PostFilters
+                    lang={locale}
+                    listId={postListId}
+                    authorKeys={authorKeys}
+                    total={posts.length}
+                />
+                <div class="post-list home-post-list" id={postListId}>
                     {
                         postsWithReadingTime.map(({ post, minutesRead }) => {
                             const cat = getCategoryDetailsFromSlug(getCategory(post.id), locale);
@@ -97,6 +106,11 @@ const latestHref = latestPost && latestCategory
                                 <a
                                     href={`/${cat.slug}/${slug}/`}
                                     class="post-item home-post-item"
+                                    data-post-item="true"
+                                    data-post-title={post.data.title}
+                                    data-post-date={post.data.date.getTime()}
+                                    data-post-author={post.data.author}
+                                    data-post-search={`${post.data.title} ${post.data.description}`}
                                 >
                                     <PostCover
                                         cover={post.data.cover}
