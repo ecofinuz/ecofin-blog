@@ -13,7 +13,7 @@ import ReadingTime from "@components/ReadingTime.astro";
 import ReadingProgress from "@components/ReadingProgress.astro";
 import SeriesNavigation from "@components/SeriesNavigation.astro";
 import ShareActions from "@components/ShareActions.astro";
-import { getLocalizedPostLinks } from "@utils/languageLinks";
+import { getAvailablePostLanguageLinks, getLocalizedPostLinks } from "@utils/languageLinks";
 import { getSeriesNavigation } from "@utils/seriesNavigation";
 import { getMinutesRead } from "@utils/readingTime";
 import { getCollection, render } from "astro:content";
@@ -37,13 +37,14 @@ export async function getStaticPaths() {
             props: {
                 post,
                 languageLinks: getLocalizedPostLinks(post, allPosts),
+                seoLanguageLinks: getAvailablePostLanguageLinks(post, allPosts),
                 seriesNavigation: getSeriesNavigation(post, posts),
             },
         };
     });
 }
 
-const { post, languageLinks, seriesNavigation } = Astro.props;
+const { post, languageLinks, seoLanguageLinks, seriesNavigation } = Astro.props;
 const { Content, remarkPluginFrontmatter } = await render(post);
 const minutesRead = getMinutesRead(remarkPluginFrontmatter);
 const author = getAuthor(post.data.author as AuthorKey);
@@ -65,7 +66,19 @@ function formatDate(date: Date): string {
 }
 ---
 
-<Layout title={post.data.title} description={post.data.description} lang={locale} ogImage={ogImage} languageLinks={languageLinks}>
+<Layout
+    title={post.data.title}
+    description={post.data.description}
+    lang={locale}
+    ogImage={ogImage}
+    languageLinks={languageLinks}
+    seoLanguageLinks={seoLanguageLinks}
+    pageType="article"
+    publishedTime={post.data.date}
+    updatedTime={post.data.updated}
+    authorName={author.name}
+    articleSection={catLabel}
+>
     <ReadingProgress />
     <main>
         <div class="container">

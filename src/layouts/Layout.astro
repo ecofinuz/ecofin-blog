@@ -5,6 +5,12 @@ interface Props {
     lang?: string;
     ogImage?: string;
     languageLinks?: Partial<LanguageLinks>;
+    seoLanguageLinks?: Partial<LanguageLinks>;
+    pageType?: "website" | "article";
+    publishedTime?: Date;
+    updatedTime?: Date;
+    authorName?: string;
+    articleSection?: string;
 }
 
 import "@styles/global.css";
@@ -18,6 +24,12 @@ const {
     lang = "uz",
     ogImage,
     languageLinks,
+    seoLanguageLinks,
+    pageType = "website",
+    publishedTime,
+    updatedTime,
+    authorName,
+    articleSection,
 } = Astro.props;
 
 const t: Record<string, Record<string, string>> = {
@@ -62,6 +74,7 @@ const themeLabel = {
 }[lang] ?? "Toggle color theme";
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const siteURL = new URL("/", Astro.site);
 const homeHref = lang === "uz" ? "/" : `/${lang}/`;
 const topicsHref = `${homeHref}#topics`;
 const footerCopy = `© 2026 Ecofin. ${ui.navTagline}.`;
@@ -69,11 +82,97 @@ const resolvedLanguageLinks = {
     ...getLocalizedHomeLinks(),
     ...languageLinks,
 };
+const resolvedSeoLanguageLinks = seoLanguageLinks ?? resolvedLanguageLinks;
 const languages = [
     { code: "uz", label: "UZ", href: resolvedLanguageLinks.uz },
     { code: "en", label: "EN", href: resolvedLanguageLinks.en },
     { code: "ru", label: "RU", href: resolvedLanguageLinks.ru },
 ];
+const seoLanguages = [
+    { code: "uz", locale: "uz_UZ", href: resolvedSeoLanguageLinks.uz },
+    { code: "en", locale: "en_US", href: resolvedSeoLanguageLinks.en },
+    { code: "ru", locale: "ru_RU", href: resolvedSeoLanguageLinks.ru },
+].filter((language) => language.href);
+const currentLocale = seoLanguages.find((language) => language.code === lang)
+    ?.locale ?? "uz_UZ";
+const alternateLocales = seoLanguages.filter((language) => language.code !== lang);
+const xDefaultHref = resolvedSeoLanguageLinks.uz ?? resolvedSeoLanguageLinks.en ?? resolvedSeoLanguageLinks.ru;
+const pageTitle = `${title} | Ecofin`;
+const resolvedOgImage = new URL(ogImage ?? "/ecofin-favicon.png", Astro.site);
+const ogType = pageType === "article" ? "article" : "website";
+const publishedISO = publishedTime?.toISOString();
+const updatedISO = (updatedTime ?? publishedTime)?.toISOString();
+const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Organization",
+            "@id": new URL("/#organization", Astro.site).href,
+            name: "Ecofin",
+            url: siteURL.href,
+            logo: {
+                "@type": "ImageObject",
+                url: new URL("/ecofin-favicon.png", Astro.site).href,
+                width: 152,
+                height: 128,
+            },
+            sameAs: [
+                "https://ecofin.uz/",
+                "https://github.com/ecofinuz",
+                "https://t.me/ecofin_uz",
+            ],
+        },
+        {
+            "@type": "WebSite",
+            "@id": new URL("/#website", Astro.site).href,
+            url: siteURL.href,
+            name: "Ecofin Blog",
+            description: ui.tagline,
+            publisher: {
+                "@id": new URL("/#organization", Astro.site).href,
+            },
+            inLanguage: lang,
+        },
+        pageType === "article"
+            ? {
+                  "@type": "BlogPosting",
+                  "@id": `${canonicalURL.href}#article`,
+                  mainEntityOfPage: canonicalURL.href,
+                  headline: title,
+                  description: pageDescription,
+                  image: resolvedOgImage.href,
+                  datePublished: publishedISO,
+                  dateModified: updatedISO,
+                  author: {
+                      "@type": "Person",
+                      name: authorName ?? "Ecofin",
+                  },
+                  publisher: {
+                      "@id": new URL("/#organization", Astro.site).href,
+                  },
+                  articleSection,
+                  inLanguage: lang,
+              }
+            : {
+                  "@type": "WebPage",
+                  "@id": `${canonicalURL.href}#webpage`,
+                  url: canonicalURL.href,
+                  name: pageTitle,
+                  description: pageDescription,
+                  isPartOf: {
+                      "@id": new URL("/#website", Astro.site).href,
+                  },
+                  about: {
+                      "@id": new URL("/#organization", Astro.site).href,
+                  },
+                  primaryImageOfPage: {
+                      "@type": "ImageObject",
+                      url: resolvedOgImage.href,
+                  },
+                  inLanguage: lang,
+              },
+    ],
+};
 ---
 
 <!doctype html>
@@ -82,17 +181,63 @@ const languages = [
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="theme-color" content="#fffefb" />
-        <title>{title} | Ecofin</title>
+        <meta name="robots" content="index, follow" />
+        <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
-        <link rel="canonical" href={canonicalURL} />
-        <link rel="icon" href="/favicon.png" type="image/x-icon" />
+        <link rel="canonical" href={canonicalURL.href} />
+        {
+            seoLanguages.map((language) => (
+                <link
+                    rel="alternate"
+                    hreflang={language.code}
+                    href={new URL(language.href!, Astro.site).href}
+                />
+            ))
+        }
+        {xDefaultHref && (
+            <link
+                rel="alternate"
+                hreflang="x-default"
+                href={new URL(xDefaultHref, Astro.site).href}
+            />
+        )}
+        <link rel="icon" href="/ecofin-favicon.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/ecofin-favicon.png" />
 
         <!-- Open Graph -->
-        <meta property="og:title" content={`${title} | Ecofin`} />
+        <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={pageDescription} />
-        <meta property="og:url" content={canonicalURL} />
+        <meta property="og:type" content={ogType} />
+        <meta property="og:url" content={canonicalURL.href} />
         <meta property="og:site_name" content="Ecofin" />
-        {ogImage && <meta property="og:image" content={ogImage} />}
+        <meta property="og:locale" content={currentLocale} />
+        {
+            alternateLocales.map((language) => (
+                <meta property="og:locale:alternate" content={language.locale} />
+            ))
+        }
+        <meta property="og:image" content={resolvedOgImage.href} />
+        <meta property="og:image:secure_url" content={resolvedOgImage.href} />
+        <meta property="og:image:alt" content={pageTitle} />
+        {pageType === "article" && publishedISO && (
+            <meta property="article:published_time" content={publishedISO} />
+        )}
+        {pageType === "article" && updatedISO && (
+            <meta property="article:modified_time" content={updatedISO} />
+        )}
+        {pageType === "article" && authorName && (
+            <meta property="article:author" content={authorName} />
+        )}
+        {pageType === "article" && articleSection && (
+            <meta property="article:section" content={articleSection} />
+        )}
+
+        <!-- Twitter -->
+        <meta name="twitter:card" content={ogImage ? "summary_large_image" : "summary"} />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={pageDescription} />
+        <meta name="twitter:image" content={resolvedOgImage.href} />
+        <meta name="twitter:image:alt" content={pageTitle} />
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -105,6 +250,7 @@ const languages = [
         <link rel="alternate" type="application/rss+xml" title="Ecofin Blog (UZ)" href="/rss.xml" />
         <link rel="alternate" type="application/rss+xml" title="Ecofin Blog (EN)" href="/en/rss.xml" />
         <link rel="alternate" type="application/rss+xml" title="Ecofin Blog (RU)" href="/ru/rss.xml" />
+        <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
         <script is:inline>
             (() => {
                 try {
@@ -171,6 +317,8 @@ const languages = [
                                 <a
                                     href={language.href}
                                     class={`language-option${lang === language.code ? " active" : ""}`}
+                                    hreflang={language.code}
+                                    lang={language.code}
                                     aria-current={lang === language.code ? "page" : undefined}
                                 >
                                     {language.label}

@@ -32,7 +32,7 @@ function getPostLocale(post: BlogPost): Locale {
     return isLocale(locale) ? locale : "uz";
 }
 
-function getPostHref(post: BlogPost): string {
+export function getPostHref(post: BlogPost): string {
     const locale = getPostLocale(post);
     const [, categorySlug, postSlug] = post.id.split("/");
     const category = getCategoryDetailsFromSlug(categorySlug, locale);
@@ -88,4 +88,23 @@ export function getLocalizedPostLinks(
 
         return links;
     }, {} as LanguageLinks);
+}
+
+export function getAvailablePostLanguageLinks(
+    post: BlogPost,
+    allPosts: BlogPost[],
+): Partial<LanguageLinks> {
+    return locales.reduce((links, targetLocale) => {
+        const translatedPost = allPosts.find(
+            (candidate) =>
+                candidate.data.translationKey === post.data.translationKey &&
+                candidate.id.startsWith(`${targetLocale}/`),
+        );
+
+        if (translatedPost) {
+            links[targetLocale] = getPostHref(translatedPost);
+        }
+
+        return links;
+    }, {} as Partial<LanguageLinks>);
 }
