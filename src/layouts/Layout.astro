@@ -10,6 +10,10 @@ interface Props {
     publishedTime?: Date;
     updatedTime?: Date;
     authorName?: string;
+    authorUrl?: string;
+    authorImage?: string;
+    authorDescription?: string;
+    authorSameAs?: string[];
     articleSection?: string;
 }
 
@@ -29,6 +33,10 @@ const {
     publishedTime,
     updatedTime,
     authorName,
+    authorUrl,
+    authorImage,
+    authorDescription,
+    authorSameAs,
     articleSection,
 } = Astro.props;
 
@@ -37,7 +45,8 @@ const t: Record<string, Record<string, string>> = {
         platform:  "ecofin.uz",
         sponsor:   "Qo'llash",
         navTagline: "Ochiq moliyaviy bilim, hamma uchun",
-        tagline:   "Moliyaviy savodxonlik va iqtisodiy bilimlar ekotizimi.",
+        tagline:   "Ecofin ochiq kod asosida ishlaydigan moliyaviy ta'lim kompaniyasi.",
+        companyLine: "Ochiq kod asosidagi moliyaviy ta'lim kompaniyasi.",
         footerExplore: "Ko‘rish",
         footerBlog: "Blog",
         footerTopics: "Mavzular",
@@ -47,7 +56,8 @@ const t: Record<string, Record<string, string>> = {
         platform:  "ecofin.uz",
         sponsor:   "Sponsor",
         navTagline: "Open finance knowledge, for everyone",
-        tagline:   "An ecosystem of financial literacy and economic knowledge.",
+        tagline:   "Ecofin is an open-source financial education company.",
+        companyLine: "An open-source financial education company.",
         footerExplore: "Explore",
         footerBlog: "Blog",
         footerTopics: "Topics",
@@ -57,7 +67,8 @@ const t: Record<string, Record<string, string>> = {
         platform:  "ecofin.uz",
         sponsor:   "Поддержать",
         navTagline: "Открытые финансовые знания, для всех",
-        tagline:   "Экосистема финансовой грамотности и экономических знаний.",
+        tagline:   "Ecofin - компания финансового образования с открытым исходным кодом.",
+        companyLine: "Компания финансового образования с открытым исходным кодом.",
         footerExplore: "Разделы",
         footerBlog: "Блог",
         footerTopics: "Темы",
@@ -102,6 +113,18 @@ const resolvedOgImage = new URL(ogImage ?? "/ecofin-favicon.png", Astro.site);
 const ogType = pageType === "article" ? "article" : "website";
 const publishedISO = publishedTime?.toISOString();
 const updatedISO = (updatedTime ?? publishedTime)?.toISOString();
+const resolvedAuthorUrl = authorUrl
+    ? new URL(authorUrl, Astro.site).href
+    : undefined;
+const articleAuthor = {
+    "@type": "Person",
+    "@id": resolvedAuthorUrl ? `${resolvedAuthorUrl}#person` : undefined,
+    name: authorName ?? "Ecofin",
+    url: resolvedAuthorUrl,
+    image: authorImage ? new URL(authorImage, Astro.site).href : undefined,
+    description: authorDescription,
+    sameAs: authorSameAs?.length ? authorSameAs : undefined,
+};
 const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -143,10 +166,7 @@ const structuredData = {
                   image: resolvedOgImage.href,
                   datePublished: publishedISO,
                   dateModified: updatedISO,
-                  author: {
-                      "@type": "Person",
-                      name: authorName ?? "Ecofin",
-                  },
+                  author: articleAuthor,
                   publisher: {
                       "@id": new URL("/#organization", Astro.site).href,
                   },
@@ -385,6 +405,7 @@ const structuredData = {
                     <div class="footer-brand-block">
                         <span class="footer-brand">Ecofin</span>
                         <p class="footer-tagline">{ui.navTagline}</p>
+                        <p class="footer-open-source">{ui.companyLine}</p>
                     </div>
 
                     <div class="footer-column">

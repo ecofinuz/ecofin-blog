@@ -1,0 +1,51 @@
+---
+import type { Author, Locale } from "@data/authors";
+
+interface Props {
+    author: Author;
+    locale: Locale;
+    authorHref: string;
+}
+
+const { author, locale, authorHref } = Astro.props;
+const authorUrl = new URL(authorHref, Astro.site).href;
+const personId = `${authorUrl}#person`;
+const description = author.bio[locale];
+const sameAs = Object.values(author.links).filter(Boolean);
+
+const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Person",
+            "@id": personId,
+            name: author.name,
+            description,
+            url: authorUrl,
+            image: new URL(author.avatar, Astro.site).href,
+            sameAs,
+            affiliation: {
+                "@id": new URL("/#organization", Astro.site).href,
+            },
+        },
+        {
+            "@type": "ProfilePage",
+            "@id": `${authorUrl}#profile-page`,
+            url: authorUrl,
+            name: `${author.name} | Ecofin`,
+            description,
+            inLanguage: locale,
+            isPartOf: {
+                "@id": new URL("/#website", Astro.site).href,
+            },
+            mainEntity: {
+                "@id": personId,
+            },
+        },
+    ],
+};
+
+const jsonLd = JSON.stringify(structuredData).replace(/</g, "\\u003c");
+---
+
+<script type="application/ld+json" set:html={jsonLd} />

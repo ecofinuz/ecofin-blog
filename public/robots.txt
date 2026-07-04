@@ -134,4 +134,4 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://blog.ecofin.uz/sitemap.xml
+Sitemap: https://blog.ecofin.uz/sitemap-index.xml

@@ -3,6 +3,7 @@ import type { AuthorKey } from "@data/authors";
 import { authors, getAuthor } from "@data/authors";
 import { getCategoryDetailsFromSlug } from "@data/categories";
 import Layout from "@layouts/Layout.astro";
+import AuthorStructuredData from "@components/AuthorStructuredData.astro";
 import AuthorSocialLinks from "@components/AuthorSocialLinks.astro";
 import PostDate from "@components/PostDate.astro";
 import PostCover from "@components/PostCover.astro";
@@ -60,6 +61,12 @@ function getCatLabel(id: string): string {
 ---
 
 <Layout title={author.name} description={author.bio[locale]} lang={locale} languageLinks={languageLinks}>
+    <AuthorStructuredData
+        slot="head"
+        author={author}
+        locale={locale}
+        authorHref={`/author/${authorKey}/`}
+    />
     <main>
         <div class="container">
 

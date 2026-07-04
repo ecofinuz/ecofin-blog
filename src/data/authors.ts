@@ -23,14 +23,14 @@ export const authors: Record<AuthorKey, Author> = {
     hojiakbar: {
         name: "Hojiakbar Barotov",
         bio: {
-            uz: "Ekofin asoschisi. Westminster Universiteti Moliya bakalavriati. Moliya, iqtisod, va texnologiyalar haqida interaktiv tarzda yozaman. ",
-            en: "Founder of Ecofin. Bachelor of Finance at Westminster University. I write interactively on finance, economics, and technology.",
-            ru: "Основатель Ecofin. Имею степень бакалавра в области финансов Вестминстерского университета. Я веду интерактивные публикации на темы финансов, экономики и технологий.",
+            uz: "Ecofin muallifi. Westminster Universitetida moliya yo‘nalishida o‘qigan. Shaxsiy moliya, kredit, bank ishi, iqtisod va moliyaviy vositalar haqida sodda tilda yozadi.",
+            en: "Ecofin author with a finance background from Westminster University. Writes about personal finance, credit, banking, economics, and financial tools in simple language.",
+            ru: "Автор Ecofin с финансовым образованием Вестминстерского университета. Пишет простым языком о личных финансах, кредитах, банках, экономике и финансовых инструментах.",
         },
         articleBio: {
-            uz: "Ecofin asoschisi va muallifi. Shaxsiy moliya, kredit, bank ishi va iqtisod haqida sodda tilda yozadi.",
-            en: "Founder and author of Ecofin. Writing about personal finance, credit, banking, and economics in simple language.",
-            ru: "Основатель и автор Ecofin. Пишет простым языком о личных финансах, кредитах, банках и экономике.",
+            uz: "Ecofin muallifi. Shaxsiy moliya, kredit, bank ishi va iqtisod haqida sodda tilda yozadi.",
+            en: "Ecofin author writing about personal finance, credit, banking, and economics in simple language.",
+            ru: "Автор Ecofin. Пишет простым языком о личных финансах, кредитах, банках и экономике.",
         },
         avatar: "/authors/hojiakbar.webp",
         links: {

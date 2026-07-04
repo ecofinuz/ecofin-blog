@@ -1,16 +1,16 @@
 # Ecofin Blog
 
-Ecofin is a multilingual economics and finance blog focused on financial literacy. The site is built around article series, starting with the Uzbek `kredit` series about loans, interest, inflation, rates, and credit scoring.
+Ecofin Blog is the content site for Ecofin, an open-source financial education company. The site is built around multilingual article series, starting with the Uzbek `kredit` series about loans, interest, inflation, rates, and credit scoring.
 
 The production site is configured for `https://blog.ecofin.uz`.
 
 ## Stack
 
-- Astro 6
+- Astro 7
 - MDX content collections
 - Static routes
 - `@astrojs/rss` for language-specific RSS feeds
-- `@astrojs/sitemap` for sitemap generation
+- `@astrojs/sitemap` integration for sitemap generation
 - Chart.js for interactive financial explainers
 
 ## Locales

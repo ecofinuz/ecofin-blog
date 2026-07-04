@@ -79,6 +79,10 @@ function formatDate(date: Date): string {
     updatedTime={post.data.updated}
     authorName={author.name}
     articleSection={catLabel}
+    authorUrl={`/en/author/${post.data.author}/`}
+    authorImage={author.avatar}
+    authorDescription={author.articleBio[locale] ?? author.bio[locale]}
+    authorSameAs={Object.values(author.links).filter(Boolean)}
 >
     <ReadingProgress />
     <main>

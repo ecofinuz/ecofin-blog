@@ -29,9 +29,17 @@
 
 .footer-tagline {
     max-width: 34ch;
-    margin-bottom: 0;
+    margin-bottom: var(--space-2);
     color: var(--text-secondary);
     font-size: 0.95rem;
+    line-height: 1.45;
+}
+
+.footer-open-source {
+    max-width: 34ch;
+    margin-bottom: 0;
+    color: var(--text-muted);
+    font-size: 0.88rem;
     line-height: 1.45;
 }
 
