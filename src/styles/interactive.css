@@ -85,37 +85,41 @@ tr:last-child td {
     padding: 12px 22px;
 }
 
-/* ── 4. Formula block ── */
+/* ── Formula block ── */
 .formula-block {
+    margin: 20px 0;
+    padding: 16px 18px;
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-sm);
-    padding: 24px 28px;
-    margin: 28px 0;
-    text-align: center;
+    border-left: 2px solid var(--text-primary);
 }
 
 .formula-label {
+    margin: 0 0 6px;
     font-size: 11px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--text-muted);
-    margin-bottom: 12px;
 }
 
 .formula {
     font-family: "Lora", Georgia, serif;
-    font-size: 1.4rem;
-    font-weight: 600;
+    margin: 0;
+    font-size: 1rem;
     color: var(--text-primary);
-    margin-bottom: 12px;
+    line-height: 1.45;
+}
+
+.formula sub,
+.formula sup {
+    font-size: 0.7em;
 }
 
 .formula-note {
-    font-size: 0.85rem;
+    margin: 8px 0 0;
+    font-size: 0.78rem;
     color: var(--text-muted);
-    margin-bottom: 0;
+    line-height: 1.4;
 }
 
 /* ── 5. Sliders & Inputs ── */

@@ -64,6 +64,11 @@ function formatDate(date: Date): string {
         year: "numeric",
     });
 }
+
+const hasUpdatedDate = post.data.updated &&
+    post.data.updated.getTime() !== post.data.date.getTime();
+const publishedLabel = "Chop etildi";
+const updatedLabel = "Yangilandi";
 ---
 
 <Layout
@@ -120,7 +125,21 @@ function formatDate(date: Date): string {
                     <span class="label-small">
                         &middot;
                     </span>
-                    <PostDate date={formatDate(post.data.date)} class="label-small" />
+                    <PostDate
+                        date={`${publishedLabel}: ${formatDate(post.data.date)}`}
+                        class="label-small"
+                    />
+                    {hasUpdatedDate && (
+                        <>
+                            <span class="label-small">
+                                &middot;
+                            </span>
+                            <PostDate
+                                date={`${updatedLabel}: ${formatDate(post.data.updated!)}`}
+                                class="label-small"
+                            />
+                        </>
+                    )}
                     <span class="label-small">
                         &middot;
                     </span>

@@ -1,8 +1,9 @@
 ---
 title: What Is Interest? Simple and Compound Interest
-description: What does interest actually mean? What is the difference between simple and compound interest?
+description: What is interest? Simple and compound interest, their differences, and an interactive chart.
 cover: simple-and-compound-interest.webp
 date: 2026-04-11
+updated: 2026-07-05
 category: loan
 translationKey: sodda-va-murakkab-foizlar
 author: hojiakbar
@@ -16,8 +17,8 @@ import TOC from "@components/TOC.astro";
     lang="en"
     items={[
         { label: "What is interest?", href: "#what-is-interest" },
-        { label: "What is simple interest?", href: "#what-is-simple-interest" },
-        { label: "What is compound interest?", href: "#what-is-compound-interest" },
+        { label: "Simple interest", href: "#simple-interest" },
+        { label: "Compound interest", href: "#compound-interest" },
         { label: "Interactive chart", href: "#interactive-chart" },
         { label: "Conclusion", href: "#conclusion" },
     ]}
@@ -25,34 +26,44 @@ import TOC from "@components/TOC.astro";
 
 ## What Is Interest?
 
-**Interest** is a mathematical term that means a part out of 100. 20% means 20 out of 100. In finance, interest is the "price" of money. A bank, microfinance organization, or lender charges interest for letting you use its money. If I give you 10,000,000 soums and ask you to return 12,000,000 soums after one year, the [loan rate](/en/loan/how-rates-are-determined/) is 20%. You are returning the original 10,000,000 soums plus 20%, or 2,000,000 soums.
+**Interest** is a mathematical term that means one part out of 100. 20% means 20 out of 100.
 
-In finance and economics, interest is simply the price of using money. You use the money, then pay a fee for it in percent. In one sense, interest works like rent. Whether that is right or wrong is a topic for later posts. This is just how the modern banking system works.
+In finance, interest is the "price" of money. A bank, microfinance organization, or lender charges interest for letting you use money. If I give you 10,000,000 soums and ask you to return 12,000,000 soums after one year, the [loan rate](/en/loan/how-rates-are-determined/) is simply 20%. In other words, you are returning the original 10,000,000 soums plus 20%, or 2,000,000 soums.
 
-Western finance is built on the idea that **money has a time value**. That is why the concept of interest exists.
+In practice, banks calculate loan interest in other ways: [annuity and declining balance methods](/en/loan/how-loans-work/).
 
-There are two main types of financial interest: simple and compound. They work differently, and both are widely used in banking. This post is about the difference between them.
+The important point is that, in modern finance and economics, interest is simply the price of credit. You use money and pay for it as a percentage. Some people compare interest to rent.
 
-## What Is Simple Interest?
+Whether that is right or wrong is a topic for later posts. For now, this is how the modern banking system works.
 
-**Simple interest** is interest calculated only on the principal amount. The amount is the same every year. Interest is not added to the principal; it is paid or calculated separately. Your interest payment does not change, because it is tied to a **fixed principal amount**. This is the type of interest most people already understand. [Almost all informal moneylenders](/en/loan/credit-is-not-neutral/) lend this way.
+Western finance is built on the idea that **money has a time value**. Today's 1,000,000 soums is preferred to 1,000,000 soums a year from now, because you can put the money into a deposit today and earn extra income. That is why the concept of interest exists.
 
-Many bank deposits in Uzbekistan work like this. For example, if you put 10,000,000 soums into a National Bank deposit at 24%, the bank transfers the same interest amount to your card every month: 200,000 soums. The principal you placed in the bank stays unchanged.
+There are two main types of financial interest: simple and compound. They are fundamentally different, but both are widely used in the banking system and financial markets. This post is about the difference between them.
+
+## Simple Interest
+
+**Simple interest** is interest calculated only on the principal amount. In other words, the interest amount does not change because the **principal** does not change.
+
+This is the type of interest most people know and understand. [Almost all informal moneylenders](/en/loan/credit-is-not-neutral/) lend this way. For example, 40%. If you borrow $1,000 today and return it tomorrow, you still return $400 on top.
+
+Bank deposits in Uzbekistan often work this way. For example, if you place 10,000,000 soums into Turon Bank's [Imkoniyat plus](https://bank.uz/uz/deposit/imkoniyat-plyus) deposit at 18%, your deposit earns 1,800,000 soums in one year. Turon Bank transfers 150,000 soums to your card every month.
+
+The principal you placed in the deposit remains unchanged. Every year, this deposit type earns the same amount of interest.
 
 Mathematically, simple interest is represented by a linear function (y = ax + b):
 
-```text
-A = P x (1 + r x t)
-
-P - principal
-r - annual interest rate
-t - number of years
-A - final amount
-```
+<div class="formula-block">
+    <p class="formula-label">Formula</p>
+    <p class="formula">A = P × (1 + r × t)</p>
+    <p class="formula-note">
+        P - principal &nbsp;·&nbsp; r - annual interest rate &nbsp;·&nbsp; t -
+        number of years &nbsp;·&nbsp; A - final amount
+    </p>
+</div>
 
 ### Example
 
-10,000,000 soums, 20% annual rate, for 5 years.
+For example, you place 10,000,000 soums into a simple-interest deposit at a 20% annual rate for 5 years. Your annual income and total savings would look like this:
 
 |                        |                                           |
 | ---------------------- | ----------------------------------------- |
@@ -60,28 +71,38 @@ A - final amount
 | Total interest, 5 years | **10,000,000 soums**                     |
 | Final amount           | **20,000,000 soums**                      |
 
-## What Is Compound Interest?
+## Compound Interest
 
-**Compound interest** is a system where interest earns interest. In other words, your money "gives birth" to more money. At the end of each period, the calculated interest is added to the principal, and the next interest calculation is based on a larger amount.
+**Compound interest** is a system where interest earns interest. In other words, your money "gives birth" to more money. Unlike simple interest, the calculated interest is added back to the principal.
 
-You can compare it to habits. Going to the gym for one week does not change much, but every workout adds strength and gradually makes you stronger. Bad habits work the same way: playing video games once or twice a month may not be a problem, but every session can make the habit stronger.
+That is why the interest calculated in each period becomes larger. The base for the next period becomes a larger amount.
 
-In Uzbekistan, some banks call this capitalization. For example, Asia Alliance Bank describes capitalization as adding the interest calculated for a period to the principal and using that new amount for the next calculation. Many banks offer this, but it is usually not the default option. You have to look for it separately.
+You may know the book [Atomic Habits](https://asaxiy.uz/product/zheims-klir-atom-odatlar). Habits are similar to compound interest. One week in the gym does not change much, but every workout adds strength and gradually makes you stronger. Bad habits work the same way: playing video games once or twice a month may not be a problem, but every session can make the habit stronger.
+
+In other words, each repeated action helps good or bad habits appear and become part of our character. Compound interest works on a similar principle.
+
+In Uzbekistan, compound interest is called [capitalization](https://finlit.uz/uz/services/question_answer/deposits/?CODE=capitalization-of-interest). Finlit.uz explains it this way:
+
+> **Interest capitalization** is when the interest calculated on a deposit over a certain period is added to the principal amount, and the next interest is calculated on the new amount. In other words, interest is also paid on interest.
+
+As you can see, capitalization is more beneficial for the person placing a deposit. However, many banks do not offer capitalized deposits. But penalties for late payments are capitalized. The bank does not leave even one soum behind.
 
 Mathematically, compound interest is written as an exponential function (y = a^x):
 
-```text
-A = P x (1 + r)^t
-
-P - principal
-r - annual interest rate
-t - number of years
-A - final amount
-```
+<div class="formula-block">
+    <p class="formula-label">Formula</p>
+    <p class="formula">
+        A = P × (1 + r)<sup>t</sup>
+    </p>
+    <p class="formula-note">
+        P - principal &nbsp;·&nbsp; r - annual interest rate &nbsp;·&nbsp; t -
+        number of years &nbsp;·&nbsp; A - final amount
+    </p>
+</div>
 
 ### The Same Example
 
-10,000,000 soums, 20% annual rate, for 5 years.
+Let us return to the same example: 10,000,000 soums, a 20% annual rate, and a 5-year term. But this time with compound interest. In banking terms, a capitalized deposit.
 
 A = 10,000,000 x (1.20)^5 = **24,883,200 soums**
 
@@ -90,20 +111,24 @@ A = 10,000,000 x (1.20)^5 = **24,883,200 soums**
 | Final amount   | 20,000,000 soums      | 24,883,200 soums      |
 | Total interest | +10,000,000 soums     | +14,883,200 soums     |
 
-Same money, same rate, same term. The difference is 4,883,200 soums. That gap grows as time passes or as the interest rate rises.
+Same money, same rate, same term, and the same risk. The difference is 4,883,200 soums. That difference grows as time passes or as the interest rate rises. Mathematically, compound interest grows _exponentially_.
 
 ## Interactive Chart
 
-The chart below shows how both types of interest grow under the same conditions. Move the sliders and watch the result. The compound interest line is not straight, and the longer the time period gets, the more clearly it separates from simple interest.
+Use the interactive chart below to see the difference between the two types of interest. Change the term, principal, and interest rate. The lines separate clearly.
 
-For example, with 100 million soums, a 20% rate, and a 10-year term, the difference in the final amount is more than double.
+Mathematically, simple interest works as a linear function, while compound interest works as an exponential function.
+
+For example, with 100 million soums, 20%, and 10 years, the difference in the final amount is more than double.
 
 <InterestChart lang="en" />
 
 ## Conclusion
 
-Interest is the price of money - the cost of using money for a period of time. Western specialists often describe it as a rental price. You receive money, use it, and return more than you borrowed. But this is a controversial topic. For example, would you borrow one loaf of bread from your neighbor and return one and a half loaves a month later?
+Interest is the price of money - the price of using money for a period of time. Western specialists often call it a rental rate. You receive money and return extra on top. But this is a controversial topic. For example, would you borrow one loaf of bread from your neighbor and return one and a half loaves a month later?
 
-Simple interest is interest where the principal does not change. In compound interest, the principal changes. If interest makes money "give birth" to money, compound interest makes it "give birth to twins."
+In this article, we only covered the mathematical interpretation of interest. Interest is a much deeper topic.
 
-In the next post, we will look at [how banks calculate consumer loans](/en/loan/how-loans-work/).
+In short, simple interest is interest where the principal does not change. In compound interest, the principal changes. If interest makes money "give birth" to money, compound interest makes it "give birth to twins."
+
+In the next post, we will look at [how banks calculate monthly payments when lending to consumers](/en/loan/how-loans-work/). That system is built on top of interest.

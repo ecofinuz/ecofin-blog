@@ -50,14 +50,14 @@ But "same payment" does not mean the internal structure is the same. In the firs
 
 In Excel, annuity principal and interest parts can be calculated with `=PPMT()` and `=IPMT()`. Mathematically, the annuity formula looks like this:
 
-```text
-M = P x r(1 + r)^n / ((1 + r)^n - 1)
-
-P - principal
-r - monthly interest rate (annual / 12)
-n - number of months
-M - monthly payment
-```
+<div class="formula-block">
+    <p class="formula-label">Formula</p>
+    <p class="formula">M = P × r(1 + r)<sup>n</sup> / ((1 + r)<sup>n</sup> - 1)</p>
+    <p class="formula-note">
+        P - principal &nbsp;·&nbsp; r - monthly interest rate
+        &nbsp;·&nbsp; n - number of months &nbsp;·&nbsp; M - monthly payment
+    </p>
+</div>
 
 Use the sliders in the table below to see how each monthly payment is split. Bank service fees, collateral costs, and [penalties](/en/loan/credit-score/) are not included.
 
@@ -75,17 +75,18 @@ As a result, the monthly payment gets smaller every month. Unlike annuity, you a
 
 Mathematically, the logic is much simpler:
 
-```text
-Principal part = P / n
-Interest part = Balance x r
-Monthly payment = Principal part + Interest part
-
-P - principal
-r - monthly interest rate
-n - number of months
-A - final amount
-Balance - remaining debt for that month
-```
+<div class="formula-block">
+    <p class="formula-label">Formula</p>
+    <p class="formula">
+        Principal part = P / n<br />
+        Interest part = Balance × r<br />
+        Monthly payment = Principal part + Interest part
+    </p>
+    <p class="formula-note">
+        P - principal &nbsp;·&nbsp; r - monthly interest rate
+        &nbsp;·&nbsp; n - number of months &nbsp;·&nbsp; Balance - remaining debt
+    </p>
+</div>
 
 <LoanCalculator lang="en" variant="declining" />
 
