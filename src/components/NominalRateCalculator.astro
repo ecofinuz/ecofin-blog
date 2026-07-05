@@ -9,6 +9,7 @@ const t: Record<string, Record<string, string>> = {
   uz: {
     title: "Nominal foiz stavkasi",
     resultLabel: "Nominal foiz stavkasi (R)",
+    cost: "Asosiy stavka",
     risk: "Risk mukofoti",
     margin: "Foyda marjasi",
     inflation: "Inflyatsiya",
@@ -16,6 +17,7 @@ const t: Record<string, Record<string, string>> = {
   en: {
     title: "Nominal interest rate",
     resultLabel: "Nominal interest rate (R)",
+    cost: "Cost of funds",
     risk: "Risk premium",
     margin: "Profit margin",
     inflation: "Inflation",
@@ -23,6 +25,7 @@ const t: Record<string, Record<string, string>> = {
   ru: {
     title: "Номинальная процентная ставка",
     resultLabel: "Номинальная процентная ставка (R)",
+    cost: "Стоимость фондирования",
     risk: "Премия за риск",
     margin: "Маржа прибыли",
     inflation: "Инфляция",
@@ -38,16 +41,22 @@ const strings = t[lang] ?? t.uz;
 >
   <div class="result-display">
     <p class="result-label">{strings.resultLabel}</p>
-    <div class="result-R" data-result-r>49.0%</div>
+    <div class="result-R" data-result-r>48.7%</div>
     <p class="result-sub" data-result-sub>
-      (1 + 0.23) x (1 + 0.13) x (1 + 0.07) = 1.490
+      (1 + 0.06) × (1 + 0.16) × (1 + 0.13) × (1 + 0.07) = 1.487
     </p>
   </div>
 
   <div class="breakdown">
     <div class="breakdown-item">
+      <div class="b-label">{strings.cost}</div>
+      <div class="b-value" data-b-cost>6.0%</div>
+      <div class="b-name">c</div>
+    </div>
+
+    <div class="breakdown-item">
       <div class="b-label">{strings.risk}</div>
-      <div class="b-value" data-b-risk>23.0%</div>
+      <div class="b-value" data-b-risk>16.0%</div>
       <div class="b-name">r</div>
     </div>
 
@@ -66,8 +75,13 @@ const strings = t[lang] ?? t.uz;
 
   <div class="sliders">
     <div class="slider-group">
-      <label>{strings.risk} <span data-val-risk>23%</span></label>
-      <input type="range" data-sl-risk min="5" max="50" step="0.5" value="23" />
+      <label>{strings.cost} <span data-val-cost>6%</span></label>
+      <input type="range" data-sl-cost min="0" max="30" step="0.5" value="6" />
+    </div>
+
+    <div class="slider-group">
+      <label>{strings.risk} <span data-val-risk>16%</span></label>
+      <input type="range" data-sl-risk min="5" max="50" step="0.5" value="16" />
     </div>
 
     <div class="slider-group">
@@ -88,6 +102,7 @@ const strings = t[lang] ?? t.uz;
   );
 
   calculators.forEach((root) => {
+    const slCost = root.querySelector<HTMLInputElement>("[data-sl-cost]")!;
     const slRisk = root.querySelector<HTMLInputElement>("[data-sl-risk]")!;
     const slMargin = root.querySelector<HTMLInputElement>("[data-sl-margin]")!;
     const slInflation = root.querySelector<HTMLInputElement>("[data-sl-inflation]")!;
@@ -95,39 +110,45 @@ const strings = t[lang] ?? t.uz;
     const resultR = root.querySelector<HTMLElement>("[data-result-r]")!;
     const resultSub = root.querySelector<HTMLElement>("[data-result-sub]")!;
 
+    const valCost = root.querySelector<HTMLElement>("[data-val-cost]")!;
     const valRisk = root.querySelector<HTMLElement>("[data-val-risk]")!;
     const valMargin = root.querySelector<HTMLElement>("[data-val-margin]")!;
     const valInflation = root.querySelector<HTMLElement>("[data-val-inflation]")!;
 
+    const bCost = root.querySelector<HTMLElement>("[data-b-cost]")!;
     const bRisk = root.querySelector<HTMLElement>("[data-b-risk]")!;
     const bMargin = root.querySelector<HTMLElement>("[data-b-margin]")!;
     const bInflation = root.querySelector<HTMLElement>("[data-b-inflation]")!;
 
     function update(): void {
+      const costPct = Number(slCost.value);
       const riskPct = Number(slRisk.value);
       const marginPct = Number(slMargin.value);
       const inflationPct = Number(slInflation.value);
 
+      const c = costPct / 100;
       const r = riskPct / 100;
       const m = marginPct / 100;
       const p = inflationPct / 100;
 
-      const R = (1 + r) * (1 + m) * (1 + p) - 1;
+      const R = (1 + c) * (1 + r) * (1 + m) * (1 + p) - 1;
 
+      valCost.textContent = `${costPct}%`;
       valRisk.textContent = `${riskPct}%`;
       valMargin.textContent = `${marginPct}%`;
       valInflation.textContent = `${inflationPct}%`;
 
+      bCost.textContent = `${costPct.toFixed(1)}%`;
       bRisk.textContent = `${riskPct.toFixed(1)}%`;
       bMargin.textContent = `${marginPct.toFixed(1)}%`;
       bInflation.textContent = `${inflationPct.toFixed(1)}%`;
 
       resultR.textContent = `${(R * 100).toFixed(1)}%`;
       resultSub.textContent =
-        `(1 + ${r.toFixed(2)}) × (1 + ${m.toFixed(2)}) × (1 + ${p.toFixed(2)}) = ${(1 + R).toFixed(3)}`;
+        `(1 + ${c.toFixed(2)}) × (1 + ${r.toFixed(2)}) × (1 + ${m.toFixed(2)}) × (1 + ${p.toFixed(2)}) = ${(1 + R).toFixed(3)}`;
     }
 
-    [slRisk, slMargin, slInflation].forEach((el) =>
+    [slCost, slRisk, slMargin, slInflation].forEach((el) =>
       el.addEventListener("input", update)
     );
 
