@@ -3,6 +3,7 @@ title: Inflyatsiya - Pulning Ko'rinmas Solig'i
 description: Maosh o'zgarmadi, lekin hayot qimmatlashdi. Bu tasodif emas - bu inflyatsiya.
 cover: inflyatsiya.webp
 date: 2026-04-25
+updated: 2026-07-05
 category: kredit
 translationKey: inflyatsiya
 author: hojiakbar
@@ -21,67 +22,97 @@ import TOC from "@components/TOC.astro";
         { label: "Inflyatsiya Grafigi", href: "#inflyatsiya-grafigi" },
         { label: "Oddiy odamga ta'siri", href: "#oddiy-odamga-tasiri" },
         { label: "Kredit va inflyatsiya", href: "#kredit-va-inflyatsiya" },
-        { label: "Qaysi biri foydali?", href: "#qaysi-biri-foydali" },
+        { label: "So'm inflyatsiya kalkulyatori", href: "#som-inflyatsiya-kalkulyatori" },
     ]}
 />
 
 ## Inflyatsiya Nima?
 
-**Inflyatsiya (inflation)** - tovar va xizmatlar narxlarining vaqt o'tishi bilan umumiy ko'tarilishi. Yoki boshqacha aytganda: pulning xarid qobiliyatining pasayishi. 2026-yildagi 1,000,000 so'm bilan 2020-yildagi 1,000,000 orasida katta farq bor. 6-yil ichida pulning xarid qobiliyati sezilarli pasaygan.
+**Inflyatsiya (inflation)** - tovar va xizmatlar narxlarining vaqt o'tishi bilan umumiy ko'tarilishi. Boshqacha aytganda, pulning xarid qobiliyatining pasayishi. 2026-yildagi 1,000,000 so'm bilan 2020-yildagi 1,000,000 orasida katta farq bor. 6-yil ichida pulning xarid qobiliyati sezilarli pasaygan.
 
-Mirshakar Fayzulloyevning bir stand-up hazili bor. Bundan 10 yil oldin 200,000 so'm bilan Korzinkaga kirsam, paketlarni ko'tarolmasdim. Hozir esa, kichikkina bir paketcha.
+[Bank.uz inflyatsiyaga](https://jet.bank.uz/article/inflyatsiya-80) quyidagidek ta'rif beradi:
 
-Ilmiy tarzda aytganda, inflyatsiya paytida pulning nominal qiymati (ustidagi son) o'zgarmaydi, lekin uning real qiymati (xarid kuchi) kamayadi.
+> Inflyatsiya — bu tovarlar va xizmatlar umumiy narxlarining barqaror o'sib borishidir. Inflyatsiya davrida ayrim tovarlar sezilarli darajada qimmatlashishi, boshqalari arzonlashishi yoki narxi o'zgarmasligi mumkin.
 
-Inflyatsiyani hisoblash aslida juda ko'p vaqt oladi. Butun iqtisoddagi narxlarni va odamlarning tovarlar tanlovini yuritish oson emas. Barcha davlatlar inflyatsiyani kuzatish uchun "iste'mol savatchasi (CPI)" konseptini ishlatishadi. Bu juda katta mavzu, va alohida o'zining postiga arziydi.
+Mirshakar Fayzulloyevning bir stand-up hazili bor:
+
+> Bundan 10 yil oldin 200,000 so'm bilan Korzinkaga kirsam, paketlarni ko'tarolmasdim. Hozir esa, kichikkina bir paketchani silkitib ob chiqib ketaman.
+
+Ilmiy tilda aytganda, inflyatsiya tufayli pulning nominal qiymati (ustidagi soni) o'zgarmaydi, lekin uning real qiymati (xarid kuchi) kamayadi.
+
+Infylatsiya vaqt o'tgani sababli sodir bo'lmaydi. Bu odamlardagi katta noto'g'ri tushuncha. Iqtisodiyotda tovarlarga nisbatan pul miqdori oshib ketsa, pulning qadri tushadi. Siyosat yoki iqtisodiyotda jiddiy xatoliklar bo'lsa, bu [giperinflyatsiyaga](https://uz.wikipedia.org/wiki/Giperinflyatsiya) olib keladi.
+
+[Zimbabve](https://en.wikipedia.org/wiki/Zimbabwean_one_hundred_trillion_dollar_note) mamlakatida inflyatsiya tufayli trillionerlar borligini bilarmidingiz?
+
+![100 trillion Zimbabve banknotasi](/images/posts/inflyatsiya/Zimbabwe_$100_trillion_2009.jpg)
+
+**100 trillion Zimbabve dollari.**
+
+Inflyatsiyani hisoblash aslida juda ko'p vaqt oladi. Butun iqtisoddagi narxlarni va odamlarning tovarlar tanlovini yuritish oson emas. Barcha davlatlar inflyatsiyani kuzatish uchun "[iste'mol savatchasi (CPI)](https://jet.bank.uz/article/inflyatsiya-80#block-index-1)" konseptini ishlatishadi.
+
+Inflyatsiya juda katta mavzu, va alohida o'zining postiga arziydi. Haqiqatdan, tez orada kelajakda inflyatsiyaga oid maxsus seriya yoziladi.
+
+Hozir esa, inflyatsiyaning boshlang'ich tushunchalari va uning kreditga ta'siri haqida so'z yuritamiz.
 
 ---
 
-Inflyatsiyani odatda ikkita ko'rsatkich bilan o'lchangiladi: **oyma-oy** (o'tgan oyga nisbatan) va **yillik** (o'tgan yilning shu oyiga nisbatan). Bu orqali ikki davr orasidagi inflyatsiya topish juda oson. Inflyatsiya kalkulyatorlari ham shu asnoda ishlaydi. O'zbekiston Markaziy banki har oy bu ma'lumotlarni [e'lon qiladi](https://cbu.uz/en/monetary-policy/annual-inflation/indicators/).
+Inflyatsiyani odatda ikkita ko'rsatkich bilan o'lchangiladi: **oyma-oy** (o'tgan oyga nisbatan) va **yillik** (o'tgan yilning shu oyiga nisbatan). Bu orqali ikki davr orasidagi inflyatsiya topish juda oson.
+
+Inflyatsiya kalkulyatorlari ham shu asnoda ishlaydi. O'zbekiston Markaziy banki har oy bu ma'lumotlarni [e'lon qiladi](https://cbu.uz/en/monetary-policy/annual-inflation/indicators/).
+
+Shu ma'lumotlarga asoslanib biz ham [pastda o'zimizning inflyatsion kalkulatorimizni](#som-inflyatsiya-kalkulyatori) ishlab chiqdik.
 
 ## U Qanday Ishlaydi?
 
 Narxlar ko'tarilishining bir necha sababi bor. Eng asosiy ikktasi:
 
-**Talab inflyatsiyasi (demand pull)** - iqtisodiyotda pul ko'p, tovar kam bo'lganda. Tasavvur qiling, O'zbekiston milliy terma jamoasi Bunyodkor stadionida Birlashgan Arab Amirliklari bilan o'ynaydi. Stadionga maksimum 34,000 tomoshabin sig'adi. O'yinni ko'rmoqchi bo'lganlar esa millionlab. Stadionga bormoqchi bo'lganlar soni esa yuz minglab.
+**Talab inflyatsiyasi (demand pull)** - iqtisodiyotda pul ko'p, tovar esa kam. Tasavvur qiling, O'zbekiston milliy terma jamoasi Bunyodkor stadionida Birlashgan Arab Amirliklari bilan o'ynaydi. Stadionga maksimum 34,000 tomoshabin sig'adi. O'yinni ko'rmoqchi bo'lganlar esa millionlab. Stadionga bormoqchi bo'lganlar muhlislar soni esa yuz minglab.
 
-Talab miqdori chipta sonidan karrasiga ko'p. Bunday vaziyatda bilet narxi oshishi tabiiy. Cheklangan kam sonli tovarni ko'p odamlar sotib olmoqchi. 100,000 so'm chipta talab miqdoriga qarab oshib boradi, va ma'lum bir narxga yetgach o'sishdan to'xtaydi.
+Talab miqdori chipta sonidan karrasiga ko'p. Bunday vaziyatda bilet narxi oshishi tabiiy. Cheklangan kam sonli tovarni ko'p odamlar sotib olmoqchi. Original narxi 100,000 so'm bo'lgan chipta talab miqdoriga qarab oshib boradi, va ma'lum bir narxga yetgach o'sishdan to'xtaydi.
 
-Teoriya bo'yicha shunday. Ammo, rasmiy kassalarda narxlar o'zgarmaydi. Uning o'rniga ko'chadagi** "shustriy"lar** biletni arzon narxga olib, karrasiga qo'yib sotadi. Iqtisod nazariyasidan to'g'ri, insof bo'yicha esa yo'q. Bayram oldi viloyatlarga taksida ketmoqchi bo'lganlar ham buni bilishadi: moshina soni cheklangan, yo'lovchi ko'p. Yo'l kira tabiiyki ko'tariladi.
+Teoriya bo'yicha shunday. Ammo, rasmiy kassalarda narxlar o'zgarmaydi. Uning o'rniga ko'chadagi **"shustriy"lar** biletni arzon narxga olib, karrasiga qo'yib sotadi. Iqtisod nazariyasidan to'g'ri, insof bo'yicha esa yo'q. Bayram oldi viloyatlarga taksida ketmoqchi bo'lganlar ham buni bilishadi: moshina soni cheklangan, yo'lovchi ko'p. Yo'l kira tabiiyki ko'tariladi.
 
-Shu sxema orqali ham oltinning narxi tushmaydi. Oltin cheklangan resurs, lekin unga talab katta. Shuning uchun ham shaxsiy moliya ekspertlari oltin olib qo'yishni tavsiya berishadi.
+Shu sxema orqali ham oltinning narxi tushmaydi. Oltin cheklangan resurs, lekin unga talab katta. Hukumatlar, kompaniyalar, boylar boyligini oltinda saqlashadi. Shuning uchun ham shaxsiy moliya ekspertlari kelajak uchun oltin olib qo'yishni tavsiya berishadi.
 
-Davlat miqyosida, agar Markaziy Bank ko'p pul chiqarsa yoki kredit arzonlashsa (ayni damda 14%), odamlar va korxonalarda ko'proq pul bo'ladi va ko'proq xarid qiladi. Yalpi talab oshadi. Lekin ishlab chiqarish miqdori har doim ham tezda o'zgarmaydi - narxlar ko'tariladi. Hukumatlarda bunday inflyatsiyani jilovlash uchun yaxshi mexanizmlar mavjud.
+Davlat miqyosida, agar Markaziy Bank ko'p pul chiqarsa yoki kredit arzonlashsa ([ayni damda 14%](https://cbu.uz/uz/monetary-policy/refinancing-rate/)), odamlar va korxonalarda ko'proq pul bo'ladi va ko'proq xarid qiladi. Yalpi talab oshadi. Lekin ishlab chiqarish miqdori har doim ham tezda o'zgarmaydi - narxlar ko'tariladi. Hukumatlarda bunday inflyatsiyani jilovlash uchun yaxshi mexanizmlar mavjud. Bu haqida boshqa maqolalarda.
 
 ---
 
 **Xarajat inflyatsiyasi (cost-push)** - ishlab chiqarish qimmatlashganda sodir bo'ladigan inflyatsiya. Xarajat inflyatsiyasi muhim, birlamchi tovarlarning narxi o'zgarganda sodir bo'ladi: yoqilg'i, xom ashyo, oziq-ovqat yoki mehnat narxi oshsa, korxonalar bu xarajatni narxga qo'shadi.
 
-Misol uchun, Fevralda boshlangan Eron urushi ortidan Hormuz bo'g'ozi yopildi. Dunyodagi 20% neft blokadada qolib ketdi. Buning ortidan, neftning narxi oshib ketdi. Bu barcha tovar va xizmatlarga butun dunyo bo'yicha ta'sir qildi. Aviabiletlarning narxlari ham oshib ketdi.
+Misol uchun, Fevralda boshlangan Eron urushi ortidan Hormuz bo'g'ozi yopildi. Dunyodagi 20% neft blokadada qolib ketdi. Buning ortidan, neftning narxi oshib ketdi. Bu barcha tovar va xizmatlarga butun dunyo bo'yicha ta'sir qildi. Aviabiletlarning narxlari ham oshdi.
 
 O'zbekistonda metan yoki benzin narxi oshishi barcha tovarlarga ta'sir qiladi: har bir oila va korxona yoqilg'iga muhtoj. Ishlab chiqarish, logistika, taksi - barcha-barchasi oshadi. Talab inflyatsiyasi asosan ma'lum bir sektorga ta'sir ko'rsatsa, xarajat inflyatsiyasi butun iqtisodga ta'sir qiladi. Hukumatlarda afsuski bu tur inflyatsiyaga qarshi kuchli mexanizmlar yo'q.
 
 ## Inflyatsiya Grafigi
 
+Quyida O'zbekistondagi inflyatsiyaning oyma-oy o'zgarishini ko'rishingiz mumkin. 2017-yilda inflyatsiya eng yuqoriga (22%) ko'tarilgan bo'lsa, hozirga kelib bu 7% atrofiga tushgan.
+
 <InflationChart lang="uz" />
 
 ## Oddiy Odamga Ta'siri
 
-Inflyatsiya hammaga bir xil ta'sir qilmaydi. Inflyatsiya hammaga ham salbiy ta'sir qiladi. Axir odamning xarid qobiliyati pasayib bormoqda. Ammo, u ayniqsa uch toifani qattiq uradi:
+Inflyatsiya hammaga bir xil ta'sir qilmaydi. Qarz olgan odam uchun inflyatsiya yaxshi, sababi qarzning nominal qiymati o'zgarmaydi, ammo haqiqiy qiymati tushadi.
 
-**#1. Jamg'armasi naqd bo'lganlar.** Uyida yoki past foizli hisob raqamda saqlangan pul har yil o'z qiymatini yo'qotadi. U hattoki AQSH dollarida bo'lsa ham. AQSH dollari ham inflyatsiyaga uchraydi, istalgan valyuta kabi. Shunchaki u so'mdan sekinroq qadrini yo'qotgani va ishonchli bo'lgani uchun ham odamlar dollarda pullarini saqlashadi.
+Ammo, inflyatsiya ayniqsa bu uch toifani qattiq uradi:
 
-Shu inflyatsiya ham nega O'zbekistonda odamlar ko'chmas mulkka shunchalik mehr qo'yganini ko'rsatadi. Puli bor odam ishonchli, inflyatsiyaga chidamli investitsiya qidiradi. Afsuski, yurtimizda hali birja bozori yaxshi yo'l qo'yilmagan. Oltin sotib olish va saqlash madaniyati ham yaxshi shakllanmagan. Sheriklikda ish boshlash va yuritish (mudorabah) ham hali mashhur emas. Qolayotgan yagona variantlar - yer va uy.
+**#1. Jamg'armasi naqd bo'lganlar.** Sandiqda yoki past foizli hisob raqamda saqlangan pul vaqt o'tgani sari o'z qiymatini yo'qotadi. U hattoki AQSH dollarida bo'lsa ham. AQSH dollari ham inflyatsiyaga uchraydi, istalgan valyuta kabi. Shunchaki u so'mdan sekinroq qadrini yo'qotgani va ishonchli bo'lgani uchun ham odamlar dollarda pullarini saqlashadi.
 
-**#2. Maoshi indekslanmaganlar.** Agar maoshingiz inflyatsiyadan past sur'atda o'ssa, amalda siz kamroq topayapsiz - raqam o'sha bo'lsa ham. Deylik, inflyatsiya yillik o'rtacha 10% bo'lsa, va sizning oylik daromadingiz 8% o'ssa, siz aslida pul yo'qotayapsiz. Inflyatsiya davlat ishida past lavozimlarda ishlaydigan xodimlarga juda qattiq ta'sir etadi.
+Shu inflyatsiya ham nega O'zbekistonda odamlar ko'chmas mulkka shunchalik mehr qo'yganini ko'rsatadi. Puli bor odam ishonchli, inflyatsiyaga chidamli investitsiya qidiradi. Afsuski, yurtimizda hali birja bozori yaxshi yo'lga qo'yilmagan. Oltin sotib olish va saqlash madaniyati ham hali yaxshi shakllanmagan. Sheriklikda ish boshlash va yuritish (mudorabah) ham hali mashhur emas. Qolayotgan yagona variantlar - yer va uy.
 
-**#3. O'zgarmas daromadlilar.** Pensiya, nafaqa, yoki belgilangan miqdordagi ijara daromadlari inflyatsiya bilan avtomatik ko'tarilmaydi. Nima uchun hukumat har yili pensiya, nafaqa, va stipendiyalarni 10%-15% oshiradi? Inflyatsiya buning omillaridan biri.
+**#2. Maoshi indekslanmaganlar.** Agar maoshingiz inflyatsiyadan past sur'atda o'ssa, amalda siz kamroq topayapsiz - oylik oshgan bo'lsa ham. Deylik, inflyatsiya yillik o'rtacha 10% bo'lsa, va sizning oylik daromadingiz 8% o'ssa, siz aslida pul yo'qotayapsiz. Inflyatsiya davlat ishida past lavozimlarda ishlaydigan xodimlarga juda qattiq ta'sir etadi.
 
-Aksincha, inflyatsiyadan kimlar yutadi? [Qarz olganlar](/kredit/qarz-qachon-ishlaydi/) - agar foiz stavkasi inflyatsiyadan past bo'lsa. Haqiqiy hayotda, banklar hech qachon foiz stavkasini inflyatsidan pastga tushurmaydi.
+**#3. O'zgarmas daromadlilar.** Pensiya, nafaqa, yoki belgilangan miqdordagi ijara daromadlari inflyatsiya bilan avtomatik ko'tarilmaydi. Nima uchun hukumat har yili pensiya, nafaqa, va stipendiyalarni 10%-15% oshiradi? Inflyatsiya buning asosiy omillaridan biri.
 
-Bu holat odatda ikki jismoniy shaxs orasida sodir bo'ladi. Deylik, siz qarindoshingizga 2025-yil Yanvarda 10,000,000 so'm qarz berdingiz va bir yildan so'ng qaytib oldingiz. El orasida hech kim inflyatsiyaga bog'lab qarz bermaydi. Pul qadrsizlanishi tufayli, siz qarz berish orqali pul yo'qotdingiz.
+Aksincha, inflyatsiyadan kimlar yutadi? [Qarz olganlar](/kredit/qarz-qachon-ishlaydi/) - agar foiz stavkasi o'zgarmas bo'lsa.
+
+Bu holat odatda ikki jismoniy shaxs orasida sodir bo'ladi. Deylik, siz qarindoshingizga 2025-yil Yanvarda 10 000 000 so'm qarz berdingiz va 2026-yil Yanvarda qaytib oldingiz. Inflyatsiya bo'yicha bu pul 10 700 000 atrofida bo'lishi kerak edi.
+
+El orasida hech kim inflyatsiyaga bog'lab qarz bermaydi. Pul qadrsizlanishi tufayli, siz qarz berib pul yo'qotasiz.
 
 ## Kredit va Inflyatsiya
+
+Ho'p, inflyatsiya kreditga qanday bog'langan?
 
 Bu ikkalasining bog'liqligi ko'pchilikka noaniq. Ammo tushunish qiyin emas. Inflyatsiya [foiz stavkalari](/kredit/foiz-stavkasi-qanday-belgilanadi/) past yoki tepa bo'lishini belgilaydi.
 
@@ -93,22 +124,25 @@ Shuning uchun banklar foiz stavkasini belgilashda inflyatsiyani hisobga oladi. M
     <p class="formula-label">Formula</p>
     <p class="formula">r = R - π</p>
     <p class="formula-note">
-        R — nominal stavka &nbsp;·&nbsp; π — inflyatsiya &nbsp;·&nbsp; r — real stavka
+        R — nominal stavka &nbsp;·&nbsp; π — inflyatsiya &nbsp;·&nbsp; r — real
+        stavka
     </p>
 </div>
 
-Agar kredit 24% da berilsa va inflyatsiya 10% bo'lsa, bank aslida 14% real daromad oladi. O'zbekistonda Markaziy bank asosiy stavkani hozir 14% da ushlab turibdi. Inflyatsiya esa ~7%. Real stavka - taxminan 7%. Bu bank uchun foydali, qarz oluvchi uchun esa qimmat.
+Agar kredit 24% da berilsa va inflyatsiya 10% bo'lsa, bank aslida 14% real daromad oladi. O'zbekistonda Markaziy bank asosiy stavkani [hozir 14% da ushlab turibdi](https://cbu.uz/uz/monetary-policy/refinancing-rate/). Inflyatsiya esa ~7%. Bu bank uchun foydali, qarz oluvchi uchun esa qimmat.
 
-TBC Bank sizga 49% ga iste'mol krediti berishi orqali bu mantiq bo'yicha 42% real daromad oladi. Aslida, haqiqiy formula Fisher formulasi risk faktorini ham o'z ichiga oladi. Bu haqida [foiz stavkasi qanday belgilanadi](/kredit/foiz-stavkasi-qanday-belgilanadi/) postida ko'ramiz.
+TBC Bank sizga 49% ga iste'mol krediti berishi orqali bu mantiq bo'yicha 42% real daromad oladi. Aslida, haqiqiy formula Fisher formulasi risk faktorini ham o'z ichiga oladi. Bu haqida [foiz stavkasi qanday belgilanadi](/kredit/foiz-stavkasi-qanday-belgilanadi/) maqolasida ko'ramiz.
 
 ## So'm Inflyatsiya Kalkulyatori
 
-Bu kalkulyator Markaziy Bank ma'lumotlariga asoslangan. Markaziy Bankning rasmiy kalkulyatori [bu sahifada](https://cbu.uz/en/monetary-policy/inflation-calculator/).
+Bu kalkulyator Markaziy Bank ma'lumotlariga asoslangan. Markaziy Bankning rasmiy kalkulyatori [bu sahifada](https://cbu.uz/en/monetary-policy/inflation-calculator/). Biz u ma'lumotlardan foydalanib ishlatishga qulay formatda bu yerda keltirdik.
 
-Quyidagi kalkulator O'zbekiston Markaziy bankining rasmiy oy-oy inflyatsiya ma'lumotlariga asoslanadi (2016 yil yanvar — 2026 yil mart).
+Quyidagi kalkulator O'zbekiston Markaziy bankining rasmiy oy-oy inflyatsiya ma'lumotlariga asoslanadi (2016 yil yanvar — 2026 yil may).
 
-Ikki davr tanlang va summani kiriting — kalkulator pulning xarid qobiliyati qanday o'zgarganini ko'rsatadi.
+Ikki davr tanlang va summani belgilang — kalkulator pulning xarid qobiliyati qanday o'zgarganini ko'rsatadi.
 
 <InflationCalculator lang="uz" />
 
 Ma'lumot manbai: [O'zbekiston Markaziy banki](https://cbu.uz/en/monetary-policy/annual-inflation/indicators/).
+
+Keyingi postda [kredit stavkasi](/kredit/foiz-stavkasi-qanday-belgilanadi/) banklar tomonidan qanday qo'yilishi haqida gaplashamiz.

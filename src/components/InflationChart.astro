@@ -53,8 +53,7 @@ const strings = translations[lang];
     <div class="sliders inflation-chart-sliders">
         <div class="slider-group">
             <label>
-                {strings.startYear}
-                <span data-inflation-chart-from-value>2016</span>
+                {strings.startYear} <span data-inflation-chart-from-value>2016</span>
             </label>
             <input
                 type="range"
@@ -67,8 +66,7 @@ const strings = translations[lang];
         </div>
         <div class="slider-group">
             <label>
-                {strings.endYear}
-                <span data-inflation-chart-to-value>2026</span>
+                {strings.endYear} <span data-inflation-chart-to-value>2026</span>
             </label>
             <input
                 type="range"
@@ -222,6 +220,8 @@ const strings = translations[lang];
         ["Yanvar 2026", 0.7, 7.2],
         ["Fevral 2026", 0.6, 7.3],
         ["Mart 2026", 0.6, 7.1],
+        ["April 2026", 0.6, 7.0],
+        ["May 2026", 0.2, 5.5],
     ];
 
     const getYear = (label: string): number => Number(label.split(" ")[1]);

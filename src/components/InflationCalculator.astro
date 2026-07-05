@@ -118,8 +118,7 @@ const strings = translations[lang];
     <div class="sliders inflation-amount-slider">
         <div class="slider-group">
             <label>
-                {strings.amount}
-                <span data-inflation-amount-value>1 {strings.million}</span>
+                {strings.amount} <span data-inflation-amount-value>1 {strings.million}</span>
             </label>
             <input
                 type="range"
@@ -293,6 +292,8 @@ const strings = translations[lang];
         [2026, 0, 0.7, 7.2],
         [2026, 1, 0.6, 7.3],
         [2026, 2, 0.6, 7.1],
+        [2026, 3, 0.6, 7.0],
+        [2026, 4, 0.2, 5.5],
     ];
 
     const calculators = document.querySelectorAll<HTMLElement>(
