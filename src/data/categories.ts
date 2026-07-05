@@ -5,7 +5,8 @@ export type CategoryKey =
     | "treyding"
     | "pul-saqlash"
     | "inqirozlar"
-    | "boshqalar";
+    | "boshqalar"
+    | "iqtisodiyot";
 
 export type Locale = "uz" | "en" | "ru";
 
@@ -24,7 +25,7 @@ export const categories: Record<
             slug: "kredit",
             label: "Kredit",
             description:
-                "Kreditlar, foiz stavkalari, kredit reytingi va qarz olishdan oldin bilish kerak bo‘lgan asosiy tushunchalar.",
+                "Kreditlar, foiz stavkalari, kredit reytingi va qarz olishdan oldin bilish kerak bo'lgan asosiy tushunchalar.",
         },
         en: {
             slug: "loan",
@@ -35,6 +36,26 @@ export const categories: Record<
         ru: {
             slug: "kredit",
             label: "Кредит",
+            description:
+                "Материалы о кредитах, процентных ставках, кредитном рейтинге и ключевых вещах, которые важно понимать перед займом.",
+        },
+    },
+    iqtisodiyot: {
+        uz: {
+            slug: "iqtisodiyot",
+            label: "Iqtisodiyot",
+            description:
+                "Kreditlar, foiz stavkalari, kredit reytingi va qarz olishdan oldin bilish kerak bo'lgan asosiy tushunchalar.",
+        },
+        en: {
+            slug: "economics",
+            label: "Economics",
+            description:
+                "Guides on loans, interest rates, credit scores, and the key ideas to understand before borrowing money.",
+        },
+        ru: {
+            slug: "ekonomika",
+            label: "Экономика",
             description:
                 "Материалы о кредитах, процентных ставках, кредитном рейтинге и ключевых вещах, которые важно понимать перед займом.",
         },
@@ -64,7 +85,7 @@ export const categories: Record<
             slug: "tilla",
             label: "Tilla",
             description:
-                "Tilla, uning narxi, jamg‘arma sifatidagi o‘rni va iqtisodiyotdagi ahamiyati haqida maqolalar.",
+                "Tilla, uning narxi, jamg'arma sifatidagi o'rni va iqtisodiyotdagi ahamiyati haqida maqolalar.",
         },
         en: {
             slug: "gold",
@@ -104,7 +125,7 @@ export const categories: Record<
             slug: "pul-saqlash",
             label: "Pul saqlash",
             description:
-                "Jamg‘arma, budjet, xarajatlarni boshqarish va pulni xavfsiz saqlash bo‘yicha amaliy tushuntirishlar.",
+                "Jamg'arma, budjet, xarajatlarni boshqarish va pulni xavfsiz saqlash bo'yicha amaliy tushuntirishlar.",
         },
         en: {
             slug: "savings",
@@ -144,7 +165,7 @@ export const categories: Record<
             slug: "boshqalar",
             label: "Boshqalar",
             description:
-                "Ecofin’dagi boshqa moliya va iqtisod mavzulari bo‘yicha qo‘shimcha maqolalar.",
+                "Ecofin’dagi boshqa moliya va iqtisod mavzulari bo'yicha qo'shimcha maqolalar.",
         },
         en: {
             slug: "other",
