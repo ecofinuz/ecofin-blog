@@ -1,8 +1,9 @@
 ---
 title: Kredit Reyting - Bank Sizni Qanday Baholaydi?
-description: Foiz stavkasi qanday belgilanishini ko'rdik. Risk mukofoti — formulaning eng katta qismi. Lekin bank siz uchun risk mukofotini qanday hisoblaydi? Javob kredit reytingda.
+description: Bank riskni qanday o'lchaydi va baholaydi? Javob kredit reytingda.
 cover: kredit-reyting.webp
 date: 2026-05-09
+updated: 2026-07-11
 category: kredit
 translationKey: kredit-reyting
 author: hojiakbar
@@ -29,91 +30,102 @@ import TOC from "@components/TOC.astro";
 
 ## Kredit Reyting Nima?
 
-Moliya sohasida analitik nisbatlar juda ko'p. Qancha foyda olindi (investitsiya rentabelligi, sof foyda marjasi), firma qanchalik yaxshi ketyapti (pul mablag'larini konvertatsiya qilish sikli), firma jamiyat va tabiat oldida qanchalik ma'suliyat bilan yondashmoqda (ESG reyting). Xuddi shunday analitik nisbatlardan biri - kredit reyting (yoki kredit skoring).
+Moliya, buxgalteriya, va auditda sonlar sizga "gapirishi", ya'ni siz kerakli ma'lumotlarni moliyaviy hisobotlardan kerakli tahliliy xulosalar chiqarishingiz zarur.Shuning uchun ham moliyada analitika ko'p ishlatiladi. Moliyaviy analitik roli ham [Amerikada juda tez o'sayotgan kasblardan biridir](https://www.bls.gov/ooh/business-and-financial/financial-analysts.htm).
 
-**Kredit reyting (credit score)** - kredit/qarz olayotgan odamning qanchalik ishonchli ekanligini ifodalovchi raqamli ko'rsatkich. Bu qiyin bo'lib tuyulishi mumkin, lekin mohiyati anchagina sodda.
+Moliyada analitik nisbatlar juda ko'p. Masalan, qancha foyda olindi (investitsiya rentabelligi, sof foyda marjasi), firmaning kundalik ishlari qanchalik yaxshi ketyapti (pul mablag'larini konvertatsiya qilish sikli), firma jamiyat va tabiat oldida qanchalik ma'suliyat bilan yondashmoqda (ESG reyting). Xuddi shunday analitik nisbatlardan biri - kredit reyting (yoki kredit skoring).
 
-Misol uchun, sizning ikkita do'stingiz bor. Birinchisi Toshmat bo'lsin. Uning ishini tayini yo'q, hali u _dvijeniyada_, hali bu _dvijeniyada_. Doimo qarzga botib yursa-da, qo'lida eng so'nggi telefon, har oy Chorvoqda. "Yigit kishining omadi bilan o'ynashma" kabi videolar ishqibozi.
+**Kredit reyting (credit score)** - kredit/qarz olayotgan odamning qanchalik ishonchli ekanligini ifodalovchi raqamli ko'rsatkich. Nomi qiyin bo'lib tuyulishi mumkin, lekin mohiyati anchagina sodda.
 
-Ikkinchisi esa Eshmat. O'qigan, yaxshi joyda ishlaydi. O'zini bosib olgan, pulini hisobi bilan ishlatadi. Ortidan hech bir uyatli gap eshitmagansiz. Uy uchun olgan ipotekasidan boshqa krediti yo'q.
+Misol uchun, sizning ikkita do'stingiz bor. Birinchisi Toshmat bo'lsin. Uning ishini tayini yo'q, hali u _dvijeniyada_, hali bu _dvijeniyada_. Doimo qarzga botib yursa-da, qo'lida eng so'nggi telefon, har oy Chorvoqda. "Yigit kishining omadi bilan o'ynashma" kabi videolar ishqibozi. Sizga doimo "jigarim" deya murojat qiladi.
 
-Tasavvur qiling, ikkalasi bir kunda sizdan 2 000 000 qarz so'rab keldi. Tabiiyki, Toshmatga qarz berishga cho'chiysiz. Undan "qarzim qaytib keladimi, qachon qaytadi, qo'lim bilan berib oyog'im bilan yugurib qolmaymanmi?" degan savollar paydo bo'ladi.
+Ikkinchisi esa Eshmat. O'qigan, yaxshi joyda ishlaydi. O'zini bosib olgan, pulini hisobi bilan ishlatadi. Ishga boradi, bo'sh vaqti bo'lsa chiqib taksichilik qiladi. Ortidan hech bir uyatli gap eshitmagansiz. Uy uchun olgan ipotekasidan boshqa krediti yo'q.
 
-Eshmatdan esa yo'q. Eshmatda ishi, moshinasi, uyi bor. Ishonchingiz baland. Uning hurmati baland. Unga ortiqcha savollarsiz pulingiz qaytishiga ishonib berasiz.
+Tasavvur qiling, ikkalasi bir kunda sizdan 3 000 000 qarz so'rab keldi. Tabiiyki, Toshmatga qarz berishga cho'chiysiz. Undan "qarzim qaytib keladimi, qachon qaytadi, qo'lim bilan berib oyog'im bilan yugurib qolmaymanmi?" degan savollar paydo bo'ladi.
 
-Kredit reyting ham shu ishonchning raqamli ifodasi. Toshmatning reytingi pastroq, Eshmatniki balandroq bo'lar edi.
+Eshmatdan esa yo'q. Eshmatda ishi, moshinasi, uyi bor. Pulni bekorga ortiqcha joyga sochmaydi. Ishonchingiz baland. Uning jamiyatda hurmati baland. Unga ortiqcha savollarsiz pulingiz qaytishiga ishonib berasiz.
 
-Faqatgina bank kredit olishga kelayotgan odamlarni shaxsan bilmaydi. Shuning uchun ham ularning ish joyi, oyligi, kredit tarixi, kreditni o'z vaqtida to'laganmi, mol-mulklari, jinoyat tarixi, va hokazo boshqa faktorlarini olib, yagona kredit reytingini yaratadi.
+Kredit reyting ham shu ishonchning katta miqyosdagi raqamli ifodasi. Bank tizimida Toshmatning reytingi past, Eshmatniki esa baland bo'lar edi.
+
+Jamiyat miqyosida bank kredit olishga kelayotgan odamlarni shaxsan bilmaydi. Ishxonasidan, qo'ni-qo'shnisidan surishtirga bankning vaqt va imkoni yo'q. Ulardan obyektiv ma'lumot olishning ehtimoli ham past.
+
+Shuning uchun ham bank kreditga kelganlarning ish joyi, oyligi, kredit tarixi, kreditni o'z vaqtida to'laganmi, yo'qmi, mol-mulklari, jinoyat tarixi, va hokazo boshqa faktorlarini olib, yagona kredit reyting tizimini yaratadi.
 
 O'zbekistonda bu ishni [KATM](https://infokredit.uz/) (Kredit-Axborot Tahliliy Markazi) va xalqaro [CRIF](https://www.crif.uz/) firmasi olib boradi. Kredit skoringni hisoblash algoritmlari, bir necha yaxshi sabablarga ko'ra, ommaga ochiqlanmaydi.
 
 ## Kredit Skoring va Kredit
 
-[Avvalgi postda aytganimizdek](/kredit/foiz-stavkasi-qanday-belgilanadi/), kredit foizi uchta faktordan tashkil topgan
+[Avvalgi postda aytganimizdek](/kredit/foiz-stavkasi-qanday-belgilanadi/), kredit stavkasi 4 ta faktordan tashkil topgan
 
 <div class="formula-block">
     <p class="formula-label">Formula</p>
-    <p class="formula">(1 + R) = (1 + r) × (1 + m) × (1 + π)</p>
-    <p class="formula-note">
-        R — nominal foiz stavkasi &nbsp;·&nbsp; r — risk mukofoti
-        &nbsp;·&nbsp; m — bank foyda marjasi &nbsp;·&nbsp; π — inflyatsiya
-    </p>
+    <p class="formula">(1 + R) = (1 + c) × (1 + r) × (1 + m) × (1 + π)</p>
+    <p class="formula-note">R — nominal foiz stavkasi &nbsp;·&nbsp; c — asosiy stavka (bank uchun pul narxi) &nbsp;·&nbsp; r — risk mukofoti &nbsp;·&nbsp; m — bank foyda marjasi &nbsp;·&nbsp; π — inflyatsiya</p>
 </div>
 
-[Inflyatsiya](/kredit/inflyatsiya/), risk mukofoti, va foyda marjasi. Kredit skoring risk mukofotiga to'g'ridan-to'g'ri ta'sir etadi.
+Asosiy stavka, [inflyatsiya](/kredit/inflyatsiya-va-kredit/), risk mukofoti, va foyda marjasi. Kredit skoring risk mukofotiga to'g'ridan-to'g'ri ta'sir etadi.
 
-Sizda kredit reyting qancha yaxshi bo'lsa, sizga teoriya bo'yicha shuncha past foizga kredit beriladi. Iste'mol kreditlariga bu unchalik ham katta ta'sir etmaydi. Bu asosan katta firma va ipotekalar uchun sezilarli faktor.
+Sizda kredit reyting qancha yaxshi bo'lsa, sizga teoriya bo'yicha shuncha past foizga kredit beriladi. Iste'mol kreditlariga bu unchalik ham katta ta'sir etmaydi. Bu asosan hukumat, katta firma va ipotekalar uchun sezilarli faktor.
 
-Ammo, sizda kredit reyting yomon bo'lsa, sizga [juda yuqori protsentlarda](/kredit/foiz-stavkasi-qanday-belgilanadi/) beriladi. Yoki bira to'la berilmaydi. Kredit skoring davlat tomonidan umumlashtirilgani uchun, sizning kredit reytingingizni banklar ko'ra oladi. Ya'ni, jonajon TBC Bankdan 49% ga kredit olib, to'lamay qochib yurganingizni SQB Bank ham, Kapital Bank ham xabardor bo'lishi mumkin, agar siz ulardan kredit so'rab borsangiz.
+Dunyoda katta korporatsiyalar va hukumatlarga ham kredit skoring beriladi. Bu ishni uchta gigant, [S&P](https://uz.wikipedia.org/wiki/S%26P_Global_Ratings), [Moody's](https://uz.wikipedia.org/wiki/Moody%E2%80%99s_Ratings), va [Fitch](https://uz.wikipedia.org/wiki/Fitch_Ratings) korporatsiyalar amalga oshiradi. 2026-yilgi S&P reytingiga ko'ra, [O'zbekiston BB/B holatida](https://www.spglobal.com/ratings/en/regulatory/article/-/view/type/HTML/id/3568186). Ya'ni, o'rtacha.
 
-Bu tizim davlat tomonidan standartlashgani uchun ham banklar sizning reytingizga ishonch bildiradi va sizga qarz beradi.
+Bu reyting O'zbekistonga qancha investitsiya qanday shartlarda kirib kelishini belgilab beradi. Reytingimiz qancha yaxshi bo'lsa, moliyaviy dunyoning bizga ishonchi shuncha ortadi.
+
+O'zbekistonda, jismoniy shaxs sifatida, sizda kredit skoring yomon bo'lsa, sizga [juda yuqori protsentlarda](/kredit/foiz-stavkasi-qanday-belgilanadi/) kredit beriladi. Yoki bira to'la berilmaydi. Kredit skoring davlat tomonidan markazlashtirilgani uchun, sizning kredit reytingingizni banklar ko'ra oladi. Bu tizim davlat tomonidan standartlashgani uchun ham banklar sizning reytingizga ishonch bildiradi va sizga qarz beradi (yoki bermaydi).
+
+Ya'ni, jonajon TBC Bankdan 49% ga kredit olib, to'lamay qiynalib qochib yurganingizni SQB Bank ham, Kapital Bank ham bilishi mumkin, agarda siz ulardan kredit so'rab borsangiz.
 
 ## U Qanday Ishlaydi?
 
-Kredit reytingi algoritmlari qattiq sir tutiladi. Sababi, agar faktorlar va ularning vazni ommaga oshkor bo'lganida edi, _"shustriy"_ odamlar o'zlarining reytinglarini manipulyatsiya qilgan bo'lardi. Bundan kredit skoringga banklarning ishonchi kamaygan, risk mukofoti oshgan, va oddiy qarz oluvchilarga foizlar yuqoriroq bo'lardi. Shuning uchun ham kredit skoring algoritmlari qat'iy maxfiylik ostiga olingan.
+Kredit reytingi algoritmlari qattiq sir tutiladi. Sababi, agar faktorlar va ularning o'rni (vazni) ommaga oshkor bo'lganida edi, _"shustriy"_ odamlar o'zlarining reytinglarini manipulyatsiya qilgan bo'lardi. Bu tufayli kredit skoringga banklarning ishonchi kamaygan, risk mukofoti oshgan, va oddiy qarz oluvchilarga stavkalar yuqoriroq bo'lardi. Shuning uchun ham kredit skoring algoritmlari qat'iy maxfiylik ostiga olingan.
 
-Lekin, umumiy faktorlar ma'lum; ulardan eng muhimi - kredit tarixi. Oylikdan ham, mol-mulkdan ham, joriy qarzlardan ham. Nega? Sababi, O'zbekistonda, ayniqsa viloyatlarda, juda ko'pchilik rasmiy ish joyi va daromadga ega emas: bozorchilar, ustalar, mexaniklar, mayda xususiy tadbirkorlar. Va ko'p hollarda, o'zbek oilalarida, uy-joy va moshina ota-onaning nomiga olinadi. O'zbeklar bir-biriga bergan qarzini odatda notariusda ham rasmiylashtirishmaydi. Shu sabablar tufayli, oylik, mol-mulk, va joriy qarzlar doim ham foydali faktorlar emas.
+Lekin, umumiy faktorlar ma'lum; ulardan eng muhimi - kredit tarixi. Oylikdan ham, mol-mulkdan ham, joriy qarzlardan ham.
 
-Shuning uchun ham O'zbekistonda naqd puldan elektron plastik tizimiga o'tish harakatini hukumat juda kuchaygan. Ham soliq, ham iqtisodiy indikator, ham nazorat uchun. Bu haqida boshqa postlarda.
+Nega? Sababi, O'zbekistonda, ayniqsa viloyatlarda, juda ko'pchilik rasmiy ish joyi va daromad manbaiga ega emas: bozorchilar, ustalar, mexaniklar, taksistlar, mayda xususiy tadbirkorlar. Va ko'p hollarda, o'zbek oilalarida, uy-joy va moshina ota-onaning nomiga olinadi. O'zbeklar bir-biriga bergan qarzini odatda notariusda rasmiylashtirmaydi. Shu sabablar tufayli, oylik, mol-mulk, va joriy qarzlar doim ham aniq va xolis faktorlar emas.
+
+Bir necha sabablarga ko'ra, O'zbekistonda naqd puldan elektron tizimga o'tish harakati juda kuchaygan. Ham soliq, ham iqtisodiy indikator, ham nazorat uchun. 2026-yil 1-apreldan ["zapravklarda" naqd pul qabul qilinmaydi](https://zamin.uz/uz/ozbekiston/185468-rasman-ozbekistonda-1-apreldan-zapravkada-naqd-pul-otmaydi.html), misol uchun. Bu haqida boshqa postlarda.
 
 ---
 
-Tarixan, kredit skoring modellari tarixga katta urg'u bergan. Shuning uchun ham kredit tarixi katta rol o'ynaydi. Sizda pul ko'p bo'lib turib ham, agar kredit tarixingiz bo'lmasa, sizning kredit reytingingiz yaxshi bo'lmaydi. Ammo, hozir boshqa faktorlarga ham urg'u berishadi. Plastik kartada aylangan pul mablag'lar, ishlash tarixi, yoshi, jinsi, mol-mulki va hokazo.
+Tarixan, kredit skoring modellari kredit tarixiga katta urg'u bergan. Sizda pul ko'p bo'lib turib ham, agar kredit tarixingiz bo'lmasa, sizning kredit reytingingiz o'rtacha bo'ladi. Ammo, hozir boshqa faktorlarga ham urg'u berishadi. Plastik kartada aylangan pul mablag'lar, ishlash tarixi, yoshi, jinsi, mol-mulki va hokazo.
 
-Kredit skoring har yili yangilanib, rivojlanib boradi. O'zbekiston aholisi naqd puldan plastik o'tgani sari algoritmlar ham o'zgarib boraveradi.
+Kredit skoring har yili yangilanib, rivojlanib boradi. O'zbekiston aholisi naqd puldan plastikka o'tgani sari algoritmlar ham aniqlashib boraveradi.
 
 ## Reytingni Qanday Olish Mumkin?
 
-Xo'p, kredit reyting tizimini ko'rib chiqdik. U O'zbekistonda qanday ishlaydi, va muhimrog'i uni qanday olish mumkin?
+Xo'p, kredit reyting tizimini umumiy ko'rib chiqdik. U haqida bir kun alohida seriya yozaman, nasib. Bu tizim O'zbekistonda qanday ishlaydi, va muhimrog'i uni qanday bilish mumkin?
 
 O'zbekistonda kredit skoring 0-500 shkalasida bo'lib, 5 ta turga ajratiladi:
 
-- 0-100 (E sinfi)
-- 100-200 (D sinfi)
-- 200-300 (C sinfi)
-- 300-400 (B sinfi)
-- 400-500 (A sinfi)
+- **0-100 (E sinfi)**
+- **100-200 (D sinfi)**
+- **200-300 (C sinfi)**
+- **300-400 (B sinfi)**
+- **400-500 (A sinfi)**
 
-Sizda qanchalik reyting baland bo'lsa shunchalik yaxshi. Menda, ish joyi, rasmiy daromad, va soliqlar mavjud, lekin biron marta ham kredit olmaganman (Olmayin ham). Mendagi ko'rsatkich 281 chiqdi.
+Sizda qanchalik reyting baland bo'lsa kredit olayotganda shunchalik yaxshi. Menda, ish joyi, rasmiy daromad, va soliqlar mavjud, lekin biron marta ham kredit olmaganman (Olmayin ham). Mendagi ko'rsatkich, o'rtacha, 281 chiqdi. Sababi menda hech qanday kredit tarixi mavjud emas.
 
 ---
 
-Qonunchilikka ko'ra, O'zbekiston fuqarolari [yiliga bir marotaba kredit tarixlarini bepul olishlari mumkin](https://depozit.uz/news/kredit-tarixini-bilish-yollari#:~:text=Muhim!%20Kredit%20tarixingiz%20haqidagi%20ma%27lumotni%20yiliga%20bir%20marta%20bepul%20va%20to%27lov%20evaziga%20%2D%20cheksiz%20ko%27p%20marta%20hech%20qanday%20sabab%20ko%27rsatmagan%20holda%20olish%20mumkin.). Men ham birinchisini tekinga oldim:
+Qonunchilikka ko'ra, O'zbekiston fuqarolari [yiliga bir marotaba kredit tarixlarini bepul olishlari mumkin](https://depozit.uz/news/kredit-tarixini-bilish-yollari#:~:text=Muhim!%20Kredit%20tarixingiz%20haqidagi%20ma%27lumotni%20yiliga%20bir%20marta%20bepul%20va%20to%27lov%20evaziga%20%2D%20cheksiz%20ko%27p%20marta%20hech%20qanday%20sabab%20ko%27rsatmagan%20holda%20olish%20mumkin.). Men ham birinchisini tekinga olgan edim:
 
 ![Avtorning kredit tarixi, 25/04/2026](/images/posts/kredit-reyting/kredit-tarixi-v0.webp)
 
-C klass, 276.
+C klass, 276. 25/04/2026.
 
-Va, bu postni yozayotganda [14 832 so'm evaziga mygov'dan](https://my.gov.uz/uz/service/411) hozirgi kredit skoringni oldim:
+Va, bu postni yozayotganimda [14 832 so'm evaziga mygov'dan](https://my.gov.uz/uz/service/411) hozirgi kredit skoringni oldim:
 
 ![Avtorning kredit tarixi, 19/05/2026](/images/posts/kredit-reyting/kredit-tarixi-v1.webp)
 
-Qaysidir sababga ko'ra, 276 dan 281'ga oshgan. Biron marta ham kredit olmaganim uchun ham kredit reytingim yuqori emas, rasmiy ish joyim va daromadim bo'lsa ham. Umid qilaman, hech qachon kredit olmayman.
+C klass, 281. 19/05/2026.
 
-O'zingizning kredit skoringizni olish uchun:
+Qaysidir sabablarga ko'ra, 276 dan 281'ga oshgan. Biron marta ham kredit olmaganim uchun ham kredit reytingim yuqori emas, rasmiy ish joyim va daromadim bo'lsa ham. Va umid qilamanki, hech qachon kredit olmayman.
+
+---
+
+O'zingizning kredit skoringizni olish uchun quyidagi amallarni bajaring:
 
 1. **my.gov.uz** portaliga kiring
-2. "“Kredit tarixi” to'g'risida ma'lumotnoma berish" xizmatini qidiring. [Bu havolada](https://my.gov.uz/uz/service/411).
+2. "'Kredit tarixi' to'g'risida ma'lumotnoma berish" xizmatini qidiring. [Bu havolada](https://my.gov.uz/uz/service/411).
 3. Elektron imzo yoki One ID orqali autentifikatsiya qiling
 4. So'rovni yuboring
 
@@ -121,26 +133,26 @@ Natija .zip format ichida HTML shaklida taqdim etiladi (xavfsizlik va banklar uc
 
 ## Past Reyting?
 
-Kredit reytingiz past bo'lsa, va sizga kredit olish qiyinlik qilayotgan bo'lsa, eng zo'r maslahat: kreditlarni o'z vaqtida to'lashga harakat qiling. Uzoq muddatda, [kredit olmaslikka harakat qiling](/kredit/qarz-qachon-ishlaydi/).
+Kredit reytingiz past bo'lsa, va sizga kredit olish qiyinlik qilayotgan bo'lsa, eng zo'r maslahat: kreditlarni o'z vaqtida to'lashga harakat qiling.
 
-Amalda, kredit reytingni tezda ko'tarish mumkin emas. Bu vaqt talab qiladigan jarayon.
+Biroq, eng zo'r maslahat shu: uzoq muddatda, [kredit olmaslikka harakat qiling](/kredit/qarz-qachon-ishlaydi/). Kredit reyting baland bo'lmaydi, lekin kreditsiz yaxshi yashaysiz. Tunda xotirjam uxlaysiz.
 
-Ammo bir necha amaliy qadam bor:
+Amalda, kredit reytingni tezda ko'tarish mumkin emas. Algoritmlar o'zgarmas jihatlarni (jins, demografiya) va bir necha yillik moliyaviy ma'lumotlarni tahlil qilib bu skoringni yaratadi. Bu vaqt talab qiladigan jarayon. Ammo bir necha amaliy qadam bor:
 
-- **Mavjud kreditlarni o'z vaqtida to'lang.** Bu eng ko'p ta'sir qiladigan omil.
-  Hatto bir oylik kechikish ham reytingga salbiy ta'sir ko'rsatadi.
-- **Kechiktirilgan to'lovlarni imkon qadar tezroq yoping.** Qarz qolsa, u har oy
-  yangi salbiy yozuv sifatida qayd etiladi.
-- **Yangi kredit olishdan saqlaning.** Har bir kredit arizasi reytingga ta'sir qiladi.
-  Qisqa muddat ichida bir necha joyga murojaat qilish salbiy signal beradi.
+- **Mavjud kreditlarni o'z vaqtida to'lang.** Bu eng ko'p ta'sir qiladigan omil. Hatto bir oylik kechikish ham reytingga salbiy ta'sir ko'rsatadi.
+- **Kechiktirilgan to'lovlarni imkon qadar tezroq yoping.** Qarz qolsa, u har oy yangi salbiy yozuv sifatida qayd etiladi.
+- **Yangi kredit olishdan saqlaning.** Har bir kredit arizasi reytingga ta'sir qiladi. Qisqa muddat ichida bir necha joyga murojaat qilish salbiy signal beradi.
 - **Sabr qiling.** Yaxshi kredit tarixi yillar davomida quriladi.
 - **Boy bo'ling.** Kreditga muhtoj bo'lmaydigan holatga chiqishga harakat qiling. Moliyaviy erkinlik ayniqsa erkak kishi uchun eng katta erkinliklardan biri. Kreditga asir bo'lmaslik qanday yaxshi.
 
 ## Xulosa
 
 Kredit reyting - bank siz haqingizda qiladigan birinchi savolning javobi:
-"Bu odam qarzini qaytaradimi?"
 
-Foiz stavkasi formulasini eslang. Risk mukofoti eng katta komponent edi. Kredit reyting aynan shu risk mukofotini belgilaydi - sizga shaxsan.
+"Bu odam qarzini qaytaradimi? Unga ishonsak bo'ladimi?"
 
-Keyingi qismda [kreditning haqiqiy narxini](/kredit/kreditning-haqiqiy-narxi/) ko'ramiz. Yo'q, kreditning narxi faqat foiz stavkasida emas.
+Bu protsess faqatgina jismoniy shaxslarga emas, butun boshli korporatsiyalar va hukumatlar uchun ham mavjud. U yerda qoidalar boshqacharoq xolos. Mohiyati bir.
+
+Foiz stavkasi formulasini eslang. Risk mukofoti katta komponent edi. Kredit reyting aynan shu risk mukofotini belgilaydi - sizga shaxsan.
+
+Keyingi qismda [kreditning haqiqiy narxini](/kredit/kreditning-haqiqiy-narxi/) ko'ramiz. Yo'q, uning narxi faqat foiz stavkasida emas.

@@ -40,7 +40,7 @@ export const authors: Record<AuthorKey, Author> = {
         },
     },
     samandar: {
-        name: "Samandar Shoquchqarov",
+        name: "Samandar Shokuchkarov",
         bio: {
             uz: "Ecofin muallifi. Westminster Universitetida moliya yo'nalishida o'qigan. Shaxsiy moliya, kredit, bank ishi, iqtisod va moliyaviy vositalar haqida sodda tilda yozadi.",
             en: "Ecofin author with a finance background from Westminster University. Writes about personal finance, credit, banking, economics, and financial tools in simple language.",
