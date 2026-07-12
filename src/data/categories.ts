@@ -3,7 +3,7 @@ export type CategoryKey =
     | "birja"
     | "tilla"
     | "treyding"
-    | "pul-saqlash"
+    | "jamgarma"
     | "inqirozlar"
     | "boshqalar"
     | "iqtisodiyot";
@@ -120,10 +120,10 @@ export const categories: Record<
                 "Понятные статьи о трейдинге, риске, рыночной психологии и краткосрочных торговых решениях.",
         },
     },
-    "pul-saqlash": {
+    jamgarma: {
         uz: {
-            slug: "pul-saqlash",
-            label: "Pul saqlash",
+            slug: "jamgarma",
+            label: "Jamg'arma",
             description:
                 "Jamg'arma, budjet, xarajatlarni boshqarish va pulni xavfsiz saqlash bo'yicha amaliy tushuntirishlar.",
         },
