@@ -60,7 +60,13 @@ function getCatLabel(id: string): string {
 }
 ---
 
-<Layout title={author.name} description={author.bio[locale]} lang={locale} languageLinks={languageLinks}>
+<Layout
+    title={author.name}
+    description={author.bio[locale]}
+    lang={locale}
+    ogImage={author.avatar}
+    languageLinks={languageLinks}
+>
     <AuthorStructuredData
         slot="head"
         author={author}

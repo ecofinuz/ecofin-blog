@@ -40,7 +40,7 @@ export const authors: Record<AuthorKey, Author> = {
         },
     },
     samandar: {
-        name: "Samandar Shokuchkarov",
+        name: "Samandar Shoquchqarov",
         bio: {
             uz: "Ecofin muallifi. Westminster Universitetining iqtisod yo'nalishini qizil diplomga tamomlagan. Hozirda Infinbank komplayns bo'limida ishlaydi.",
             en: "Ecofin author with an honours diploma of economics from Westminster University. Currently working at the Compliance department in Infinbank.",
