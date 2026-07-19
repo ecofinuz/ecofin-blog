@@ -282,6 +282,31 @@ main {
     transform: translateY(-1px);
 }
 
+.btn-primary {
+    --bs-btn-bg: var(--button-primary-bg);
+    --bs-btn-border-color: var(--button-primary-border);
+    --bs-btn-color: var(--button-primary-color);
+    --bs-btn-hover-bg: var(--button-primary-hover-bg);
+    --bs-btn-hover-border-color: var(--button-primary-hover-border);
+    --bs-btn-hover-color: var(--button-primary-hover-color);
+    --bs-btn-active-bg: var(--button-primary-hover-bg);
+    --bs-btn-active-border-color: var(--button-primary-hover-border);
+    --bs-btn-active-color: var(--button-primary-hover-color);
+    --bs-btn-focus-shadow-rgb: var(--green-action-rgb);
+}
+
+.btn-outline-secondary {
+    --bs-btn-color: var(--text-primary);
+    --bs-btn-border-color: var(--border);
+    --bs-btn-hover-bg: var(--green-soft);
+    --bs-btn-hover-border-color: var(--accent-border);
+    --bs-btn-hover-color: var(--accent-text);
+    --bs-btn-active-bg: var(--green-soft);
+    --bs-btn-active-border-color: var(--accent-border);
+    --bs-btn-active-color: var(--accent-text);
+    --bs-btn-focus-shadow-rgb: var(--green-action-rgb);
+}
+
 .button-primary {
     border: 1px solid var(--button-primary-border);
     background: var(--button-primary-bg);

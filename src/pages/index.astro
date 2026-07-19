@@ -1,9 +1,7 @@
 ---
 import HomeHero from "@components/HomeHero.astro";
-import PostCover from "@components/PostCover.astro";
-import PostDate from "@components/PostDate.astro";
+import PostCard from "@components/PostCard.astro";
 import PostFilters from "@components/PostFilters.astro";
-import ReadingTime from "@components/ReadingTime.astro";
 import type { CategoryKey } from "@data/categories";
 import { categories, getCategoryDetailsFromSlug } from "@data/categories";
 import Layout from "@layouts/Layout.astro";
@@ -100,63 +98,28 @@ const latestHref = latestPost && latestCategory
                     authorKeys={authorKeys}
                     total={posts.length}
                 />
-                <div class="post-list home-post-list" id={postListId}>
+                <div class="post-list home-post-list row row-cols-1 row-cols-md-2 g-4" id={postListId}>
                     {
                         postsWithReadingTime.map(({ post, minutesRead }) => {
                             const cat = getCategoryDetailsFromSlug(getCategory(post.id), locale);
                             const slug = getSlug(post.id);
 
                             return (
-                                <a
+                                <PostCard
                                     href={`/${cat.slug}/${slug}/`}
-                                    class="post-item home-post-item"
-                                    data-post-item="true"
-                                    data-post-title={post.data.title}
-                                    data-post-date={post.data.date.getTime()}
-                                    data-post-author={post.data.author}
-                                    data-post-search={`${post.data.title} ${post.data.description}`}
-                                >
-                                    <PostCover
-                                        cover={post.data.cover}
-                                        title={post.data.title}
-                                        className="post-item-cover home-post-cover"
-                                        placeholderLabel={cat.label}
-                                        placeholderTitle={post.data.title}
-                                        decorative
-                                    />
-                                    <div class="post-meta-row home-post-meta">
-                                        <span class="post-category label-small">
-                                            {cat.label}
-                                        </span>
-                                        {post.data.part && (
-                                            <>
-                                                <span class="post-meta-separator" aria-hidden="true">
-                                                    &middot;
-                                                </span>
-                                                <span class="label-small post-date home-post-part">
-                                                    {post.data.part}-qism
-                                                </span>
-                                            </>
-                                        )}
-                                    </div>
-                                    <h2 class="post-title">{post.data.title}</h2>
-                                    <p class="post-excerpt">
-                                        {post.data.description}
-                                    </p>
-                                    <div class="post-footer home-post-footer">
-                                        <span class="post-read">O‘qish &rarr;</span>
-
-                                        <div class="post-card-details">
-                                            <PostDate date={formatDate(post.data.date)} class="label-small" />
-                                            <span class="post-meta-separator" aria-hidden="true">&middot;</span>
-                                            <ReadingTime
-                                                locale={locale}
-                                                minutesRead={minutesRead}
-                                                class="label-small"
-                                            />
-                                        </div>
-                                    </div>
-                                </a>
+                                    title={post.data.title}
+                                    description={post.data.description}
+                                    cover={post.data.cover}
+                                    categoryLabel={cat.label}
+                                    part={post.data.part}
+                                    partLabel={post.data.part ? `${post.data.part}-qism` : undefined}
+                                    date={formatDate(post.data.date)}
+                                    dateTime={post.data.date.getTime()}
+                                    minutesRead={minutesRead}
+                                    locale={locale}
+                                    readLabel="O‘qish"
+                                    authorKey={post.data.author}
+                                />
                             );
                         })
                     }

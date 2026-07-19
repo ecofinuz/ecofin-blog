@@ -1,0 +1,87 @@
+---
+import PostCover from "@components/PostCover.astro";
+import PostDate from "@components/PostDate.astro";
+import ReadingTime from "@components/ReadingTime.astro";
+
+type Locale = "uz" | "en" | "ru";
+
+interface Props {
+    href: string;
+    title: string;
+    description: string;
+    cover?: string;
+    categoryLabel: string;
+    part?: number;
+    date: string;
+    minutesRead: number;
+    locale: Locale;
+    readLabel: string;
+    partLabel?: string;
+    authorKey: string;
+    dateTime: number;
+}
+
+const {
+    href,
+    title,
+    description,
+    cover,
+    categoryLabel,
+    part,
+    date,
+    minutesRead,
+    locale,
+    readLabel,
+    partLabel,
+    authorKey,
+    dateTime,
+} = Astro.props;
+---
+
+<article
+    class="col"
+    data-post-item="true"
+    data-post-title={title}
+    data-post-date={dateTime}
+    data-post-author={authorKey}
+    data-post-search={`${title} ${description}`}
+>
+    <a href={href} class="post-item home-post-item card h-100">
+        <PostCover
+            cover={cover}
+            title={title}
+            className="post-item-cover home-post-cover"
+            placeholderLabel={categoryLabel}
+            placeholderTitle={title}
+            decorative
+        />
+        <div class="post-meta-row home-post-meta">
+            <span class="post-category label-small">{categoryLabel}</span>
+            {part && partLabel && (
+                <>
+                    <span class="post-meta-separator" aria-hidden="true">
+                        &middot;
+                    </span>
+                    <span class="label-small post-date home-post-part">
+                        {partLabel}
+                    </span>
+                </>
+            )}
+        </div>
+        <h2 class="post-title">{title}</h2>
+        <p class="post-excerpt">{description}</p>
+        <div class="post-footer home-post-footer">
+            <span class="post-read">{readLabel} &rarr;</span>
+
+            <div class="post-card-details">
+                <PostDate date={date} class="label-small" />
+                <span class="post-meta-separator" aria-hidden="true">&middot;</span>
+                <ReadingTime
+                    locale={locale}
+                    minutesRead={minutesRead}
+                    class="label-small"
+                />
+            </div>
+        </div>
+    </a>
+</article>

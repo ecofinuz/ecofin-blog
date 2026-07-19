@@ -101,6 +101,23 @@
     --space-12: 48px;
     --space-16: 64px;
     --space-20: 80px;
+
+    --bs-body-bg: var(--color-bg);
+    --bs-body-color: var(--text-primary);
+    --bs-body-font-family: var(--font-sans);
+    --bs-body-font-size: 18px;
+    --bs-body-line-height: 1.72;
+    --bs-secondary-color: var(--text-secondary);
+    --bs-tertiary-color: var(--text-muted);
+    --bs-border-color: var(--border);
+    --bs-border-radius: var(--radius);
+    --bs-border-radius-sm: var(--radius-sm);
+    --bs-primary: var(--green-action);
+    --bs-primary-rgb: var(--green-action-rgb);
+    --bs-link-color: var(--accent-text);
+    --bs-link-hover-color: var(--accent-action-hover);
+    --bs-focus-ring-color: var(--accent-ring);
+    --bs-focus-ring-width: 3px;
 }
 
 :root[data-theme="dark"] {

@@ -42,12 +42,12 @@ const copy = {
             <p class="hero-lede">{copy.lead}</p>
 
             <div class="hero-actions">
-                <a class="button button-primary" href="#articles">
+                <a class="button button-primary btn btn-primary" href="#articles">
                     {copy.primaryCta}
                 </a>
                 {
                     latestTitle && (
-                        <a class="button button-secondary" href={latestHref}>
+                        <a class="button button-secondary btn btn-outline-secondary" href={latestHref}>
                             <span>{copy.latestLabel}</span>
                             <strong>{latestTitle}</strong>
                         </a>

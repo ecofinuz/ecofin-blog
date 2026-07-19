@@ -89,7 +89,7 @@ const authorOptions = Array.from(new Set(authorKeys))
         <label class="post-filter-field post-filter-field--search">
             <span class="post-filter-label">{copy.search}</span>
             <input
-                class="post-filter-input"
+                class="post-filter-input form-control"
                 type="search"
                 autocomplete="off"
                 placeholder={copy.searchPlaceholder}
@@ -101,7 +101,7 @@ const authorOptions = Array.from(new Set(authorKeys))
             showAuthorFilter && (
                 <label class="post-filter-field">
                     <span class="post-filter-label">{copy.author}</span>
-                    <select class="post-filter-select" data-post-author>
+                    <select class="post-filter-select form-select" data-post-author>
                         <option value="">{copy.allAuthors}</option>
                         {authorOptions.map((author) => (
                             <option value={author.key}>{author.name}</option>
@@ -113,7 +113,7 @@ const authorOptions = Array.from(new Set(authorKeys))
 
         <label class="post-filter-field">
             <span class="post-filter-label">{copy.sort}</span>
-            <select class="post-filter-select" data-post-sort>
+            <select class="post-filter-select form-select" data-post-sort>
                 <option value="date-desc">{copy.dateDesc}</option>
                 <option value="date-asc">{copy.dateAsc}</option>
                 <option value="title-asc">{copy.titleAsc}</option>

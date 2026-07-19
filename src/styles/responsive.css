@@ -24,10 +24,6 @@
         font-size: 3.55rem;
     }
 
-    .post-list {
-        grid-template-columns: 1fr;
-    }
-
     .post-filter-form {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
