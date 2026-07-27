@@ -4,6 +4,15 @@ Ecofin Blog is the content site for Ecofin, an open-source financial education c
 
 The production site is configured for `https://blog.ecofin.uz`.
 
+## Ecosystem Links
+
+- Main site: [ecofin.uz](https://ecofin.uz/)
+- Blog: [blog.ecofin.uz](https://blog.ecofin.uz/)
+- Tools: [tools.ecofin.uz](https://tools.ecofin.uz/)
+- GitHub: [ecofinuz](https://github.com/ecofinuz)
+
+Practical calculators and Uzbekistan data pages live on Ecofin Tools.
+
 ## Stack
 
 - Astro 7
